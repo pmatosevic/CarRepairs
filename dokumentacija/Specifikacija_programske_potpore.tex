@@ -13,9 +13,11 @@
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Neregistrirani korisnik
+				\item Vlasnik automobila			
+				\item Vlasnik autoservisa
+				\item Serviser
+				\item Glavni administrator
 				
 			\end{packed_enum}
 			
@@ -23,30 +25,80 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
+				\item  \underbar{Neregistrirani korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item Registracija
+					\item Uvid u servise
 					\begin{packed_enum}
 						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
+						\item  Uvid u informacije o servisima
 				
 					\end{packed_enum}
-					\item  funkcionalnost 3
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+				\item  \underbar{Vlasnik automobila (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item Upravljanje vozilima
+					\item Otvaranje servisnog naloga (?)
+					\item Pregled detalja prošlih servisa
+					\item Uređivanje osobnih podataka
+					\item Brisanje računa
 					
 				\end{packed_enum}
+			
+				\item  \underbar{Vlasnik autoservisa (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item Uređivanje cjenika usluga i podataka o autodijelovima
+					\item Uvid u sve informacije o autoservisu
+					\item Upravljanje listom zaposlenika
+					
+				\end{packed_enum}
+				
+				\item  \underbar{Serviser (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item Registracija
+					\item Unos podataka o servisu
+					\item Pregled prošlih servisa
+					
+				\end{packed_enum}
+				
+				\item  \underbar{Glavni administrator (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item Odobravanje registracije vlasnika autoservisa
+					\item Upravljanje svim korisnicima
+					\item Brisanje računa
+					\item Uvid u statističke podatke
+					
+				\end{packed_enum}
+			
+				\item  \underbar{HUO registar (sudionik) može:}
+				
+				\begin{packed_enum}
+					
+					\item Dohvaća podatke o modelu i broju šasije auta na temelju registracije
+					
+				\end{packed_enum}
+			
+				\item \underbar{Baza podataka (sudionik) može:}
+				
+				\begin{packed_enum}
+					
+					\item Pohranjuje podatke i ovlasti korisnika sustava
+					\item Pohranjuje podatke o automobilima i prošlim servisiranjima automobila
+					
+				\end{packed_enum}
+				
 			\end{packed_enum}
 			
 			\eject 
