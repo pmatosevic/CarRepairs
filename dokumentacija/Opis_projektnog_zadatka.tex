@@ -3,12 +3,22 @@
 		
 		% \textbf{\textit{dio 1. revizije}}\\
 
-		Cilj ovog projektnog zadatka je osmisliti i razviti programsku potporu za aplikaciju \textit{"MojAutoServis"} koja će omogućiti vlasnicima automobila, serviserima te auto-servisima da prate izvanredne i redovne servise automobila. Ova aplikacija će svima njima omogućiti bržu i efikasniju suradnju, bez potrebe za papirologijom i čekanjem. 
+		Cilj ovog projektnog zadatka je osmisliti i razviti programsku potporu za web-aplikaciju \textit{"MojAutoServis"} koja će registriranim vlasnicima automobila uštediti vrijeme prilikom obavljanja redovitih i izvanrednih servisa vozila. Aplikacija će ih brzo i efikasno povezati sa auto-servisima, tj. sa serviserima, te tako eliminirati potrebu za dugim i nepotrebnim čekanjem u redovima i za ispunjavanjem papirologije.
+		
+		
 		
 		% opis projektnog zadatka
-		Kada neregistrirani korisnik pokrene aplikaciju, ima na izbor hoće li se registrirati kao korisnik, tj. vlasnik auta, kao autoservis, ili kao serviser. Postojeći korisnik registrira se svojim računom. Kao neregistrirani korisnik, on ima i opciju pregledavanja svih auto-servisa te su mu dostupne informacije o njima.
 		
-		Kako bi se registrirao, neregistrirani korisnik mora aplikaciji dati:
+		Kada neregistrirani korisnik pokrene aplikaciju, ima opciju pregledavanja svih auto-servisa te su mu dostupne informacije o njima. Također ima mogućnost registracije.
+		Postoje tri vrste korisnika:
+		\begin{packed_item}
+			\item vlasnik automobila,
+			\item auto-servis, i
+			\item serviser.
+		\end{packed_item}
+		
+		
+		 Postojeći korisnik registrira se svojim jedinstvenim korisničkim imenom i lozinkom. Kako bi se registrirao, neregistrirani korisnik mora aplikaciji dati:
 		\begin{packed_item}
 			\item svoje ime,
 			\item svoje prezime,
@@ -23,14 +33,23 @@
 			\item OIB tvrtke.
 		\end{packed_item}
 		
-		Nakon registracije, korisnik može unijeti podatke o automobilu (automobilima). Korisnik može dodavati po želji mnogo automobila kojima se podatci provjeravaju u HUO registru. Korisnik može otvoriti radni nalog te pregledati sve prošle radne naloge, kao i statističke podatke o troškovima i sličnom. Korisnik također može uređivati osobne podatke te izbrisati profil.
+		Nakon registracije, korisnik unosi podatke o automobilu iz prometne dozvole, među kojima su obavezno:
+		\begin{packed_item}
+			\item registracijska oznaka, te
+			\item marka automobila
+		\end{packed_item}
+		
+		Korisnik može u bilo kojem trenutku dodati još automobila, te ih može imati neograničeno mnogo. Kako bi novi automobil bio dodan, uneseni podaci moraju biti potvrđeni u HUO registru. Ukoliko to želi, korisnik također ima mogućnost izbrisati automobil.
+		 
+		Kada korisnik želi poslati svoj automobil na servis, mora otvoriti radni nalog, prilikom čega odabire redoviti ili izvanredni servis. Nakon što je rad na automobilu obavljen, korisniku dolaze detalji servisa, te su mu vidljivi zajedno sa detaljima svih prijašnjih obavljenih servisa. Te informacije su dostupne sve dok se automobil ne obriše iz aplikacije.
 		
 		Auto-servisi nakon registracije dodaju korisnički račun svoga administratora te servisere. Potom dodaju cjenik usluga i podatke o auto-dijelovima, te započinju s radom. Dostupna im je lista servisera preko koje mogu upravljati svojim zaposlenicima.  
 		
-		Serviseri unose podatke o obavljenim servisima, te im je dostupan pregled prošlih servisa.
+		Serviseri primaju radne naloge poslane njihovoj tvrtci. Ako ih prihvate obavljaju servis, te u radni nalog dopisuju dodatne podatke******. Naknadno, ako je na automobilu primjećena potreba za dodatnim popravcima, serviser daje preporuku za izvanredan servis. Serviseri, kao i obični korisnici, mogu dodavati podatke o vlastitim automobilima i sami otvarati radne naloga za njih.
 		
 		Glavni administrator odobrava registracije autoservisa, ima upravu nad svim korisnicima, može brisati račune i ima pristup svim statističkim podatcima koji se izračunavaju. \textbf{\texttt{\textcolor{red}{Treba dovršiti/dopuniti}}} \\
 		
+		\newpage
 		\Large Primjeri sličnih rješenja
 		
 		\normalsize Dvije aplikacije koje su najsličnije ovoj su ShopBoss i GetAFix. 
@@ -54,8 +73,26 @@
 			\label{fig:idk1}
 		\end{figure}
 		
-		Uz ove aplikacije, postoje mnoge koje su usmjerene samo na vlasnike automobila, pružajući im jednostavno i efikasno praćenje stanja njihovih vozila, te one koje su usmjerene samo na auto-servise i pomažu im u organizaciji i provođenju servisa. Ova aplikacija ta će dva smjera spojiti u jedan, omogućavajući i vlasnicima automobila i auto-servisima da komuniciraju i organiziraju servise automobila.\\
+		Uz ove aplikacije, postoje mnoge koje su usmjerene samo na vlasnike automobila, pružajući im jednostavno i efikasno praćenje stanja njihovih vozila, te one koje su usmjerene samo na auto-servise i pomažu im u organizaciji i provođenju servisa. Ova aplikacija ta će dva smjera spojiti u jedan, omogućavajući i vlasnicima automobila i auto-servisima da komuniciraju i organiziraju servise automobila. \\
 		
+			\Large Moguće nadogradnje projektnog zadatka
+		
+		\normalsize Jedna od mogućih nadogradnji koje bi učinile ovu web-stranicu pristupačnijom je prilagodba iste za korištenje na mobilnim uređajima. Ovo bi bilo izrazito pogodno za slučajeve kada je korisniku potreban izvandredni servis zbog kvara koji se dogodio tijekom vožnje, npr. nakon sudara. Web-stranica bi mogla biti dalje nadograđena da nudi uslugu vučne službe,
+		
+		Još jedan potencijalni dodatak projektnom zadatku je mogućnost korisnika koji dodaje novi automobil da vidi podatke o svim obavljenim servisima nad tim automobilom dok nije bio u njegovom vlasništvu.
+		
+		
+		
+		
+		autopraonica?
+		ponuda rezervnih dijelova i njihove ugradnje
+		rating
+		
+		
+		
+		
+		
+		hhhh\\
 		\eject
 		
 		\section{Primjeri u LaTeXu}
