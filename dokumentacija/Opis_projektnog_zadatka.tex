@@ -3,14 +3,14 @@
 		
 		% \textbf{\textit{dio 1. revizije}}\\
 
-		Cilj ovog projektnog zadatka je osmisliti i razviti programsku potporu za web-aplikaciju \textit{"MojAutoServis"} koja će registriranim vlasnicima automobila uštediti vrijeme prilikom obavljanja redovitih i izvanrednih servisa vozila. Aplikacija će ih brzo i efikasno povezati sa auto-servisima, tj. sa serviserima, te tako eliminirati potrebu za dugim i nepotrebnim čekanjem u redovima i za ispunjavanjem papirologije.
+		
+		Cilj ovog projektnog zadatka je osmisliti i razviti programsku potporu  za web aplikaciju \textit{"MojAutoServis"},  koja će registriranim korisnicima aplikacije, vlasnicima automobila s jedne i auto servisima sa druge strane, omogućiti praćenje redovitog i izvanrednog servisiranja automobila. Aplikacija će brzo i efikasno povezati  vlasnike automobila sa auto servisima te eliminirati potrebu za dugim i nepotrebnim čekanjem, odnosno skratiti vrijeme od narudžbe do realizacije. 
 		
 		
 		
 		% opis projektnog zadatka
 		
-		Kada neregistrirani korisnik pokrene aplikaciju, ima opciju pregledavanja svih auto-servisa te su mu dostupne informacije o njima. Također ima mogućnost registracije.
-		Postoje tri vrste korisnika:
+		Aplikaciju će moći koristiti samo registrirani korisnici. Registrirani korisnik prijavljuje se sa svojim jedinstvenim korisničkim imenom i lozinkom. Postoje tri vrste korisnika:
 		\begin{packed_item}
 			\item vlasnik automobila,
 			\item auto-servis, i
@@ -18,7 +18,7 @@
 		\end{packed_item}
 		
 		
-		 Postojeći korisnik registrira se svojim jedinstvenim korisničkim imenom i lozinkom. Kako bi se registrirao, neregistrirani korisnik mora aplikaciji dati:
+		 Kako bi se registrirao vlasnik automobila mora aplikaciji dati sljedeće podatke:
 		\begin{packed_item}
 			\item svoje ime,
 			\item svoje prezime,
@@ -39,15 +39,40 @@
 			\item marka automobila
 		\end{packed_item}
 		
-		Korisnik može u bilo kojem trenutku dodati još automobila, te ih može imati neograničeno mnogo. Kako bi novi automobil bio dodan, uneseni podaci moraju biti potvrđeni u HUO registru. Ukoliko to želi, korisnik također ima mogućnost izbrisati automobil.
+		Kako bi novi automobil bio dodan, uneseni podaci  se provjeravaju u HUO registru. U slučaju nepodudaranja podataka  vozila sa podacima u HUO registru, odbija se registracija vozila u aplikaciji. Korisnik može u bilo kojem trenutku dodati još automobila, te  može unijeti podatke o  neograničeno mnogo vozila. Ukoliko to želi, korisnik također ima mogućnost  izbrisati podatke o automobilu. 
+		
+		Auto-servisi također moraju stvoriti svoje profile u aplikaciji, odnosno moraju se registrirati kao korisnici sa podacima:
+		\begin{packed_item}
+			\item naziv,
+			\item adresa, i
+			\item OIB
+		\end{packed_item}
 		 
-		Kada korisnik želi poslati svoj automobil na servis, mora otvoriti radni nalog, prilikom čega odabire redoviti ili izvanredni servis. Nakon što je rad na automobilu obavljen, korisniku dolaze detalji servisa, te su mu vidljivi zajedno sa detaljima svih prijašnjih obavljenih servisa. Te informacije su dostupne sve dok se automobil ne obriše iz aplikacije.
+		 Nakon registracije auto-servisi trebaju definirati  korisnički račun za administratora auto-servisa i za servisere. Administrator auto-servisa potom unosi cjenik usluga sa podacima:
+		 \begin{packed_item}
+		 	\item vrsta usluge i
+		 	\item cijena usluge
+		 \end{packed_item}
+	 
+	 	 i podatke o auto-dijelovima, koji se ugrađuju u servisu:
+	 	 \begin{packed_item}
+	 	 	\item naziv dijela
+	 	 	\item rok trajanja
+	 	 	\item predviđena kilometraža i
+	 	 	\item cijena dijela
+	 	 \end{packed_item}
+		 
+		 kao i listu servisera sa podacima, preko koje mogu upravljati svojim zaposlenicima. 
 		
-		Auto-servisi nakon registracije dodaju korisnički račun svoga administratora te servisere. Potom dodaju cjenik usluga i podatke o auto-dijelovima, te započinju s radom. Dostupna im je lista servisera preko koje mogu upravljati svojim zaposlenicima.  
+		Kada korisnik,vlasnik automobila, želi poslati svoj automobil na servis, mora otvoriti radni nalog, prilikom čega odabire auto servis u kojem želi obaviti servis. Odabire redoviti ili izvanredni servis. Nakon što je rad na automobilu obavljen, korisniku dolaze detalji servisa sa cijenom.  
+		Aplikacija nudi vlasniku automobila različite statističke podatka o troškovima, zamijenjenim dijelovima i drugim aspektima svih prijašnjih obavljenih servisa. Te informacije su dostupne sve dok se automobil ne obriše iz aplikacije.
+		Serviseri primaju radne naloge poslane njihovoj tvrtci. 
+		Ako ih prihvate obavljaju servis, te u radni nalog dopisuju dodatne podatke o servisiranju kao što su kilometraža, zamjena ulja, filtera i sl. Naknadno, ako je na automobilu primjećena potreba za dodatnim popravcima, serviser daje preporuku za izvanredni servis. U slučaju izvanrednog servisa unose se podaci o kvarovima, popravcima kao i ugrađenim rezervnim dijelovima.  
+		Serviseri, kao i obični korisnici, mogu dodavati podatke o vlastitim automobilima i sami otvarati radne naloga za njih.
+		Aplikacija nudi auto-servisu različite statičke podatke o troškovima servisa, stanju rezervnih dijelova, te financijskim aspektima poslovanja. Također nudi i statičke podatke o serviserima.
 		
-		Serviseri primaju radne naloge poslane njihovoj tvrtci. Ako ih prihvate obavljaju servis, te u radni nalog dopisuju dodatne podatke******. Naknadno, ako je na automobilu primjećena potreba za dodatnim popravcima, serviser daje preporuku za izvanredan servis. Serviseri, kao i obični korisnici, mogu dodavati podatke o vlastitim automobilima i sami otvarati radne naloga za njih.
+		Glavni administrator odobrava registracije autoservisa, ima upravu nad svim korisnicima, moze brisati račune i ima pristup svim statističkim podatcima koji se izračunavaju. 
 		
-		Glavni administrator odobrava registracije autoservisa, ima upravu nad svim korisnicima, može brisati račune i ima pristup svim statističkim podatcima koji se izračunavaju. \textbf{\texttt{\textcolor{red}{Treba dovršiti/dopuniti}}} \\
 		
 		\newpage
 		\Large Primjeri sličnih rješenja
@@ -77,22 +102,13 @@
 		
 			\Large Moguće nadogradnje projektnog zadatka
 		
-		\normalsize Jedna od mogućih nadogradnji koje bi učinile ovu web-stranicu pristupačnijom je prilagodba iste za korištenje na mobilnim uređajima. Ovo bi bilo izrazito pogodno za slučajeve kada je korisniku potreban izvandredni servis zbog kvara koji se dogodio tijekom vožnje, npr. nakon sudara. Web-stranica bi mogla biti dalje nadograđena da nudi uslugu vučne službe,
+		\normalsize Jedna od mogućih nadogradnji koje bi učinile ovu web-stranicu pristupačnijom je prilagodba iste za korištenje na mobilnim uređajima. Ovo bi bilo izrazito pogodno za slučajeve kada je korisniku potreban izvandredni servis zbog kvara koji se dogodio tijekom vožnje, npr. nakon sudara. Web-stranica bi mogla biti dalje nadograđena da nudi uslugu vučne službe, tj. da omogućuje korisniku da na karti označi gdje se nalazi sa svojim vozilom, koje bi potom bilo odvučeno na servis.
 		
-		Još jedan potencijalni dodatak projektnom zadatku je mogućnost korisnika koji dodaje novi automobil da vidi podatke o svim obavljenim servisima nad tim automobilom dok nije bio u njegovom vlasništvu.
+		Još jedan potencijalni dodatak projektnom zadatku je omogućavanje korisniku da nakon što doda novi automobil ima pristup podacima o svim servisima nad tim automobilom obavljenim dok nije bio u njegovom vlasništvu.
 		
+		Naknadno, moguće je nadograditi aplikaciju na način da svaki korisnik ima priliku ocijeniti kvalitetu usluge nakon obavljenog servisa. Tada bi se mogla izračunati prosječna ocjena dodjeljena pojedinom serviseru, te pojedinom auto-servisu u cjelosti. Te bi ocjene bile vidljive korisniku dok odabire gdje želi da je njegov automobil servisiran.
 		
-		
-		
-		autopraonica?
-		ponuda rezervnih dijelova i njihove ugradnje
-		rating
-		
-		
-		
-		
-		
-		hhhh\\
+		Zadnja ideja za nadogradnju je mogućnost da vlasnik automobila može platiti za uslugu elektronički kroz aplikaciju, što bi uštedilo još vrememna kod podizanja automobila iz auto-servisa.\\
 		\eject
 		
 		\section{Primjeri u LaTeXu}
