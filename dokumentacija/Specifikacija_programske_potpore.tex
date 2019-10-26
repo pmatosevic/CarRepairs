@@ -171,6 +171,142 @@
 						
 					\end{packed_item}
 				
+					\noindent \underbar{\textbf{UC5 -Pregled autoservisa}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Posjetitelj, vlasnik automobila
+						\item  \textbf{Cilj:} Pregled svih dostupnih autoservisa u aplikaciji
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik/posjetitelj klikne na poveznicu za pregled svih autoservisa na početnom sučelju aplikacije
+							\item Sustav prikaže listu autoservisa
+						\end{packed_enum}
+						
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC6 -Pregled korisničkih podataka}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
+						\item  \textbf{Cilj:} Pregled korisničkih podataka
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik klikne na poveznicu za upravljanje korisničkim računom
+							\item Sustav prikaže osnovne podatke korisnika
+						\end{packed_enum}
+						
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC7 -Promjena korisničkih podataka}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
+						\item  \textbf{Cilj:} Promjena korisničkih podataka
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik klikne na poveznicu za upravljanje korisničkim računom
+							\item Sustav dozvoli promjenu i prikaže sučelje za promjene korisničkih podataka
+							\item Korisnik promijeni podatke i potvrđuje promjene lozinkom
+							\item Sustav sprema nove podatke u bazu i prikazuje poruku za uspješnu promjenu podataka
+						\end{packed_enum}
+						
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC8 -Dodavanje automobila}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Vlasnik automobila
+						\item  \textbf{Cilj:} Dodavanje automobila
+						\item  \textbf{Sudionici:} Baza podataka, HUO registar
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik klikne prvo na poveznicu za upravljanje svojim automobila
+							\item Sustav prikaže sučelje za dodavanje novog automobila
+							\item Korisnik unosi registracijsku oznaku i marku automobila
+							\item Sustav provjerava unesene podatke pomoću HUO registra i prikaže broj šasije
+							\item Korisniku se prikazuje poruka o uspješnom dodavanju automobila
+							
+						\end{packed_enum}
+					
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[4.a] Korisnik je unio neispravnu registracijsku oznaku
+							\item[] \begin{packed_enum}
+								
+								\item Korisniku se prikazuje poruka o neispravnosti, a korisnik može pokušati ispraviti podatke
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+						\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC9 -Pregled statističkih podataka za automobil}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Vlasnik automobila
+						\item  \textbf{Cilj:} Pregled podataka o odabranom automobilu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik klikne na poveznicu za upravljanje svojim automobilima
+							\item Sustav prikaže sučelje s listom automobila
+							\item Korisnik zatim odabere automobil i sustav prikaže podatke o tom automobilu
+							
+						\end{packed_enum}
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC10 -Brisanje automobila}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Vlasnik automobila
+						\item  \textbf{Cilj:} Brisanje automobila
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik klikne na poveznicu za upravljanje svojim automobilima
+							\item Sustav prikaže sučelje s listom automobila
+							\item Korisnik zatim odabere automobil koji će izbrisati
+							\item Sustav briše automobil
+							\item Sustav preusmjerava korisnika u priješnje sučelje za upravljanje automobilima i prikazuje poruku za uspješno brisanje odabranog automobila
+							
+						\end{packed_enum}
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[4.a] Korisnik je odustao od brisanja
+							\item[] \begin{packed_enum}
+								
+								\item Korisniku se prikazuje izbornik hoće li izbrisati odabrani automobil i preusmjerava ga u sučelje ovisno o odabiru
+								
+							\end{packed_enum}
+								
+							\end{packed_item}
+							
+					\end{packed_item}
 					
 
 %					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
