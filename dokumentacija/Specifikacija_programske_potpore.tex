@@ -61,10 +61,10 @@
 %					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
 					
-					\noindent \underbar{\textbf{UC1 -Registracija}}
+					\noindent \underbar{\textbf{UC1 -Registracija vlasnika automobila}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Korisnik
+						\item \textbf{Glavni sudionik: } Posjetitelj
 						\item  \textbf{Cilj:} Stvaranje novog korisničkog računa vlasnika automobila
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} -
@@ -72,55 +72,103 @@
 						
 						\item[] \begin{packed_enum}
 							
-							\item Korisnik na početnoj stranici klikne na poveznicu za registraciju
-							\item Korisnik unosi osobne podatke i nastavlja registraciju
+							\item Posjetitelj na početnoj stranici klikne na poveznicu za registraciju
+							\item Posjetitelj unosi osobne podatke i nastavlja registraciju
 							\item Sustav provjerava ispravnost i zauzetost upisanih podataka
-							\item Korisniku se prikazuje poruka o uspješnoj registraciji
+							\item Posjetitelju se prikazuje poruka o uspješnoj registraciji
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[3.a] Korisnik je unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka
+							\item[3.a] Posjetitelj je unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka
 							\item[] \begin{packed_enum}
 								
-								\item Korisniku se prikazuje poruka o neispravnosti/zauzetosti podataka, a korisnik ispravlja podatke
+								\item Posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka
 								
 							\end{packed_enum}
 							
 						\end{packed_item}
 					\end{packed_item}
 				
-					\noindent \underbar{\textbf{UC2 -Prijava}}
+					\noindent \underbar{\textbf{UC2 -Registracija vlasnika autoservisa}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Posjetitelj
+						\item  \textbf{Cilj:} Stvaranje novog korisničkog računa vlasnika autoservisa
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Posjetitelj na početnoj stranici klikne na poveznicu za registraciju autoservisa
+							\item Posjetitelj unosi podatke o tvrtki te svoje korisničke podatke za vlasnika servisa
+							\item Sustav provjerava upisane podatke
+							\item Posjetitelju se prikazuje poruka o uspješnoj registraciji
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Posjetitelj je unio neispravan OIB ili korisničko ime ili već postoji tvrtka s nekim od tih podataka
+							\item[] \begin{packed_enum}
+								
+								\item Posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC3 -Prijava u sustav}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: } Vlasnik automobila
-						\item  \textbf{Cilj:} Dobiti pristup korisničkom sučelju prijavljenog korisnika
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
+						\item  \textbf{Cilj:} Dobiti pristup korisničkom sučelju
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Vlasnik automobila je registriran u sustav
+						\item  \textbf{Preduvjet:} Korisnik je registriran kao vlasnik automobila ili serviser
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Vlasnik automobila na početnoj stranici klikne na poveznicu za registraciju
-							\item Vlasnik automobila upisuje korisničko ime i lozinku i nastavlja prijavu
+							\item Korisnik na početnoj stranici klikne na poveznicu za registraciju
+							\item Korisnik upisuje korisničko ime i lozinku i nastavlja prijavu
 							\item Sustav provjerava upisane podatke
-							\item Vlasnik automobila se preusmjerava na korisničko sučelje za prijavljene korisnike
+							\item Korisnika se preusmjerava na korisničko sučelje ovisno o tome je li vlasnik automobila ili serviser
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Vlasnik automobila je unio neispravno korisničko ime ili lozinku
+							\item[3.a] Korisnik je unio neispravno korisničko ime ili lozinku
 							\item[] \begin{packed_enum}
 								
-								\item Vlasniku automobila se prikazuje poruka o neispravnosti, a vlasnik automobila može pokušati ispraviti podatke
+								\item Korisniku se prikazuje poruka o neispravnosti, a korisnik može pokušati ispraviti podatke
 								
 							\end{packed_enum}
 							
 						\end{packed_item}
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC4 -Odjava}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
+						\item  \textbf{Cilj:} Odjaviti se iz korisničkog sučelja
+						\item  \textbf{Sudionici:} -
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik klikne na poveznicu za odjavu
+							\item Sustav odjavljuje korisnika te ga preusmjeri na početnu stranicu
+						\end{packed_enum}
+						
 					\end{packed_item}
 				
 					
@@ -162,8 +210,30 @@
 				
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
+				
+					\begin{figure}[H]
+						\includegraphics[width=\linewidth]{dijagrami/diagram0.png}
+						\centering
+						\caption{Dijagram obrasca uporabe, funkcionalnost posjetitelja, registriranog korisnika i vlasnika automobila}
+						\label{fig:diagram0}
+					\end{figure}
+				
+					\begin{figure}[H]
+						\includegraphics[width=\linewidth]{dijagrami/diagram1.png}
+						\centering
+						\caption{Dijagram obrasca uporabe, funkcionalnost servisera i vlasnika autoservisa}
+						\label{fig:diagram1}
+					\end{figure}
+				
+					\begin{figure}[H]
+						\includegraphics[width=\linewidth]{dijagrami/diagram2.png}
+						\centering
+						\caption{Dijagram obrasca uporabe, funkcionalnost administratora}
+						\label{fig:diagram2}
+					\end{figure}
+				
 					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
+%					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
 				\eject		
 				
 			\subsection{Sekvencijski dijagrami}
