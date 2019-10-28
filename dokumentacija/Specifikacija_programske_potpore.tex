@@ -203,7 +203,7 @@
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik/posjetitelj klikne na poveznicu za pregled svih
+		\item Vlasnik automobila/posjetitelj klikne na poveznicu za pregled svih
 		autoservisa na početnom sučelju aplikacije
 		\item Sustav prikaže listu autoservisa
 	\end{packed_enum}
@@ -254,17 +254,17 @@
 	\item \textbf{Glavni sudionik: } Vlasnik automobila
 	\item  \textbf{Cilj:} Dodavanje automobila
 	\item  \textbf{Sudionici:} Baza podataka, HUO registar
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne prvo na poveznicu za upravljanje svojim automobila
+		\item Vlasnik automobila klikne prvo na poveznicu za upravljanje svojim automobila
 		\item Sustav prikaže sučelje za dodavanje novog automobila
-		\item Korisnik unosi registracijsku oznaku i marku automobila
+		\item Vlasnik automobila unosi registracijsku oznaku i marku automobila
 		\item Sustav provjerava unesene podatke pomoću HUO registra i prikaže
 		broj šasije
-		\item Korisniku se prikazuje poruka o uspješnom dodavanju automobila
+		\item Vlasnik automobila se prikazuje poruka o uspješnom dodavanju automobila
 		
 	\end{packed_enum}
 	
@@ -272,10 +272,10 @@
 	
 	\item[] \begin{packed_item}
 		
-		\item[4.a] Korisnik je unio neispravnu registracijsku oznaku
+		\item[4.a] Vlasnik automobila je unio neispravnu registracijsku oznaku
 		\item[] \begin{packed_enum}
 			
-			\item Korisniku se prikazuje poruka o neispravnosti, a korisnik može
+			\item Vlasniku automobila se prikazuje poruka o neispravnosti i može
 			pokušati ispraviti podatke
 			
 		\end{packed_enum}
@@ -290,14 +290,14 @@
 	\item \textbf{Glavni sudionik: } Vlasnik automobila
 	\item  \textbf{Cilj:} Pregled podataka o odabranom automobilu
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za upravljanje svojim automobilima
+		\item Vlasnik automobila klikne na poveznicu za upravljanje svojim automobilima
 		\item Sustav prikaže sučelje s listom automobila
-		\item Korisnik zatim odabere automobil i sustav prikaže podatke o tom
+		\item Vlasnik automobila zatim odabere automobil i sustav prikaže podatke o tom
 		automobilu
 		
 	\end{packed_enum}
@@ -309,16 +309,16 @@
 	\item \textbf{Glavni sudionik: } Vlasnik automobila
 	\item  \textbf{Cilj:} Brisanje automobila
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za upravljanje svojim automobilima
+		\item Vlasnik automobila klikne na poveznicu za upravljanje svojim automobilima
 		\item Sustav prikaže sučelje s listom automobila
-		\item Korisnik zatim odabere automobil koji će izbrisati
+		\item Vlasnik automobila zatim odabere automobil koji će izbrisati
 		\item U bazu podataka se pohranuje promjena
-		\item Sustav preusmjerava korisnika u priješnje sučelje za upravljanje
+		\item Sustav preusmjerava vlasnika automobila u priješnje sučelje za upravljanje
 		automobilima i prikazuje poruku za uspješno brisanje odabranog automobila
 		
 	\end{packed_enum}
@@ -326,10 +326,10 @@
 	
 	\item[] \begin{packed_item}
 		
-		\item[3.a] Korisnik je odustao od brisanja
+		\item[3.a] Vlasnik automobila je odustao od brisanja
 		\item[] \begin{packed_enum}
 			
-			\item Korisniku se prikazuje izbornik hoće li izbrisati odabrani
+			\item Vlasniku automobila se prikazuje izbornik hoće li izbrisati odabrani
 			automobil i preusmjerava ga u sučelje ovisno o odabiru
 			
 		\end{packed_enum}
@@ -338,7 +338,7 @@
 		obrisati
 		\item[] \begin{packed_enum}
 			
-			\item Korisniku se prikazuje poruka o nemogućnosti brisanja odabranog
+			\item Vlasniku automobila se prikazuje poruka o nemogućnosti brisanja odabranog
 			automobila
 			
 		\end{packed_enum}
@@ -352,16 +352,16 @@
 	\item \textbf{Glavni sudionik: } Vlasnik automobila
 	\item  \textbf{Cilj:} Otvaranje novog radnog naloga za servis automobila
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za upravljanje servisnim nalozima
+		\item Vlasnik automobila klikne na poveznicu za upravljanje servisnim nalozima
 		\item Sustav prikaže sučelje s listom radnih naloga
-		\item Korisnik zatim klikne na poveznicu za otvaranje novog naloga i pri
+		\item Vlasnik automobila zatim klikne na poveznicu za otvaranje novog naloga i pri
 		tom odabere za koji autoservis
-		\item Nakon što je stvoren radni nalog, korisniku se prikazuje poruka za
+		\item Nakon što je stvoren radni nalog, vlasniku se prikazuje poruka za
 		uspješno kreiranje radnog naloga te se osvježava lista radnih naloga
 		
 	\end{packed_enum}
@@ -373,12 +373,12 @@
 	\item \textbf{Glavni sudionik: } Vlasnik automobila
 	\item  \textbf{Cilj:} Pregled statusa radnog naloga
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za upravljanje servisnim nalozima
+		\item Vlasnik automobila klikne na poveznicu za upravljanje servisnim nalozima
 		\item Sustav prikaže sučelje s listom radnih naloga i njihov status
 		(otvoren/zatvoren/u obradi)
 		
@@ -391,15 +391,16 @@
 	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
 	\item  \textbf{Cilj:} Prihvaćanje radnog naloga
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i radni nalog
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik autoservisa i radni nalog
 	je otvoren
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za prihvaćanje radnog naloga
+		\item Vlasnik autoservisa klikne na poveznicu za prihvaćanje radnog naloga
 		\item Sustav prikaže listu otvorenih radnih naloga
-		\item Korisnik klikne na prihvaćanje odabranog naloga
+		\item Vlasnik klikne na prihvaćanje odabranog naloga
+		\item Status radnog naloga se mijenja i postaje dostupan serviseru
 		
 	\end{packed_enum}
 \end{packed_item}
@@ -410,15 +411,16 @@
 	\item \textbf{Glavni sudionik: } Serviser
 	\item  \textbf{Cilj:} Zatvaranje radnog naloga
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i radni nalog
-	je bio prihvaćen
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser i radni nalog
+	je prihvaćen
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za rad na radnom nalogu
+		\item Serviser klikne na poveznicu za rad na radnom nalogu
 		\item Sustav prikaže listu dostupnih radnih naloga
-		\item Korisnik klikne na zatvaranje odabranog radnog naloga
+		\item Serviser klikne na zatvaranje odabranog radnog naloga
+		\item Status radnog naloga se promijeni u "zatvoren" i serviseru se prikaže poruka o uspješnom zatvaranju
 		
 	\end{packed_enum}
 \end{packed_item}
@@ -429,22 +431,102 @@
 	\item \textbf{Glavni sudionik: } Serviser
 	\item  \textbf{Cilj:} Uređivanje prihvaćenog radnog naloga
 	\item  \textbf{Sudionici:} Baza podataka
-	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav, radni nalog je
-	prihvaćen i radni nalog je za redovan servis
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za redovan servis i prihvaćen
 	\item  \textbf{Opis osnovnog tijeka:}
 	
 	\item[] \begin{packed_enum}
 		
-		\item Korisnik klikne na poveznicu za rad na radnom nalogu
+		\item Serviser klikne na poveznicu za rad na radnom nalogu
 		\item Sustav prikaže listu dostupnih radnih naloga
-		\item Korisnik klikne na uređivanje odabranog radnog naloga za redovan
+		\item Serviser klikne na uređivanje odabranog radnog naloga za redovan
 		servis
-		\item U radnom nalogu korisnik unosi dodatne podatke (očitana kilometraža
+		\item U radnom nalogu serviser unosi dodatne podatke (očitana kilometraža
 		vozila te preporuka za izvanredni servis ukoliko je potrebno)
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
 		
 	\end{packed_enum}
 \end{packed_item}
 
+\noindent \underbar{\textbf{UC16 -Dodavanje ugrađenog rezervnog dijela}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Dodavanje ugrađenog rezervnog dijela u radni nalog
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Serviser klikne na poveznicu za rad na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser klikne za dodavanje ugrađeni rezervni dio
+		\item Serviser odabere koji će rezervni dio unijeti
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+		
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC17 -Brisanje ugrađenog rezervnog dijela}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Izbrisati odabrani ugrađeni rezervni dio u radnom nalogu
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Serviser klikne na poveznicu za rad na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser klikne za brisanje ugrađenog rezervnog dijela
+		\item Serviser odabere koji će rezervni dio izbrisati
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+		
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC18 -Brisanje usluge}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Izbrisati uslugu 
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Serviser klikne na poveznicu za rad na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser klikne za brisanje usluge
+		\item Serviser odabere koju će uslugu obrisati
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+		
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC19 -Dodavanje usluge}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Dodati uslugu
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Serviser klikne na poveznicu za rad na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser klikne za dodavanje usluge
+		\item Serviser odabere uslugu za radni nalog
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+		
+	\end{packed_enum}
+\end{packed_item}
 
 \noindent \underbar{\textbf{UC20 -Dodavanje rezervnog dijela}}
 \begin{packed_item}
@@ -475,10 +557,6 @@
 	\end{packed_item}
 	
 \end{packed_item}
-
-
-
-
 
 \noindent \underbar{\textbf{UC21 -Uređivanje rezervnog dijela}}
 \begin{packed_item}
@@ -513,7 +591,6 @@
 	
 \end{packed_item}
 
-
 \noindent \underbar{\textbf{UC22 -Brisanje rezervnog dijela}}
 \begin{packed_item}
 	
@@ -535,9 +612,6 @@
 	\end{packed_enum}
 \end{packed_item}
 
-
-
-
 \noindent \underbar{\textbf{UC23 -Uređivanje podataka autoservisa}}
 \begin{packed_item}
 	
@@ -558,10 +632,6 @@
 		
 	\end{packed_enum}
 \end{packed_item}
-
-
-
-
 
 \noindent \underbar{\textbf{UC24 -Dodavanje servisera}}
 \begin{packed_item}
