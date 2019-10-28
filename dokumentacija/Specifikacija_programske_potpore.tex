@@ -417,7 +417,7 @@
 
 						\item[] \begin{packed_enum}
 
-							\item Vlasnik automobila odabere opciju upravljanja rezervnim dijelovima
+							\item Vlasnik autoservisa odabere opciju upravljanja rezervnim dijelovima
 							\item Vlasnik autoservisa odabere opciju dodavanja novog rezervnog dijela
 							\item Vlasnik upisuje naziv i cijenu rezervnog dijela i potvrđuje upis
 							\item U bazu podataka se pohrani promjena
@@ -449,7 +449,7 @@
 
 						\item[] \begin{packed_enum}
 
-							\item Vlasnik automobila odabere opciju upravljanja rezervnim dijelovima
+							\item Vlasnik autoservisa odabere opciju upravljanja rezervnim dijelovima
 							\item Vlasnik autoservisa iz popisa rezervnih dijelova odabere opciju uređivanja
 							\item Vlasniku se prikazuje prozor s upisanim postojećim podacima o odabranom dijelu
 							\item Vlasnik mijenja podatke i potvrđuje promjene
@@ -479,10 +479,82 @@
 
 						\item[] \begin{packed_enum}
 
-							\item Vlasnik automobila odabere opciju upravljanja rezervnim dijelovima
+							\item Vlasnik autoservisa odabere opciju upravljanja rezervnim dijelovima
 							\item Vlasnik autoservisa iz popisa rezervnih dijelova odabere rezervni dio za brisanje
 							\item U bazi podataka se odabrani dio označava kao nedostupan za daljnju ugradnju
 
+						\end{packed_enum}
+					\end{packed_item}
+				
+				
+				
+				
+					\noindent \underbar{\textbf{UC23 -Uređivanje podataka autoservisa}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+						\item  \textbf{Cilj:} Promjena naziva i ostalih podataka autoservisa
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno mu je pravo vlasnika autoservisa
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Vlasnik autoservisa odabere opciju uređivanja podataka autoservisa
+							\item Vlasnik autoservisa se prikazuju trenutni podaci o njegovom autoservisu (naziv)
+							\item Vlasnik autoservisa mijenja podatke i potvrđuje promjenu
+							\item Promjena se pohranjuje u bazu podataka
+							
+						\end{packed_enum}
+					\end{packed_item}
+				
+				
+				
+				
+				
+					\noindent \underbar{\textbf{UC24 -Dodavanje servisera}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+						\item  \textbf{Cilj:} Dodavanje novog servisera u vlastiti autoservis
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno mu je pravo vlasnika autoservisa
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Vlasnik autoservisa odabere opciju upravljanja serviserima
+							\item Vlasnik autoservisa odabere opciju dodavanja novog servisera
+							\item Vlasnik autoservisa upisuje ime i prezime te korisničko ime i inicijalnu lozinku za korisnički račun novog servisera
+							\item Novi račun se pohranjuje u bazu podataka
+							
+						\end{packed_enum}
+					
+						\item  \textbf{Opis mogućih odstupanja:}
+						\item[] \begin{packed_item}
+							\item[4.a] Postoji korisnički korisnički račun s istim korisničkim imenom
+							\item[] \begin{packed_enum}
+								\item Vlasniku se prikazuje poruka o zauzetosti korisničkog imena, a vlasnik bira drugo korisničko ime
+							\end{packed_enum}
+						\end{packed_item}
+					
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC25 -Ukalnjanje servisera}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+						\item  \textbf{Cilj:} Uklanjanje servisera iz vlastitog autoservisa
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno mu je pravo vlasnika autoservisa
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Vlasnik autoservisa odabere opciju upravljanja serviserima
+							\item Vlasnik autoservisa odabere iz popisa odabire servisera kojeg želi ukloniti
+							\item Korisnički račun servisera se briše iz baze podataka
+							
 						\end{packed_enum}
 					\end{packed_item}
 
