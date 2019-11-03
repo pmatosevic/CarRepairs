@@ -84,7 +84,7 @@
 		
 		\item Posjetitelj odabire opciju registracije
 		\item Posjetitelj unosi osobne podatke i nastavlja registraciju
-		\item Sustav provjerava ispravnost i zauzetost upisanih podataka u bazi podataka
+		\item Sustav provjerava ispravnost te ih sprema u bazu podataka ako su ispravni
 		\item Posjetitelju se prikazuje poruka o uspješnoj registraciji
 	\end{packed_enum}
 	
@@ -119,7 +119,7 @@
 		\item Posjetitelj odabire opciju registracije autoservisa
 		\item Posjetitelj unosi podatke o tvrtki te svoje korisničke podatke za
 		vlasnika servisa
-		\item Sustav provjerava upisane podatke i zatim ih sprema, ako su ispravni
+		\item Sustav provjerava upisane podatke te ih sprema u bazu podataka ako su ispravni
 		\item Posjetitelju se prikazuje poruka o uspješnoj registraciji
 	\end{packed_enum}
 	
@@ -374,7 +374,7 @@
 	\item[] \begin{packed_enum}
 		
 		\item Vlasnik automobila odabire opciju upravljanja servisnim nalozima
-		\item Sustav prikaže sučelje s listom radnih naloga dohvačenih iz baze podataka i njihov status
+		\item Sustav prikaže sučelje s listom radnih naloga dohvaćenih iz baze podataka i njihov status
 		(otvoren/zatvoren/u obradi)
 		
 	\end{packed_enum}
@@ -395,7 +395,7 @@
 		\item Vlasnik autoservisa odabire opciju prihvaćanja radnog naloga
 		\item Sustav prikaže listu otvorenih radnih naloga dohvaćenih iz baze podataka
 		\item Vlasnik prihvaća odabrani nalog
-		\item Status radnog naloga se mijenja i sprema se u bazu, te postaje dostupan serviseru
+		\item Status radnog naloga se mijenja i sprema se u bazu, te postaje dostupan svim serviserima tog autoservisa
 		
 	\end{packed_enum}
 \end{packed_item}
@@ -659,7 +659,7 @@
 	
 \end{packed_item}
 
-\noindent \underbar{\textbf{UC25 -Ukalnjanje servisera}}
+\noindent \underbar{\textbf{UC25 -Uklanjanje servisera}}
 \begin{packed_item}
 	
 	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
@@ -697,6 +697,7 @@
 		računima
 		\item Sustav prikaže listu korisničkih računa
 		\item Administrator odabere korisnički račun čije podatke želi pregledati
+		\item Administratoru se prikažu korisnički podaci dohvaćeni iz baze podataka
 		
 	\end{packed_enum}
 \end{packed_item}
@@ -755,6 +756,7 @@
 		\item Administrator odabere opciju upravljanja autoservisima
 		\item Sustav prikaže listu autoservisa
 		\item Administrator odabire autoservis čije podatke želi pregledati
+		\item Administratoru se prikazuju podaci o autoservisu dohvaćeni iz baze podataka
 		
 	\end{packed_enum}
 \end{packed_item}
