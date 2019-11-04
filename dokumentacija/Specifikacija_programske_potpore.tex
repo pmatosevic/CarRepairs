@@ -1,23 +1,17 @@
 \chapter{Specifikacija programske potpore}
 		
 	\section{Funkcionalni zahtjevi}
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
 				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
-			
-			
 			\noindent \textbf{Dionici:}
 			
 			\begin{packed_enum}
 				
-				\item Neregistrirani korisnik
+				\item Posjetitelj
+				\item Registrirani korisnik
 				\item Vlasnik automobila			
 				\item Vlasnik autoservisa
 				\item Serviser
-				\item Glavni administrator
+				\item Administrator
 				
 			\end{packed_enum}
 			
@@ -25,17 +19,31 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Neregistrirani korisnik (inicijator) može:}
+				
+				\item  \underbar{Posjetitelj (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item Registracija
-					\item Uvid u servise
+					\item Registracija vlasnika automobila
+					\item Registracija vlasnika autoservisa
+					\item Pregled autoservisa
+					
+				\end{packed_enum}
+			
+				\item \underbar{Registrirani korisnik (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item Upravljanje korisničkim računom
 					\begin{packed_enum}
 						
-						\item  Uvid u informacije o servisima
-				
+						\item Pregled korisničkih podataka
+						\item Promjena korisničkih podataka
+						
 					\end{packed_enum}
+				
+					\item Prijava u sustav
+					\item Odjava
 					
 				\end{packed_enum}
 			
@@ -43,10 +51,23 @@
 				
 				\begin{packed_enum}
 					
-					\item Upravljanje vozilima
-					\item Pregled detalja prošlih servisa
-					\item Uređivanje osobnih podataka
-					\item Brisanje računa
+					\item Pregled autoservisa
+					\item Upravljanje automobilima
+					\begin{packed_enum}
+						
+						\item Dodavanje automobila
+						\item Pregled statističkih podataka za automobil
+						\item Brisanje automobila
+					
+					\end{packed_enum}
+					
+					\item Upravljanje servisnim nalozima
+					\begin{packed_enum}
+				
+						\item Otvaranje novog servisnog naloga
+						\item Pregled statusa servisnog naloga
+				
+					\end{packed_enum}
 					
 				\end{packed_enum}
 			
@@ -54,11 +75,24 @@
 				
 				\begin{packed_enum}
 					
-					\item Uređivanje cjenika usluga i podataka o autodijelovima
-					\item Uvid u sve informacije o autoservisu
-					\item Upravljanje listom zaposlenika
-					\item Odabir je li servis redovan ili izvanredan
-					\item Otvaranje i zatvaranje radnog naloga
+					\item Prihvaćanje radnog naloga
+					\item Upravljanje rezervnim dijelovima
+					\begin{packed_enum}
+						
+						\item Dodavanje rezervnog dijela
+						\item Uređivanje rezervnog dijela
+						\item Brisanje rezervnog dijela
+						
+					\end{packed_enum}
+				
+					\item Uređivanje podataka autoservisa
+					\item Upravljanje serviserima
+					\begin{packed_enum}
+						
+						\item Dodavanje servisera
+						\item Uklanjanje servisera
+						
+					\end{packed_enum}
 					
 				\end{packed_enum}
 				
@@ -66,28 +100,44 @@
 				
 				\begin{packed_enum}
 					
-					\item Registracija
-					\item Nakon prijave, odabir hoće li pristupiti stranici kao serviser ili kao vlasnik automobila
-					\item Unos podataka o servisu
-					\item Pregled prošlih servisa
-					\item Dodavanje stavki na radni nalog (pri izvanrednom servisu)
+					\item Rad na radnom nalogu
 					\begin{packed_enum}
 						
-						\item  Dodavanje zamijenjenih rezervnih dijelova (po definiranoj cijeni)
-						\item  Dodavanje rada
+						\item Uređivanje naloga redovnog servisa
+						\item Zatvaranje radnog naloga
+						\item Rad na nalogu izvanrednog servisa
+						\begin{packed_enum}
+							
+							\item Dodavanje ugrađenog rezervnog dijela
+							\item Brisanje ugrađenog rezervnog dijela
+							\item Dodavanje usluge
+							\item Brisanje usluge
+							
+						\end{packed_enum}
 						
 					\end{packed_enum}
 					
 				\end{packed_enum}
 				
-				\item  \underbar{Glavni administrator (inicijator) može:}
+				\item  \underbar{Administrator (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item Odobravanje registracije vlasnika autoservisa
-					\item Upravljanje svim korisnicima
-					\item Brisanje računa
-					\item Uvid u statističke podatke
+					\item Administracija korisnika
+					\begin{packed_enum}
+						
+						\item Pregled podataka korisničkog računa
+						\item Brisanje korisničkog računa
+						
+					\end{packed_enum}
+				
+					\item Administracija autoservisa
+					\begin{packed_enum}
+						
+						\item Pregled podataka autoservisa
+						\item Brisanje autoservisa
+						
+					\end{packed_enum}
 					
 				\end{packed_enum}
 			
@@ -95,7 +145,7 @@
 				
 				\begin{packed_enum}
 					
-					\item Dohvaćanje podataka o modelu i broju šasije auta na temelju registracije
+					\item Provjera registracije i dohvat broja šasije
 					
 				\end{packed_enum}
 			
@@ -103,8 +153,8 @@
 				
 				\begin{packed_enum}
 					
-					\item Pohranjivanje podataka i ovlasti korisnika sustava
-					\item Pohranjivanje podataka o automobilima i prošlim servisiranjima automobila
+					\item Komunikacija sa svim dijelovima sustava
+					\item Pohrana podataka i ovlasti
 					
 				\end{packed_enum}
 				
