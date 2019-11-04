@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
 
     @Id @GeneratedValue
@@ -16,9 +17,8 @@ public class User {
     @Column(nullable = false, length = 200)
     private String passwordHash;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserRole userRole;
+    @Column
+    private String email;
 
     public Long getId() {
         return id;
@@ -44,11 +44,4 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
 }
