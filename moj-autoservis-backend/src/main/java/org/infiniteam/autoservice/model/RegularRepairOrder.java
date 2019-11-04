@@ -5,7 +5,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class RegularServiceJob extends ServiceJob {
+public class RegularRepairOrder extends RepairOrder {
 
     private int kilometers;
 

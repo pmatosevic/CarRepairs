@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class RepairingServiceJob extends ServiceJob {
+public class RepairingRepairOrder extends RepairOrder {
 
     @ManyToMany
     private List<VehiclePart> changedParts;
