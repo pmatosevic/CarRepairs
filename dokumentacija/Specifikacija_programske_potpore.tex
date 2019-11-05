@@ -6,11 +6,11 @@
 
 			\begin{packed_enum}
 
-				\item Posjetitelj
-				\item Registrirani korisnik
-				\item Vlasnik automobila
-				\item Vlasnik autoservisa
-				\item Serviser
+                \item Naručitelj (FER)
+				\item Razvojni tim
+				\item Vlasnici automobila
+				\item Vlasnici autoservisa
+				\item Serviseri
 				\item Administrator
 
 			\end{packed_enum}
@@ -945,18 +945,16 @@
 
 			 	\begin{packed_item}
 
-			 	\item  Aplikacija mora biti pregledna te mora imati laku dostupnost raznim funkcionalnostima i sadržajima
-			 	\item Mogućnost istovremenog pristupa aplikaciji od strane više korisnika
-			 	\item U slučaju neispravnog korištenja korisničkog sučelja sustav mora prikazati odgovarajuću poruku upozorenja
-			 	\item  Aplikacija mora podržavati hrvatsku abecedu pri unosu podataka
-			 	\item Sustav treba imati pristup HUO registru
-			 	\item  U slučaju prijeđenog određenog broja kilometara od poslijednjeg redovnog servisa, aplikacija treba prikazati poruku preporuke redovnog servisa nakon prijave u sustav
+                \item Sustav treba biti implementiran u objektno-orijentiranom jeziku te omogućiti laku nadogradnju u slučaju potrebe
+                \item Sustav treba biti implementiran kao web-aplikacija
+                \item Korisničko sučelje se treba ispravno prikazivati u svim modernim preglednicima na desktop računalima i mobilnim uređajima
+                \item Sučelje za vlasnike automobila treba biti jednostavno za korištenje osobama svih dobnih skupina
+                \item Sučelje za servisere treba biti prilagođeno za uporabu u okruženju servisa i osigurati laku dostupnost svih funkcionalnosti
+%			 	\item Aplikacija mora biti pregledna te mora imati laku dostupnost raznim funkcionalnostima i sadržajima
+			 	\item Sustavu mogu istovremeno pristupiti više različitih vrsta korisnika
+			 	\item Aplikacija mora podržavati hrvatsku abecedu pri unosu podataka
 			 	\item Sustav koristi HRK kao valutu za izračun i prikaz cijena
-			 	\item Izvršavanje dijelova aplikacije mora se odviti u razumnom roku
-			 	\item Ukoliko pri registraciji/prijavi u sustav posjetitelj unese neispravne podatke, sustav prikazuje poruku o neispravnosti/zauzetosti podataka
-			 	\item Pri unosu neispravnih podataka unutar aplikacije, korisniku se prikazuje poruka o neispravnosti
-			 	\item Promjene podataka trebaju biti potvrđene unosom lozinke
-			 	\item Nakon odjave sustav preusmjeruje korisnika na početnu stranicu
+			 	\item Izvršavanje dijelova aplikacije mora se odviti u roku manjem od nekoliko sekundi
 
 			 \end{packed_item}
 
