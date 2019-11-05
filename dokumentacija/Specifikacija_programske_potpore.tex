@@ -830,11 +830,16 @@
 
 \subsection{Sekvencijski dijagrami}
 
-\textbf{\textit{dio 1. revizije}}\\
-
-\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove
-	sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s
-	asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+	\textbf{Obrasci uporabe UC12--UC15: Upravljanje radnim nalozima}
+	
+	\noindent Vlasnik automobila (korisnik) odabire opciju upravljanja radnim nalozima, na što mu aplikacija vraća popis radnih naloga te njihov status. Tada korisnik otvara novi radni nalog koji se sprema u bazu podataka, te se uspješno spremanje javlja korisniku. Web aplikacija osvježava listu radnih naloga koja se prikazuje korisniku. Serviser javlja aplikaciji da može raditi na radnom nalogu, te se iz baze podataka tada dohvaća lista otvorenih radnih naloga, od kojih on odabire jedan. Tom radnom nalogu mijenja se status u \textit{u obradi}, te se novi status potom ažurira u bazi podataka. Serviser tijekom servisiranja upisuje kilometražu te daje preporuku za izvanredan servis. Te podatke aplikacija ažurira u bazi podataka. Nakon što serviser u aplikaciji zatvori radni nalog, status naloga se još jednom ažurira na \textit{zatvoren} u bazi podataka.
+	
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{dijagrami/seq-dia1.png}
+		\centering
+		\caption{Sekvencijski dijagram za upravljanje nalozima, UC12--UC15}
+		\label{fig:sequence-diagram1}
+	\end{figure}
 \eject
 
 \section{Ostali zahtjevi}
