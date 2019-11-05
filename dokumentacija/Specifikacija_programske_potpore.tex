@@ -1,163 +1,163 @@
 \chapter{Specifikacija programske potpore}
 		
 	\section{Funkcionalni zahtjevi}
-				
+
 			\noindent \textbf{Dionici:}
-			
+
 			\begin{packed_enum}
-				
+
 				\item Posjetitelj
 				\item Registrirani korisnik
-				\item Vlasnik automobila			
+				\item Vlasnik automobila
 				\item Vlasnik autoservisa
 				\item Serviser
 				\item Administrator
-				
+
 			\end{packed_enum}
-			
+
 			\noindent \textbf{Aktori i njihovi funkcionalni zahtjevi:}
-			
-			
+
+
 			\begin{packed_enum}
-				
+
 				\item  \underbar{Posjetitelj (inicijator) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Registracija vlasnika automobila
 					\item Registracija vlasnika autoservisa
 					\item Pregled autoservisa
-					
+
 				\end{packed_enum}
-			
+
 				\item \underbar{Registrirani korisnik (inicijator) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Upravljanje korisničkim računom
 					\begin{packed_enum}
-						
+
 						\item Pregled korisničkih podataka
 						\item Promjena korisničkih podataka
-						
+
 					\end{packed_enum}
-				
+
 					\item Prijava u sustav
 					\item Odjava
-					
+
 				\end{packed_enum}
-			
+
 				\item  \underbar{Vlasnik automobila (inicijator) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Pregled autoservisa
 					\item Upravljanje automobilima
 					\begin{packed_enum}
-						
+
 						\item Dodavanje automobila
 						\item Pregled statističkih podataka za automobil
 						\item Brisanje automobila
-					
+
 					\end{packed_enum}
-					
+
 					\item Upravljanje servisnim nalozima
 					\begin{packed_enum}
-				
+
 						\item Otvaranje novog servisnog naloga
 						\item Pregled statusa servisnog naloga
-				
+
 					\end{packed_enum}
-					
+
 				\end{packed_enum}
-			
+
 				\item  \underbar{Vlasnik autoservisa (inicijator) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Prihvaćanje radnog naloga
 					\item Upravljanje rezervnim dijelovima
 					\begin{packed_enum}
-						
+
 						\item Dodavanje rezervnog dijela
 						\item Uređivanje rezervnog dijela
 						\item Brisanje rezervnog dijela
-						
+
 					\end{packed_enum}
-				
+
 					\item Uređivanje podataka autoservisa
 					\item Upravljanje serviserima
 					\begin{packed_enum}
-						
+
 						\item Dodavanje servisera
 						\item Uklanjanje servisera
-						
+
 					\end{packed_enum}
-					
+
 				\end{packed_enum}
-				
+
 				\item  \underbar{Serviser (inicijator) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Rad na radnom nalogu
 					\begin{packed_enum}
-						
+
 						\item Uređivanje naloga redovnog servisa
 						\item Zatvaranje radnog naloga
 						\item Rad na nalogu izvanrednog servisa
 						\begin{packed_enum}
-							
+
 							\item Dodavanje ugrađenog rezervnog dijela
 							\item Brisanje ugrađenog rezervnog dijela
 							\item Dodavanje usluge
 							\item Brisanje usluge
-							
+
 						\end{packed_enum}
-						
+
 					\end{packed_enum}
-					
+
 				\end{packed_enum}
-				
+
 				\item  \underbar{Administrator (inicijator) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Administracija korisnika
 					\begin{packed_enum}
-						
+
 						\item Pregled podataka korisničkog računa
 						\item Brisanje korisničkog računa
-						
+
 					\end{packed_enum}
-				
+
 					\item Administracija autoservisa
 					\begin{packed_enum}
-						
+
 						\item Pregled podataka autoservisa
 						\item Brisanje autoservisa
-						
+
 					\end{packed_enum}
-					
+
 				\end{packed_enum}
-			
+
 				\item  \underbar{HUO registar (sudionik) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Provjera registracije i dohvat broja šasije
-					
+
 				\end{packed_enum}
-			
+
 				\item \underbar{Baza podataka (sudionik) može:}
-				
+
 				\begin{packed_enum}
-					
+
 					\item Komunikacija sa svim dijelovima sustava
 					\item Pohrana podataka i ovlasti
-					
+
 				\end{packed_enum}
-				
+
 			\end{packed_enum}
 			
 			\eject 
@@ -172,64 +172,783 @@
 					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
 					
 
-					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }$<$sudionik$>$
-						\item  \textbf{Cilj:} $<$cilj$>$
-						\item  \textbf{Sudionici:} $<$sudionici$>$
-						\item  \textbf{Preduvjet:} $<$preduvjet$>$
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-	
-							\item $<$opis korak jedan$>$
-							\item $<$opis korak dva$>$
-							\item $<$opis korak tri$>$
-							\item $<$opis korak četiri$>$
-							\item $<$opis korak pet$>$
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-	
-							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[] \begin{packed_enum}
-								
-								\item $<$opis rješenja mogućeg scenarija korak 1$>$
-								\item $<$opis rješenja mogućeg scenarija korak 2$>$
-								
-							\end{packed_enum}
-							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
-							
-						\end{packed_item}
-					\end{packed_item}
-				
-					
-				\subsubsection{Dijagrami obrazaca uporabe}
-					
-					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
-				\eject		
-				
-			\subsection{Sekvencijski dijagrami}
-				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
-				\eject
-	
-		\section{Ostali zahtjevi}
-		
-			\textbf{\textit{dio 1. revizije}}\\
-		 
+
+\noindent \underbar{\textbf{UC1 -Registracija vlasnika automobila}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Posjetitelj
+	\item  \textbf{Cilj:} Stvaranje novog korisničkog računa vlasnika
+	automobila
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} -
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Posjetitelj odabire opciju registracije
+		\item Posjetitelj unosi osobne podatke i nastavlja registraciju
+		\item Sustav provjerava ispravnost te ih sprema u bazu podataka ako su ispravni
+		\item Posjetitelju se prikazuje poruka o uspješnoj registraciji
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+
+	\item[] \begin{packed_item}
+
+		\item[3.a] Posjetitelj je unio neispravan OIB, korisničko ime ili e-mail,
+		ili postoji registrirani korisnik s nekim od tih podataka
+		\item[] \begin{packed_enum}
+
+			\item Posjetitelju se prikazuje poruka o neispravnosti/zauzetosti
+			podataka
+
+		\end{packed_enum}
+
+	\end{packed_item}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC2 -Registracija vlasnika autoservisa}}
+\begin{packed_item}
+	\item \textbf{Glavni sudionik: } Posjetitelj
+	\item  \textbf{Cilj:} Stvaranje novog korisničkog računa vlasnika
+	autoservisa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} -
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Posjetitelj odabire opciju registracije autoservisa
+		\item Posjetitelj unosi podatke o tvrtki te svoje korisničke podatke za
+		vlasnika servisa
+		\item Sustav provjerava upisane podatke te ih sprema u bazu podataka ako su ispravni
+		\item Posjetitelju se prikazuje poruka o uspješnoj registraciji
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+
+	\item[] \begin{packed_item}
+
+		\item[3.a] Posjetitelj je unio neispravan OIB ili korisničko ime ili već
+		postoji tvrtka s nekim od tih podataka
+		\item[] \begin{packed_enum}
+
+			\item Posjetitelju se prikazuje poruka o neispravnosti/zauzetosti
+			podataka
+
+		\end{packed_enum}
+
+	\end{packed_item}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC3 -Prijava u sustav}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Registrirani korisnik
+	\item  \textbf{Cilj:} Dobiti pristup korisničkom sučelju
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je registriran kao vlasnik automobila
+	ili serviser
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Korisnik odabire opciju prijave u aplikaciju
+		\item Korisnik upisuje korisničko ime i lozinku i nastavlja prijavu
+		\item Sustav provjerava upisane podatke u bazi podataka
+		\item Korisnika se preusmjerava na korisničko sučelje ovisno o tome je li
+		vlasnik automobila ili serviser
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+
+	\item[] \begin{packed_item}
+
+		\item[3.a] Korisnik je unio neispravno korisničko ime ili lozinku
+		\item[] \begin{packed_enum}
+
+			\item Korisniku se prikazuje poruka o neispravnosti, a korisnik može
+			pokušati ispraviti podatke
+
+		\end{packed_enum}
+
+	\end{packed_item}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC4 -Odjava}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Registrirani korisnik
+	\item  \textbf{Cilj:} Odjaviti se iz korisničkog sučelja
+	\item  \textbf{Sudionici:} -
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Korisnik odabire opciju odjave iz aplikacije
+		\item Sustav odjavljuje korisnika te ga preusmjeri na početnu stranicu
+	\end{packed_enum}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC5 -Pregled autoservisa}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Posjetitelj, vlasnik automobila
+	\item  \textbf{Cilj:} Pregled svih dostupnih autoservisa u aplikaciji
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} -
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik automobila/posjetitelj odabire opciju za pregled svih autoservisa na početnom sučelju aplikacije
+		\item Sustav dohvati iz baze listu svih registriranih autoservisa i prikaže ih
+	\end{packed_enum}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC6 -Pregled korisničkih podataka}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Registrirani korisnik
+	\item  \textbf{Cilj:} Pregled korisničkih podataka
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Korisnik klikne odabire opciju upravljanja korisničkim računom
+		\item Sustav prikaže osnovne podatke korisnika, nakon što ih dohvati iz baze
+	\end{packed_enum}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC7 -Promjena korisničkih podataka}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Registrirani korisnik
+	\item  \textbf{Cilj:} Promjena korisničkih podataka
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Korisnik odabire opciju upravljanja korisničkim računom
+		\item Sustav dozvoli promjenu i prikaže sučelje za promjene korisničkih
+		podataka
+		\item Korisnik promijeni podatke i potvrđuje promjene lozinkom
+		\item Sustav sprema nove podatke u bazu i prikazuje poruku za uspješnu
+		promjenu podataka
+	\end{packed_enum}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC8 -Dodavanje automobila}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik automobila
+	\item  \textbf{Cilj:} Dodavanje automobila
+	\item  \textbf{Sudionici:} Baza podataka, HUO registar
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik automobila odabire opciju upravljanja svojim automobila
+		\item Sustav prikaže sučelje za dodavanje novog automobila
+		\item Vlasnik automobila unosi registracijsku oznaku i marku automobila
+		\item Sustav provjerava unesene podatke pomoću HUO registra i dohvaća broj šasije, te sprema podatke u bazu
+		\item Vlasniku automobila se prikazuje poruka o uspješnom dodavanju automobila
+
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+
+	\item[] \begin{packed_item}
+
+		\item[4.a] Vlasnik automobila je unio neispravnu registracijsku oznaku
+		\item[] \begin{packed_enum}
+
+			\item Vlasniku automobila se prikazuje poruka o neispravnosti i može
+			pokušati ispraviti podatke
+
+		\end{packed_enum}
+
+	\end{packed_item}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC9 -Pregled statističkih podataka za
+		automobil}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik automobila
+	\item  \textbf{Cilj:} Pregled podataka o odabranom automobilu
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik automobila odabire opciju upravljanja svojim automobilima
+		\item Sustav prikaže sučelje s listom automobila
+		\item Vlasnik automobila zatim odabere automobil i sustav prikaže podatke o tom
+		automobilu, nakon što ih dohvati iz baze podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC10 -Brisanje automobila}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik automobila
+	\item  \textbf{Cilj:} Brisanje automobila
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik automobila odabire opciju upravljanja svojim automobilima
+		\item Sustav prikaže sučelje s listom automobila
+		\item Vlasnik automobila zatim odabere automobil koji će izbrisati
+		\item U bazu podataka se pohranuje promjena
+		\item Sustav preusmjerava vlasnika automobila u prijašnje sučelje za upravljanje
+		automobilima i prikazuje poruku za uspješno brisanje odabranog automobila
+
+	\end{packed_enum}
+	\item  \textbf{Opis mogućih odstupanja:}
+
+	\item[] \begin{packed_item}
+
+		\item[3.a] Vlasnik automobila je odustao od brisanja
+		\item[] \begin{packed_enum}
+
+			\item Vlasniku automobila se prikazuje izbornik hoće li izbrisati odabrani
+			automobil i preusmjerava ga u sučelje ovisno o odabiru
+
+		\end{packed_enum}
+
+		\item[3.b] Postoji otvoren servisni nalog za automobil koji se želi
+		obrisati
+		\item[] \begin{packed_enum}
+
+			\item Vlasniku automobila se prikazuje poruka o nemogućnosti brisanja odabranog
+			automobila
+
+		\end{packed_enum}
+
+	\end{packed_item}
+
+\end{packed_item}
+\noindent \underbar{\textbf{UC11 -Otvaranje novog servisnog naloga}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik automobila
+	\item  \textbf{Cilj:} Otvaranje novog radnog naloga za servis automobila
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik automobila odabire opciju upravljanja servisnim nalozima
+		\item Sustav prikaže sučelje s listom radnih naloga
+		\item Vlasnik automobila zatim odabire opciju otvaranja novog naloga i pri
+		tom odabere za koji autoservis
+		\item Nakon što je stvoren radni nalog, sprema se u bazu podataka i vlasniku se prikazuje poruka za uspješno kreiranje radnog naloga te se osvježava lista radnih naloga
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC12 -Pregled statusa servisnog naloga}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik automobila
+	\item  \textbf{Cilj:} Pregled statusa radnog naloga
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik automobila
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik automobila odabire opciju upravljanja servisnim nalozima
+		\item Sustav prikaže sučelje s listom radnih naloga dohvaćenih iz baze podataka i njihov status
+		(otvoren/zatvoren/u obradi)
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC13 -Prihvaćanje radnog naloga}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Prihvaćanje radnog naloga
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik autoservisa i radni nalog
+	je otvoren
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabire opciju prihvaćanja radnog naloga
+		\item Sustav prikaže listu otvorenih radnih naloga dohvaćenih iz baze podataka
+		\item Vlasnik prihvaća odabrani nalog
+		\item Status radnog naloga se mijenja i sprema se u bazu, te postaje dostupan svim serviserima tog autoservisa
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC14 -Zatvaranje radnog naloga}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Zatvaranje radnog naloga
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser i radni nalog
+	je prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Serviser odabire opciju rada na radnom nalogu
+		\item Sustav prikaže listu dostupnih radnih naloga
+		\item Serviser odabire opciju zatvaranja odabranog radnog naloga
+		\item Status radnog naloga se promijeni u "zatvoren", sprema se u bazu i serviseru se prikaže poruka o uspješnom zatvaranju
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC15 -Uređivanje naloga redovnog servisa}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Uređivanje prihvaćenog radnog naloga
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za redovan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Serviser odabire opciju rada na radnom nalogu
+		\item Sustav prikaže listu dostupnih radnih naloga
+		\item Serviser klikne na uređivanje odabranog radnog naloga za redovan
+		servis
+		\item U radnom nalogu serviser unosi dodatne podatke (očitana kilometraža
+		vozila te preporuka za izvanredni servis ukoliko je potrebno)
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC16 -Dodavanje ugrađenog rezervnog dijela}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Dodavanje ugrađenog rezervnog dijela u radni nalog
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Serviser odabire opciju za rad na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser odabire opciju dodavanja ugrađenog rezervnog dijela
+		\item Serviser odabere koji će rezervni dio unijeti
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC17 -Brisanje ugrađenog rezervnog dijela}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Izbrisati odabrani ugrađeni rezervni dio u radnom nalogu
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Serviser odabire opciju rada na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser odabire opciju brisanja ugrađenog rezervnog dijela
+		\item Serviser odabere koji će rezervni dio izbrisati
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC18 -Brisanje usluge}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Izbrisati uslugu
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Serviser odabire opciju rada na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser odabire opciju brisanja usluge
+		\item Serviser odabere koju će uslugu obrisati
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC19 -Dodavanje usluge}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Serviser
+	\item  \textbf{Cilj:} Dodati uslugu
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao serviser, radni nalog je
+	za izvanredan servis i prihvaćen
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Serviser odabire opciju rada na radnom nalogu izvanrednog servisa
+		\item Na odabranom radnom nalogu, serviser odabire opciju dodavanja usluge
+		\item Serviser odabere uslugu za radni nalog
+		\item Promjene se zatim spremaju i pohranjuju u bazu podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC20 -Dodavanje rezervnog dijela}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Dodavanje novog rezervnog dijela za ugradnju
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabire opciju upravljanja rezervnim dijelovima
+		\item Vlasnik autoservisa odabire opciju dodavanja novog rezervnog dijela
+		\item Vlasnik upisuje naziv i cijenu rezervnog dijela i potvrđuje upis
+		\item U bazu podataka se pohrani promjena
+
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+	\item[] \begin{packed_item}
+		\item[3.a] Vlasnik je unio neispravnu cijenu rezervnog dijela
+		\item[] \begin{packed_enum}
+			\item Vlasniku se prikazuje poruka o neispravnosti, a vlasnik je
+			ispravlja i nastavlja s potvrdom
+		\end{packed_enum}
+	\end{packed_item}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC21 -Uređivanje rezervnog dijela}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Uređivanje postojećeg rezervnog dijela za ugradnju
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabire opciju upravljanja rezervnim dijelovima
+		\item Vlasnik autoservisa iz popisa rezervnih dijelova odabere opciju
+		uređivanja
+		\item Vlasniku se prikazuje prozor s upisanim postojećim podacima o
+		odabranom dijelu
+		\item Vlasnik mijenja podatke i potvrđuje promjene
+		\item U bazu podataka se pohrani promjena
+
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+	\item[] \begin{packed_item}
+		\item[4.a] Vlasnik je unio neispravnu cijenu rezervnog dijela
+		\item[] \begin{packed_enum}
+			\item Vlasniku se prikazuje poruka o neispravnosti, a vlasnik je
+			ispravlja i nastavlja s potvrdom
+		\end{packed_enum}
+	\end{packed_item}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC22 -Brisanje rezervnog dijela}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Brisanje rezervnog dijela
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabire opciju upravljanja rezervnim dijelovima
+		\item Vlasnik autoservisa iz popisa rezervnih dijelova odabere rezervni
+		dio za brisanje
+		\item U bazi podataka se odabrani dio označava kao nedostupan za daljnju
+		ugradnju
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC23 -Uređivanje podataka autoservisa}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Promjena naziva i ostalih podataka autoservisa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabire opciju uređivanja podataka autoservisa
+		\item Vlasnik autoservisa se prikazuju trenutni podaci o njegovom
+		autoservisu (naziv)
+		\item Vlasnik autoservisa mijenja podatke i potvrđuje promjenu
+		\item Promjena se pohranjuje u bazu podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC24 -Dodavanje servisera}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Dodavanje novog servisera u vlastiti autoservis
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabere opciju upravljanja serviserima
+		\item Vlasnik autoservisa odabere opciju dodavanja novog servisera
+		\item Vlasnik autoservisa upisuje ime i prezime te korisničko ime i
+		inicijalnu lozinku za korisnički račun novog servisera
+		\item Novi račun se pohranjuje u bazu podataka
+
+	\end{packed_enum}
+
+	\item  \textbf{Opis mogućih odstupanja:}
+	\item[] \begin{packed_item}
+		\item[4.a] Postoji korisnički korisnički račun s istim korisničkim imenom
+		\item[] \begin{packed_enum}
+			\item Vlasniku se prikazuje poruka o zauzetosti korisničkog imena, a
+			vlasnik bira drugo korisničko ime
+		\end{packed_enum}
+	\end{packed_item}
+
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC25 -Uklanjanje servisera}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Uklanjanje servisera iz vlastitog autoservisa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Vlasnik autoservisa odabere opciju upravljanja serviserima
+		\item Vlasnik autoservisa odabere iz popisa odabire servisera kojeg želi
+		ukloniti
+		\item Korisnički račun servisera se briše iz baze podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+
+\noindent \underbar{\textbf{UC26 -Pregled podataka
+		korisničkog računa}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Administrator
+	\item  \textbf{Cilj:} Pregled podataka odabranog
+	korisničkog računa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu administratora
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Administrator odabere opciju upravljanja
+		računima
+		\item Sustav prikaže listu korisničkih računa
+		\item Administrator odabere korisnički račun čije podatke želi pregledati
+		\item Administratoru se prikažu korisnički podaci dohvaćeni iz baze podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC27 -Brisanje korisničkog
+		računa}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Administrator
+	\item  \textbf{Cilj:} Brisanje odabranog korisničkog računa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu administratora
+
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Administrator odabere opciju upravljanja
+		serviserima
+		\item Sustav prikaže listu korisničkih računa
+		\item Administrator iz popisa odabere korisnički račun kojeg želi ukloniti
+		\item Korisnički račun briše se iz baze podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC28 - Brisanje autoservisa }}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Administrator
+	\item  \textbf{Cilj:} Brisanje odabranog autoservisa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu administratora
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Administrator odabere opciju upravljanja autoservisima
+		\item Sustav prikaže listu autoservisa
+		\item Administrator iz popisa odabere autoservis kojeg želi ukloniti
+		\item Autoservis se briše iz baze podataka
+	\end{packed_enum}
+\end{packed_item}
+
+	\noindent \underbar{\textbf{UC29 -Pregled podataka autoservisa}}
+\begin{packed_item}
+
+	\item \textbf{Glavni sudionik: } Administrator
+	\item  \textbf{Cilj:} Pregled podataka odabranog autoservisa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu administratora
+	\item  \textbf{Opis osnovnog tijeka:}
+
+	\item[] \begin{packed_enum}
+
+		\item Administrator odabere opciju upravljanja autoservisima
+		\item Sustav prikaže listu autoservisa
+		\item Administrator odabire autoservis čije podatke želi pregledati
+		\item Administratoru se prikazuju podaci o autoservisu dohvaćeni iz baze podataka
+
+	\end{packed_enum}
+\end{packed_item}
+
+%					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
+%					\begin{packed_item}
+%
+%						\item \textbf{Glavni sudionik: }$<$sudionik$>$
+%						\item  \textbf{Cilj:} $<$cilj$>$
+%						\item  \textbf{Sudionici:} $<$sudionici$>$
+%						\item  \textbf{Preduvjet:} $<$preduvjet$>$
+%						\item  \textbf{Opis osnovnog tijeka:}
+%
+%						\item[] \begin{packed_enum}
+%
+%							\item $<$opis korak jedan$>$
+%							\item $<$opis korak dva$>$
+%							\item $<$opis korak tri$>$
+%							\item $<$opis korak četiri$>$
+%							\item $<$opis korak pet$>$
+%						\end{packed_enum}
+%
+%						\item  \textbf{Opis mogućih odstupanja:}
+%
+%						\item[] \begin{packed_item}
+%
+%							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+%							\item[] \begin{packed_enum}
+%
+%								\item $<$opis rješenja mogućeg scenarija korak 1$>$
+%								\item $<$opis rješenja mogućeg scenarija korak 2$>$
+%
+%							\end{packed_enum}
+%							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+%							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
+%
+%						\end{packed_item}
+%					\end{packed_item}
+
+
+\subsubsection{Dijagrami obrazaca uporabe}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{dijagrami/diagram0.png}
+	\centering
+	\caption{Dijagram obrasca uporabe, funkcionalnost posjetitelja,
+		registriranog korisnika i vlasnika automobila}
+	\label{fig:diagram0}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{dijagrami/diagram1.png}
+	\centering
+	\caption{Dijagram obrasca uporabe, funkcionalnost servisera i vlasnika
+		autoservisa}
+	\label{fig:diagram1}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{dijagrami/diagram2.png}
+	\centering
+	\caption{Dijagram obrasca uporabe, funkcionalnost administratora}
+	\label{fig:diagram2}
+\end{figure}
+
+
+%					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML
+%dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama
+%apstrakcije i skupovima srodnih funkcionalnosti.}
+\eject
+
+\subsection{Sekvencijski dijagrami}
+
+\textbf{\textit{dio 1. revizije}}\\
+
+\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove
+	sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s
+	asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+\eject
+
+\section{Ostali zahtjevi}
+
+\textbf{\textit{dio 1. revizije}}\\
+
 			 	\begin{packed_item}
-			 	
+
 			 	\item  Aplikacija mora biti pregledna te mora imati laku dostupnost raznim funkcionalnostima i sadržajima
 			 	\item Mogućnost istovremenog pristupa aplikaciji od strane više korisnika
 			 	\item U slučaju neispravnog korištenja korisničkog sučelja sustav mora prikazati odgovarajuću poruku upozorenja
-			 	\item  Aplikacija mora podržavati hrvatsku abecedu pri unosu podataka 
+			 	\item  Aplikacija mora podržavati hrvatsku abecedu pri unosu podataka
 			 	\item Sustav treba imati pristup HUO registru
 			 	\item  U slučaju prijeđenog određenog broja kilometara od poslijednjeg redovnog servisa, aplikacija treba prikazati poruku preporuke redovnog servisa nakon prijave u sustav
 			 	\item Sustav koristi HRK kao valutu za izračun i prikaz cijena
@@ -238,9 +957,6 @@
 			 	\item Pri unosu neispravnih podataka unutar aplikacije, korisniku se prikazuje poruka o neispravnosti
 			 	\item Promjene podataka trebaju biti potvrđene unosom lozinke
 			 	\item Nakon odjave sustav preusmjeruje korisnika na početnu stranicu
-			 	
+
 			 \end{packed_item}
-			 
-			 
-			 
-	
+
