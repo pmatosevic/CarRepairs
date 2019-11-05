@@ -1,18 +1,16 @@
 package org.infiniteam.autoservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class RepairingRepairOrder extends RepairOrder {
 
-    @ManyToMany
-    private List<VehiclePart> changedParts;
+    @Column
+    private String malfunctions;
 
-    @ManyToMany
-    private List<ServiceLabor> serviceLabors;
+    @OneToMany(mappedBy = "repairOrder", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RepairOrderItem> items;
 
 }

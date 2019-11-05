@@ -12,6 +12,9 @@ public class VehiclePart {
     private AutoService autoService;
 
     @Column
+    private String partName;
+
+    @Column
     private int estimatedDurationInKm;
 
     @Column(nullable = false)
