@@ -935,12 +935,23 @@
 
 \textbf{Obrazac uporabe UC1: Registracija vlasnika automobila}
 
-\noindent Posjetitelj na početnoj stranici odabire opciju registracije. Poslužitelj dohvaća sučelje za registraciju i prikazuje ga posjetitelju. Posjetitelj zatim unosi osobne podatke i nastavlja registraciju. Sustav provjerava ispravnost podataka te ih sprema u bazu podataka ako su ispravni.Posjetitelju se na kraju prikazuje poruka o uspješnoj registraciji. Ukoliko je posjetitelj unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka, posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka. 
+\noindent Posjetitelj na početnoj stranici odabire opciju registracije. Poslužitelj dohvaća sučelje za registraciju i prikazuje ga posjetitelju. Posjetitelj zatim unosi osobne podatke i nastavlja registraciju. Sustav provjerava ispravnost podataka te ih sprema u bazu podataka ako su ispravni.Posjetitelju se na kraju prikazuje poruka o uspješnoj registraciji. Ukoliko je posjetitelj unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka, posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka.
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{dijagrami/seq-dia-UC1.png}
 	\centering
 	\caption{Sekvencijski dijagram za UC1}
+	\label{fig:sequence-diagram1}
+\end{figure}
+
+\textbf{Obrazac uporabe UC7: Promjena korisničkih podataka}
+
+\noindent Korisnik odabire opciju upravljanja korisničkim računom, na što mu aplikacija dozvoljava promjenu te korisniku prikazuje sučelje za promjenu korisničkih podataka. Korisnik mijenja podatke i potom promjene potvrđuje unosom lozinke. Aplikacija provjerava točnost lozinke te ukoliko je ona ispravna i ako su novi podatci ispravni, novi podatci se spremaju u bazu podataka i korisniku se prikazuje poruka o uspješnoj promjeni podataka. Ukoliko je unesena lozinka neispravna ili ukoliko su novi podatci neispravni, korisniku se prikazuje poruka o neispravnosti unesene lozinke ili unesenih podataka.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{dijagrami/seq-dia-UC7.png}
+	\centering
+	\caption{Sekvencijski dijagram za promjenu korisničkih podataka, UC7}
 	\label{fig:sequence-diagram1}
 \end{figure}
 
