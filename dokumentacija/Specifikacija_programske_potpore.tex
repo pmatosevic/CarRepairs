@@ -485,7 +485,7 @@
 \noindent \underbar{\textbf{UC13 -Prihvaćanje radnog naloga}}
 \begin{packed_item}
 
-	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item \textbf{Glavni sudionik: } Serviser
 	\item  \textbf{Cilj:} Prihvaćanje radnog naloga
 	\item  \textbf{Sudionici:} Baza podataka
 	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav kao vlasnik autoservisa i radni nalog
@@ -708,6 +708,92 @@
 
 	\end{packed_enum}
 \end{packed_item}
+
+
+\noindent \underbar{\textbf{UC -Dodavanje usluge u cjenik}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Dodavanje novog usluge u cjenik
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Vlasnik autoservisa odabire opciju upravljanja cjenikom usluga
+		\item Vlasnik autoservisa odabire opciju dodavanja nove usluge
+		\item Vlasnik upisuje naziv i cijenu usluge i potvrđuje upis
+		\item U bazu podataka se pohrani promjena
+		
+	\end{packed_enum}
+	
+	\item  \textbf{Opis mogućih odstupanja:}
+	\item[] \begin{packed_item}
+		\item[3.a] Vlasnik je unio neispravnu cijenu usluge
+		\item[] \begin{packed_enum}
+			\item Vlasniku se prikazuje poruka o neispravnosti, a vlasnik je
+			ispravlja i nastavlja s potvrdom
+		\end{packed_enum}
+	\end{packed_item}
+	
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC -Uređivanje usluge u cjeniku}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Uređivanje postojećeg usluge u cjeniku
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Vlasnik autoservisa odabire opciju upravljanja cjenikom usluga
+		\item Vlasnik autoservisa iz popisa usluga u cjeniku odabere opciju
+		uređivanja
+		\item Vlasniku se prikazuje prozor s upisanim postojećim podacima o
+		odabranoj usluzi
+		\item Vlasnik mijenja podatke i potvrđuje promjene
+		\item U bazu podataka se pohrani promjena
+		
+	\end{packed_enum}
+	
+	\item  \textbf{Opis mogućih odstupanja:}
+	\item[] \begin{packed_item}
+		\item[4.a] Vlasnik je unio neispravnu cijenu usluge
+		\item[] \begin{packed_enum}
+			\item Vlasniku se prikazuje poruka o neispravnosti, a vlasnik je
+			ispravlja i nastavlja s potvrdom
+		\end{packed_enum}
+	\end{packed_item}
+	
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC22 -Brisanje usluge iz cjenika}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Brisanje usluge iz cjenika
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Vlasnik autoservisa odabire opciju cjenikom usluga
+		\item Vlasnik autoservisa iz cjenika usluga odabire uslugu za brisanje
+		\item U bazi podataka se odabrani usluga označava kao nedostupan za daljnju
+		dodavanje na radne naloge
+		
+	\end{packed_enum}
+\end{packed_item}
+
+
 
 \noindent \underbar{\textbf{UC23 -Uređivanje podataka autoservisa}}
 \begin{packed_item}
@@ -980,14 +1066,16 @@
 
                 \item Sustav treba biti implementiran u objektno-orijentiranom jeziku te omogućiti laku nadogradnju u slučaju potrebe
                 \item Sustav treba biti implementiran kao web-aplikacija
-                \item Korisničko sučelje se treba ispravno prikazivati u svim modernim preglednicima na desktop računalima i mobilnim uređajima
+                \item Korisničko sučelje mora biti responzivno te se ispravno prikazivati u preglednicima na desktop računalima i mobilnim uređajima
                 \item Sučelje za vlasnike automobila treba biti jednostavno za korištenje osobama svih dobnih skupina
                 \item Sučelje za servisere treba biti prilagođeno za uporabu u okruženju servisa i osigurati laku dostupnost svih funkcionalnosti
 %			 	\item Aplikacija mora biti pregledna te mora imati laku dostupnost raznim funkcionalnostima i sadržajima
 			 	\item Sustavu mogu istovremeno pristupiti više različitih vrsta korisnika
 			 	\item Aplikacija mora podržavati hrvatsku abecedu pri unosu podataka
 			 	\item Sustav koristi HRK kao valutu za izračun i prikaz cijena
-			 	\item Izvršavanje dijelova aplikacije mora se odviti u roku manjem od nekoliko sekundi
+			 	\item Pristup sustavu mora biti osiguran putem protokola HTTPS
+			 	\item Podaci o automobilu se na temelju registracije trebaju provjeravati i dohvaćati iz HUO registra
+			 	\item Izvršavanje dijelova aplikacije (uključujući i pristup HUO registru) mora se odviti u roku manjem od nekoliko sekundi
 
 			 \end{packed_item}
 
