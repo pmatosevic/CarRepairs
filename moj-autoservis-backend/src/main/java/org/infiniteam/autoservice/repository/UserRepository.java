@@ -1,4 +1,4 @@
-package org.infiniteam.autoservice;
+package org.infiniteam.autoservice.repository;
 
 import org.infiniteam.autoservice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

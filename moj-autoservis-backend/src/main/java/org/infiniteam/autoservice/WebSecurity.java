@@ -4,6 +4,8 @@ import org.infiniteam.autoservice.model.Administrator;
 import org.infiniteam.autoservice.model.ServiceEmployee;
 import org.infiniteam.autoservice.model.User;
 import org.infiniteam.autoservice.model.VehicleOwner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -39,18 +41,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                .loginPage("/login")
-                .successHandler((req, resp, auth) -> resp.sendRedirect(redirects.get(auth.getPrincipal().getClass())))
-                .failureForwardUrl("/login?error=true");
+        http.authorizeRequests().antMatchers("/login").permitAll();
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .permitAll();
+        http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
 //        http.authorizeRequests().anyRequest().authenticated();
         http.authorizeRequests().anyRequest().permitAll();
     }
-
-
 
 }
