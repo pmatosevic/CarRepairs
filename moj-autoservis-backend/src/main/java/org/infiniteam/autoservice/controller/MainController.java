@@ -1,51 +1,36 @@
 package org.infiniteam.autoservice.controller;
 
-import org.infiniteam.autoservice.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.UserDetailsManager;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.infiniteam.autoservice.model.Administrator;
+import org.infiniteam.autoservice.model.ServiceEmployee;
+import org.infiniteam.autoservice.model.VehicleOwner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.Map;
 
 @Controller
 public class MainController {
 
-    @Autowired
-    private UserDetailsServiceImpl manager;
+    private static final Map<Class<?>, String> redirects = Map.of(
+            VehicleOwner.class, "/user",
+            ServiceEmployee.class, "/autoservice",
+            Administrator.class, "/admin"
+    );
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, Principal principal) {
+        if (principal != null) {
+            return "redirect:" + redirects.get(principal.getClass());
+        }
         return "home";
     }
 
     @GetMapping("/login")
     public String login(HttpServletRequest request, Model model) {
         return "login";
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> appLogin(String username, String password, HttpServletRequest request) {
-        try {
-            UserDetails userDetails = manager.loadUserByUsername(username);
-            Authentication auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            return new ResponseEntity<String>(HttpStatus.OK);
-        } catch (Exception e) {
-            SecurityContextHolder.getContext().setAuthentication(null);
-            return new ResponseEntity<String>(HttpStatus.FORBIDDEN);
-        }
     }
 
 }

@@ -69,7 +69,7 @@
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
 <main role="main" class="container text-center">
-    <form class="form-login" method="post" action="/login">
+    <form class="form-login" method="post" action="/appLogin">
         <h1 class="h3 mb-3 font-weight-normal">Prijava</h1>
         <p th:if="${loginError}" class="error">Neispravno korisničko ime ili lozinka</p>
         <label for="username" class="sr-only">Korisničko ime</label>

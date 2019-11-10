@@ -33,15 +33,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             Administrator.class, AuthorityUtils.createAuthorityList("ROLE_ADMINISTRATOR")
     );
 
-    private Map<Class<?>, String> redirects = Map.of(
-            VehicleOwner.class, "/user",
-            ServiceEmployee.class, "/autoservice",
-            Administrator.class, "/admin"
-    );
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.formLogin()
+                .loginPage("/appLogin")
+                .loginProcessingUrl("/appLogin")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .successHandler((request, response, authentication) -> response.setStatus(200))
+                .failureHandler((request, response, exception) -> response.setStatus(403))
+                .permitAll();
         http.logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
