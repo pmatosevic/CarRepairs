@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 @Entity
 public class VehicleOwner extends User {
 
-    @Column(nullable = false)
+    @Column
     private String oib;
 
 }

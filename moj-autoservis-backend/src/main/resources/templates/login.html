@@ -20,10 +20,10 @@
                     url: url,
                     data: form.serialize(),
                     success: data => {
-                        alert("success");
+                        window.location.replace("/");
                     },
                     error: data => {
-                        alert("fail");
+                        $('.error').innerText = "Neispravno korisničko ime ili lozinka";
                     }
                 });
             });

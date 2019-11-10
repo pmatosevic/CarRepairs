@@ -17,4 +17,19 @@ public class ServiceEmployee extends User {
     @NonNull
     private ServiceEmployeeType employeeType = ServiceEmployeeType.REGULAR_EMPLOYEE;
 
+    public AutoService getAutoService() {
+        return autoService;
+    }
+
+    public void setAutoService(AutoService autoService) {
+        this.autoService = autoService;
+    }
+
+    public ServiceEmployeeType getEmployeeType() {
+        return employeeType;
+    }
+
+    public void setEmployeeType(ServiceEmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
 }

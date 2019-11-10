@@ -6,6 +6,7 @@ import org.infiniteam.autoservice.model.User;
 import org.infiniteam.autoservice.model.VehicleOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,13 +26,8 @@ import java.util.Set;
 import java.util.function.Function;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
-
-    private Map<Class<? extends User>, List<GrantedAuthority>> authorities = Map.of(
-            VehicleOwner.class, AuthorityUtils.createAuthorityList("ROLE_USER"),
-            ServiceEmployee.class, AuthorityUtils.createAuthorityList("ROLE_SERVICE_EMPLOYEE"),
-            Administrator.class, AuthorityUtils.createAuthorityList("ROLE_ADMINISTRATOR")
-    );
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -49,7 +45,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll();
         http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
-//        http.authorizeRequests().anyRequest().authenticated();
         http.authorizeRequests().anyRequest().permitAll();
     }
 
