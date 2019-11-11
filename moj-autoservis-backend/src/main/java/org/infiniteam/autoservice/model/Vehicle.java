@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Vehicle {
 
     @Id @GeneratedValue
-    private Long id;
+    private Long vehicleId;
 
     @Column(nullable = false)
     private String licencePlate;

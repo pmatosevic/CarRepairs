@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class AutoService {
 
     @Id @GeneratedValue
-    private Long id;
+    private Long autoServiceId;
 
     @Column(nullable = false)
     private String shopName;

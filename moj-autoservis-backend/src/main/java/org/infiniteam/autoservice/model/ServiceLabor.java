@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class ServiceLabor {
 
     @Id @GeneratedValue
-    private Long id;
+    private Long serviceLaborId;
 
     @ManyToOne
     private AutoService autoService;

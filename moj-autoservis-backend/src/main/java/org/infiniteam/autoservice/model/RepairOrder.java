@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class RepairOrder {
 
     @Id @GeneratedValue
-    private Long id;
+    private Long repairOrderId;
 
     @ManyToOne
     private Vehicle vehicle;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class VehiclePart {
 
     @Id @GeneratedValue
-    private Long id;
+    private Long partId;
 
     @ManyToOne
     private AutoService autoService;

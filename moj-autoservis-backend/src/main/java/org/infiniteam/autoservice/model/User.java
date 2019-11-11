@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id @GeneratedValue
-    private Long id;
+    private Long userId;
 
     @Column(unique = true, nullable = false)
     @Size(min = 1, max = 20)
@@ -20,12 +20,12 @@ public class User {
     @Column
     private String email;
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
