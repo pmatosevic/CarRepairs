@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class VehicleOwner extends User {
+public class VehicleOwner extends AppUser {
 
     @Column
     private String oib;

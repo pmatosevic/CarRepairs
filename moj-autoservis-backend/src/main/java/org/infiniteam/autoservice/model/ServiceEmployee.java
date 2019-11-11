@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class ServiceEmployee extends User {
+public class ServiceEmployee extends AppUser {
 
     @ManyToOne
     private AutoService autoService;

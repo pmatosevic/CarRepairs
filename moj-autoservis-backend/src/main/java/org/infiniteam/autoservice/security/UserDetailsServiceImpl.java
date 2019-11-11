@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Map<Class<? extends User>, List<GrantedAuthority>> authorities = Map.of(
+    private static final Map<Class<? extends AppUser>, List<GrantedAuthority>> authorities = Map.of(
             VehicleOwner.class, AuthorityUtils.createAuthorityList("ROLE_USER"),
             ServiceEmployee.class, AuthorityUtils.createAuthorityList("ROLE_SERVICE_EMPLOYEE"),
             Administrator.class, AuthorityUtils.createAuthorityList("ROLE_ADMIN")
@@ -28,19 +28,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.getByUsername(username).orElseThrow(
+        AppUser appUser = userRepository.getByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Username is not found in the DB.")
         );
 
         return new CurrentUser(
-                username, user.getPasswordHash(), userAuthorities(user), user
+                username, appUser.getPasswordHash(), userAuthorities(appUser), appUser
         );
     }
 
-    private List<GrantedAuthority> userAuthorities(User user) {
+    private List<GrantedAuthority> userAuthorities(AppUser appUser) {
         List<GrantedAuthority> authList = new ArrayList<>();
-        authList.addAll(authorities.get(user.getClass()));
-        if (user instanceof ServiceEmployee && ((ServiceEmployee)user).getEmployeeType() == ServiceEmployeeType.SERVICE_ADMINISTRATOR) {
+        authList.addAll(authorities.get(appUser.getClass()));
+        if (appUser instanceof ServiceEmployee && ((ServiceEmployee) appUser).getEmployeeType() == ServiceEmployeeType.SERVICE_ADMINISTRATOR) {
             authList.addAll(AuthorityUtils.createAuthorityList("ROLE_SERVICE_ADMIN"));
         }
         return authList;

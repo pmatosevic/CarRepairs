@@ -28,7 +28,7 @@ public class MainController {
         if (principal != null) {
             UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
             CurrentUser user = (CurrentUser) token.getPrincipal();
-            return "redirect:" + redirects.get(user.getUser().getClass());
+            return "redirect:" + redirects.get(user.getAppUser().getClass());
         }
         return "home";
     }
