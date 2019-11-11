@@ -1,14 +1,15 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
+%		\textbf{\textit{dio 1. revizije}}\\
+%
+%		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
+%	\begin{itemize}
+%		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
+%		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
+%		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
+%	\end{itemize}
 
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
+	
 	
 		
 
@@ -17,9 +18,19 @@
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+%			\textbf{\textit{dio 1. revizije}}\\
+%			
+%		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+
+		Sustav tijekom svojeg rada sprema i dohvaća različite podatke, koji će biti pohranjeni u bazu podataka. U bazi podataka se ti podaci spremaju u relacije (tablice) s definiranim atributima. Baza treba osigurati konzistentnost podataka kroz definirana ograničenja te primarne i strane ključeve, mogućnost istovremenog pristupa podacima te izdržljivost i mogućnost oporavka podataka u slučaju kvara.
+		
+		Za preslikavanje modela razreda u relacijski model podataka koristi se biblioteka \text{Hibernate}. To je ORM (object-relational mapping) okvir koji automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje.
+		
+		U razvojnoj okolini se koristi \textit{H2} baza podataka koja se čuva u memoriji za vrijeme pokretanja aplikacije te omogućava lako testiranje i dodavanje podataka. Ona je odabrana jer za nju već postoji podrška u \textit{Spring} okviru koji se koristi.
+		
+		Sustav će u produkciji koristiti \textit{PostgreSQL} bazu podataka, koja je besplatna i otvorenog koda. Ona je također dobro podržana u \textit{Spring} okviru, ima različite mogućnosti replikacije podataka koje bi se kasnije mogle implementirati i podržava većinu operativnih sustava. Ona može biti pokrenuta na istom poslužitelju na kojem je pokrenut i sustav ili na nekom drugom, a sustav se na nju povezuje putem JDBC protokola.
+		
+		
 		
 			\subsection{Opis tablica}
 			
@@ -50,9 +61,9 @@
 			\subsection{Dijagram baze podataka}
 %				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
 				
-				\begin{figure}
+				\begin{figure}[h]
 					\centering
-					\includegraphics[width=0.7\linewidth]{dijagrami/er-diagram}
+					\includegraphics[width=1.0\linewidth]{dijagrami/er-diagram}
 					\caption{Relacijski model baze podataka}
 					\label{fig:er-diagram}
 				\end{figure}
