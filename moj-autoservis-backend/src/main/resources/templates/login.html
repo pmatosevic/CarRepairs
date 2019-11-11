@@ -11,6 +11,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#error').hide();
             $('.form-login').submit(function (e) {
                 e.preventDefault();
                 const form = $('.form-login');
@@ -23,7 +24,7 @@
                         window.location.replace("/");
                     },
                     error: data => {
-                        $('.error').innerText = "Neispravno korisničko ime ili lozinka";
+                        $('#error').show();
                     }
                 });
             });
@@ -63,6 +64,10 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+
+        #error {
+            color: darkred;
+        }
     </style>
 </head>
 
@@ -71,7 +76,7 @@
 <main role="main" class="container text-center">
     <form class="form-login" method="post" action="/appLogin">
         <h1 class="h3 mb-3 font-weight-normal">Prijava</h1>
-        <p th:if="${loginError}" class="error">Neispravno korisničko ime ili lozinka</p>
+        <p id="error">Neispravno korisničko ime ili lozinka</p>
         <label for="username" class="sr-only">Korisničko ime</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Korisničko ime" required autofocus>
         <label for="password" class="sr-only">Lozinka</label>
