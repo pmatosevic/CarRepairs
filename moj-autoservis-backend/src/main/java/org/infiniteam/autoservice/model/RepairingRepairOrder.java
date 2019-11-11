@@ -13,4 +13,19 @@ public class RepairingRepairOrder extends RepairOrder {
     @OneToMany(mappedBy = "repairOrder", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RepairOrderItem> items;
 
+    public String getMalfunctions() {
+        return malfunctions;
+    }
+
+    public void setMalfunctions(String malfunctions) {
+        this.malfunctions = malfunctions;
+    }
+
+    public List<RepairOrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<RepairOrderItem> items) {
+        this.items = items;
+    }
 }

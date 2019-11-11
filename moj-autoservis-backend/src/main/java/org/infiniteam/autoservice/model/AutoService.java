@@ -22,4 +22,43 @@ public class AutoService {
 
     private double regularServicePrice;
 
+    public Long getAutoServiceId() {
+        return autoServiceId;
+    }
+
+    public void setAutoServiceId(Long autoServiceId) {
+        this.autoServiceId = autoServiceId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getOib() {
+        return oib;
+    }
+
+    public void setOib(String oib) {
+        this.oib = oib;
+    }
+
+    public double getRegularServicePrice() {
+        return regularServicePrice;
+    }
+
+    public void setRegularServicePrice(double regularServicePrice) {
+        this.regularServicePrice = regularServicePrice;
+    }
 }

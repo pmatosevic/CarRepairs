@@ -17,4 +17,27 @@ public class RegularRepairOrder extends RepairOrder {
     @Column
     private String observedMalfunctions;
 
+    public int getKilometers() {
+        return kilometers;
+    }
+
+    public void setKilometers(int kilometers) {
+        this.kilometers = kilometers;
+    }
+
+    public boolean isRepairRecommended() {
+        return repairRecommended;
+    }
+
+    public void setRepairRecommended(boolean repairRecommended) {
+        this.repairRecommended = repairRecommended;
+    }
+
+    public String getObservedMalfunctions() {
+        return observedMalfunctions;
+    }
+
+    public void setObservedMalfunctions(String observedMalfunctions) {
+        this.observedMalfunctions = observedMalfunctions;
+    }
 }

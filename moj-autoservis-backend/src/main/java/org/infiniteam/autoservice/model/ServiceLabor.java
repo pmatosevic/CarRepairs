@@ -17,4 +17,35 @@ public class ServiceLabor {
     @Column(nullable = false)
     private double price;
 
+    public Long getServiceLaborId() {
+        return serviceLaborId;
+    }
+
+    public void setServiceLaborId(Long serviceLaborId) {
+        this.serviceLaborId = serviceLaborId;
+    }
+
+    public AutoService getAutoService() {
+        return autoService;
+    }
+
+    public void setAutoService(AutoService autoService) {
+        this.autoService = autoService;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
