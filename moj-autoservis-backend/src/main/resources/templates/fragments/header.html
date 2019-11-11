@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg" th:fragment="header">
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-md" th:fragment="header">
     <div class="container">
         <a class="navbar-brand" href="/">Moj AutoServis</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLeft" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="navbarLeft">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" th:classappend="${module == 'home' ? 'active' : ''}" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link" href="#" th:href="@{/}">Home</a>
