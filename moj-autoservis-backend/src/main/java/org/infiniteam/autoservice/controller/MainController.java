@@ -1,6 +1,6 @@
 package org.infiniteam.autoservice.controller;
 
-import org.infiniteam.autoservice.CurrentUser;
+import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.model.Administrator;
 import org.infiniteam.autoservice.model.ServiceEmployee;
 import org.infiniteam.autoservice.model.VehicleOwner;

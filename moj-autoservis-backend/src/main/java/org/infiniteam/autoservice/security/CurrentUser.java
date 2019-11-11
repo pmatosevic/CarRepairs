@@ -1,4 +1,4 @@
-package org.infiniteam.autoservice;
+package org.infiniteam.autoservice.security;
 
 import org.infiniteam.autoservice.model.User;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package org.infiniteam.autoservice;
+package org.infiniteam.autoservice.security;
 
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.repository.UserRepository;
