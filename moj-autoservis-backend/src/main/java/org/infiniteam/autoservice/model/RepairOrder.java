@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class RepairOrder {
+public abstract class RepairOrder {
 
     @Id @GeneratedValue
     private Long repairOrderId;

@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class AppUser {
+public abstract class AppUser {
 
     @Id @GeneratedValue
     private Long userId;
