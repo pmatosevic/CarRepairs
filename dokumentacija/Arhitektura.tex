@@ -152,6 +152,8 @@
 					
 				\end{longtabu}
 			
+			\textbf{regular\_repair\_order} Ovaj entitet sadržava sve važne informacije o radnom nalogu koji se provodi za redoviti servis. Sadrži atribute: kilometražu vozila, primijećene kvarove, preporuku za izvanredni servis te ID radnog naloga kojem pripada. Ovaj entitet je specijalizacija entiteta repair\_order. 
+			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{regular\_repair\_order (Radni nalog za redoviti servis)}}	 \\[3pt] \hline
@@ -172,12 +174,14 @@
 					
 				\end{longtabu}
 			
+			\noindent\textbf{repairing\_repair\_order} Ovaj entitet sadrži sve važne informacije za izvanredni servis vozila. Sadrži atribute: kvarove na vozilu i ID radnog naloga kojem pripada. Ovaj entitet je specijalizacija entiteta repair\_order. 
+			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{repairing\_repair\_order (Radni nalog za izvanredni servis)}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za izvanredni servis}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{repairing\_repair\_order}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
@@ -190,25 +194,29 @@
 					
 				\end{longtabu}
 			
+			\noindent\textbf{repair\_order\_item} Ovaj entitet sadrži sve važne informacije za pojedinu stavku na radnom nalogu. Atributi ovog entiteta su: identifikator stavke na radnom nalogu, njen naziv, cijena te ID izvanrednog radnog naloga kojem stavka pripada. Ovaj entitet je u vezi \textit{Many-to-One} sa entitetom repair\_order preko ID-a tog radnog naloga.
+			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item (Stavka na radnom nalogu)}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Stavka na radnom nalogu}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					item\_id 				& BIGINT	&  	Identifikator popravka. 	\\ \hline
-					name				& VARCHAR 	&   Naziv popravka.	\\ \hline 
-					price 				& DOUBLE PRECISION 	&   Cijena popravka. \\ \hline 
-					repair\_order\_id		& BIGINT	&  	Identifikator radnog naloga kojem pripada popravak.	\\ \hline 
+					item\_id 				& BIGINT	&  	Identifikator stavke. 	\\ \hline
+					name				& VARCHAR 	&   Naziv stavke.	\\ \hline 
+					price 				& DOUBLE PRECISION 	&   Cijena stavke. \\ \hline 
+					repair\_order\_id		& BIGINT	&  	Identifikator izvanrednog radnog naloga kojem pripada popravak.	\\ \hline 
 					
 					
 				\end{longtabu}
+			
+			\noindent\textbf{service\_labor} Ovaj entitet sadrži sve informacije važne za servisnu uslugu. Atributi ovog entiteta su: ID usluge, cijena usluge, naziv usluge i ID autoservisa koji pruža uslugu. Ovaj entitet je u vezi \textit{Many-to-One} sa entitetom auto\_service preko ID-a autoservisa.
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -230,12 +238,14 @@
 					
 				\end{longtabu}
 			
+			\noindent\textbf{vehicle\_part} Ovaj entitet sadrži sve važne informacije za rezervni dio automobila. Ovaj entitet sadrži atribute: ID dijela, kilometraža za koju je dio predviđen, naziv dijela, njegova cijena te ID autoservisa koji ima rezervni dio. Ovaj entitet je u vezi \textit{Many-to-One} sa entitetom auto\_service preko ID-a tog autoservisa.
+			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item (Rezervni dio)}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle\_part (Rezervni dio)}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Rezervni dio}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle\_part}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
