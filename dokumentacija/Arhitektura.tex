@@ -9,7 +9,7 @@
 %		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
 %	\end{itemize}
 		
-		Jedan od najvažnijih koraka pri razvoju sustava je izbor i oblikovanje arhitekture sustava. Kako će našu aplikaciju koristit više različitih korisnika istovremeno (vlasnici automobila, autoservisi i administratori), te stoga što autoservisi koriste različite uređaje kojima će pristupati sustavu, odlučen je razvoj web aplikacije. Time će se sustavu moći pristupati sa svih uređaja (mobilni uređaji, tableti, desktop računala) bez obzira na platformu uz uvjet da na uređaju postoji odgovarajući web preglednik čime se želi i privući što veći broj vlasnika automobila kao korisnika aplikacije.
+		Jedan od najvažnijih koraka pri razvoju sustava je izbor i oblikovanje arhitekture sustava. Kako će našu aplikaciju koristiti više različitih korisnika istovremeno (vlasnici automobila, autoservisi i administratori), te stoga što autoservisi koriste različite uređaje kojima će pristupati sustavu, odlučen je razvoj web aplikacije. Time će se sustavu moći pristupati sa svih uređaja (mobilni uređaji, tableti, desktop računala) bez obzira na platformu uz uvjet da na uređaju postoji odgovarajući web preglednik čime se želi i privući što veći broj vlasnika automobila kao korisnika aplikacije.
 		
 		Na slici \ref{fig:arhitektura1} prikazana je klijent-poslužitelj arhitektura na kojoj će se temeljiti sustav. Korisnici aplikacije putem svojih web preglednika (putem \textit{HTTP} ili \textit{HTTPS} protokola) pristupaju poslužitelju na kojem je pokrenuta web aplikacija koja obrađuje njihove zahtjeve i komunicira s bazom podataka (pokrenutoj na istom ili nekom drugom poslužitelju) putem \textit{JDBC} protokola.
 		
@@ -52,7 +52,7 @@
 
 		Sustav tijekom svojeg rada sprema i dohvaća različite podatke, koji će biti pohranjeni u bazu podataka. U bazi podataka se ti podaci spremaju u relacije (tablice) s definiranim atributima. Baza treba osigurati konzistentnost podataka kroz definirana ograničenja te primarne i strane ključeve, mogućnost istovremenog pristupa podacima te izdržljivost i mogućnost oporavka podataka u slučaju kvara.
 		
-		Za preslikavanje modela razreda u relacijski model podataka koristi se biblioteka \text{Hibernate}. To je ORM (object-relational mapping) okvir koji automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje.
+		Za preslikavanje modela razreda u relacijski model podataka koristi se biblioteka \text{Hibernate}. To je ORM (\textit{Object-Relational Mapping}) okvir koji automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje.
 		
 		U razvojnoj okolini se koristi \textit{H2} baza podataka koja se čuva u memoriji za vrijeme pokretanja aplikacije te omogućava lako testiranje i dodavanje podataka. Ona je odabrana jer za nju već postoji podrška u \textit{Spring} okviru koji se koristi.
 		
@@ -63,28 +63,193 @@
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				% \textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam 	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\cellcolor{LightGreen}
+					dtype 				& VARCHAR	&  	 	\\ \hline
+					userid				& BIGINT 	& Jedinstveni identifikacijski broj korisnika.  	\\ \hline 
+					email 				& VARCHAR 	&  E-mail adresa korisnika. \\ \hline 
+					password hash 		& VARCHAR	&  Lozinka korisnika.		\\ \hline 
+					username 			& VARCHAR	&  Korisničko ime korisnika.		\\ \hline 
+					oib 				& VARCHAR	&  OIB korisnika.		\\ \hline 
+					employee type 		& VARCHAR	&  Tip zaposlenika u autoservisu - serviser ili vlasnik autoservisa.		\\ \hline 
+					auto service id 	& BIGINT	&  Jedinstveni identifikacijski broj autoservisa.		\\ \hline 
 					
 					
 				\end{longtabu}
 			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Vozilo}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Vozilo}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					vehicle id 			& BIGINT	&  	 Jedinstveni identifikator vozila.	\\ \hline
+					license plate				& VARCHAR 	&  Registarska oznaka vozila. 	\\ \hline 
+					vehicle model 				& VARCHAR 	&  Model vozila. \\ \hline 
+					vin number 		& VARCHAR	&  VIN broj vozila.		\\ \hline 
+					owner user id 			& BIGINT	&  	Identifikacijski broj vlasnika vozila.	\\ \hline 
+					
+					
+				\end{longtabu}
+		
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					repair order id 				& BIGINT	&  	Jedinstveni identifikacijski broj radnog naloga. 	\\ \hline
+					price				& DOUBLE PRECISION 	&   Ukupna cijena.	\\ \hline 
+					service job status 				& VARCHAR 	&  Status radnog naloga: otvoren, zatvoren ili u obradi.  \\ \hline 
+					auto service id 		& BIGINT	&  	Identifikacijski broj autoservisa.	\\ \hline 
+					vehicle id 			& BIGINT	&  	Identifikacijski broj vozila.	\\ \hline 
+					
+					
+				\end{longtabu}
+
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Autoservis}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Autoservis}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					auto service id 				& BIGINT	& Jedinstveni identifikator autoservisa.  	 	\\ \hline
+					address				& VARCHAR 	&   Adresa autoservisa.	\\ \hline 
+					oib 				& VARCHAR 	&   OIB autoservisa.\\ \hline 
+					regular service price		& DOUBLE PRECISION	&  Cijena redovitog servisa.		\\ \hline 
+					shop name 			& VARCHAR	&  		\\ \hline 
+					
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za redoviti servis}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za redoviti servis}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					kilometers 				& INTEGER	&  	Kilometraža vozila zabilježena na servisu.	\\ \hline
+					observed malfunctions				& VARCHAR 	&   Primijećeni kvarovi.	\\ \hline 
+					repair recommended 				& BOOLEAN 	&  Je li potreban izvanredni servis ili ne? \\ \hline 
+					id		& BIGINT	&  		\\ \hline 
+					
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za izvanredni servis}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za izvanredni servis}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					malfunctions 				& VARCHAR	&  	 Kvarovi na vozilu.	\\ \hline
+					id		& BIGINT	&  		\\ \hline 
+					
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Popravak}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Popravak}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					item id 				& BIGINT	&  	Identifikator popravka. 	\\ \hline
+					name				& VARCHAR 	&   Naziv popravka.	\\ \hline 
+					price 				& DOUBLE PRECISION 	&   Cijena popravka. \\ \hline 
+					repair order id		& BIGINT	&  	Identifikator radnog naloga kojem pripada popravak.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Servisna usluga}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Servisna usluga}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					service labor id 				& BIGINT	&  	 Identifikator usluge.	\\ \hline
+					price				& DOUBLE PRECISION 	&   Cijena usluge.	\\ \hline 
+					service name 				& VARCHAR 	&  Naziv usluge.  \\ \hline 
+					auto service id		& BIGINt	&  	Identifikator autoservisa koji pruža uslugu.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Rezervni dio}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Rezervni dio}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					part id 				& BIGINT	&  	Identifikator rezervnog dijela. 	\\ \hline
+					estimated duration in km				& INTEGER 	&   	\\ \hline 
+					part name 				& VARCHAR 	& Naziv rezervnog dijela.  \\ \hline 
+					price		& DOUBLE PRECISION	&  	Cijena rezervnog dijela.	\\ \hline 
+					auto service id		& BIGINT	&  	Identifikator autoservisa koji ima rezervni dio.	\\ \hline
+					
+					
+				\end{longtabu}
 			
 			\subsection{Dijagram baze podataka}
 %				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
