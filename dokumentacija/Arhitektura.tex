@@ -65,6 +65,9 @@
 
 				% \textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
+				\textbf{app\_user} Ovaj entitet sadrži sve podatke o registriranom korisniku aplikacije. Atributi koje sadrži su: tip, jedinstveni identifikacijski broj, e-mail adresa, lozinka, korisničko ime i OIB korisnika, te tip zaposlenika u autoservisu i jedinstveni identifikacijski broj autoservisa. Entitet je u \textit{One-to-Many} vezi s entitetom vehicle preko atributa identifikacijaki broj korisnika. Također je u vezi \textit{Many-to-One} sa entitetom auto\_service preko jedinstvenog identifikatora autoservisa.
+				
+				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{app\_user (Korisnik)}}	 \\[3pt] \hline
@@ -89,6 +92,11 @@
 					
 				\end{longtabu}
 			
+			
+			\textbf{vehicle} Ovo je entitet koji sadrži podatke o vozilu. Atributi su mu: jedinstveni identifikator, registarska oznaka, model i broj šasije vozila, te identifikacijski broj vlasnika vozila. Ovaj entitet je u vezi \textit{Many-to-One} s entitetom app\_user preko atributa identifikacijski broj vlasnika vozila. Također je u \textit{One-to-Many} vezi s entitetom repair\_order preko identifikacijakog broja vozila.
+			
+			
+			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{vehicle (Vozilo)}}	 \\[3pt] \hline
@@ -109,6 +117,9 @@
 					
 					
 				\end{longtabu}
+			
+			\textbf{repair\_order} Ovo je entitet koji sadrži sve važne podatke o pojedinom radnom nalogu. Sadrži atribute: jedinstveni identifikacijski broj radnog naloga, identifikacijski broj autoservisa i vozila, te ukupna cijena i status radnog naloga (otvoren, zatvoren ili u obradi). Entitet je u vezi \textit{Many-to-One} s entitetom vehicle preko atributa identifikacijski broj vozila. Također je u \textit{Many-to-One} vezi s entitetom auto\_service preko identifikacijskog broja autoservisa. Ovaj entitet je generalizacija entiteta regular\_repair\_order i entiteta repairing\_repair\_order.
+			
 		
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -130,6 +141,10 @@
 					
 					
 				\end{longtabu}
+			\textbf{auto\_service} Ovaj entitet sadrži sve važne informacije o autoservisu. Atributi koje sadrži su: jedinstveni identifikator, ime, adresa i OIB autoservisa, te cijena redovitog servisa. Ovaj entitet povezan je vezom \textit{One-to-Many} preko atributa jedinstveni identifikator autoservisa s entitetima: repair\_order, app\_user, service\_labor i vehicle\_part.
+			
+
+
 
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
