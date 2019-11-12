@@ -67,7 +67,7 @@
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{app\_user (Korisnik)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Korisnik}}	 \\[3pt] \hline
@@ -77,21 +77,21 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					dtype 				& VARCHAR	&  	 	\\ \hline
+					dtype 				& VARCHAR	&  Tip korisnika: vlasnik vozila, zaposlenik autoservisa ili administrator.	 	\\ \hline
 					userid				& BIGINT 	& Jedinstveni identifikacijski broj korisnika.  	\\ \hline 
 					email 				& VARCHAR 	&  E-mail adresa korisnika. \\ \hline 
-					password hash 		& VARCHAR	&  Lozinka korisnika.		\\ \hline 
+					password\_hash 		& VARCHAR	&  Lozinka korisnika.		\\ \hline 
 					username 			& VARCHAR	&  Korisničko ime korisnika.		\\ \hline 
 					oib 				& VARCHAR	&  OIB korisnika.		\\ \hline 
-					employee type 		& VARCHAR	&  Tip zaposlenika u autoservisu - serviser ili vlasnik autoservisa.		\\ \hline 
-					auto service id 	& BIGINT	&  Jedinstveni identifikacijski broj autoservisa.		\\ \hline 
+					employee\_type 		& VARCHAR	&  Tip zaposlenika u autoservisu - serviser ili vlasnik autoservisa.			\\ \hline 
+					auto\_service\_id 	& BIGINT	&  Jedinstveni identifikacijski broj autoservisa.		\\ \hline 
 					
 					
 				\end{longtabu}
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Vozilo}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle (Vozilo)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Vozilo}}	 \\[3pt] \hline
@@ -101,18 +101,18 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					vehicle id 			& BIGINT	&  	 Jedinstveni identifikator vozila.	\\ \hline
-					license plate				& VARCHAR 	&  Registarska oznaka vozila. 	\\ \hline 
-					vehicle model 				& VARCHAR 	&  Model vozila. \\ \hline 
-					vin number 		& VARCHAR	&  VIN broj vozila.		\\ \hline 
-					owner user id 			& BIGINT	&  	Identifikacijski broj vlasnika vozila.	\\ \hline 
+					vehicle\_id 			& BIGINT	&  	 Jedinstveni identifikator vozila.	\\ \hline
+					license\_plate				& VARCHAR 	&  Registarska oznaka vozila. 	\\ \hline 
+					vehicle\_model 				& VARCHAR 	&  Model vozila. \\ \hline 
+					vin\_number 		& VARCHAR	&  Broj šasije vozila.		\\ \hline 
+					owner\_user\_id 			& BIGINT	&  	Identifikacijski broj vlasnika vozila.	\\ \hline 
 					
 					
 				\end{longtabu}
 		
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order (Radni nalog)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog}}	 \\[3pt] \hline
@@ -122,18 +122,18 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					repair order id 				& BIGINT	&  	Jedinstveni identifikacijski broj radnog naloga. 	\\ \hline
+					repair\_order\_id 				& BIGINT	&  	Jedinstveni identifikacijski broj radnog naloga. 	\\ \hline
 					price				& DOUBLE PRECISION 	&   Ukupna cijena.	\\ \hline 
-					service job status 				& VARCHAR 	&  Status radnog naloga: otvoren, zatvoren ili u obradi.  \\ \hline 
-					auto service id 		& BIGINT	&  	Identifikacijski broj autoservisa.	\\ \hline 
-					vehicle id 			& BIGINT	&  	Identifikacijski broj vozila.	\\ \hline 
+					service\_job\_ status 				& VARCHAR 	&  Status radnog naloga: otvoren, zatvoren ili u obradi.  \\ \hline 
+					auto\_service\_id 		& BIGINT	&  	Identifikacijski broj autoservisa.	\\ \hline 
+					vehicle\_id 			& BIGINT	&  	Identifikacijski broj vozila.	\\ \hline 
 					
 					
 				\end{longtabu}
 
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Autoservis}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{auto\_service (Autoservis)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Autoservis}}	 \\[3pt] \hline
@@ -143,18 +143,18 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					auto service id 				& BIGINT	& Jedinstveni identifikator autoservisa.  	 	\\ \hline
+					auto\_service\_id 				& BIGINT	& Jedinstveni identifikator autoservisa.  	 	\\ \hline
 					address				& VARCHAR 	&   Adresa autoservisa.	\\ \hline 
 					oib 				& VARCHAR 	&   OIB autoservisa.\\ \hline 
-					regular service price		& DOUBLE PRECISION	&  Cijena redovitog servisa.		\\ \hline 
-					shop name 			& VARCHAR	&  		\\ \hline 
+					regular\_service \_price		& DOUBLE PRECISION	&  Cijena redovitog servisa.		\\ \hline 
+					shop\_name 			& VARCHAR	&  		\\ \hline 
 					
 					
 				\end{longtabu}
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za redoviti servis}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{regular\_repair\_order (Radni nalog za redoviti servis)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za redoviti servis}}	 \\[3pt] \hline
@@ -165,16 +165,16 @@
 					
 					\cellcolor{LightGreen}
 					kilometers 				& INTEGER	&  	Kilometraža vozila zabilježena na servisu.	\\ \hline
-					observed malfunctions				& VARCHAR 	&   Primijećeni kvarovi.	\\ \hline 
-					repair recommended 				& BOOLEAN 	&  Je li potreban izvanredni servis ili ne? \\ \hline 
-					id		& BIGINT	&  		\\ \hline 
+					observed\_ malfunctions				& VARCHAR 	&   Primijećeni kvarovi.	\\ \hline 
+					repair\_ recommended 				& BOOLEAN 	&  Je li potreban izvanredni servis ili ne? \\ \hline 
+					id		& BIGINT	&  	Identifikacijski broj radnog naloga.	\\ \hline 
 					
 					
 				\end{longtabu}
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za izvanredni servis}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{repairing\_repair\_order (Radni nalog za izvanredni servis)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za izvanredni servis}}	 \\[3pt] \hline
@@ -185,34 +185,34 @@
 					
 					\cellcolor{LightGreen}
 					malfunctions 				& VARCHAR	&  	 Kvarovi na vozilu.	\\ \hline
-					id		& BIGINT	&  		\\ \hline 
+					id		& BIGINT	&  	Identifikacijski broj radnog naloga.	\\ \hline 
 					
 					
 				\end{longtabu}
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Popravak}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item (Stavka na radnom nalogu)}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Popravak}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{Stavka na radnom nalogu}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					item id 				& BIGINT	&  	Identifikator popravka. 	\\ \hline
+					item\_id 				& BIGINT	&  	Identifikator popravka. 	\\ \hline
 					name				& VARCHAR 	&   Naziv popravka.	\\ \hline 
 					price 				& DOUBLE PRECISION 	&   Cijena popravka. \\ \hline 
-					repair order id		& BIGINT	&  	Identifikator radnog naloga kojem pripada popravak.	\\ \hline 
+					repair\_order\_id		& BIGINT	&  	Identifikator radnog naloga kojem pripada popravak.	\\ \hline 
 					
 					
 				\end{longtabu}
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Servisna usluga}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{service\_labor (Servisna usluga)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Servisna usluga}}	 \\[3pt] \hline
@@ -222,17 +222,17 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					service labor id 				& BIGINT	&  	 Identifikator usluge.	\\ \hline
+					service\_labor\_ id 				& BIGINT	&  	 Identifikator usluge.	\\ \hline
 					price				& DOUBLE PRECISION 	&   Cijena usluge.	\\ \hline 
-					service name 				& VARCHAR 	&  Naziv usluge.  \\ \hline 
-					auto service id		& BIGINt	&  	Identifikator autoservisa koji pruža uslugu.	\\ \hline 
+					service\_name 				& VARCHAR 	&  Naziv usluge.  \\ \hline 
+					auto\_service\_id		& BIGINT	&  	Identifikator autoservisa koji pruža uslugu.	\\ \hline 
 					
 					
 				\end{longtabu}
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Rezervni dio}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item (Rezervni dio)}}	 \\[3pt] \hline
 					\endfirsthead
 					
 					\hline \multicolumn{3}{|c|}{\textbf{Rezervni dio}}	 \\[3pt] \hline
@@ -242,11 +242,11 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen}
-					part id 				& BIGINT	&  	Identifikator rezervnog dijela. 	\\ \hline
-					estimated duration in km				& INTEGER 	&   	\\ \hline 
-					part name 				& VARCHAR 	& Naziv rezervnog dijela.  \\ \hline 
+					part\_id 				& BIGINT	&  	Identifikator rezervnog dijela. 	\\ \hline
+					estimated\_ duration\_in\_km				& INTEGER 	&   Kilometraža za koju je predviđen rezervni dio.	\\ \hline 
+					part\_name 				& VARCHAR 	& Naziv rezervnog dijela.  \\ \hline 
 					price		& DOUBLE PRECISION	&  	Cijena rezervnog dijela.	\\ \hline 
-					auto service id		& BIGINT	&  	Identifikator autoservisa koji ima rezervni dio.	\\ \hline
+					auto\_service\_id		& BIGINT	&  	Identifikator autoservisa koji ima rezervni dio.	\\ \hline
 					
 					
 				\end{longtabu}
