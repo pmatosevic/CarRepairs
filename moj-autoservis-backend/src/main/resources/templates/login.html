@@ -80,6 +80,12 @@
 <main role="main" class="container text-center">
     <form class="form-login" method="post" action="/appLogin">
         <h1 class="h3 mb-3 font-weight-normal">Prijava</h1>
+        <div class="alert alert-success" role="alert" th:if="${(param.registered != null)}">
+            Uspješno ste registrirani!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <p id="error">Neispravno korisničko ime ili lozinka</p>
         <label for="username" class="sr-only">Korisničko ime</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Korisničko ime" required autofocus>
