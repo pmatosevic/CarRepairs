@@ -1,15 +1,17 @@
 package org.infiniteam.autoservice.controller;
 
+import org.infiniteam.autoservice.model.*;
+import org.infiniteam.autoservice.repository.UserRepository;
 import org.infiniteam.autoservice.security.CurrentUser;
-import org.infiniteam.autoservice.model.Administrator;
-import org.infiniteam.autoservice.model.ServiceEmployee;
-import org.infiniteam.autoservice.model.VehicleOwner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Map;
@@ -22,6 +24,9 @@ public class MainController {
             ServiceEmployee.class, "/autoservice",
             Administrator.class, "/admin"
     );
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
@@ -56,4 +61,35 @@ public class MainController {
         return "admin/home";
     }
 
+    @GetMapping("/register/user")
+    public String registrationFormUser(Model model){
+        return "registration-user";
+    }
+
+    @PostMapping("/register/user")
+    public String userRegistration(HttpServletRequest request, Model model) {
+
+        AppUser newUser = new AppUser();
+        newUser.setUsername(request.getParameter("username"));
+        newUser.setEmail(request.getParameter("email"));
+        newUser.setPasswordHash(request.getParameter("password"));
+        userRepository.save(newUser);
+        return "redirect:user/home";
+    }
+
+    @GetMapping("/register/autoservice")
+    public String registrationFormAutoService(Model model){
+        return "registration-autoservice";
+    }
+
+    @PostMapping("/register/autoservice")
+    public String autoServiceRegistration(HttpServletRequest request, Model model) {
+
+        AutoService newAutoService = new AutoService();
+        newAutoService.setShopName(request.getParameter("shopname"));
+        newAutoService.setAddress(request.getParameter("address"));
+        newAutoService.setOib(request.getParameter("oib"));
+        //userRepository.save(newAutoService);
+        return "redirect:registration-user";
+    }
 }
