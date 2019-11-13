@@ -1,6 +1,7 @@
 package org.infiniteam.autoservice.controller;
 
 import org.infiniteam.autoservice.model.*;
+import org.infiniteam.autoservice.repository.AutoServiceRepository;
 import org.infiniteam.autoservice.repository.UserRepository;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class MainController {
 
     @Autowired
     private UserRepository userRepository;
+    private AutoServiceRepository autoServiceRepository;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
@@ -66,14 +68,11 @@ public class MainController {
 
     @PostMapping("/register/user")
     public String userRegistration(HttpServletRequest request, Model model) {
-
-        /*
-        AppUser newUser = new AppUser();
+        AppUser newUser = new VehicleOwner();
         newUser.setUsername(request.getParameter("username"));
         newUser.setEmail(request.getParameter("email"));
         newUser.setPasswordHash(request.getParameter("password"));
         userRepository.save(newUser);
-         */
         return "redirect:/login";
     }
 
@@ -85,13 +84,11 @@ public class MainController {
     @PostMapping("/register/autoservice")
     public String autoServiceRegistration(HttpServletRequest request, Model model) {
 
-        /*
         AutoService newAutoService = new AutoService();
         newAutoService.setShopName(request.getParameter("shopname"));
         newAutoService.setAddress(request.getParameter("address"));
         newAutoService.setOib(request.getParameter("oib"));
-        userRepository.save(newAutoService);
-         */
+        autoServiceRepository.save(newAutoService);
         return "redirect:/register/user";
     }
 }
