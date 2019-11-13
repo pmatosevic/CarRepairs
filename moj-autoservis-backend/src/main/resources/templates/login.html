@@ -12,8 +12,11 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#error').hide();
+
             $('.form-login').submit(function (e) {
                 e.preventDefault();
+                $('#submit-btn').prop('disabled', true);
+
                 const form = $('.form-login');
                 const url = form.attr('action');
                 $.ajax({
@@ -25,6 +28,7 @@
                     },
                     error: data => {
                         $('#error').show();
+                        $('#submit-btn').prop('disabled', false);
                     }
                 });
             });
