@@ -5,4 +5,4 @@ compile_pdf:
     - latexmk -pdf OPP_ProjektnaDokumentacija_v5.tex
   artifacts:
     paths:
-      - OPP_ProjektnaDokumentacija_v5.pdf
+      - dokumentacija/OPP_ProjektnaDokumentacija_v5.pdf
