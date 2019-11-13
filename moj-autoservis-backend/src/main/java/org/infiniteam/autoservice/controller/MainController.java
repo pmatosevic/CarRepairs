@@ -63,7 +63,7 @@ public class MainController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         if (userRepository.getByUsername(username).isPresent()) {
-            return new ResponseEntity<>("Username already registered.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Korisničko ime već postoji.", HttpStatus.BAD_REQUEST);
         }
 
         VehicleOwner newUser = new VehicleOwner();
@@ -83,12 +83,31 @@ public class MainController {
     }
 
     @PostMapping("/register/autoservice")
-    public String autoServiceRegistration(HttpServletRequest request, Model model) {
+    @Transactional
+    public ResponseEntity<String> autoServiceRegistration(HttpServletRequest request, Model model) {
+        if (autoServiceRepository.getByOib(request.getParameter("oib")).isPresent()) {
+            return new ResponseEntity<>("Autoservis s tim OIB-om već postoji", HttpStatus.BAD_REQUEST);
+        }
+        if (userRepository.getByUsername(request.getParameter("username")).isPresent()) {
+            return new ResponseEntity<>("Korisničko ime već postoji.", HttpStatus.BAD_REQUEST);
+        }
+
         AutoService newAutoService = new AutoService();
         newAutoService.setShopName(request.getParameter("shopname"));
         newAutoService.setAddress(request.getParameter("address"));
         newAutoService.setOib(request.getParameter("oib"));
         autoServiceRepository.save(newAutoService);
-        return "redirect:/register/user";
+
+        ServiceEmployee owner = new ServiceEmployee();
+        owner.setEmployeeType(ServiceEmployeeType.SERVICE_ADMINISTRATOR);
+        owner.setEmail(request.getParameter("email"));
+        owner.setUsername(request.getParameter("username"));
+        owner.setFirstName(request.getParameter("name"));
+        owner.setLastName(request.getParameter("surname"));
+        owner.setPasswordHash(passwordEncoder.encode(request.getParameter("password")));
+        userRepository.save(owner);
+        newAutoService.addEmployee(owner);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

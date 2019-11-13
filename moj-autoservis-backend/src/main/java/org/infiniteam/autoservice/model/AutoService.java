@@ -1,6 +1,7 @@
 package org.infiniteam.autoservice.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class AutoService {
     private List<RepairOrder> repairOrders;
 
     @OneToMany(mappedBy = "autoService")
-    private List<ServiceEmployee> employees;
+    private List<ServiceEmployee> employees = new ArrayList<>();
 
     public Long getAutoServiceId() {
         return autoServiceId;
@@ -102,5 +103,10 @@ public class AutoService {
 
     public void setEmployees(List<ServiceEmployee> employees) {
         this.employees = employees;
+    }
+
+    public void addEmployee(ServiceEmployee employee) {
+        employee.setAutoService(this);
+        employees.add(employee);
     }
 }
