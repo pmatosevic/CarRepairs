@@ -65,7 +65,7 @@
 
 				% \textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
-				\textbf{app\_user} Ovaj entitet sadrži sve podatke o registriranom korisniku aplikacije. Atributi koje sadrži su: tip, jedinstveni identifikacijski broj, e-mail adresa, lozinka, korisničko ime i OIB korisnika, te tip zaposlenika u autoservisu i jedinstveni identifikacijski broj autoservisa. Entitet je u \textit{One-to-Many} vezi s entitetom vehicle preko atributa identifikacijaki broj korisnika. Također je u vezi \textit{Many-to-One} sa entitetom auto\_service preko jedinstvenog identifikatora autoservisa.
+				\textbf{app\_user} Ovaj entitet sadrži sve podatke o registriranom korisniku aplikacije te predstavlja vlasnika automobila, servisera i administratora ovisno o sadržaju atributa \textit{dtype}. Atributi koje sadrži su: tip, jedinstveni identifikacijski broj, e-mail adresa, lozinka, korisničko ime, ime, prezime i OIB korisnika, te tip zaposlenika u autoservisu i jedinstveni identifikacijski broj autoservisa. Ovisno o tipu korisnika, neki atributi će imati vrijednost \textit{NULL} ako se na njih ne odnosi taj atribut. Entitet je u \textit{One-to-Many} vezi s entitetom vehicle preko atributa identifikacijaki broj korisnika. Također je u vezi \textit{Many-to-One} sa entitetom auto\_service preko jedinstvenog identifikatora autoservisa.
 				
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
@@ -82,6 +82,9 @@
 					\cellcolor{LightGreen}
 					dtype 				& VARCHAR	&  Tip korisnika: vlasnik vozila, zaposlenik autoservisa ili administrator.	 	\\ \hline
 					userid				& BIGINT 	& Jedinstveni identifikacijski broj korisnika.  	\\ \hline 
+					email 				& VARCHAR 	&  E-mail adresa korisnika. \\ \hline 
+					first\_name 		& VARCHAR 	&  Ime korisnika. \\ \hline 
+					last\_name 			& VARCHAR 	&  Prezime korisnika. \\ \hline 
 					email 				& VARCHAR 	&  E-mail adresa korisnika. \\ \hline 
 					password\_hash 		& VARCHAR	&  Lozinka korisnika.		\\ \hline 
 					username 			& VARCHAR	&  Korisničko ime korisnika.		\\ \hline 
