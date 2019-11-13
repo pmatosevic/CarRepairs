@@ -1,0 +1,7 @@
+compile_pdf:
+  image: aergus/latex
+  script:
+    - latexmk -pdf dokumentacija/OPP_ProjektnaDokumentacija_v5.tex
+  artifacts:
+    paths:
+      - InfiniTeam_MojAutoServis.pdf
