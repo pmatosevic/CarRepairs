@@ -11,7 +11,7 @@ public class VehicleOwner extends AppUser {
     @Column
     private String oib;
 
-    @OneToMany
+    @OneToMany(mappedBy = "owner")
     private List<Vehicle> vehicles;
 
     public String getOib() {

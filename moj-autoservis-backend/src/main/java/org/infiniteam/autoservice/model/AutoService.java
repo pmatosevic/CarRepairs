@@ -20,16 +20,16 @@ public class AutoService {
 
     private double regularServicePrice;
 
-    @OneToMany
+    @OneToMany(mappedBy = "autoService")
     private List<ServiceLabor> serviceLabors;
 
-    @OneToMany
+    @OneToMany(mappedBy = "autoService")
     private List<VehiclePart> vehicleParts;
 
-    @OneToMany
+    @OneToMany(mappedBy = "autoService")
     private List<RepairOrder> repairOrders;
 
-    @OneToMany
+    @OneToMany(mappedBy = "autoService")
     private List<ServiceEmployee> employees;
 
     public Long getAutoServiceId() {
