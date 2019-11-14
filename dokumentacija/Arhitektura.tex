@@ -39,7 +39,14 @@
 		
 		Korištenjem Model-pogled-nadglednik oblikovnog obrasca smanjit će se ovisnost između korisničkog sučelja i ostatka sustava, a zbog podjele odgovornosti između komponenti i smanjene međuovisnosti olakšat će se paralelni razvoj, testiranje i moguće buduće promjene u sustavu.
 		
-		Arhitektura aplikacije se može podijeliti i na \textit{backend} i \textit{frontend} sloj. \textit{Backend} sloj izvršavat će se na poslužitelju (i biti ravijen po \textit{MVC} obrascu) te će rezultat obrade klijentskih zahtjeva biti grafički prikaz stranice u jeziku \textit{HTML} koji se šalje klijentu i predstavlja \textit{frontend} sloj.
+		Arhitektura aplikacije se može podijeliti i na \textit{backend} i \textit{frontend} sloj. \textit{Backend} sloj izvršavat će se na poslužitelju (i biti ravijen po \textit{MVC} obrascu) te će rezultat obrade klijentskih zahtjeva biti grafički prikaz stranice. Takav prikaz u jezicima \textit{HTML}, \textit{CSS} i \textit{JavaScript} se šalje klijentu i predstavlja \textit{frontend} sloj.
+		
+		Prema pogledu korisnika (aktora) koji će koristiti sustav, on se može podijeliti na tri manja podsustava što je vidljivo na slici \ref{fig:arhitektura1}:
+		\begin{itemize}
+			\item Aplikacija za vlasnike automobila
+			\item Aplikacija za autoservise
+			\item Aplikacija za administraciju 
+		\end{itemize}
 
 		
 
@@ -167,7 +174,7 @@
 					address				& VARCHAR 	&   Adresa autoservisa.	\\ \hline 
 					oib 				& VARCHAR 	&   OIB autoservisa.\\ \hline 
 					regular\_service \_price		& DOUBLE PRECISION	&  Cijena redovitog servisa.		\\ \hline 
-					shop\_name 			& VARCHAR	&  		\\ \hline 
+					shop\_name 			& VARCHAR	& Naziv autoservisa. 		\\ \hline 
 					
 					
 				\end{longtabu}
@@ -313,6 +320,14 @@
 			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram}
 			\caption{Dijagram razreda modela}
 			\label{fig:classdiagram}
+		\end{figure}
+	
+		
+		\begin{figure}
+			\centering
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_ctrl}
+			\caption{Dijagram razreda u sloju nadglednika}
+			\label{fig:classdiagramctrl}
 		\end{figure}
 			
 			
