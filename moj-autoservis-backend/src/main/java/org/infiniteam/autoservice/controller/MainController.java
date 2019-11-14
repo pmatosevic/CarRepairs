@@ -3,11 +3,10 @@ package org.infiniteam.autoservice.controller;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.repository.AutoServiceRepository;
 import org.infiniteam.autoservice.repository.UserRepository;
-import org.infiniteam.autoservice.security.CurrentUser;
+import org.infiniteam.autoservice.security.SpringCurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -41,7 +40,7 @@ public class MainController {
     public String index(Model model, Principal principal) {
         if (principal != null) {
             UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
-            CurrentUser user = (CurrentUser) token.getPrincipal();
+            SpringCurrentUser user = (SpringCurrentUser) token.getPrincipal();
             return "redirect:" + redirects.get(user.getAppUser().getClass());
         }
         return "home";

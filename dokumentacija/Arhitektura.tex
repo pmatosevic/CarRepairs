@@ -47,6 +47,8 @@
 			\item Aplikacija za autoservise
 			\item Aplikacija za administraciju 
 		\end{itemize}
+	
+		Sustav će biti implementiran u programskom jeziku \textit{Java} korištenjem \textit{Spring} okvira uz potrebna proširenja. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac Model-pogled-nadglednik. Uz to, slijedi princip inverzije ovisnosti koji će olakšati kasnije nadogradnje i promjene smanjivanjem ovisnosti te nudi gotovu implementaciju različitih protokola i automatsku postavljanje autentifikacije. Time će se ubrzati razvoj, a dodatno će se uz njega koristiti i okvir za pristup podacima \textit{Spring JPA}.
 
 		
 
@@ -59,7 +61,7 @@
 
 		Sustav tijekom svojeg rada sprema i dohvaća različite podatke, koji će biti pohranjeni u bazu podataka. U bazi podataka se ti podaci spremaju u relacije (tablice) s definiranim atributima. Baza treba osigurati konzistentnost podataka kroz definirana ograničenja te primarne i strane ključeve, mogućnost istovremenog pristupa podacima te izdržljivost i mogućnost oporavka podataka u slučaju kvara.
 		
-		Za preslikavanje modela razreda u relacijski model podataka koristi se biblioteka \text{Hibernate}. To je ORM (\textit{Object-Relational Mapping}) okvir koji automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje.
+		Za preslikavanje modela razreda u relacijski model podataka koristi se biblioteka \text{Hibernate} unutar okvira \textit{Spring JPA}. To je ORM (\textit{Object-Relational Mapping}) okvir koji automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje.
 		
 		U razvojnoj okolini se koristi \textit{H2} baza podataka koja se čuva u memoriji za vrijeme pokretanja aplikacije te omogućava lako testiranje i dodavanje podataka. Ona je odabrana jer za nju već postoji podrška u \textit{Spring} okviru koji se koristi.
 		
@@ -313,22 +315,25 @@
 %			
 %			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
 
-		Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Razred \textit{Administrator} predstavlja administratora koji nakon registracije ima najveće ovlasti. Razred \textit{VehicleOwner} predstavlja registriranog vlasnika automobila. Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser koji radi na automobilima. Razred \textit{RepairOrder} predstavlja radni nalog za servis. On ima dva podrazreda, razred \textit{RegularRepairOrder} koji označava radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji označava radni nalog za izvanredni servis. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil. Razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu. Razred \textit{RepairOrderItem} označava dio automobila koji je ugrađen.
-			
-		\begin{figure}[h]
+
+		
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram}
 			\caption{Dijagram razreda modela}
 			\label{fig:classdiagram}
 		\end{figure}
 	
+		Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Razred \textit{Administrator} predstavlja administratora koji nakon registracije ima najveće ovlasti. Razred \textit{VehicleOwner} predstavlja registriranog vlasnika automobila. Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser koji radi na automobilima. Razred \textit{RepairOrder} predstavlja radni nalog za servis. On ima dva podrazreda, razred \textit{RegularRepairOrder} koji označava radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji označava radni nalog za izvanredni servis. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil. Razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu. Razred \textit{RepairOrderItem} označava dio automobila koji je ugrađen.
 		
-		\begin{figure}
+		\begin{figure}[H]
 			\centering
-			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_ctrl}
-			\caption{Dijagram razreda u sloju nadglednika}
+			\includegraphics[width=0.9\linewidth]{dijagrami/class_diagram_ctrl}
+			\caption{Dijagram razreda u sloju nadglednika te sloja pristupa podacima}
 			\label{fig:classdiagramctrl}
 		\end{figure}
+	
+		
 			
 			
 			\eject
