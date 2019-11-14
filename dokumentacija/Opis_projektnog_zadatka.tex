@@ -22,38 +22,40 @@
 		\begin{packed_item}
 			\item svoje ime,
 			\item svoje prezime,
-			\item OIB, te
-			\item adresu svoje e-pošte.
+			\item OIB,
+			\item adresu svoje e-pošte,
+			\item željeno korisničko ime za prijavu, te
+			\item lozinku
 		\end{packed_item}
 		
-		U slučaju da se radi o tvrtci, podatci koji su potrebni su:
+		Auto servis registrira njegov vlasnik te pri tome upisuje podatke o auto servisu:
 		\begin{packed_item}
 			\item naziv,
 			\item adresa, i
 			\item OIB tvrtke.
 		\end{packed_item}
+		i podatke novog korisničkog računa vlasnika autoservisa:
+		\begin{packed_item}
+			\item ime,
+			\item prezime,
+			\item korisničko ime, i
+			\item lozinku
+		\end{packed_item}
 		
-		Nakon registracije, korisnik unosi podatke o automobilu iz prometne dozvole, među kojima su obavezno:
+		Nakon registracije, korisnik može dodavati nove automobile unoseći njihove podatke iz prometne dozvole, među kojima su obavezno:
 		\begin{packed_item}
 			\item registracijska oznaka, te
 			\item marka automobila.
 		\end{packed_item}
 		
-		Kako bi novi automobil bio dodan, uneseni podaci  se provjeravaju u HUO registru, iz kojeg se dobiva marka, model, i broj šasije automobila. U slučaju nepodudaranja podataka  vozila sa podacima u HUO registru, odbija se registracija vozila u aplikaciji. Korisnik može u bilo kojem trenutku dodati još automobila, te  može unijeti podatke o  neograničeno mnogo vozila. Ukoliko to želi, korisnik također ima mogućnost  izbrisati podatke o automobilu. 
-		
-		Auto servisi također moraju stvoriti svoje profile u aplikaciji, odnosno moraju se registrirati kao korisnici sa podacima:
-		\begin{packed_item}
-			\item naziv,
-			\item adresa, i
-			\item OIB.
-		\end{packed_item}
+		Prilikom dodavanja novog automobila, uneseni podaci se provjeravaju u HUO registru, iz kojeg se dobiva marka, model, i broj šasije automobila. U slučaju nepodudaranja podataka vozila sa podacima u HUO registru, odbija se dodavanje vozila u aplikaciji. Korisnik može u bilo kojem trenutku dodati još automobila, te  može unijeti podatke o  neograničeno mnogo vozila. Ukoliko to želi, korisnik također ima mogućnost  izbrisati podatke o automobilu. 
 		 
-		 Nakon registracije, auto servisi trebaju definirati  korisnički račun za administratora auto servisa i za servisere. Administrator auto servisa potom unosi cjenik usluga sa podacima:
+		Nakon registracije auto servisa, njegov vlasnik može nakon prijave u sustav upravljati svojim zaposlenicima, odnosno dodavati ih definiranjem korisničkog imena i inicijalne lozinke korisničkog računa novog zaposlenika, te ih brisati.
+		Vlasnik auto servisa također unosi i cjenik usluga (radova na servisu) sa podacima:
 		 \begin{packed_item}
 		 	\item vrsta usluge, i
 		 	\item cijena usluge,
 		 \end{packed_item}
-	 
 	 	 te podatke o auto-dijelovima, koji se ugrađuju u servisu:
 	 	 \begin{packed_item}
 	 	 	\item naziv dijela,
@@ -61,19 +63,16 @@
 	 	 	\item predviđena kilometraža, i
 	 	 	\item cijena dijela,
 	 	 \end{packed_item}
-		 
-		 kao i listu servisera sa podacima, preko koje mogu upravljati svojim zaposlenicima. 
 		
-		Kada korisnik (vlasnik automobila) želi poslati svoj automobil na servis, mora otvoriti radni nalog, prilikom čega odabire auto servis u kojem želi obaviti servis. Odabire redoviti ili izvanredni servis. Nakon što je rad na automobilu obavljen, korisniku dolaze detalji servisa sa cijenom.  
+		Kada korisnik (vlasnik automobila) želi poslati svoj automobil na servis, mora otvoriti radni nalog, prilikom čega na karti odabire auto servis u kojem želi obaviti servis uz mogućnost filtriranja po lokaciji. Potom odabire redoviti koji bi periodički trebao obavljati na automobilu, ili izvanredni koji se otvara u slučaju uočenog kvara. Nakon što je servis obavljen, korisniku dolaze detalji servisa s cijenom, te moguće preporuke o slanju na izvanredni servis.
 		
 		Aplikacija nudi vlasniku automobila različite statističke podatka o troškovima, zamijenjenim dijelovima i drugim aspektima svih prijašnjih obavljenih servisa. Te informacije su dostupne sve dok se automobil ne obriše iz aplikacije.
 		
-		Serviseri primaju radne naloge poslane njihovoj tvrtci. 
-		Ako ih prihvate, obavljaju servis, te u radni nalog dopisuju dodatne podatke o servisiranju, kao što su kilometraža, zamjena ulja, filtera i sl. Naknadno, ako je na automobilu primijećena potreba za dodatnim popravcima, serviser daje preporuku za izvanredni servis. U slučaju izvanrednog servisa unose se podaci o kvarovima, popravcima kao i ugrađenim rezervnim dijelovima.
+		Serviseri primaju radne naloge poslane njihovoj tvrtci. Ako ih prihvate, obavljaju servis, te u radni nalog dopisuju dodatne podatke o servisiranju, kao što su kilometraža, i opčenito stanje vozila, i, ako je na automobilu primijećena potreba za dodatnim popravcima, serviser daje preporuku za izvanredni servis. U slučaju izvanrednog servisa unose se podaci o kvarovima, popravcima (uslugama) kao i ugrađenim rezervnim dijelovima.
 
 		Aplikacija nudi auto servisu različite statičke podatke o troškovima servisa, stanju rezervnih dijelova, te financijskim aspektima poslovanja. Također, nudi i statičke podatke o serviserima.
 		
-		Glavni administrator odobrava registracije auto servisa, ima upravu nad svim korisnicima, može brisati račune i ima pristup svim statističkim podatcima koji se izračunavaju. 
+		Glavni administrator ima upravu nad svim korisnicima, može brisati račune i ima pristup svim statističkim podatcima koji se izračunavaju. Njegov korisnički račun nije moguće registrirati već se on direktno postavlja u bazi podataka.
 		
 		
 		\newpage
