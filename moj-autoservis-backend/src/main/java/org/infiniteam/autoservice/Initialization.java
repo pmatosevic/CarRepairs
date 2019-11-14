@@ -37,9 +37,13 @@ public class Initialization {
         admin.setUsername("admin");
         admin.setPasswordHash(passwordEncoder.encode("admin"));
 
-        userRepository.save(user);
-        userRepository.save(employee);
-        userRepository.save(boss);
-        userRepository.save(admin);
+        try {
+            userRepository.save(user);
+            userRepository.save(employee);
+            userRepository.save(boss);
+            userRepository.save(admin);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
