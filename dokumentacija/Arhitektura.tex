@@ -1,70 +1,339 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
+%		\textbf{\textit{dio 1. revizije}}\\
+%
+%		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
+%	\begin{itemize}
+%		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
+%		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
+%		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
+%	\end{itemize}
+		
+		Jedan od najvažnijih koraka pri razvoju sustava je izbor i oblikovanje arhitekture sustava. Kako će našu aplikaciju koristiti više različitih korisnika istovremeno (vlasnici automobila, autoservisi i administratori), te stoga što autoservisi koriste različite uređaje kojima će pristupati sustavu, odlučen je razvoj web aplikacije. Time će se sustavu moći pristupati sa svih uređaja (mobilni uređaji, tableti, desktop računala) bez obzira na platformu uz uvjet da na uređaju postoji odgovarajući web preglednik čime se želi i privući što veći broj vlasnika automobila kao korisnika aplikacije.
+		
+		Na slici \ref{fig:arhitektura1} prikazana je klijent-poslužitelj arhitektura na kojoj će se temeljiti sustav. Korisnici aplikacije putem svojih web preglednika (putem \textit{HTTP} ili \textit{HTTPS} protokola) pristupaju poslužitelju na kojem je pokrenuta web aplikacija koja obrađuje njihove zahtjeve i komunicira s bazom podataka (pokrenutoj na istom ili nekom drugom poslužitelju) putem \textit{JDBC} protokola.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.7\linewidth]{slike/server-client}
+			\caption{Osnovna arhitektura cijelog sustava}
+			\label{fig:arhitektura1}
+		\end{figure}
 	
 		
+		Kao tip arhitekture uzet će se objektno usmjerena arhitektura budući da najbolje odgovara razvoju složene višekorisničke aplikacije. 
+		
+		Pri razvoju će se pratiti Model-pogled-nadglednik obrazac (engl. \textit{MVC: Model-View-Controller}) prikazan na slici \ref{fig:mvc} koji dijeli sustav na tri komponente:
+		\begin{itemize}
+			\item Model - komponenta koja je zadužena za upravljanje podacima te uključuje sve razrede čiji se podaci obrađuju
+			\item Pogled - komponenta koja služi za prikaz podataka (modela) korisniku
+			\item Nadglednik - komponenta koja prima i obrađuju korisničke zahtjeve na način da dohvaća, provjerava i mijenja podatke u modelu te ih šalje pogledu za prikaz
+		\end{itemize}
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.7\linewidth]{slike/mvc}
+			\caption{Oblikovni obrazac Model-pogled-nadglednik}
+			\label{fig:mvc}
+		\end{figure}
+		
+		Korištenjem Model-pogled-nadglednik oblikovnog obrasca smanjit će se ovisnost između korisničkog sučelja i ostatka sustava, a zbog podjele odgovornosti između komponenti i smanjene međuovisnosti olakšat će se paralelni razvoj, testiranje i moguće buduće promjene u sustavu.
+		
+		Arhitektura aplikacije se može podijeliti i na \textit{backend} i \textit{frontend} sloj. \textit{Backend} sloj izvršavat će se na poslužitelju (i biti ravijen po \textit{MVC} obrascu) te će rezultat obrade klijentskih zahtjeva biti grafički prikaz stranice. Takav prikaz u jezicima \textit{HTML}, \textit{CSS} i \textit{JavaScript} se šalje klijentu i predstavlja \textit{frontend} sloj.
+		
+		Prema pogledu korisnika (aktora) koji će koristiti sustav, on se može podijeliti na tri manja podsustava što je vidljivo na slici \ref{fig:arhitektura1}:
+		\begin{itemize}
+			\item Aplikacija za vlasnike automobila
+			\item Aplikacija za autoservise
+			\item Aplikacija za administraciju 
+		\end{itemize}
+	
+		Sustav će biti implementiran u programskom jeziku \textit{Java} korištenjem \textit{Spring} okvira uz potrebna proširenja. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac Model-pogled-nadglednik. Uz to, slijedi princip inverzije ovisnosti koji će olakšati kasnije nadogradnje i promjene smanjivanjem ovisnosti te nudi gotovu implementaciju različitih protokola i automatsku postavljanje autentifikacije. Time će se ubrzati razvoj, a dodatno će se uz njega koristiti i okvir za pristup podacima \textit{Spring JPA}.
 
 		
 
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+%			\textbf{\textit{dio 1. revizije}}\\
+%			
+%		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+
+		Sustav tijekom svojeg rada sprema i dohvaća različite podatke, koji će biti pohranjeni u bazu podataka. U bazi podataka se ti podaci spremaju u relacije (tablice) s definiranim atributima. Baza treba osigurati konzistentnost podataka kroz definirana ograničenja te primarne i strane ključeve, mogućnost istovremenog pristupa podacima te izdržljivost i mogućnost oporavka podataka u slučaju kvara.
+		
+		Za preslikavanje modela razreda u relacijski model podataka koristi se biblioteka \text{Hibernate} unutar okvira \textit{Spring JPA}. To je ORM (\textit{Object-Relational Mapping}) okvir koji automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje.
+		
+		U razvojnoj okolini se koristi \textit{H2} baza podataka koja se čuva u memoriji za vrijeme pokretanja aplikacije te omogućava lako testiranje i dodavanje podataka. Ona je odabrana jer za nju već postoji podrška u \textit{Spring} okviru koji se koristi.
+		
+		Sustav će u produkciji koristiti \textit{PostgreSQL} bazu podataka, koja je besplatna i otvorenog koda. Ona je također dobro podržana u \textit{Spring} okviru, ima različite mogućnosti replikacije podataka koje bi se kasnije mogle implementirati i podržava većinu operativnih sustava. Ona može biti pokrenuta na istom poslužitelju na kojem je pokrenut i sustav ili na nekom drugom, a sustav se na nju povezuje putem JDBC protokola.
+		
+		
 		
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				% \textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				
+				{\small \textbf{Napomena} Atributi koji su \textbf{podebljani} označavaju primarne ključeve, a oni koji su \underline{podcrtani} označavaju strane.}
+				
+				\noindent\textbf{app\_user} Ovaj entitet sadrži sve podatke o registriranom korisniku aplikacije te predstavlja vlasnika automobila, servisera i administratora ovisno o sadržaju atributa \textit{dtype}. Atributi koje sadrži su: tip, jedinstveni identifikacijski broj, e-mail adresa, lozinka, korisničko ime, ime, prezime i OIB korisnika, te tip zaposlenika u autoservisu i jedinstveni identifikacijski broj autoservisa. Ovisno o tipu korisnika, neki atributi će imati vrijednost \textit{NULL} ako se na njih ne odnosi taj atribut. Entitet je u \textit{One-to-Many} vezi s entitetom vehicle preko atributa identifikacijaki broj korisnika. Također je u vezi \textit{Many-to-One} sa entitetom auto\_service preko jedinstvenog identifikatora autoservisa.
+				
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{app\_user (Korisnik)}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{app\_user}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
 					\endlastfoot
 					
-					\cellcolor{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam 	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\cellcolor{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\cellcolor{LightGreen}
+					dtype 				& VARCHAR	&  Tip korisnika: vlasnik vozila, zaposlenik autoservisa ili administrator.	 	\\ \hline
+					\textbf{user\_id}				& BIGINT 	& Jedinstveni identifikacijski broj korisnika.  	\\ \hline 
+					email 				& VARCHAR 	&  E-mail adresa korisnika. \\ \hline 
+					first\_name 		& VARCHAR 	&  Ime korisnika. \\ \hline 
+					last\_name 			& VARCHAR 	&  Prezime korisnika. \\ \hline 
+					email 				& VARCHAR 	&  E-mail adresa korisnika. \\ \hline 
+					password\_hash 		& VARCHAR	&  Lozinka korisnika.		\\ \hline 
+					username 			& VARCHAR	&  Korisničko ime korisnika.		\\ \hline 
+					oib 				& VARCHAR	&  OIB korisnika.		\\ \hline 
+					employee\_type 		& VARCHAR	&  Tip zaposlenika u autoservisu - serviser ili vlasnik autoservisa.			\\ \hline 
+					\underline{auto\_service\_id} 	& BIGINT	&  Jedinstveni identifikacijski broj autoservisa.		\\ \hline 
 					
 					
 				\end{longtabu}
 			
 			
+			\noindent\textbf{vehicle} Ovo je entitet koji sadrži podatke o vozilu. Atributi su mu: jedinstveni identifikator, registarska oznaka, model i broj šasije vozila, te identifikacijski broj vlasnika vozila. Ovaj entitet je u vezi \textit{Many-to-One} s entitetom app\_user preko atributa identifikacijski broj vlasnika vozila. Također je u \textit{One-to-Many} vezi s entitetom repair\_order preko identifikacijakog broja vozila.
+			
+			
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle (Vozilo)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					\textbf{vehicle\_id} 			& BIGINT	&  	 Jedinstveni identifikator vozila.	\\ \hline
+					license\_plate				& VARCHAR 	&  Registarska oznaka vozila. 	\\ \hline 
+					vehicle\_model 				& VARCHAR 	&  Model vozila. \\ \hline 
+					vin\_number 		& VARCHAR	&  Broj šasije vozila.		\\ \hline 
+					\underline{owner\_user\_id} 			& BIGINT	&  	Identifikacijski broj vlasnika vozila.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+			\noindent\textbf{repair\_order} Ovo je entitet koji sadrži sve važne podatke o pojedinom radnom nalogu. Sadrži atribute: jedinstveni identifikacijski broj radnog naloga, identifikacijski broj autoservisa i vozila, te ukupna cijena i status radnog naloga (otvoren, zatvoren ili u obradi). Entitet je u vezi \textit{Many-to-One} s entitetom vehicle preko atributa identifikacijski broj vozila. Također je u \textit{Many-to-One} vezi s entitetom auto\_service preko identifikacijskog broja autoservisa. Ovaj entitet je generalizacija entiteta regular\_repair\_order i entiteta repairing\_repair\_order.
+			
+		
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order (Radni nalog)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					\textbf{repair\_order\_id} 				& BIGINT	&  	Jedinstveni identifikacijski broj radnog naloga. 	\\ \hline
+					price				& DOUBLE PRECISION 	&   Ukupna cijena.	\\ \hline 
+					service\_job\_ status 				& VARCHAR 	&  Status radnog naloga: otvoren, zatvoren ili u obradi.  \\ \hline 
+					\underline{auto\_service\_id} 		& BIGINT	&  	Identifikacijski broj autoservisa.	\\ \hline 
+					\underline{vehicle\_id} 			& BIGINT	&  	Identifikacijski broj vozila.	\\ \hline 
+					
+					
+				\end{longtabu}
+			\noindent\textbf{auto\_service} Ovaj entitet sadrži sve važne informacije o autoservisu. Atributi koje sadrži su: jedinstveni identifikator, ime, adresa i OIB autoservisa, te cijena redovitog servisa. Ovaj entitet povezan je vezom \textit{One-to-Many} preko atributa jedinstveni identifikator autoservisa s entitetima: repair\_order, app\_user, service\_labor i vehicle\_part.
+			
+
+
+
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{auto\_service (Autoservis)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{auto\_service}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					\textbf{auto\_service\_id} 				& BIGINT	& Jedinstveni identifikator autoservisa.  	 	\\ \hline
+					address				& VARCHAR 	&   Adresa autoservisa.	\\ \hline 
+					oib 				& VARCHAR 	&   OIB autoservisa.\\ \hline 
+					regular\_service \_price		& DOUBLE PRECISION	&  Cijena redovitog servisa.		\\ \hline 
+					shop\_name 			& VARCHAR	& Naziv autoservisa. 		\\ \hline 
+					
+					
+				\end{longtabu}
+			
+			\noindent\textbf{regular\_repair\_order} Ovaj entitet sadržava sve važne informacije o radnom nalogu koji se provodi za redoviti servis. Sadrži atribute: kilometražu vozila, primijećene kvarove, preporuku za izvanredni servis te ID radnog naloga kojem pripada. Ovaj entitet je specijalizacija entiteta repair\_order. 
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{regular\_repair\_order (Radni nalog za redoviti servis)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Radni nalog za redoviti servis}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					kilometers 				& INTEGER	&  	Kilometraža vozila zabilježena na servisu.	\\ \hline
+					observed\_ malfunctions				& VARCHAR 	&   Primijećeni kvarovi.	\\ \hline 
+					repair\_ recommended 				& BOOLEAN 	&  Je li potreban izvanredni servis ili ne? \\ \hline 
+					\textbf{\underline{id}}		& BIGINT	&  	Identifikacijski broj radnog naloga.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+			\noindent\textbf{repairing\_repair\_order} Ovaj entitet sadrži sve važne informacije za izvanredni servis vozila. Sadrži atribute: kvarove na vozilu i ID radnog naloga kojem pripada. Ovaj entitet je specijalizacija entiteta repair\_order. 
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{repairing\_repair\_order (Radni nalog za izvanredni servis)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{repairing\_repair\_order}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					malfunctions 				& VARCHAR	&  	 Kvarovi na vozilu.	\\ \hline
+					\textbf{\underline{id}}		& BIGINT	&  	Identifikacijski broj radnog naloga.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+			\noindent\textbf{repair\_order\_item} Ovaj entitet sadrži sve važne informacije za pojedinu stavku na radnom nalogu. Atributi ovog entiteta su: identifikator stavke na radnom nalogu, njen naziv, cijena te ID izvanrednog radnog naloga kojem stavka pripada. Ovaj entitet je u vezi \textit{Many-to-One} sa entitetom repair\_order preko ID-a tog radnog naloga.
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item (Stavka na radnom nalogu)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{repair\_order\_item}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					\textbf{item\_id} 				& BIGINT	&  	Identifikator stavke. 	\\ \hline
+					name				& VARCHAR 	&   Naziv stavke.	\\ \hline 
+					price 				& DOUBLE PRECISION 	&   Cijena stavke. \\ \hline 
+					\underline{repair\_order\_id}		& BIGINT	&  	Identifikator izvanrednog radnog naloga kojem pripada popravak.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+			\noindent\textbf{service\_labor} Ovaj entitet sadrži sve informacije važne za servisnu uslugu. Atributi ovog entiteta su: ID usluge, cijena usluge, naziv usluge i ID autoservisa koji pruža uslugu. Ovaj entitet je u vezi \textit{Many-to-One} sa entitetom auto\_service preko ID-a autoservisa.
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{service\_labor (Servisna usluga)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{service\_labor}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					\textbf{service\_labor\_ id} 				& BIGINT	&  	 Identifikator usluge.	\\ \hline
+					price				& DOUBLE PRECISION 	&   Cijena usluge.	\\ \hline 
+					service\_name 				& VARCHAR 	&  Naziv usluge.  \\ \hline 
+					\underline{auto\_service\_id}		& BIGINT	&  	Identifikator autoservisa koji pruža uslugu.	\\ \hline 
+					
+					
+				\end{longtabu}
+			
+			\noindent\textbf{vehicle\_part} Ovaj entitet sadrži sve važne informacije za rezervni dio automobila. Ovaj entitet sadrži atribute: ID dijela, kilometraža za koju je dio predviđen, naziv dijela, njegova cijena te ID autoservisa koji ima rezervni dio. Ovaj entitet je u vezi \textit{Many-to-One} sa entitetom auto\_service preko ID-a tog autoservisa.
+			
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle\_part (Rezervni dio)}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{vehicle\_part}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightGreen}
+					\textbf{part\_id} 				& BIGINT	&  	Identifikator rezervnog dijela. 	\\ \hline
+					estimated\_ duration\_in\_km				& INTEGER 	&   Kilometraža za koju je predviđen rezervni dio.	\\ \hline 
+					part\_name 				& VARCHAR 	& Naziv rezervnog dijela.  \\ \hline 
+					price		& DOUBLE PRECISION	&  	Cijena rezervnog dijela.	\\ \hline 
+					\underline{auto\_service\_id}		& BIGINT	&  	Identifikator autoservisa koji ima rezervni dio.	\\ \hline
+					
+					
+				\end{longtabu}
+			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+%				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=1.0\linewidth]{dijagrami/er-diagram}
+					\caption{Relacijski model baze podataka}
+					\label{fig:er-diagram}
+				\end{figure}
 			
 			\eject
 			
 			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
-			
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
+%			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
+%			
+%			\textbf{\textit{dio 1. revizije}}\\
+%			
+%			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
+%			
+%			\textbf{\textit{dio 2. revizije}}\\			
+%			
+%			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+
+
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram}
+			\caption{Dijagram razreda modela}
+			\label{fig:classdiagram}
+		\end{figure}
+	
+		Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Razred \textit{Administrator} predstavlja administratora koji nakon registracije ima najveće ovlasti. Razred \textit{VehicleOwner} predstavlja registriranog vlasnika automobila. Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser koji radi na automobilima. Razred \textit{RepairOrder} predstavlja radni nalog za servis. On ima dva podrazreda, razred \textit{RegularRepairOrder} koji označava radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji označava radni nalog za izvanredni servis. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil. Razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu. Razred \textit{RepairOrderItem} označava dio automobila koji je ugrađen.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\linewidth]{dijagrami/class_diagram_ctrl}
+			\caption{Dijagram razreda u sloju nadglednika te sloja pristupa podacima}
+			\label{fig:classdiagramctrl}
+		\end{figure}
+	
+		
 			
 			
 			\eject

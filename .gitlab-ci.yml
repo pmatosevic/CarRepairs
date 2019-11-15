@@ -1,0 +1,8 @@
+compile_pdf:
+  image: aergus/latex
+  script:
+    - cd dokumentacija
+    - latexmk -pdf OPP_ProjektnaDokumentacija_v5.tex
+  artifacts:
+    paths:
+      - dokumentacija/OPP_ProjektnaDokumentacija_v5.pdf
