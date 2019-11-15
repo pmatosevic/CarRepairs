@@ -1019,29 +1019,33 @@
 \subsection{Sekvencijski dijagrami}
 
 
-\textbf{Obrazac uporabe UC1: Registracija vlasnika automobila}
+\noindent \textbf{Obrazac uporabe UC1: Registracija vlasnika automobila}
 
 \noindent Posjetitelj na početnoj stranici odabire opciju registracije. Poslužitelj posjetitelju prikazuje sučelje za registraciju. Posjetitelj zatim unosi osobne podatke i nastavlja registraciju. Sustav provjerava ispravnost podataka te ih sprema u bazu podataka ako su ispravni.Posjetitelju se na kraju prikazuje poruka o uspješnoj registraciji. Ukoliko je posjetitelj unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka, posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka.
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{dijagrami/seq-dia-UC1.png}
+	\includegraphics[width=0.85\linewidth]{dijagrami/seq-dia-UC1.png}
 	\centering
 	\caption{Sekvencijski dijagram za UC1}
 	\label{fig:sequence-diagram1}
 \end{figure}
 
-\textbf{Obrazac uporabe UC7: Promjena korisničkih podataka}
+\eject
+
+\noindent \textbf{Obrazac uporabe UC7: Promjena korisničkih podataka}
 
 \noindent Korisnik odabire opciju upravljanja korisničkim računom, na što mu aplikacija dozvoljava promjenu, iz baze podataka dohvaća korisničke podatke te korisniku prikazuje sučelje za promjenu korisničkih podataka. Korisnik mijenja podatke i potom promjene potvrđuje unosom lozinke. Aplikacija provjerava točnost lozinke te ukoliko je ona ispravna i ako su novi podatci ispravni, novi podatci se spremaju u bazu podataka i korisniku se prikazuje poruka o uspješnoj promjeni podataka. Ukoliko je unesena lozinka neispravna ili ukoliko su novi podatci neispravni, korisniku se prikazuje poruka o neispravnosti unesene lozinke ili unesenih podataka.
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{dijagrami/seq-dia-UC7.png}
+	\includegraphics[width=0.9\linewidth]{dijagrami/seq-dia-UC7.png}
 	\centering
 	\caption{Sekvencijski dijagram za promjenu korisničkih podataka, UC7}
 	\label{fig:sequence-diagram1}
 \end{figure}
 
-\textbf{Obrasci uporabe UC12--UC15: Upravljanje radnim nalozima}
+\eject
+
+\noindent \textbf{Obrasci uporabe UC12--UC15: Upravljanje radnim nalozima}
 	
 \noindent Vlasnik automobila (korisnik) odabire opciju upravljanja radnim nalozima, na što mu aplikacija vraća popis radnih naloga te njihov status. Tada korisnik otvara novi radni nalog koji se sprema u bazu podataka, te se uspješno spremanje javlja korisniku. Web aplikacija osvježava listu radnih naloga koja se prikazuje korisniku. Serviser javlja aplikaciji da može raditi na radnom nalogu, te se iz baze podataka tada dohvaća lista otvorenih radnih naloga, od kojih on odabire jedan. Tom radnom nalogu mijenja se status u \textit{u obradi}, te se novi status potom ažurira u bazi podataka. Serviser tijekom servisiranja upisuje kilometražu te daje preporuku za izvanredan servis. Te podatke aplikacija ažurira u bazi podataka. Nakon što serviser u aplikaciji zatvori radni nalog, status naloga se još jednom ažurira na \textit{zatvoren} u bazi podataka.
 	
@@ -1052,14 +1056,16 @@
 		\label{fig:sequence-diagram1}
 	\end{figure}
 
+\eject
 
-\textbf{Obrasci uporabe UC11-14 i UC16: Upravljanje izvanrednim servisima}
+
+\noindent \textbf{Obrasci uporabe UC11-14 i UC16: Upravljanje izvanrednim servisima}
 
 \noindent Korisnik odabire opciju upravljanja radnim nalozima, na što mu aplikacija vraća popis radnih naloga te njihov status. Tada korisnik otvara novi radni nalog koji se sprema u bazu podataka, te se uspješno spremanje javlja korisniku. Web aplikacija osvježava listu radnih naloga koja se prikazuje korisniku. Serviser zatraži listu otvorenih naloga izvanrednog servisa te prihvaća jednog od njih. Tom se radnom nalogu mijenja status u \textit{u obradi}, te se novi status potom ažurira u bazi podataka. Serviser zatim unese opis kvarova. Ako se automobilu ugradio rezervni dio serviser ih dodaje jedan po jedan i sprema promjene u bazu, a ako je obavljena neka usluga dodaje se opis popravka. Serviser ovo radi dok god još ima popravaka za obaviti nad automobilom. Promjene se ažuriraju. Nakon što serviser u aplikaciji zatvori radni nalog, status naloga se još jednom ažurira na \textit{zatvoren} u bazi podataka.
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{dijagrami/izvanredni-dijagram}
+		\includegraphics[width=\linewidth]{dijagrami/izvanredni-dijagram}
 		\caption{Sekvencijski dijagrami tijeka izvanrednog servisa}
 		\label{fig:izvanredni-dijagram}
 	\end{figure}
