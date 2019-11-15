@@ -14,4 +14,19 @@ public class AdministratorController {
         return "admin/home";
     }
 
+    public String removeUser(Model model) {
+        return null;
+    }
+
+    public String userDetails(Model model) {
+        return null;
+    }
+
+    public String removeAutoService(Model model) {
+        return null;
+    }
+
+    public String autoServiceDetails(Model model) {
+        return null;
+    }
 }

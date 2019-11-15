@@ -1021,7 +1021,7 @@
 
 \textbf{Obrazac uporabe UC1: Registracija vlasnika automobila}
 
-\noindent Posjetitelj na početnoj stranici odabire opciju registracije. Poslužitelj dohvaća sučelje za registraciju i prikazuje ga posjetitelju. Posjetitelj zatim unosi osobne podatke i nastavlja registraciju. Sustav provjerava ispravnost podataka te ih sprema u bazu podataka ako su ispravni.Posjetitelju se na kraju prikazuje poruka o uspješnoj registraciji. Ukoliko je posjetitelj unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka, posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka.
+\noindent Posjetitelj na početnoj stranici odabire opciju registracije. Poslužitelj posjetitelju prikazuje sučelje za registraciju. Posjetitelj zatim unosi osobne podatke i nastavlja registraciju. Sustav provjerava ispravnost podataka te ih sprema u bazu podataka ako su ispravni.Posjetitelju se na kraju prikazuje poruka o uspješnoj registraciji. Ukoliko je posjetitelj unio neispravan OIB, korisničko ime ili e-mail, ili postoji registrirani korisnik s nekim od tih podataka, posjetitelju se prikazuje poruka o neispravnosti/zauzetosti podataka.
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{dijagrami/seq-dia-UC1.png}
@@ -1032,7 +1032,7 @@
 
 \textbf{Obrazac uporabe UC7: Promjena korisničkih podataka}
 
-\noindent Korisnik odabire opciju upravljanja korisničkim računom, na što mu aplikacija dozvoljava promjenu te korisniku prikazuje sučelje za promjenu korisničkih podataka. Korisnik mijenja podatke i potom promjene potvrđuje unosom lozinke. Aplikacija provjerava točnost lozinke te ukoliko je ona ispravna i ako su novi podatci ispravni, novi podatci se spremaju u bazu podataka i korisniku se prikazuje poruka o uspješnoj promjeni podataka. Ukoliko je unesena lozinka neispravna ili ukoliko su novi podatci neispravni, korisniku se prikazuje poruka o neispravnosti unesene lozinke ili unesenih podataka.
+\noindent Korisnik odabire opciju upravljanja korisničkim računom, na što mu aplikacija dozvoljava promjenu, iz baze podataka dohvaća korisničke podatke te korisniku prikazuje sučelje za promjenu korisničkih podataka. Korisnik mijenja podatke i potom promjene potvrđuje unosom lozinke. Aplikacija provjerava točnost lozinke te ukoliko je ona ispravna i ako su novi podatci ispravni, novi podatci se spremaju u bazu podataka i korisniku se prikazuje poruka o uspješnoj promjeni podataka. Ukoliko je unesena lozinka neispravna ili ukoliko su novi podatci neispravni, korisniku se prikazuje poruka o neispravnosti unesene lozinke ili unesenih podataka.
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{dijagrami/seq-dia-UC7.png}
@@ -1053,13 +1053,15 @@
 	\end{figure}
 
 
+\textbf{Obrasci uporabe UC11-14 i UC16: Upravljanje izvanrednim servisima}
 
+\noindent Korisnik odabire opciju upravljanja radnim nalozima, na što mu aplikacija vraća popis radnih naloga te njihov status. Tada korisnik otvara novi radni nalog koji se sprema u bazu podataka, te se uspješno spremanje javlja korisniku. Web aplikacija osvježava listu radnih naloga koja se prikazuje korisniku. Serviser zatraži listu otvorenih naloga izvanrednog servisa te prihvaća jednog od njih. Tom se radnom nalogu mijenja status u \textit{u obradi}, te se novi status potom ažurira u bazi podataka. Serviser zatim unese opis kvarova. Ako se automobilu ugradio rezervni dio serviser ih dodaje jedan po jedan i sprema promjene u bazu, a ako je obavljena neka usluga dodaje se opis popravka. Serviser ovo radi dok god još ima popravaka za obaviti nad automobilom. Promjene se ažuriraju. Nakon što serviser u aplikaciji zatvori radni nalog, status naloga se još jednom ažurira na \textit{zatvoren} u bazi podataka.
 
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{dijagrami/seq-dia-service2}
-		\caption{Sekvencijski dijagrami za tijek izvanrednog servisa}
-		\label{fig:seq-dia-service2}
+		\includegraphics[width=0.8\linewidth]{dijagrami/izvanredni-dijagram}
+		\caption{Sekvencijski dijagrami tijeka izvanrednog servisa}
+		\label{fig:izvanredni-dijagram}
 	\end{figure}
 
 
@@ -1069,8 +1071,6 @@
 
 \section{Ostali zahtjevi}
 
-\textbf{\textit{dio 1. revizije}}\\
-
 			 	\begin{packed_item}
 
                 \item Sustav treba biti implementiran u objektno-orijentiranom jeziku te omogućiti laku nadogradnju u slučaju potrebe
@@ -1078,7 +1078,6 @@
                 \item Korisničko sučelje mora biti responzivno te se ispravno prikazivati u preglednicima na desktop računalima i mobilnim uređajima
                 \item Sučelje za vlasnike automobila treba biti jednostavno za korištenje osobama svih dobnih skupina
                 \item Sučelje za servisere treba biti prilagođeno za uporabu u okruženju servisa i osigurati laku dostupnost svih funkcionalnosti
-%			 	\item Aplikacija mora biti pregledna te mora imati laku dostupnost raznim funkcionalnostima i sadržajima
 			 	\item Sustavu mogu istovremeno pristupiti više različitih vrsta korisnika
 			 	\item Aplikacija mora podržavati hrvatsku abecedu pri unosu podataka
 			 	\item Sustav koristi HRK kao valutu za izračun i prikaz cijena

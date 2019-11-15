@@ -14,4 +14,29 @@ public class VehicleOwnerController {
         return "user/home";
     }
 
+    // Not implemented
+    public String addVehicle(Model model) {
+        return null;
+    }
+
+    public String removeVehicle(Model model) {
+        return null;
+    }
+
+    public String vehicleStatistics(Model model) {
+        return null;
+    }
+
+    public String autoServicesList(Model model) {
+        return null;
+    }
+
+    public String openRepairOrder(Model model) {
+        return null;
+    }
+
+    public String viewRepairOrder(Model model) {
+        return null;
+    }
+
 }
