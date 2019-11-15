@@ -295,14 +295,14 @@
 			\subsection{Dijagram baze podataka}
 %				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
 				
-				\begin{figure}[h]
+				\begin{figure}
 					\centering
 					\includegraphics[width=1.0\linewidth]{dijagrami/er-diagram}
 					\caption{Relacijski model baze podataka}
 					\label{fig:er-diagram}
 				\end{figure}
 			
-			\eject
+		\eject
 			
 			
 		\section{Dijagram razreda}
@@ -317,7 +317,9 @@
 %			
 %			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
 
-
+		Na slici \ref{fig:classdiagram} je prikazan dijagram razreda koji pripadaju sloju modela. Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Njega nasljeđuje razred \textit{Administrator} koji predstavlja administratora koji ima najveće ovlasti, razred \textit{VehicleOwner} koji predstavlja registriranog vlasnika automobila te razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser ovisno ovisno o tipu (enumeracija \textit{ServiceEmployeeType}).
+		
+		Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{RepairOrder} predstavlja radni nalog za servis, te ima dva podrazreda, razred \textit{RegularRepairOrder} koji predstavlja radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji predstavlja radni nalog za izvanredni servis. Razred \textit{RepairOrderItem} predstavlja konkretnu stavku (ugrađeni rezervni dio ili obavljenu uslugu) s cijenom na izvanrednom servisu. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil, a razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu te oni pripadaju određenom autoservisu te predstavljaju stavke koje se mogu dodati na radne naloge izvanrednog servisa.
 		
 		\begin{figure}[H]
 			\centering
@@ -326,7 +328,9 @@
 			\label{fig:classdiagram}
 		\end{figure}
 	
-		Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Razred \textit{Administrator} predstavlja administratora koji nakon registracije ima najveće ovlasti. Razred \textit{VehicleOwner} predstavlja registriranog vlasnika automobila. Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser koji radi na automobilima. Razred \textit{RepairOrder} predstavlja radni nalog za servis. On ima dva podrazreda, razred \textit{RegularRepairOrder} koji označava radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji označava radni nalog za izvanredni servis. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil. Razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu. Razred \textit{RepairOrderItem} označava dio automobila koji je ugrađen.
+		Na slici \ref{fig:classdiagramctrl} dijagramom su prikazani ostali razredi. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije, dok razred \textit{MockDataInitialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{SpringCurrentUser}.
+		
+		Razred \textit{MainController} pripada sloju nadglednika te nudi operacije povezane s prikaznom početne stranice te registraciju. Razredi \textit{AdministratorController}, \textit{VehicleOwnerController} te \textit{AutoServiceController} nude operacije povezane s tipom korisnika koji će koristiti aplikaciju.
 		
 		\begin{figure}[H]
 			\centering
