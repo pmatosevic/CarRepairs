@@ -816,7 +816,25 @@
 	\end{packed_enum}
 \end{packed_item}
 
-\noindent \underbar{\textbf{UC27 -Dodavanje servisera}}
+\noindent \underbar{\textbf{UC27 -Pregled statistike autoservisa}}
+\begin{packed_item}
+	
+	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
+	\item  \textbf{Cilj:} Pregled statističkih podataka autoservisa
+	\item  \textbf{Sudionici:} Baza podataka
+	\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodijeljeno
+	mu je pravo vlasnika autoservisa
+	\item  \textbf{Opis osnovnog tijeka:}
+	
+	\item[] \begin{packed_enum}
+		
+		\item Vlasnik autoservisa odabire opciju pregleda statistike
+		\item Vlasnik autoservisa se prikazuju različiti statistički podaci o radu servisa (zarada, broj popravljanih automobila i ostalo)
+		
+	\end{packed_enum}
+\end{packed_item}
+
+\noindent \underbar{\textbf{UC28 -Dodavanje servisera}}
 \begin{packed_item}
 
 	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
@@ -847,7 +865,7 @@
 
 \end{packed_item}
 
-\noindent \underbar{\textbf{UC28 -Uklanjanje servisera}}
+\noindent \underbar{\textbf{UC29 -Uklanjanje servisera}}
 \begin{packed_item}
 
 	\item \textbf{Glavni sudionik: } Vlasnik autoservisa
@@ -868,7 +886,7 @@
 \end{packed_item}
 
 
-\noindent \underbar{\textbf{UC29 -Pregled podataka
+\noindent \underbar{\textbf{UC30 -Pregled podataka
 		korisničkog računa}}
 \begin{packed_item}
 
@@ -890,7 +908,7 @@
 	\end{packed_enum}
 \end{packed_item}
 
-\noindent \underbar{\textbf{UC30 -Brisanje korisničkog
+\noindent \underbar{\textbf{UC31 -Brisanje korisničkog
 		računa}}
 \begin{packed_item}
 
@@ -912,7 +930,7 @@
 	\end{packed_enum}
 \end{packed_item}
 
-\noindent \underbar{\textbf{UC31 - Brisanje autoservisa }}
+\noindent \underbar{\textbf{UC32 - Brisanje autoservisa }}
 \begin{packed_item}
 
 	\item \textbf{Glavni sudionik: } Administrator
@@ -930,7 +948,7 @@
 	\end{packed_enum}
 \end{packed_item}
 
-	\noindent \underbar{\textbf{UC32 -Pregled podataka autoservisa}}
+	\noindent \underbar{\textbf{UC33 -Pregled podataka i statistike autoservisa}}
 \begin{packed_item}
 
 	\item \textbf{Glavni sudionik: } Administrator
@@ -944,7 +962,7 @@
 		\item Administrator odabere opciju upravljanja autoservisima
 		\item Sustav prikaže listu autoservisa
 		\item Administrator odabire autoservis čije podatke želi pregledati
-		\item Administratoru se prikazuju podaci o autoservisu dohvaćeni iz baze podataka
+		\item Administratoru se prikazuju osnovni i statistički podaci o autoservisu dohvaćeni iz baze podataka
 
 	\end{packed_enum}
 \end{packed_item}
@@ -1065,7 +1083,7 @@
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=\linewidth]{dijagrami/izvanredni-dijagram}
+		\includegraphics[width=\linewidth]{dijagrami/seq-dia-service2}
 		\caption{Sekvencijski dijagrami tijeka izvanrednog servisa}
 		\label{fig:izvanredni-dijagram}
 	\end{figure}
