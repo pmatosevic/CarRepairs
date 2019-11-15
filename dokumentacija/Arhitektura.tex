@@ -42,13 +42,15 @@
 		Arhitektura aplikacije se može podijeliti i na \textit{backend} i \textit{frontend} sloj. \textit{Backend} sloj izvršavat će se na poslužitelju (i biti ravijen po \textit{MVC} obrascu) te će rezultat obrade klijentskih zahtjeva biti grafički prikaz stranice. Takav prikaz u jezicima \textit{HTML}, \textit{CSS} i \textit{JavaScript} se šalje klijentu i predstavlja \textit{frontend} sloj.
 		
 		Prema pogledu korisnika (aktora) koji će koristiti sustav, on se može podijeliti na tri manja podsustava što je vidljivo na slici \ref{fig:arhitektura1}:
-		\begin{itemize}
+		\begin{packed_item}
 			\item Aplikacija za vlasnike automobila
 			\item Aplikacija za autoservise
 			\item Aplikacija za administraciju 
-		\end{itemize}
+		\end{packed_item}
 	
-		Sustav će biti implementiran u programskom jeziku \textit{Java} korištenjem \textit{Spring} okvira uz potrebna proširenja. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac Model-pogled-nadglednik. Uz to, slijedi princip inverzije ovisnosti koji će olakšati kasnije nadogradnje i promjene smanjivanjem ovisnosti te nudi gotovu implementaciju različitih protokola i automatsku postavljanje autentifikacije. Time će se ubrzati razvoj, a dodatno će se uz njega koristiti i okvir za pristup podacima \textit{Spring JPA}.
+		Sustav će biti implementiran u programskom jeziku \textit{Java} korištenjem \textit{Spring} okvira uz potrebna proširenja. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac Model-pogled-nadglednik. Uz to, slijedi princip inverzije ovisnosti koji će olakšati kasnije nadogradnje i promjene smanjivanjem ovisnosti te nudi gotovu implementaciju različitih protokola i automatsku postavljanje autentifikacije. Time će se ubrzati razvoj, a dodatno će se uz njega koristiti i okvir za pristup podacima \textit{Spring JPA} te okvir \textit{Thymeleaf} namijenjen generiranju \textit{HTML} koda iz definiranih predložaka.
+		
+		\eject
 
 		
 
