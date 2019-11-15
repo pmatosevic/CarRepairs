@@ -24,11 +24,11 @@
 		Kao tip arhitekture uzet će se objektno usmjerena arhitektura budući da najbolje odgovara razvoju složene višekorisničke aplikacije. 
 		
 		Pri razvoju će se pratiti Model-pogled-nadglednik obrazac (engl. \textit{MVC: Model-View-Controller}) prikazan na slici \ref{fig:mvc} koji dijeli sustav na tri komponente:
-		\begin{itemize}
+		\begin{packed_item}
 			\item Model - komponenta koja je zadužena za upravljanje podacima te uključuje sve razrede čiji se podaci obrađuju
 			\item Pogled - komponenta koja služi za prikaz podataka (modela) korisniku
 			\item Nadglednik - komponenta koja prima i obrađuju korisničke zahtjeve na način da dohvaća, provjerava i mijenja podatke u modelu te ih šalje pogledu za prikaz
-		\end{itemize}
+		\end{packed_item}
 		
 		\begin{figure}[h]
 			\centering
@@ -48,7 +48,7 @@
 			\item Aplikacija za administraciju 
 		\end{packed_item}
 	
-		Sustav će biti implementiran u programskom jeziku \textit{Java} korištenjem \textit{Spring} okvira uz potrebna proširenja. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac Model-pogled-nadglednik. Uz to, slijedi princip inverzije ovisnosti koji će olakšati kasnije nadogradnje i promjene smanjivanjem ovisnosti te nudi gotovu implementaciju različitih protokola i automatsku postavljanje autentifikacije. Time će se ubrzati razvoj, a dodatno će se uz njega koristiti i okvir za pristup podacima \textit{Spring JPA} te okvir \textit{Thymeleaf} namijenjen generiranju \textit{HTML} koda iz definiranih predložaka.
+		Sustav će biti implementiran u programskom jeziku \textit{Java} korištenjem \textit{Spring} okvira uz potrebna proširenja. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac Model-pogled-nadglednik. Uz to, slijedi princip inverzije ovisnosti koji će olakšati kasnije nadogradnje i promjene smanjivanjem ovisnosti te nudi gotovu implementaciju različitih protokola i automatsku postavljanje autentikacije. Time će se ubrzati razvoj, a dodatno će se uz njega koristiti i okvir za pristup podacima \textit{Spring JPA} te okvir \textit{Thymeleaf} namijenjen generiranju \textit{HTML} koda iz definiranih predložaka.
 		
 		\eject
 
@@ -330,7 +330,7 @@
 	
 		Na slici \ref{fig:classdiagramctrl} dijagramom su prikazani ostali razredi. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije, dok razred \textit{MockDataInitialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{SpringCurrentUser}.
 		
-		Razred \textit{MainController} pripada sloju nadglednika te nudi operacije povezane s prikaznom početne stranice te registraciju. Razredi \textit{AdministratorController}, \textit{VehicleOwnerController} te \textit{AutoServiceController} nude operacije povezane s tipom korisnika koji će koristiti aplikaciju i sve metode u njima su prikazane samo idejno, odnosno jedine nisu implementirane.
+		Razred \textit{MainController} pripada sloju nadglednika te nudi operacije povezane s prikaznom početne stranice te registraciju. Razredi \textit{AdministratorController}, \textit{VehicleOwnerController} te \textit{AutoServiceController} nude operacije povezane s tipom korisnika koji će koristiti aplikaciju i sve metode u njima su prikazane samo idejno, i jedine nisu implementirane.
 		
 		\begin{figure}[H]
 			\centering
