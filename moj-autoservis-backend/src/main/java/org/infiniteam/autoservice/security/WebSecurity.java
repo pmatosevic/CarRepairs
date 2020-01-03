@@ -12,8 +12,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/appLogin")
-                .loginProcessingUrl("/appLogin")
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler((request, response, authentication) -> response.setStatus(200))
