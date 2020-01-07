@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -117,6 +118,7 @@ public class VehicleOwnerController {
                 new RegularRepairOrder() : new RepairingRepairOrder();
         repairOrder.setAutoService(as.get());
         repairOrder.setVehicle(vehicle);
+        repairOrder.setCreationTime(LocalDateTime.now());
         repairOrderRepository.saveAndFlush(repairOrder);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("");
@@ -128,7 +130,7 @@ public class VehicleOwnerController {
     }
 
     private void checkVehicleRights(Vehicle vehicle) {
-        if (vehicle.getOwner().getUserId() != getCurrentUser().getUserId()) {
+        if (!vehicle.getOwner().getUserId().equals(getCurrentUser().getUserId())) {
             throw new AccessDeniedException("Forbidden");
         }
     }

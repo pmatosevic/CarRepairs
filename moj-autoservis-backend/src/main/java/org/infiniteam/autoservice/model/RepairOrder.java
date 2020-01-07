@@ -1,6 +1,7 @@
 package org.infiniteam.autoservice.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,6 +21,12 @@ public abstract class RepairOrder {
 
     @Column
     private Double price;
+
+    @Column
+    private LocalDateTime creationTime;
+
+    @Column
+    private LocalDateTime finishTime;
 
     public Long getRepairOrderId() {
         return repairOrderId;
@@ -59,5 +66,21 @@ public abstract class RepairOrder {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public LocalDateTime getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(LocalDateTime finishTime) {
+        this.finishTime = finishTime;
     }
 }
