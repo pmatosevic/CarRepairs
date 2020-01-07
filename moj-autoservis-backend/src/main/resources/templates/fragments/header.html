@@ -22,8 +22,16 @@
                 <li th:if="${#authorization.expression('!isAuthenticated()')}">
                     <a class="nav-link" href="/login" th:href="@{/login}">Prijava</a>
                 </li>
-                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <!--<li th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link" href="/logout" th:href="@{#}" onclick="$('#form').submit();">Odjava</a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>-->
+                <li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link dropdown-toggle" href="#" th:href="@{#}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ime Prezime</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/logout" th:href="@{#}" onclick="$('#form').submit();">Odjava</a>
+                        <a class="dropdown-item" href="/settings">Postavke</a>
+                    </div>
                     <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
                 </li>
             </ul>
