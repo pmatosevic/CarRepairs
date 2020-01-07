@@ -48,7 +48,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${vehicle.vehicleModel}">Model auta</h5>
                         <p class="card-text" th:text="${vehicle.licencePlate}">Registracija</p>
-                        <a href="#" class="btn btn-primary">Detalji</a>
+                        <a href="#" class="btn btn-primary" th:href="'/user/vehicles/' + ${vehicle.vehicleId}">Detalji</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 package org.infiniteam.autoservice;
 
 import org.infiniteam.autoservice.model.*;
+import org.infiniteam.autoservice.repository.AutoServiceRepository;
 import org.infiniteam.autoservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -15,6 +16,9 @@ public class Initialization {
     private UserRepository userRepository;
 
     @Autowired
+    private AutoServiceRepository autoServiceRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @EventListener
@@ -23,21 +27,29 @@ public class Initialization {
         user.setUsername("user1");
         user.setPasswordHash(passwordEncoder.encode("user1"));
 
+        AutoService autoService = new AutoService();
+        autoService.setShopName("Najbolji auto servis");
+        autoService.setAddress("Adresa");
+        autoService.setOib("123456789");
+
         ServiceEmployee employee = new ServiceEmployee();
         employee.setUsername("employee");
         employee.setPasswordHash(passwordEncoder.encode("employee"));
         employee.setEmployeeType(ServiceEmployeeType.REGULAR_EMPLOYEE);
+        employee.setAutoService(autoService);
 
         ServiceEmployee boss = new ServiceEmployee();
         boss.setUsername("boss");
         boss.setPasswordHash(passwordEncoder.encode("boss"));
         boss.setEmployeeType(ServiceEmployeeType.SERVICE_ADMINISTRATOR);
+        boss.setAutoService(autoService);
 
         Administrator admin = new Administrator();
         admin.setUsername("admin");
         admin.setPasswordHash(passwordEncoder.encode("admin"));
 
         try {
+            autoServiceRepository.save(autoService);
             userRepository.save(user);
             userRepository.save(employee);
             userRepository.save(boss);
