@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Moj AutoServis</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row-mb-2">
+        <h1>
+            Dobrodošao, serviseru!
+        </h1>
+    </div>
+
+    <div class="row" justify-content-center>
+
+        <div class="col-2"> <! navigation>
+            <div class="row">
+
+                <div class="col"> <! page navigation >
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Početna</a>
+                        <a class="nav-link" id="v-pills-open-tab" data-toggle="pill" href="" role="tab" aria-controls="v-pills-profile" aria-selected="false">Otvoreni nalozi</a>
+                        <a class="nav-link" id="v-pills-progress-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Prihvaćeni nalozi</a>
+
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-open" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-progress" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-6">  <! list of service orders>
+
+            <div class="row"> <! one service order>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Radni nalog 1</h5>
+                            <p class="card-text">Osnovni podatci o radnom nalogu.</p>
+                            <a href="#" class="btn btn-primary">Detalji</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Radni nalog 2</h5>
+                            <p class="card-text">Osnovni podatci o radnom nalogu.</p>
+                            <a href="#" class="btn btn-primary">Detalji</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">  <! detalji se otvore kada se klikne na gumb detalji određenog radnog naloga>
+            <p><h3>Naziv radnog naloga</h3></p>
+            <p>
+                <div class="row">
+                    <div class="col">Vlasnik:</div>
+                    <div class="col">Ivo Ivić</div>
+                </div>
+                <div class="row">
+                    <div class="col">Automobil:</div>
+                    <div class="col">Audi A1</div>
+                </div>
+                <div class="row">
+                    <div class="col">Datum:</div>
+                    <div class="col">7.1.2020.</div>
+                </div>
+                <div class="row">
+                    <div class="col">Kilometraža:</div>
+                    <div class="col">75 000 km</div>
+                </div>
+                <div class="row">
+                    <div class="col">Preporuka za izvanredan servis:</div>
+                    <div class="col">DA</div>
+                </div>
+                <div class="row">
+                    <div class="col">Status naloga:</div>
+                    <div class="col">Otvoren</div>
+                </div>
+            </p>
+
+            <div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Promijeni</button>
+                <button type="button" class="btn btn-success">Završi</button>
+                <button type="button" class="btn btn-danger">Izbriši</button>
+            </div>
+        </div>
+    </div>
+
+    <! meni za promjene za redovni servis >
+    <div class="modal" id= "exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Naziv radnog naloga</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <! input za promjenu >
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Kilometraža" aria-label="Kilometraža" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Napomene</span>
+                        </div>
+                        <textarea class="form-control" aria-label="Napomene"></textarea>
+                    </div>
+                    <p>
+                        <div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="checkbox" checked autocomplete="off"> Preporuka za izvanredni servis
+                            </label>
+                        </div>
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Spremi</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <! modal za izvanredni servis >
+    <div class="modal" id= "exampleModal2" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Naziv radnog naloga</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <! input za promjenu >
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Kilometraža" aria-label="Kilometraža" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Napomene</span>
+                        </div>
+                        <textarea class="form-control" aria-label="Napomene"></textarea>
+                    </div>
+                    <p>
+                    <div class="btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="checkbox" checked autocomplete="off"> Preporuka za izvanredni servis
+                        </label>
+                    </div>
+                    </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Spremi</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
