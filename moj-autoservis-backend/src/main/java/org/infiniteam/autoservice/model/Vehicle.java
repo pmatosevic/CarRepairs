@@ -64,9 +64,10 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(VehicleData vehicleData) {
+    public Vehicle(VehicleData vehicleData, VehicleOwner owner) {
         this.licencePlate = vehicleData.getLicencePlate();
         this.vinNumber = vehicleData.getVinNumber();
         this.vehicleModel = vehicleData.getModel();
+        this.owner = owner;
     }
 }

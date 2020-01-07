@@ -17,15 +17,17 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#addVehicle').click(function () {
-            const regPlate = $('#vehiclePlate').innerText;
+            const regPlate = $('#vehiclePlate').val();
             $.ajax({
                 method: "POST",
                 url: "/user/vehicles",
+                dataType: "text",
                 data: regPlate,
                 success: data => {
                     location.reload();
                 },
-                error: data => {
+                error: response => {
+                    $('#alert-msg').text(response.responseText);
                     $('.alert').show();
                 }
             });
@@ -56,7 +58,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
-                        Ne postoji vozilo s tim registracijskim tablicama!
+                        <span id="alert-msg"></span>
                         <button type="button" class="close" onclick="$('.alert').hide()">
                             <span aria-hidden="true">&times;</span>
                         </button>

@@ -3,7 +3,6 @@ package org.infiniteam.autoservice.controller;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.repository.RepairOrderRepository;
 import org.infiniteam.autoservice.security.CurrentUser;
-import org.infiniteam.autoservice.service.RepairOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -11,16 +10,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.List;
 
 @Controller
 @Secured("ROLE_SERVICE_EMPLOYEE")
 public class AutoServiceController {
-
-    @Autowired
-    private RepairOrderService repairOrderService;
 
     @Autowired
     private RepairOrderRepository repairOrderRepository;
