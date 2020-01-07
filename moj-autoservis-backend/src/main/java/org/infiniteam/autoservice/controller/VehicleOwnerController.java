@@ -1,9 +1,11 @@
 package org.infiniteam.autoservice.controller;
 
+import org.hibernate.Hibernate;
 import org.infiniteam.autoservice.model.AppUser;
 import org.infiniteam.autoservice.model.ServiceEmployee;
 import org.infiniteam.autoservice.model.Vehicle;
 import org.infiniteam.autoservice.model.VehicleOwner;
+import org.infiniteam.autoservice.repository.UserRepository;
 import org.infiniteam.autoservice.repository.VehicleRepository;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.service.HuoService;
@@ -27,15 +29,19 @@ import javax.transaction.Transactional;
 public class VehicleOwnerController {
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private VehicleRepository vehicleRepository;
 
     @Autowired
     private HuoService huoService;
 
     @GetMapping("/user")
+    @Transactional
     public String carOwnerHome(Model model) {
         VehicleOwner user = getCurrentUser();
-        model.addAttribute("vehicles", user.getVehicles());
+        model.addAttribute("vehicles", vehicleRepository.findAllByOwner(user));
         return "user/home";
     }
 

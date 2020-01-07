@@ -21,7 +21,7 @@
             $.ajax({
                 method: "POST",
                 url: "/user/vehicles",
-                dataType: "text",
+                contentType: 'text/plain',
                 data: regPlate,
                 success: data => {
                     location.reload();
@@ -39,14 +39,23 @@
 
 <main role="main" class="container">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Dodaj novi</button>
-    <table class="table">
-        <thead>
 
-        </thead>
-        <tbody>
 
-        </tbody>
-    </table>
+    <div class="col-6">
+        <div class="row" th:each="vehicle : ${vehicles}">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${vehicle.vehicleModel}">Model auta</h5>
+                        <p class="card-text" th:text="${vehicle.licencePlate}">Registracija</p>
+                        <a href="#" class="btn btn-primary">Detalji</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
