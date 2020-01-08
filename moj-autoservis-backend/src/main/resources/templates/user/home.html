@@ -36,7 +36,78 @@
 <div th:replace="~{fragments/header :: header}">Header</div>
 
 <main role="main" class="container">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Dodaj novi</button>
+
+    <div class="row-mb-2">
+        <h1>
+            Dobrodošao, ime_korisnika!
+        </h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3"> <! tabovi>
+                <div class="col"> <! navigation>
+                    <div class="row">
+
+                        <div class="col"> <! page navigation >
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Moji automobili</a>
+                                <a class="nav-link" id="v-pills-open-tab" data-toggle="pill" href="" role="tab" aria-controls="v-pills-profile" aria-selected="false">Moji radni nalozi</a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-open" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col"> <! podatci>
+                <p>
+                    <div class="card">
+                        <div class="card-header">
+                            ZG 0602 AB
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Audi A1</h5>
+                            <p class="card-text">Godina: 2019</p>
+                            <p class="card-text">Broj šasije: 653212346789076987</p>
+                            <p class="card-text">Status: Potreban redovan servis!</p>
+                            <a href="#" class="btn btn-primary">Statistika</a>
+                            <a href="#" class="btn btn-danger">Obriši</a>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <div class="card">
+                        <div class="card-header">
+                            ZG 1999 BA
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">BMW i8</h5>
+                            <p class="card-text">Godina: 2019</p>
+                            <p class="card-text">Broj šasije: 12345678900987654321</p>
+                            <p class="card-text">Status: Potreban izvanredni servis!</p>
+                            <a href="#" class="btn btn-primary">Statistika</a>
+                            <a href="#" class="btn btn-danger">Obriši</a>
+                        </div>
+                    </div>
+                </p>
+            </div>
+
+            <div class="col-2"> <! gumbi za upravljanje>
+                <p><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Dodaj automobil</button></p>
+                <p><button type="button" class="btn btn-info" data-toggle="modal" data-target="#serviceOrderModal">Dodaj nalog</button></p>
+                <p><button type="button" class="btn btn-info" data-toggle="modal" data-target="">Postavke računa</button></p>
+            </div>
+        </div>
+    </div>
+
     <table class="table">
         <thead>
 
@@ -45,6 +116,29 @@
 
         </tbody>
     </table>
+
+    <! izbornik za dodavanje novog radnog naloga >
+    <div class="modal fade" id="serviceOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="serviceOrderModalTitle">Dodaj novi radni nalog</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <! izbornik za dodavanje automobila >
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
