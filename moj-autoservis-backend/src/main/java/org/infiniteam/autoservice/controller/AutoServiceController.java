@@ -1,7 +1,7 @@
 package org.infiniteam.autoservice.controller;
 
 import org.infiniteam.autoservice.model.*;
-import org.infiniteam.autoservice.repository.RepairOrderRepository;
+import org.infiniteam.autoservice.repository.*;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,21 @@ public class AutoServiceController {
 
     @Autowired
     private RepairOrderRepository repairOrderRepository;
+
+    @Autowired
+    private VehiclePartRepository vehiclePartRepository;
+
+    @Autowired
+    private ServiceLaborRepository serviceLaborRepository;
+
+    @Autowired
+    private ServiceEmployeeRepository serviceEmployeeRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/autoservice")
     public String autoserviceHome(Model model) {
@@ -58,22 +74,88 @@ public class AutoServiceController {
             return "autoservice/editRegularRo";
         } else if (repairOrder instanceof RepairingRepairOrder) {
             return "autoservice/editRepairingRo";
+        } else {
+            throw new RuntimeException("Not implemented.");
         }
-        throw new RuntimeException("RO type not implemented.");
+    }
+
+    @GetMapping("/autoservice/priceList")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String showPriceList(Model model) {
+        List<VehiclePart> parts = vehiclePartRepository.findAll();
+        List<ServiceLabor> labors = serviceLaborRepository.findAll();
+        model.addAttribute("parts", parts);
+        model.addAttribute("labors", labors);
+        return "autoservice/priceList";
+    }
+
+    @PostMapping("/autoservice/priceList/parts")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String updateVehiclePart(@RequestParam String partName, @RequestParam int estimatedDuration,
+                                    @RequestParam double price, @RequestParam Long id) {
+        VehiclePart part;
+        if (id != null && id != -1) {
+            part = vehiclePartRepository.findById(id).get();
+            checkAutoServiceAccess(part.getAutoService());
+        } else {
+            part = new VehiclePart();
+            part.setAutoService(getUserAutoService());
+        }
+        part.setEstimatedDurationInKm(estimatedDuration);
+        part.setPrice(price);
+        part.setPartName(partName);
+        vehiclePartRepository.save(part);
+        return "redirect:/autoservice/priceList";
+    }
+
+    @PostMapping("/autoservice/priceList/labors")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String updateServiceLabor() {
+        return "redirect:/autoservice/priceList";
+    }
+
+    @GetMapping("/autoservice/employees")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String autoserviceEmployees(Model model) {
+        List<ServiceEmployee> employees = serviceEmployeeRepository.findAll();
+        model.addAttribute("employees", employees);
+        return "autoservice/employees";
+    }
+
+    @PostMapping("/autoservice/employees")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public ResponseEntity<?> addEmployee(@RequestParam String username, @RequestParam String password,
+                                         @RequestParam String firstName, @RequestParam String lastName) {
+        if (userRepository.existsByUsername(username)) {
+            return ResponseEntity.badRequest().body("Korisničko ime je zauzeto");
+        }
+        if (username.isBlank() || password.isBlank() || firstName.isBlank() || lastName.isBlank()) {
+            return ResponseEntity.badRequest().body("Nisu popunjena sva polja");
+        }
+
+        ServiceEmployee employee = new ServiceEmployee();
+        employee.setUsername(username);
+        employee.setPasswordHash(passwordEncoder.encode(password));
+        employee.setFirstName(firstName);
+        employee.setLastName(lastName);
+        employee.setAutoService(getUserAutoService());
+        serviceEmployeeRepository.save(employee);
+        return ResponseEntity.status(HttpStatus.CREATED).body("");
+    }
+
+    @PostMapping("/autoservice/employees/delete")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String removeEmployee(@RequestParam String username) {
+        Optional<ServiceEmployee> employeeOptional = serviceEmployeeRepository.findByUsername(username);
+        if (employeeOptional.isEmpty()) throw new ResourceNotFoundException();
+
+        ServiceEmployee employee = employeeOptional.get();
+        serviceEmployeeRepository.delete(employee);
+        return "redirect:/autoservice/employees";
     }
 
     @GetMapping("/autoservice/closed")
     public String closedRepairOrders(Model model) {
-        return null;
-    }
-
-    @GetMapping("/autoservice/employees")
-    public String autoserviceEmployees(Model model) {
-        return null;
-    }
-
-    @PostMapping("/autoservice/employees")
-    public String addEmployee(@RequestBody Object dto) {
         return null;
     }
 
@@ -102,6 +184,12 @@ public class AutoServiceController {
 
     private void checkRepairOrderAccess(RepairOrder repairOrder) {
         if (!repairOrder.getAutoService().getAutoServiceId().equals(getUserAutoService().getAutoServiceId())) {
+            throw new AccessDeniedException("Forbidden");
+        }
+    }
+
+    private void checkAutoServiceAccess(AutoService autoService) {
+        if (!getUserAutoService().getAutoServiceId().equals(autoService.getAutoServiceId())) {
             throw new AccessDeniedException("Forbidden");
         }
     }

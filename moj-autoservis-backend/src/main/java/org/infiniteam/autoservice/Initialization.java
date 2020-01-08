@@ -25,6 +25,8 @@ public class Initialization {
     public void appReady(ApplicationReadyEvent e) {
         VehicleOwner user = new VehicleOwner();
         user.setUsername("user1");
+        user.setFirstName("Pero");
+        user.setLastName("Perić");
         user.setPasswordHash(passwordEncoder.encode("user1"));
 
         AutoService autoService = new AutoService();
@@ -34,18 +36,24 @@ public class Initialization {
 
         ServiceEmployee employee = new ServiceEmployee();
         employee.setUsername("employee");
+        employee.setFirstName("Pero");
+        employee.setLastName("Perić");
         employee.setPasswordHash(passwordEncoder.encode("employee"));
         employee.setEmployeeType(ServiceEmployeeType.REGULAR_EMPLOYEE);
         employee.setAutoService(autoService);
 
         ServiceEmployee boss = new ServiceEmployee();
         boss.setUsername("boss");
+        boss.setFirstName("Pero");
+        boss.setLastName("Perić");
         boss.setPasswordHash(passwordEncoder.encode("boss"));
         boss.setEmployeeType(ServiceEmployeeType.SERVICE_ADMINISTRATOR);
         boss.setAutoService(autoService);
 
         Administrator admin = new Administrator();
         admin.setUsername("admin");
+        admin.setFirstName("Pero");
+        admin.setLastName("Perić");
         admin.setPasswordHash(passwordEncoder.encode("admin"));
 
         try {
