@@ -89,12 +89,20 @@ public class AutoServiceController {
         return "autoservice/priceList";
     }
 
+    @GetMapping("/autoservice/priceList/parts/{id}")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String vehiclePartModal(@PathVariable Long id, Model model) {
+        VehiclePart part = id == 0 ? new VehiclePart() : vehiclePartRepository.findById(id).get();
+        model.addAttribute("part", part);
+        return "/autoservice/vehiclePartModal :: content";
+    }
+
     @PostMapping("/autoservice/priceList/parts")
     @Secured("ROLE_SERVICE_ADMIN")
     public String updateVehiclePart(@RequestParam String partName, @RequestParam int estimatedDuration,
                                     @RequestParam double price, @RequestParam Long id) {
         VehiclePart part;
-        if (id != null && id != -1) {
+        if (id != null && id != 0) {
             part = vehiclePartRepository.findById(id).get();
             checkAutoServiceAccess(part.getAutoService());
         } else {
@@ -108,9 +116,29 @@ public class AutoServiceController {
         return "redirect:/autoservice/priceList";
     }
 
+    @GetMapping("/autoservice/priceList/labors/{id}")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String serviceLaborModal(@PathVariable Long id, Model model) {
+        ServiceLabor labor = id == 0 ? new ServiceLabor() : serviceLaborRepository.findById(id).get();
+        model.addAttribute("labor", labor);
+        return "/autoservice/serviceLaborModal :: content";
+    }
+
     @PostMapping("/autoservice/priceList/labors")
     @Secured("ROLE_SERVICE_ADMIN")
-    public String updateServiceLabor() {
+    public String updateServiceLabor(@RequestParam String serviceName,
+                                     @RequestParam double price, @RequestParam Long id) {
+        ServiceLabor serviceLabor;
+        if (id != null && id != 0) {
+            serviceLabor = serviceLaborRepository.findById(id).get();
+            checkAutoServiceAccess(serviceLabor.getAutoService());
+        } else {
+            serviceLabor = new ServiceLabor();
+            serviceLabor.setAutoService(getUserAutoService());
+        }
+        serviceLabor.setServiceName(serviceName);
+        serviceLabor.setPrice(price);
+        serviceLaborRepository.save(serviceLabor);
         return "redirect:/autoservice/priceList";
     }
 

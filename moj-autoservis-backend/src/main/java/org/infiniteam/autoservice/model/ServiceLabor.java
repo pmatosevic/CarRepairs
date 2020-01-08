@@ -12,7 +12,7 @@ public class ServiceLabor {
     private AutoService autoService;
 
     @Column(nullable = false)
-    private String serviceName;
+    private String serviceName = "";
 
     @Column(nullable = false)
     private double price;

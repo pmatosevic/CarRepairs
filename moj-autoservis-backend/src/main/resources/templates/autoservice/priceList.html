@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Cjenik auto servisa</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+    function editPart(id) {
+        const url = window.location.pathname + "/parts/" + id;
+        $("#modal").load(url, "", () => {
+            $('#modal').modal('show');
+        })
+    }
+
+    function editLabor(id) {
+        const url = window.location.pathname + "/labors/" + id;
+        $("#modal").load(url, "", () => {
+            $('#modal').modal('show');
+        })
+    }
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <h5>Rezervni dijelovi</h5>
+    <button type="button" class="btn btn-success" onclick="editPart(0);">Dodaj rezervni dio</button>
+    <table class="table">
+        <thead>
+            <td>Naziv</td>
+            <td>Predviđena kilometraža</td>
+            <td>Cijena</td>
+            <td>Akcija</td>
+        </thead>
+        <tbody>
+        <tr th:each="part : ${parts}" data-id="${ro.id}">
+            <td th:text="${part.partName}">Disk kočnice</td>
+            <td th:text="${part.estimatedDurationInKm} + ' km'">100 000 km</td>
+            <td th:text="${part.price} + ' kn'">1000 kn</td>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="editPart(this.dataset.id);" th:attr="data-id=${part.partId}">Uredi</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h5>Usluge</h5>
+    <button type="button" class="btn btn-success" onclick="editLabor(0);">Dodaj rezervni dio</button>
+    <table class="table">
+        <thead>
+        <td>Opis</td>
+        <td>Cijena</td>
+        <td>Akcija</td>
+        </thead>
+        <tbody>
+        <tr th:each="labor : ${labors}" data-id="${ro.id}">
+            <td th:text="${labor.serviceName}">Zamjena ulja</td>
+            <td th:text="${labor.price} + ' kn'">1000 kn</td>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="editLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Uredi</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+    </div>
+</main>
+<!-- /.container -->
+</body>
+</html>
