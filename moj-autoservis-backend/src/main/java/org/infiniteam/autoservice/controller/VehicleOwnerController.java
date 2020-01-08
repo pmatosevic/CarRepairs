@@ -68,6 +68,21 @@ public class VehicleOwnerController {
         return "user/vehicle";
     }
 
+    @GetMapping("/user/vehicles/{id}/ro/{roId}")
+    @Transactional
+    public String repairOrderDetails(@PathVariable Long id, @PathVariable Long roId, Model model) {
+        RepairOrder ro = repairOrderRepository.findById(roId).get();
+        checkVehicleRights(ro.getVehicle());
+
+        if (ro instanceof RegularRepairOrder) {
+            return "user/regularRoModal :: content";
+        } else if (ro instanceof RepairingRepairOrder) {
+            return "user/repairingRoModal :: content";
+        } else {
+            throw new RuntimeException("Broken application.");
+        }
+    }
+
     @PostMapping("/user/vehicles")
     @Transactional
     public ResponseEntity<?> addVehicle(@RequestBody String licencePlate) {
