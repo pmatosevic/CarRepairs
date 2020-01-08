@@ -7,7 +7,6 @@ import org.infiniteam.autoservice.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -44,17 +43,17 @@ public class MainController {
             CurrentUser user = (CurrentUser) token.getPrincipal();
             return "redirect:" + redirects.get(user.getAppUser().getClass());
         }
-        return "home";
+        return "home/home";
     }
 
     @GetMapping("/login")
     public String login(HttpServletRequest request, Model model) {
-        return "login";
+        return "home/login";
     }
 
     @GetMapping("/register/user")
     public String registrationFormUser(Model model){
-        return "user/registration";
+        return "home/userRegistration";
     }
 
     @PostMapping("/register/user")
@@ -79,7 +78,7 @@ public class MainController {
 
     @GetMapping("/register/autoservice")
     public String registrationFormAutoService(Model model){
-        return "autoservice/registration";
+        return "home/autoserviceRegistration";
     }
 
     @PostMapping("/register/autoservice")

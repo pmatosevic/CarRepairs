@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title,links)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:replace="${title}">Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <!-- Common styles and scripts -->
+<!--    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/test.css}">-->
+<!--    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">-->
+<!--    <script type="text/javascript" th:src="@{/js/script.js}"></script>-->
+
+    <!--/* Per-page placeholder for additional links */-->
+    <th:block th:replace="${links}" />
+
+    </head>
+<body>
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-md" th:fragment="header">
+    <div class="container">
+        <a class="navbar-brand" href="#" th:href="@{/}">Moj AutoServis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLeft" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarLeft">
+            <ul class="navbar-nav mr-auto">
+<!--                <li class="nav-item" th:classappend="${module == 'home' ? 'active' : ''}" th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <a class="nav-link" href="#" th:href="@{/}">Home</a>-->
+<!--                </li>-->
+            </ul>
+            <ul class="navbar-nav">
+                <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a class="nav-link" href="/login" th:href="@{/login}">Prijava</a>
+                </li>
+                <!--<li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="/logout" th:href="@{#}" onclick="$('#form').submit();">Odjava</a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>-->
+                <li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link dropdown-toggle" href="#" th:href="@{#}" th:text="${#authorization.authentication.principal.appUser.getFullName()}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ime Prezime</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#" th:href="@{#}" onclick="$('#logoutForm').submit();">Odjava</a>
+                        <a class="dropdown-item" href="#" th:href="@{/settings}">Postavke</a>
+                    </div>
+                    <form style="visibility: hidden" id="logoutForm" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+</body>
+</html>

@@ -26,13 +26,13 @@ public class AutoServiceController {
         return "autoservice/home";
     }
 
-    @GetMapping("/autoservice/waiting")
+    @GetMapping("/autoservice/newOrders")
     public String waitingRepairOrders(Model model) {
         AutoService autoService = getUserAutoService();
         List<RepairOrder> repairOrders = repairOrderRepository.findAllByServiceJobStatusAndAutoService(
                 ServiceJobStatus.ACCEPTANCE_WAITING, autoService);
         model.addAttribute("repairOrders", repairOrders);
-        return "autoservice/ro_list";
+        return "autoservice/newOrders";
     }
 
     @GetMapping("/autoservice/repairOrder/{id}")

@@ -51,7 +51,7 @@ public class VehicleOwnerController {
     public String carOwnerHome(Model model) {
         VehicleOwner user = getCurrentUser();
         model.addAttribute("vehicles", vehicleRepository.findAllByOwner(user));
-        return "user/home";
+        return "user/vehicleList";
     }
 
     @GetMapping("/user/vehicles/{id}")
