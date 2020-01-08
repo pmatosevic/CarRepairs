@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Secured("ROLE_SERVICE_EMPLOYEE")
@@ -24,13 +25,12 @@ public class AutoServiceController {
     @Autowired
     private RepairOrderRepository repairOrderRepository;
 
-    @Secured("ROLE_SERVICE_EMPLOYEE")
     @GetMapping("/autoservice")
     public String autoserviceHome(Model model) {
-        return "autoservice/home";
+        return "redirect:/autoservice/repairOrders/waiting";
     }
 
-    @GetMapping("/autoservice/newOrders")
+    @GetMapping("/autoservice/repairOrders/waiting")
     public String waitingRepairOrders(Model model) {
         AutoService autoService = getUserAutoService();
         List<RepairOrder> repairOrders = repairOrderRepository.findAllByServiceJobStatusAndAutoService(
@@ -39,9 +39,27 @@ public class AutoServiceController {
         return "autoservice/newOrders";
     }
 
-    @GetMapping("/autoservice/repairOrder/{id}")
-    public String showRepairOrder(Model model, @RequestParam Long id) {
-        return null;
+    @GetMapping("/autoservice/repairOrders/opened")
+    public String currentRepairOrders(Model model) {
+        AutoService autoService = getUserAutoService();
+        List<RepairOrder> repairOrders = repairOrderRepository.findAllByServiceJobStatusAndAutoService(
+                ServiceJobStatus.IN_PROGRESS, autoService);
+        model.addAttribute("repairOrders", repairOrders);
+        return "autoservice/currentOrders";
+    }
+
+    @GetMapping("/autoservice/repairOrders/{id}")
+    public String showRepairOrder(Model model, @PathVariable Long id) {
+        Optional<RepairOrder> repairOrderOptional = repairOrderRepository.findById(id);
+        if (repairOrderOptional.isEmpty()) throw new ResourceNotFoundException();
+
+        RepairOrder repairOrder = repairOrderOptional.get();
+        if (repairOrder instanceof RegularRepairOrder) {
+            return "autoservice/editRegularRo";
+        } else if (repairOrder instanceof RepairingRepairOrder) {
+            return "autoservice/editRepairingRo";
+        }
+        throw new RuntimeException("RO type not implemented.");
     }
 
     @GetMapping("/autoservice/closed")

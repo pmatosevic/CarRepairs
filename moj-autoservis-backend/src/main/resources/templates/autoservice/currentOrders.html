@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,19 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Moj AutoServis</title>
+    <title>Radni nalozi u tijeku</title>
 </head>
 
 <body>
 
+<div th:replace="~{header :: header}">Header</div>
+
 <div class="container">
-
-    <div class="row-mb-2">
-        <h1>
-            Dobrodošao, serviseru!
-        </h1>
-    </div>
-
     <div class="row" justify-content-center>
 
         <div class="col-2"> <! navigation>
@@ -47,10 +42,21 @@
         </div>
 
 
-        <div class="col">  <! list of service orders>
+        <div class="col-10">  <! list of service orders>
 
             <div class="row"> <! one service order>
-                <div class="col">
+                <div class="col-5" th:each="ro : ${repairOrders}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${ro.vehicle.vehicleModel}">Radni nalog 1</h5>
+                            <p class="card-text">Stigao na servis: [[${#temporals.format(ro.creationTime,'dd.MM.yyyy')}]]</p>
+                            <a href="#" class="btn btn-primary" th:href="@{/autoservice/repairOrders/{roId}(roId=${ro.repairOrderId})}">Prikaži</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-5" th:remove="all">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Radni nalog 1</h5>
@@ -60,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-5" th:remove="all">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Radni nalog 2</h5>
@@ -70,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-5" th:remove="all">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Radni nalog 2</h5>
