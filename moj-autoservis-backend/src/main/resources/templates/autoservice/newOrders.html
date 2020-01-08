@@ -16,12 +16,12 @@
             <td>Akcija</td>
         </thead>
         <tbody>
-            <tr th:each="ro : ${repairOrders}" data-id="${ro.id}">
+            <tr th:each="ro : ${repairOrders}" th:attr="data-id=${ro.repairOrderId}">
                 <td th:text="${ro.vehicle.licencePlate}"></td>
                 <td th:text="${ro.vehicle.owner.firstName} + ${ro.vehicle.owner.firstName}"></td>
                 <td>
-                    <button type="button" class="btn btn-success" onclick="handleAccept(${ro.id})">Prihvati</button>
-                    <button type="button" class="btn btn-danger" onclick="handleReject(${ro.id})">Odbij</button>
+                    <button type="button" class="btn btn-success" onclick="handleAccept(this.dataset.id)" th:attr="data-id=${ro.repairOrderId}">Prihvati</button>
+                    <button type="button" class="btn btn-danger" onclick="handleReject(this.dataset.id)" th:attr="data-id=${ro.repairOrderId}">Odbij</button>
                 </td>
             </tr>
         </tbody>
@@ -40,11 +40,11 @@
 
     function updateOrder(id, status) {
         $.ajax({
-            method: "PUT",
-            url: "/autoservice/ro/" + id + "/status",
-            data: status,
+            method: "POST",
+            url: "/autoservice/repairOrders/" + id + "/status",
+            data: {'status': status},
             success: data => {
-                $("tr[data-id='" + id + "'").hide();
+                $('tr[data-id="' + id + '"').hide();
             },
             error: data => {
                 console.log(data);

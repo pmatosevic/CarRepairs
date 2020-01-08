@@ -16,6 +16,7 @@ public abstract class RepairOrder {
     @ManyToOne
     private AutoService autoService;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private ServiceJobStatus serviceJobStatus = ServiceJobStatus.ACCEPTANCE_WAITING;
 
