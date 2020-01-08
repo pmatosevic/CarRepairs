@@ -15,48 +15,50 @@
 <div class="container">
     <div class="row">
         <div class="col">  <! detalji se otvore kada se klikne na gumb detalji određenog radnog naloga>
-            <p><h3>Naziv radnog naloga</h3></p>
             <p>
-            <div class="row">
-                <div class="col-1">Vlasnik:</div>
-                <div class="col-1">Ivo Ivić</div>
-            </div>
-            <div class="row">
-                <div class="col-1">Automobil:</div>
-                <div class="col">Audi A1</div>
-            </div>
-            <div class="row">
-                <div class="col-1">Datum:</div>
-                <div class="col">7.1.2020.</div>
-            </div>
-            <div class="row">
-                <div class="col-2">Status naloga:</div>
-                <div class="col">Otvoren</div>
-            </div>
+                <h3>Naziv radnog naloga</h3>
+            </p>
+            <p>
+                <div class="row">
+                    <div class="col-1">Vlasnik:</div>
+                    <div class="col-1">Ivo Ivić</div>
+                </div>
+                <div class="row">
+                    <div class="col-1">Automobil:</div>
+                    <div class="col">Audi A1</div>
+                </div>
+                <div class="row">
+                    <div class="col-1">Datum:</div>
+                    <div class="col">7.1.2020.</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">Status naloga:</div>
+                    <div class="col">Otvoren</div>
+                </div>
             </p>
 
         </div>
     </div>
 
     <p>
-    <table style="width:100%">
-        <tr>
-            <th>Naziv Usluge</th>
-            <th>Cijena</th>
-        </tr>
-        <tr>
-            <td>Zamjena ulja</td>
-            <td>100 kn</td>
-        </tr>
-        <tr>
-            <td>Popravak laka</td>
-            <td>1000 kn</td>
-        </tr>
-    </table>
+        <table style="width:100%">
+            <tr>
+                <th>Naziv Usluge</th>
+                <th>Cijena</th>
+            </tr>
+            <tr>
+                <td>Zamjena ulja</td>
+                <td>100 kn</td>
+            </tr>
+            <tr>
+                <td>Popravak laka</td>
+                <td>1000 kn</td>
+            </tr>
+        </table>
     </p>
 
     <p>
-        <button type="button" class="btn btn-primary">Dodaj uslugu</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addServiceModal">Dodaj uslugu</button>
     </p>
 
     <p>
@@ -80,18 +82,60 @@
     </p>
 
     <p>
-        <button type="button" class="btn btn-primary">Dodaj rezervni dio</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPartModal">Dodaj rezervni dio</button>
     </p>
 
     <div>
         <p>
-        <h3>Ukupna cijena: 1000 kn</h3>
+            <h3>Ukupna cijena: 1000 kn</h3>
         </p>
     </div>
 
     <div>
         <button type="button" class="btn btn-success">Spremi</button>
         <button type="button" class="btn btn-danger">Izbriši</button>
+    </div>
+
+    <! modal za dodavanje usluge>
+    <div class="modal" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addServiceModalTitle">Dodavanje usluge</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Dodavanje usluge
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <! modal za dodavanje rezervnog dijela>
+    <div class="modal fade" id="addPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPartModalTitle">Dodavanje rezervnog dijela</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Dodavanje rezervnog dijela.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
