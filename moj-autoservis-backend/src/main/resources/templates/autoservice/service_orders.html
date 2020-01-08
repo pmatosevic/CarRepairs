@@ -47,7 +47,7 @@
         </div>
 
 
-        <div class="col-6">  <! list of service orders>
+        <div class="col">  <! list of service orders>
 
             <div class="row"> <! one service order>
                 <div class="col">
@@ -69,126 +69,19 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-
-        <div class="col">  <! detalji se otvore kada se klikne na gumb detalji određenog radnog naloga>
-            <p><h3>Naziv radnog naloga</h3></p>
-            <p>
-                <div class="row">
-                    <div class="col">Vlasnik:</div>
-                    <div class="col">Ivo Ivić</div>
-                </div>
-                <div class="row">
-                    <div class="col">Automobil:</div>
-                    <div class="col">Audi A1</div>
-                </div>
-                <div class="row">
-                    <div class="col">Datum:</div>
-                    <div class="col">7.1.2020.</div>
-                </div>
-                <div class="row">
-                    <div class="col">Kilometraža:</div>
-                    <div class="col">75 000 km</div>
-                </div>
-                <div class="row">
-                    <div class="col">Preporuka za izvanredan servis:</div>
-                    <div class="col">DA</div>
-                </div>
-                <div class="row">
-                    <div class="col">Status naloga:</div>
-                    <div class="col">Otvoren</div>
-                </div>
-            </p>
-
-            <div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Promijeni</button>
-                <button type="button" class="btn btn-success">Završi</button>
-                <button type="button" class="btn btn-danger">Izbriši</button>
-            </div>
-        </div>
-    </div>
-
-    <! meni za promjene za redovni servis >
-    <div class="modal" id= "exampleModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Naziv radnog naloga</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <! input za promjenu >
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Kilometraža" aria-label="Kilometraža" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Napomene</span>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Radni nalog 2</h5>
+                            <p class="card-text">Osnovni podatci o radnom nalogu.</p>
+                            <a href="#" class="btn btn-primary">Detalji</a>
                         </div>
-                        <textarea class="form-control" aria-label="Napomene"></textarea>
                     </div>
-                    <p>
-                        <div class="btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary active">
-                                <input type="checkbox" checked autocomplete="off"> Preporuka za izvanredni servis
-                            </label>
-                        </div>
-                    </p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Spremi</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <! modal za izvanredni servis >
-    <div class="modal" id= "exampleModal2" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Naziv radnog naloga</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <! input za promjenu >
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Kilometraža" aria-label="Kilometraža" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Napomene</span>
-                        </div>
-                        <textarea class="form-control" aria-label="Napomene"></textarea>
-                    </div>
-                    <p>
-                    <div class="btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="checkbox" checked autocomplete="off"> Preporuka za izvanredni servis
-                        </label>
-                    </div>
-                    </p>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Spremi</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </div>
 
 <!-- Optional JavaScript -->
