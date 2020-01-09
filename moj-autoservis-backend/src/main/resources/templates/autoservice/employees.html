@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Cjenik auto servisa</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+    function removeEmployee(username) {
+        const url = window.location.pathname + "/delete";
+        $.post(url, {'username': username}, data => location.reload());
+    }
+
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <h5>Zaposlenici</h5>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">Dodaj zaposlenika</button>
+    <table class="table">
+        <thead>
+        <td>Ime i prezime</td>
+        <td>Korisničko ime</td>
+        <td>Akcija</td>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.fullName}">Pero Perić</td>
+            <td th:text="${employee.username}">pperic</td>
+            <td>
+                <button type="button" class="btn btn-danger" th:disabled="${employee.employeeType.name() == 'SERVICE_ADMINISTRATOR'}" onclick="removeEmployee(this.dataset.id);" th:attr="data-id=${employee.username}">Ukloni</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+
+    </div>
+</main>
+<!-- /.container -->
+</body>
+</html>
