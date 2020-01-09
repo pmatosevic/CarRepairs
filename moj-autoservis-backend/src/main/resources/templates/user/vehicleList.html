@@ -31,17 +31,23 @@
 
 <main role="main" class="container">
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Dodaj novi</button>
+    <p></p> <! ruzno ali radi>
+
+    <p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Dodaj novi</button>
+    </p>
 
     <div class="row">
-        <div class="col-5" th:each="vehicle : ${vehicles}">
+        <div class="col-4" th:each="vehicle : ${vehicles}">
             <div class="card">
-                <div class="card-header" th:text="${vehicle.licencePlate}">HV 1234 AB</div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title" th:text="${vehicle.vehicleModel}">Audi A1</h5>
-                <p class="card-text">Broj šasije: [[${vehicle.vinNumber}]]</p>
-                <a href="#" class="btn btn-primary" th:href="'/user/vehicles/' + ${vehicle.vehicleId}">Detalji</a>
+                <div class="card">
+                    <div class="card-header" th:text="${vehicle.licencePlate}">HV 1234 AB</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${vehicle.vehicleModel}">Audi A1</h5>
+                    <p class="card-text">Broj šasije: [[${vehicle.vinNumber}]]</p>
+                    <a href="#" class="btn btn-secondary" th:href="'/user/vehicles/' + ${vehicle.vehicleId}">Detalji</a>
+                </div>
             </div>
         </div>
     </div>
