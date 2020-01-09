@@ -51,8 +51,13 @@
 <div th:replace="~{header :: header}">Header</div>
 
 <main role="main" class="container">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#openRoModal" th:disabled="${roDisabled}">Otvori nalog</button>
-    <button type="button" class="btn btn-danger" id="deleteVehicle" th:disabled="${roDisabled}" onclick="$('#deleteForm').submit();">Izbriši</button>
+
+    <p></p>
+
+    <p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openRoModal" th:disabled="${roDisabled}">Otvori nalog</button>
+        <button type="button" class="btn btn-danger" id="deleteVehicle" th:disabled="${roDisabled}" onclick="$('#deleteForm').submit();">Izbriši vozilo</button>
+    </p>
 
     <form style="visibility: hidden" id="deleteForm" method="post" th:action="'/user/vehicles/' + ${vehicle.vehicleId} + '/delete'"></form>
 
@@ -61,7 +66,7 @@
         <td>Auto servis</td>
         <td>Stanje</td>
         <td>Tip servisa</td>
-        <td>Detalji</td>
+        <td></td>
         </thead>
         <tbody>
         <tr th:each="ro : ${repairOrders}" data-id="${ro.id}">
@@ -72,7 +77,7 @@
                 <span th:if="${ro instanceof T(org.infiniteam.autoservice.model.RepairingRepairOrder)}" th:text="Izvanredni"></span>
             </td>
             <td>
-                <button type="button" class="btn btn-success" onclick="showModal(this.dataset.id);" th:attr="data-id=${ro.repairOrderId}">Detalji</button>
+                <button type="button" class="btn btn-secondary" onclick="showModal(this.dataset.id);" th:attr="data-id=${ro.repairOrderId}">Detalji</button>
             </td>
         </tr>
         </tbody>
