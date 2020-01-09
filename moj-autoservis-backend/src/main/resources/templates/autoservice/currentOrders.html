@@ -16,6 +16,9 @@
 <div th:replace="~{header :: header}">Header</div>
 
 <div class="container">
+
+    <p></p>
+
     <div class="row" justify-content-center>
 
         <!-- <div class="col-2"> <! navigation>
@@ -42,6 +45,7 @@
         </div>-->
 
 
+
         <div class="col-10">  <! list of service orders>
 
             <div class="row"> <! one service order>
@@ -50,7 +54,7 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="${ro.vehicle.vehicleModel}">Radni nalog 1</h5>
                             <p class="card-text">Stigao na servis: [[${#temporals.format(ro.creationTime,'dd.MM.yyyy')}]]</p>
-                            <a href="#" class="btn btn-primary" th:href="@{/autoservice/repairOrders/{roId}(roId=${ro.repairOrderId})}">Prikaži</a>
+                            <a href="#" class="btn btn-primary" th:href="@{/autoservice/repairOrders/{roId}(roId=${ro.repairOrderId})}">Detalji</a>
                         </div>
                     </div>
                 </div>
