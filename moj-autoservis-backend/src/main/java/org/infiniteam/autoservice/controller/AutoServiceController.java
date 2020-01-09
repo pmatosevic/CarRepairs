@@ -97,6 +97,15 @@ public class AutoServiceController {
         return "/autoservice/vehiclePartModal :: content";
     }
 
+    @PostMapping("/autoservice/priceList/parts/{id}/delete")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String vehiclePartRemove(@PathVariable Long id) {
+        VehiclePart part = vehiclePartRepository.findById(id).get();
+        checkAutoServiceAccess(part.getAutoService());
+        vehiclePartRepository.delete(part);
+        return "redirect:/autoservice/priceList";
+    }
+
     @PostMapping("/autoservice/priceList/parts")
     @Secured("ROLE_SERVICE_ADMIN")
     public String updateVehiclePart(@RequestParam String partName, @RequestParam int estimatedDuration,
@@ -139,6 +148,15 @@ public class AutoServiceController {
         serviceLabor.setServiceName(serviceName);
         serviceLabor.setPrice(price);
         serviceLaborRepository.save(serviceLabor);
+        return "redirect:/autoservice/priceList";
+    }
+
+    @PostMapping("/autoservice/priceList/labors/{id}/delete")
+    @Secured("ROLE_SERVICE_ADMIN")
+    public String serviceLaborRemove(@PathVariable Long id) {
+        ServiceLabor labor = serviceLaborRepository.findById(id).get();
+        checkAutoServiceAccess(labor.getAutoService());
+        serviceLaborRepository.delete(labor);
         return "redirect:/autoservice/priceList";
     }
 

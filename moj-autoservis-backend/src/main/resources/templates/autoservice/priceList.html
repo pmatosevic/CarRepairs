@@ -14,11 +14,21 @@
         })
     }
 
+    function deletePart(id) {
+        const url = window.location.pathname + "/parts/" + id + "/delete";
+        $.post(url, data => location.reload());
+    }
+
     function editLabor(id) {
         const url = window.location.pathname + "/labors/" + id;
         $("#modal").load(url, "", () => {
             $('#modal').modal('show');
         })
+    }
+
+    function deleteLabor(id) {
+        const url = window.location.pathname + "/labors/" + id + "/delete";
+        $.post(url, data => location.reload());
     }
 </script>
 
@@ -42,6 +52,7 @@
             <td th:text="${part.price} + ' kn'">1000 kn</td>
             <td>
                 <button type="button" class="btn btn-primary" onclick="editPart(this.dataset.id);" th:attr="data-id=${part.partId}">Uredi</button>
+                <button type="button" class="btn btn-danger" onclick="deletePart(this.dataset.id);" th:attr="data-id=${part.partId}">Ukloni</button>
             </td>
         </tr>
         </tbody>
@@ -61,6 +72,7 @@
             <td th:text="${labor.price} + ' kn'">1000 kn</td>
             <td>
                 <button type="button" class="btn btn-primary" onclick="editLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Uredi</button>
+                <button type="button" class="btn btn-danger" onclick="deleteLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Ukloni</button>
             </td>
         </tr>
         </tbody>
