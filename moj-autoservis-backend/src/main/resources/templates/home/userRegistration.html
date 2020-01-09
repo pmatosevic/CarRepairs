@@ -43,18 +43,6 @@
         body {
             background-color: #f5f5f5;
         }
-        
-        /* removing spin button for Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        /* removing spin button Firefox */
-        input[type=number] {
-            -moz-appearance:textfield;
-        }
 
         .registration-form-user {
             width: 100%;
@@ -101,7 +89,7 @@
         <label for="surname" class="sr-only">Prezime</label>
         <input type="text" id="surname" name="surname" class="form-control" placeholder="Prezime" required autofocus>
         <label for="oib" class="sr-only">OIB</label>
-        <input type="number" id="oib" name="oib" class="form-control" placeholder="OIB" required autofocus>
+        <input type="text" id="oib" name="oib" class="form-control" placeholder="OIB" required autofocus pattern="[0-9]{11}">
         <label for="email" class="sr-only">E-mail</label>
         <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required autofocus>
         <label for="username" class="sr-only">Korisničko ime</label>
