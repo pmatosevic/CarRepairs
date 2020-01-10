@@ -51,6 +51,14 @@
                     <a class="nav-link" th:href="@{/autoservice/details}">Autoservis</a>
                 </li>
             </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/users}">Korisnici</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/autoservices}">Autoservisi</a>
+                </li>
+            </ul>
             <ul class="navbar-nav ml-auto">
                 <li th:if="${#authorization.expression('!isAuthenticated()')}">
                     <a class="nav-link" href="/login" th:href="@{/login}">Prijava</a>
