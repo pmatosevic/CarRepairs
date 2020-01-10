@@ -172,21 +172,21 @@ public class AutoServiceController {
     @Secured("ROLE_SERVICE_ADMIN")
     public String autoserviceDetails(Model model){
         AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
-        ServiceEmployee user2 = (ServiceEmployee) appUser;
-        AutoService autoSerivce = user2.getAutoService();
+        ServiceEmployee serviceEmployee = (ServiceEmployee) appUser;
+        AutoService autoSerivce = serviceEmployee.getAutoService();
         model.addAttribute("service", autoSerivce);
         return "autoservice/details";
     }
 
     @PostMapping("/autoservice/details")
     @Secured("ROLE_SERVICE_ADMIN")
-    public String changeServiceSettings(@RequestParam String shopName, @RequestParam String adress){
+    public String changeServiceSettings(@RequestParam String shopName, @RequestParam String address){
         AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
-        ServiceEmployee user2 = (ServiceEmployee) appUser;
-        AutoService autoService = user2.getAutoService();
+        ServiceEmployee serviceEmployee = (ServiceEmployee) appUser;
+        AutoService autoService = serviceEmployee.getAutoService();
         autoService.setShopName(shopName);
-        autoService.setAddress(adress);
-        return "redirect:/details";
+        autoService.setAddress(address);
+        return "redirect:/autoservice/details";
     }
 
     @PostMapping("/autoservice/employees")
