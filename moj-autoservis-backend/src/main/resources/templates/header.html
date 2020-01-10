@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title th:replace="${title}">Title</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -61,8 +62,14 @@
                 <li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link dropdown-toggle" href="#" th:href="@{#}" th:text="${#authorization.authentication.principal.appUser.getFullName()}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ime Prezime</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#" th:href="@{#}" onclick="$('#logoutForm').submit();">Odjava</a>
-                        <a class="dropdown-item" href="#" th:href="@{/settings}">Postavke</a>
+                        <a class="dropdown-item" href="#" th:href="@{/settings}">
+                            <i class="fa fa-cog fa-spin"></i>
+                            Postavke
+                        </a>
+                        <a class="dropdown-item" href="#" th:href="@{#}" onclick="$('#logoutForm').submit();">
+                            <i class="fa fa-sign-out"></i>
+                            Odjava
+                        </a>
                     </div>
                     <form style="visibility: hidden" id="logoutForm" method="post" action="#" th:action="@{/logout}"></form>
                 </li>
