@@ -1,56 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Pregled redovnog radnog naloga</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Moj AutoServis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
+
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col">  <! detalji se otvore kada se klikne na gumb detalji određenog radnog naloga>
-            <p>
-                <h3>Naziv radnog naloga</h3>
-            </p>
-            <p>
-                <div class="row">
-                    <div class="col-1">Vlasnik:</div>
-                    <div class="col-1">Ivo Ivić</div>
-                </div>
-                <div class="row">
-                    <div class="col-1">Automobil:</div>
-                    <div class="col">Audi A1</div>
-                </div>
-                <div class="row">
-                    <div class="col-1">Datum:</div>
-                    <div class="col">7.1.2020.</div>
-                </div>
-                <div class="row">
-                    <div class="col-2">Status naloga:</div>
-                    <div class="col">Otvoren</div>
-                </div>
-            </p>
+<div th:replace="~{header :: header}">Header</div>
 
+<main role="main" class="container">
+
+    <script type="text/javascript">
+        function closeRo() {
+
+        }
+    </script>
+
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h3>Radni nalog izvanrednog servisa</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Vlasnik:</div>
+                <div class="col-md-4" th:text="${order.vehicle.owner.fullName}">Pero Perić</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Automobil:</div>
+                <div class="col-md-4" th:text="${order.vehicle.vehicleModel}">Audi A1</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Datum dolaska na servis:</div>
+                <div class="col-md-4" th:text="${#temporals.format(order.creationTime,'dd.MM.yyyy')}">7.1.2020.</div>
+            </div>
         </div>
     </div>
 
     <p>
         <table style="width:100%">
             <tr>
-                <th>Naziv Usluge</th>
+                <th>Naziv stavke</th>
                 <th>Cijena</th>
             </tr>
-            <tr>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.name}">Zamjena ulja</td>
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')} + ' kn'">100 kn</td>
+            </tr>
+            <tr th:remove="all">
                 <td>Zamjena ulja</td>
                 <td>100 kn</td>
             </tr>
-            <tr>
+            <tr th:remove="all">
                 <td>Popravak laka</td>
                 <td>1000 kn</td>
             </tr>
@@ -58,42 +60,19 @@
     </p>
 
     <p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addServiceModal">Dodaj uslugu</button>
-    </p>
-
-    <p>
-        <table style="width:100%">
-            <tr>
-                <th>Naziv rezervnog dijela</th>
-                <th>Cijena</th>
-                <th>Kilometraža</th>
-            </tr>
-            <tr>
-                <td>Motor</td>
-                <td>100 kn</td>
-                <td>50 km</td>
-            </tr>
-            <tr>
-                <td>Sjedalo</td>
-                <td>1000 kn</td>
-                <td>94 km</td>
-            </tr>
-        </table>
-    </p>
-
-    <p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPartModal">Dodaj rezervni dio</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLaborModal">Dodaj uslugu</button>
     </p>
 
     <div>
         <p>
-            <h3>Ukupna cijena: 1000 kn</h3>
+            <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 0, 'COMMA', 2, 'POINT')}]] kn</h3>
         </p>
     </div>
 
     <div>
-        <button type="button" class="btn btn-success">Spremi</button>
-        <button type="button" class="btn btn-danger">Izbriši</button>
+        <button type="button" class="btn btn-success" onclick="closeRo();">Završi nalog</button>
+        <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
     </div>
 
     <! modal za dodavanje usluge>
@@ -117,7 +96,6 @@
         </div>
     </div>
 
-    <! modal za dodavanje rezervnog dijela>
     <div class="modal fade" id="addPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -137,7 +115,9 @@
             </div>
         </div>
     </div>
-</div>
+
+
+</main>
 
 </body>
 </html>
