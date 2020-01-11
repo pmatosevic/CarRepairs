@@ -12,13 +12,7 @@
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="roDetailsModal" aria-hidden="true">
     <div class="modal-dialog" th:fragment="content">
-        <script type="text/javascript">
-            function save() {
-                if ($('#price').valid() === 1 && $('#estimatedDuration').valid() === 1) {
-                    $('#form').submit();
-                }
-            }
-        </script>
+        <form method="post" th:action="@{/autoservice/priceList/parts}" id="form">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Rezervni dio</h5>
@@ -27,33 +21,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" th:action="@{/autoservice/priceList/parts}" id="form">
                     <input type="hidden" name="id" th:value="${part.partId}" />
                     <div class="form-group row">
                         <label for="partName" class="col-sm-6 col-form-label">Naziv:</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="partName" id="partName" required th:value="${part.partName}">
+                            <input required type="text" class="form-control" name="partName" id="partName" th:value="${part.partName}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="estimatedDuration" class="col-sm-6 col-form-label">Predviđeno trajanje u km:</label>
                         <div class="col-sm-5">
-                            <input type="number" min="0" max="1000000" step="1" class="form-control" name="estimatedDuration" id="estimatedDuration" required th:value="${part.estimatedDurationInKm}">
+                            <input type="number" min="0" max="10000000" step="1" class="form-control" name="estimatedDuration" id="estimatedDuration" required th:value="${part.estimatedDurationInKm}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="price" class="col-sm-6 col-form-label">Cijena:</label>
+                        <label for="price" class="col-sm-6 col-form-label">Cijena u kn:</label>
                         <div class="col-sm-5">
-                            <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" name="price" id="price" required th:value="${part.price}">
+                            <input type="number" min="0.00" max="1000000.00" step="0.01" class="form-control" name="price" id="price" required th:value="${part.price}">
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-                <button type="button" class="btn btn-primary" onclick="save()">Spremi</button>
+                <button type="submit" class="btn btn-primary">Spremi</button>
             </div>
         </div>
+        </form>
     </div>
 </div>
 
