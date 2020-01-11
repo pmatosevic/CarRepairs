@@ -63,7 +63,7 @@ public class Initialization {
             userRepository.save(boss);
             userRepository.save(admin);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
 }
