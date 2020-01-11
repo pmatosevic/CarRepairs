@@ -11,7 +11,7 @@
 
 <main role="main" class="container">
 
-    <form id="form" method="post" th:action="@{/autoservice/repairOrders/{id}/save(id=${order.repairOrderId})}">
+    <form id="form" method="post" th:action="@{/autoservice/repairOrders/{id}/saveAndClose(id=${order.repairOrderId})}">
 
     <div class="row">
         <div class="col">
@@ -33,8 +33,8 @@
                 <input name="kilometers" id="kilometers" type="number" min="1" max="1000000" step="1" class="form-control col-md-4" required th:value="${order.kilometers}"/>
             </label>
             <label class="form-group row">
-                <label for="recommend" class="col-md-3 col-form-label">Preporuka za izvanredan servis:</label>
-                <select class="form-control col-md-4" id="recommend">
+                <label for="recommended" class="col-md-3 col-form-label">Preporuka za izvanredan servis:</label>
+                <select class="form-control col-md-4" id="recommended" name="recommended">
                     <option value="false" th:attrappend="selected=${!order.repairRecommended} ? 'selected'">Ne</option>
                     <option value="true" th:attrappend="selected=${order.repairRecommended} ? 'selected'">Da</option>
                 </select>
