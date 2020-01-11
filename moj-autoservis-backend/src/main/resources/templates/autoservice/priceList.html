@@ -49,7 +49,7 @@
         <tr th:each="part : ${parts}" data-id="${ro.id}">
             <td th:text="${part.partName}">Disk kočnice</td>
             <td th:text="${part.estimatedDurationInKm} + ' km'">100 000 km</td>
-            <td th:text="${part.price} + ' kn'">1000 kn</td>
+            <td th:text="${#numbers.formatDecimal(part.price, 0, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
             <td>
                 <button type="button" class="btn btn-primary" onclick="editPart(this.dataset.id);" th:attr="data-id=${part.partId}">Uredi</button>
                 <button type="button" class="btn btn-danger" onclick="deletePart(this.dataset.id);" th:attr="data-id=${part.partId}">Ukloni</button>
@@ -71,7 +71,7 @@
         <tbody>
         <tr th:each="labor : ${labors}" data-id="${ro.id}">
             <td th:text="${labor.serviceName}">Zamjena ulja</td>
-            <td th:text="${labor.price} + ' kn'">1000 kn</td>
+            <td th:text="${#numbers.formatDecimal(labor.price, 0, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
             <td>
                 <button type="button" class="btn btn-primary" onclick="editLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Uredi</button>
                 <button type="button" class="btn btn-danger" onclick="deleteLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Ukloni</button>
