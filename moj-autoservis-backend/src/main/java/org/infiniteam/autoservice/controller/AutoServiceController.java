@@ -70,6 +70,8 @@ public class AutoServiceController {
         if (repairOrderOptional.isEmpty()) throw new ResourceNotFoundException();
 
         RepairOrder repairOrder = repairOrderOptional.get();
+        model.addAttribute("order", repairOrder);
+
         if (repairOrder instanceof RegularRepairOrder) {
             return "autoservice/editRegularRo";
         } else if (repairOrder instanceof RepairingRepairOrder) {
@@ -77,6 +79,61 @@ public class AutoServiceController {
         } else {
             throw new RuntimeException("Not implemented.");
         }
+    }
+
+    @PostMapping("/autoservice/repairOrders/{id}/saveAndClose")
+    public String saveAndCloseRegularRo(@PathVariable Long id,
+                                        @RequestParam int kilometers, @RequestParam boolean recommended) {
+        RegularRepairOrder repairOrder = (RegularRepairOrder) repairOrderRepository.findById(id).get();
+        checkRepairOrderAccess(repairOrder);
+
+        repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
+        repairOrder.setKilometers(kilometers);
+        repairOrder.setRepairRecommended(recommended);
+        repairOrderRepository.flush();
+
+        return "redirect:/autoservice/repairOrders/opened";
+    }
+
+    @PostMapping("/autoservice/repairOrders/{id}/close")
+    public String closeRepairingRo(@PathVariable Long id) {
+        RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
+        checkRepairOrderAccess(repairOrder);
+
+        repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
+        repairOrderRepository.flush();
+
+        return "redirect:/autoservice/repairOrders/opened";
+    }
+
+    @PostMapping("/autoservice/repairOrders/{id}/addPart")
+    public String addVehiclePartToRepairOrder(@PathVariable Long id, @RequestParam Long partId) {
+        RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
+        VehiclePart part = vehiclePartRepository.findById(partId).get();
+        checkRepairOrderAccess(repairOrder);
+        checkAutoServiceAccess(part.getAutoService());
+
+        RepairOrderItem item = new RepairOrderItem();
+        item.setName(part.getPartName());
+        item.setPrice(part.getPrice());
+        repairOrder.addItem(item);
+
+        return "redirect:/autoservice/repairOrders" + id;
+    }
+
+    @PostMapping("/autoservice/repairOrders/{id}/addLabor")
+    public String addServiceLaborToRepairOrder(@PathVariable Long id, @RequestParam Long laborId) {
+        RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
+        ServiceLabor labor = serviceLaborRepository.findById(laborId).get();
+        checkRepairOrderAccess(repairOrder);
+        checkAutoServiceAccess(labor.getAutoService());
+
+        RepairOrderItem item = new RepairOrderItem();
+        item.setName(labor.getServiceName());
+        item.setPrice(labor.getPrice());
+        repairOrder.addItem(item);
+
+        return "redirect:/autoservice/repairOrders" + id;
     }
 
     @GetMapping("/autoservice/priceList")
@@ -202,11 +259,6 @@ public class AutoServiceController {
 
     @GetMapping("/autoservice/closed")
     public String closedRepairOrders(Model model) {
-        return null;
-    }
-
-    @DeleteMapping("/autoservice/employees/{:id}")
-    public HttpStatus deleteEmployee(@RequestParam Long id) {
         return null;
     }
 

@@ -21,7 +21,7 @@ public abstract class RepairOrder {
     private ServiceJobStatus serviceJobStatus = ServiceJobStatus.ACCEPTANCE_WAITING;
 
     @Column
-    private Double price;
+    private Double price = 0.0;
 
     @Column
     private LocalDateTime creationTime;

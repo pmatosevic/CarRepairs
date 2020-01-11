@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="header :: common_header(~{::title},~{})">
     <title>Pregled redovnog radnog naloga</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 
@@ -12,7 +11,7 @@
 
 <main role="main" class="container">
 
-    <form id="form" method="post" th:action="@{/autoservice/repairOrders/{id}/close(id=${order.repairOrderId})}">
+    <form id="form" method="post" th:action="@{/autoservice/repairOrders/{id}/save(id=${order.repairOrderId})}">
 
     <div class="row">
         <div class="col">

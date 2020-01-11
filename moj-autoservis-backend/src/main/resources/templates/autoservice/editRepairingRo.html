@@ -12,12 +12,6 @@
 
 <main role="main" class="container">
 
-    <script type="text/javascript">
-        function closeRo() {
-
-        }
-    </script>
-
     <div class="row">
         <div class="col">
             <div class="row">
@@ -61,7 +55,7 @@
 
     <p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPartModal">Dodaj rezervni dio</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLaborModal">Dodaj uslugu</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addServiceModal">Dodaj uslugu</button>
     </p>
 
     <div>
@@ -71,12 +65,13 @@
     </div>
 
     <div>
-        <button type="button" class="btn btn-success" onclick="closeRo();">Završi nalog</button>
+        <form id="closeForm" th:action="@{/autoservice/repairOrders/{id}/close(id=${order.repairOrderId})}" method="post"></form>
+        <button type="button" class="btn btn-success" onclick="$('#closeForm').submit()">Završi nalog</button>
         <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
     </div>
 
-    <! modal za dodavanje usluge>
-    <div class="modal" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="serviceModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,14 +84,14 @@
                     Dodavanje usluge
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="addPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="addPartModal" tabindex="-1" role="dialog" aria-labelledby="partModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -109,8 +104,7 @@
                     Dodavanje rezervnog dijela.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
                 </div>
             </div>
         </div>
