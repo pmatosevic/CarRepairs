@@ -11,6 +11,10 @@ public interface RepairOrderService {
 
     RepairOrder fetch(long repairOrderId);
 
+    RegularRepairOrder fetchRegularRepairOrder(long repairOrderId);
+
+    RepairingRepairOrder fetchRepairingRepairOrder(long repairOrderId);
+
     RepairOrder create(AutoService autoService, Vehicle vehicle, RepairOrderType type);
 
     Optional<RepairOrder> findById(long repairOrderId);
@@ -18,4 +22,11 @@ public interface RepairOrderService {
     List<RepairOrder> findAllByVehicle(Vehicle vehicle);
 
     boolean existsByVehicleAndServiceJobStatus(Vehicle vehicle, ServiceJobStatus status);
+
+    List<RepairOrder> findAllByServiceJobStatusAndAutoService(ServiceJobStatus status, AutoService autoService);
+
+    void setFinished(RepairOrder repairOrder);
+
+    void updateRegularRepairOrder(RegularRepairOrder ro, int kilometers, boolean repairRecommended);
+
 }

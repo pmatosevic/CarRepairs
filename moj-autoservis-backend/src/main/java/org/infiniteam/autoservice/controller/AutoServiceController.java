@@ -1,9 +1,9 @@
 package org.infiniteam.autoservice.controller;
 
-import org.apache.coyote.Response;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.repository.*;
 import org.infiniteam.autoservice.security.CurrentUser;
+import org.infiniteam.autoservice.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import javax.websocket.server.PathParam;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,19 +24,16 @@ import java.util.Optional;
 public class AutoServiceController {
 
     @Autowired
-    private RepairOrderRepository repairOrderRepository;
+    private RepairOrderService repairOrderService;
 
     @Autowired
-    private VehiclePartRepository vehiclePartRepository;
+    private VehiclePartService vehiclePartService;
 
     @Autowired
-    private ServiceLaborRepository serviceLaborRepository;
+    private ServiceLaborService serviceLaborService;
 
     @Autowired
-    private ServiceEmployeeRepository serviceEmployeeRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    private ServiceEmployeeService serviceEmployeeService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -51,8 +46,9 @@ public class AutoServiceController {
     @GetMapping("/autoservice/repairOrders/waiting")
     public String waitingRepairOrders(Model model) {
         AutoService autoService = getUserAutoService();
-        List<RepairOrder> repairOrders = repairOrderRepository.findAllByServiceJobStatusAndAutoService(
+        List<RepairOrder> repairOrders = repairOrderService.findAllByServiceJobStatusAndAutoService(
                 ServiceJobStatus.ACCEPTANCE_WAITING, autoService);
+
         model.addAttribute("repairOrders", repairOrders);
         return "autoservice/newOrders";
     }
@@ -60,25 +56,23 @@ public class AutoServiceController {
     @GetMapping("/autoservice/repairOrders/opened")
     public String currentRepairOrders(Model model) {
         AutoService autoService = getUserAutoService();
-        List<RepairOrder> repairOrders = repairOrderRepository.findAllByServiceJobStatusAndAutoService(
+        List<RepairOrder> repairOrders = repairOrderService.findAllByServiceJobStatusAndAutoService(
                 ServiceJobStatus.IN_PROGRESS, autoService);
+
         model.addAttribute("repairOrders", repairOrders);
         return "autoservice/currentOrders";
     }
 
     @GetMapping("/autoservice/repairOrders/{id}")
     public String showRepairOrder(Model model, @PathVariable Long id) {
-        Optional<RepairOrder> repairOrderOptional = repairOrderRepository.findById(id);
-        if (repairOrderOptional.isEmpty()) throw new ResourceNotFoundException();
-
-        RepairOrder repairOrder = repairOrderOptional.get();
+        RepairOrder repairOrder = repairOrderService.fetch(id);
         model.addAttribute("order", repairOrder);
 
         if (repairOrder instanceof RegularRepairOrder) {
             return "autoservice/editRegularRo";
         } else if (repairOrder instanceof RepairingRepairOrder) {
-            model.addAttribute("parts", vehiclePartRepository.findAllByAutoService(getUserAutoService()));
-            model.addAttribute("labors", serviceLaborRepository.findAllByAutoService(getUserAutoService()));
+            model.addAttribute("parts", vehiclePartService.findAllByAutoService(getUserAutoService()));
+            model.addAttribute("labors", serviceLaborService.findAllByAutoService(getUserAutoService()));
             return "autoservice/editRepairingRo";
         } else {
             throw new RuntimeException("Not implemented.");
@@ -88,34 +82,29 @@ public class AutoServiceController {
     @PostMapping("/autoservice/repairOrders/{id}/saveAndClose")
     public String saveAndCloseRegularRo(@PathVariable Long id,
                                         @RequestParam int kilometers, @RequestParam boolean recommended) {
-        RegularRepairOrder repairOrder = (RegularRepairOrder) repairOrderRepository.findById(id).get();
+        RegularRepairOrder repairOrder = repairOrderService.fetchRegularRepairOrder(id);
         checkRepairOrderAccess(repairOrder);
 
-        repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
-        repairOrder.setKilometers(kilometers);
-        repairOrder.setRepairRecommended(recommended);
-        repairOrder.setFinishTime(LocalDateTime.now());
-        repairOrderRepository.flush();
+        repairOrderService.updateRegularRepairOrder(repairOrder, kilometers, recommended);
+        repairOrderService.setFinished(repairOrder);
 
         return "redirect:/autoservice/repairOrders/opened";
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/close")
     public String closeRepairingRo(@PathVariable Long id) {
-        RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
+        RepairingRepairOrder repairOrder = repairOrderService.fetchRepairingRepairOrder(id);
         checkRepairOrderAccess(repairOrder);
 
-        repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
-        repairOrder.setFinishTime(LocalDateTime.now());
-        repairOrderRepository.flush();
-
+        repairOrderService.setFinished(repairOrder);
         return "redirect:/autoservice/repairOrders/opened";
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/addPart")
+    @Transactional
     public ResponseEntity<?> addVehiclePartToRepairOrder(@PathVariable Long id, @RequestParam Long partId) {
-        RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
-        VehiclePart part = vehiclePartRepository.findById(partId).get();
+        RepairingRepairOrder repairOrder = repairOrderService.fetchRepairingRepairOrder(id);
+        VehiclePart part = vehiclePartService.fetch(partId);
         checkRepairOrderAccess(repairOrder);
         checkAutoServiceAccess(part.getAutoService());
 
@@ -123,15 +112,14 @@ public class AutoServiceController {
         item.setName(part.getPartName());
         item.setPrice(part.getPrice());
         repairOrder.addItem(item);
-        repairOrderRepository.flush();
 
         return ResponseEntity.ok("");
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/addLabor")
     public ResponseEntity<?> addServiceLaborToRepairOrder(@PathVariable Long id, @RequestParam Long laborId) {
-        RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
-        ServiceLabor labor = serviceLaborRepository.findById(laborId).get();
+        RepairingRepairOrder repairOrder = repairOrderService.fetchRepairingRepairOrder(id);
+        ServiceLabor labor = serviceLaborService.fetch(laborId);
         checkRepairOrderAccess(repairOrder);
         checkAutoServiceAccess(labor.getAutoService());
 
@@ -145,15 +133,24 @@ public class AutoServiceController {
 
     @PostMapping("/autoservice/repairOrders/{id}/removeItem")
     public ResponseEntity<?> removeItem(@PathVariable Long id, @RequestParam Long itemId) {
-
+        //TODO: implement
         return ResponseEntity.ok("");
     }
+
+
+
+
+
+
+
+
 
     @GetMapping("/autoservice/priceList")
     @Secured("ROLE_SERVICE_ADMIN")
     public String showPriceList(Model model) {
-        List<VehiclePart> parts = vehiclePartRepository.findAll();
-        List<ServiceLabor> labors = serviceLaborRepository.findAll();
+        List<VehiclePart> parts = vehiclePartService.findAllByAutoService(getUserAutoService());
+        List<ServiceLabor> labors = serviceLaborService.findAllByAutoService(getUserAutoService());
+
         model.addAttribute("parts", parts);
         model.addAttribute("labors", labors);
         return "autoservice/priceList";
@@ -162,7 +159,7 @@ public class AutoServiceController {
     @GetMapping("/autoservice/priceList/parts/{id}")
     @Secured("ROLE_SERVICE_ADMIN")
     public String vehiclePartModal(@PathVariable Long id, Model model) {
-        VehiclePart part = id == 0 ? new VehiclePart() : vehiclePartRepository.findById(id).get();
+        VehiclePart part = id == 0 ? new VehiclePart() : vehiclePartService.fetch(id);
         model.addAttribute("part", part);
         return "/autoservice/vehiclePartModal :: content";
     }
@@ -170,9 +167,11 @@ public class AutoServiceController {
     @PostMapping("/autoservice/priceList/parts/{id}/delete")
     @Secured("ROLE_SERVICE_ADMIN")
     public String vehiclePartRemove(@PathVariable Long id) {
-        VehiclePart part = vehiclePartRepository.findById(id).get();
+        VehiclePart part = vehiclePartService.fetch(id);
         checkAutoServiceAccess(part.getAutoService());
-        vehiclePartRepository.delete(part);
+
+        vehiclePartService.delete(part);
+
         return "redirect:/autoservice/priceList";
     }
 
@@ -182,7 +181,7 @@ public class AutoServiceController {
                                     @RequestParam double price, @RequestParam Long id) {
         VehiclePart part;
         if (id != null && id != 0) {
-            part = vehiclePartRepository.findById(id).get();
+            part = vehiclePartService.fetch(id);
             checkAutoServiceAccess(part.getAutoService());
         } else {
             part = new VehiclePart();
@@ -191,14 +190,14 @@ public class AutoServiceController {
         part.setEstimatedDurationInKm(estimatedDuration);
         part.setPrice(price);
         part.setPartName(partName);
-        vehiclePartRepository.save(part);
+        vehiclePartService.addOrModify(part);
         return "redirect:/autoservice/priceList";
     }
 
     @GetMapping("/autoservice/priceList/labors/{id}")
     @Secured("ROLE_SERVICE_ADMIN")
     public String serviceLaborModal(@PathVariable Long id, Model model) {
-        ServiceLabor labor = id == 0 ? new ServiceLabor() : serviceLaborRepository.findById(id).get();
+        ServiceLabor labor = id == 0 ? new ServiceLabor() : serviceLaborService.fetch(id);
         model.addAttribute("labor", labor);
         return "/autoservice/serviceLaborModal :: content";
     }
@@ -209,7 +208,7 @@ public class AutoServiceController {
                                      @RequestParam double price, @RequestParam Long id) {
         ServiceLabor serviceLabor;
         if (id != null && id != 0) {
-            serviceLabor = serviceLaborRepository.findById(id).get();
+            serviceLabor = serviceLaborService.fetch(id);
             checkAutoServiceAccess(serviceLabor.getAutoService());
         } else {
             serviceLabor = new ServiceLabor();
@@ -217,23 +216,30 @@ public class AutoServiceController {
         }
         serviceLabor.setServiceName(serviceName);
         serviceLabor.setPrice(price);
-        serviceLaborRepository.save(serviceLabor);
+        serviceLaborService.addOrModify(serviceLabor);
         return "redirect:/autoservice/priceList";
     }
 
     @PostMapping("/autoservice/priceList/labors/{id}/delete")
     @Secured("ROLE_SERVICE_ADMIN")
     public String serviceLaborRemove(@PathVariable Long id) {
-        ServiceLabor labor = serviceLaborRepository.findById(id).get();
+        ServiceLabor labor = serviceLaborService.fetch(id);
         checkAutoServiceAccess(labor.getAutoService());
-        serviceLaborRepository.delete(labor);
+        serviceLaborService.delete(labor);
         return "redirect:/autoservice/priceList";
     }
+
+
+
+
+
+
+
 
     @GetMapping("/autoservice/employees")
     @Secured("ROLE_SERVICE_ADMIN")
     public String autoserviceEmployees(Model model) {
-        List<ServiceEmployee> employees = serviceEmployeeRepository.findAll();
+        List<ServiceEmployee> employees = serviceEmployeeService.findAllByAutoService(getUserAutoService());
         model.addAttribute("employees", employees);
         return "autoservice/employees";
     }
@@ -262,9 +268,6 @@ public class AutoServiceController {
     @Secured("ROLE_SERVICE_ADMIN")
     public ResponseEntity<?> addEmployee(@RequestParam String username, @RequestParam String password,
                                          @RequestParam String firstName, @RequestParam String lastName) {
-        if (userRepository.existsByUsername(username)) {
-            return ResponseEntity.badRequest().body("Korisničko ime je zauzeto");
-        }
         if (username.isBlank() || password.isBlank() || firstName.isBlank() || lastName.isBlank()) {
             return ResponseEntity.badRequest().body("Nisu popunjena sva polja");
         }
@@ -275,30 +278,42 @@ public class AutoServiceController {
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
         employee.setAutoService(getUserAutoService());
-        serviceEmployeeRepository.save(employee);
+
+        try {
+            serviceEmployeeService.add(employee);
+        } catch (UsernameExistsException e) {
+            return ResponseEntity.badRequest().body("Korisničko ime je zauzeto");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
 
     @PostMapping("/autoservice/employees/delete")
     @Secured("ROLE_SERVICE_ADMIN")
     public String removeEmployee(@RequestParam String username) {
-        Optional<ServiceEmployee> employeeOptional = serviceEmployeeRepository.findByUsername(username);
+        Optional<ServiceEmployee> employeeOptional = serviceEmployeeService.findByUsername(username);
         if (employeeOptional.isEmpty()) throw new ResourceNotFoundException();
 
         ServiceEmployee employee = employeeOptional.get();
-        serviceEmployeeRepository.delete(employee);
+        serviceEmployeeService.delete(employee);
         return "redirect:/autoservice/employees";
     }
 
+
+
+
+
+
     @GetMapping("/autoservice/closed")
     public String closedRepairOrders(Model model) {
+        //TODO: implement
         return null;
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/status")
     @Transactional
     public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestParam String status) {
-        RepairOrder repairOrder = repairOrderRepository.findById(id).get();
+        RepairOrder repairOrder = repairOrderService.findById(id).get();
         checkRepairOrderAccess(repairOrder);
 
         switch (status) {

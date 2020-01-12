@@ -1,7 +1,11 @@
 package org.infiniteam.autoservice.service;
 
-public class Utility {
+import org.infiniteam.autoservice.model.AppUser;
+import org.infiniteam.autoservice.model.ServiceEmployee;
+import org.infiniteam.autoservice.repository.UserRepository;
+import org.springframework.util.Assert;
 
+public class Utility {
 
     public static boolean checkOib(String oib) {
         return true;
@@ -19,4 +23,10 @@ public class Utility {
         return true;
     }
 
+    public static void validateUser(AppUser user, UserRepository userRepository) {
+        String username = user.getUsername();
+        if (userRepository.existsByUsername(username)) {
+            throw new UsernameExistsException("Username " + username + " already exists.");
+        }
+    }
 }
