@@ -12,6 +12,15 @@
 
 <main role="main" class="container">
 
+    <script type="text/javascript">
+        function addPart(id) {
+            $.post(window.location.pathname + "/addPart", {partId: id}, () => location.reload());
+        }
+        function addLabor(id) {
+            $.post(window.location.pathname + "/addLabor", {laborId: id}, () => location.reload());
+        }
+    </script>
+
     <div class="row">
         <div class="col">
             <div class="row">
@@ -38,9 +47,9 @@
                 <th>Naziv stavke</th>
                 <th>Cijena</th>
             </tr>
-            <tr th:each="item : ${items}">
+            <tr th:each="item : ${order.items}">
                 <td th:text="${item.name}">Zamjena ulja</td>
-                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')} + ' kn'">100 kn</td>
+                <td th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">100 kn</td>
             </tr>
             <tr th:remove="all">
                 <td>Zamjena ulja</td>
@@ -60,7 +69,7 @@
 
     <div>
         <p>
-            <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 0, 'COMMA', 2, 'POINT')}]] kn</h3>
+            <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}]] kn</h3>
         </p>
     </div>
 
@@ -81,7 +90,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Dodavanje usluge
+                    <table class="table">
+                        <tr>
+                            <th>Opis</th>
+                            <th>Cijena</th>
+                            <th>Akcija</th>
+                        </tr>
+                        <tr th:each="labor : ${labors}">
+                            <td th:text="${labor.serviceName}">Zamjena ulja</td>
+                            <td th:text="${#numbers.formatDecimal(labor.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
+                            <td>
+                                <button type="button" class="btn btn-success" onclick="addLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Dodaj</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
@@ -101,7 +123,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Dodavanje rezervnog dijela.
+                    <table class="table">
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Predviđena kilometraža</th>
+                            <th>Cijena</th>
+                            <th>Akcija</th>
+                        </tr>
+                        <tr th:each="part : ${parts}">
+                            <td th:text="${part.partName}">Disk kočnice</td>
+                            <td th:text="${part.estimatedDurationInKm} + ' km'">100 000 km</td>
+                            <td th:text="${#numbers.formatDecimal(part.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
+                            <td>
+                                <button type="button" class="btn btn-success" onclick="addPart(this.dataset.id);" th:attr="data-id=${part.partId}">Dodaj</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>

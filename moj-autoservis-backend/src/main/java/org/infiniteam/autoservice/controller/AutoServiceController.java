@@ -1,5 +1,6 @@
 package org.infiniteam.autoservice.controller;
 
+import org.apache.coyote.Response;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.repository.*;
 import org.infiniteam.autoservice.security.CurrentUser;
@@ -76,6 +77,8 @@ public class AutoServiceController {
         if (repairOrder instanceof RegularRepairOrder) {
             return "autoservice/editRegularRo";
         } else if (repairOrder instanceof RepairingRepairOrder) {
+            model.addAttribute("parts", vehiclePartRepository.findAllByAutoService(getUserAutoService()));
+            model.addAttribute("labors", serviceLaborRepository.findAllByAutoService(getUserAutoService()));
             return "autoservice/editRepairingRo";
         } else {
             throw new RuntimeException("Not implemented.");
@@ -110,7 +113,7 @@ public class AutoServiceController {
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/addPart")
-    public String addVehiclePartToRepairOrder(@PathVariable Long id, @RequestParam Long partId) {
+    public ResponseEntity<?> addVehiclePartToRepairOrder(@PathVariable Long id, @RequestParam Long partId) {
         RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
         VehiclePart part = vehiclePartRepository.findById(partId).get();
         checkRepairOrderAccess(repairOrder);
@@ -120,12 +123,13 @@ public class AutoServiceController {
         item.setName(part.getPartName());
         item.setPrice(part.getPrice());
         repairOrder.addItem(item);
+        repairOrderRepository.flush();
 
-        return "redirect:/autoservice/repairOrders" + id;
+        return ResponseEntity.ok("");
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/addLabor")
-    public String addServiceLaborToRepairOrder(@PathVariable Long id, @RequestParam Long laborId) {
+    public ResponseEntity<?> addServiceLaborToRepairOrder(@PathVariable Long id, @RequestParam Long laborId) {
         RepairingRepairOrder repairOrder = (RepairingRepairOrder) repairOrderRepository.findById(id).get();
         ServiceLabor labor = serviceLaborRepository.findById(laborId).get();
         checkRepairOrderAccess(repairOrder);
@@ -136,7 +140,7 @@ public class AutoServiceController {
         item.setPrice(labor.getPrice());
         repairOrder.addItem(item);
 
-        return "redirect:/autoservice/repairOrders" + id;
+        return ResponseEntity.ok("");
     }
 
     @GetMapping("/autoservice/priceList")

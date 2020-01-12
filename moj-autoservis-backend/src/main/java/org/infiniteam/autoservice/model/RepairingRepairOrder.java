@@ -11,7 +11,7 @@ public class RepairingRepairOrder extends RepairOrder {
     @Column
     private String malfunctions;
 
-    @OneToMany(mappedBy = "repairOrder", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "repairOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RepairOrderItem> items = new ArrayList<>();
 
     public String getMalfunctions() {
