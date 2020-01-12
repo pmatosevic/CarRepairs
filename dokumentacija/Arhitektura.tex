@@ -346,11 +346,20 @@
 		
 		\section{Dijagram stanja}
 			
+			Slika \ref{fig:statediagram} prikazuje dijagram stanja koji opisuje kako se serviser služi aplikacijom. Nakon što mu se njegova prikaže početna stranica, on klikom na "Servisni nalozi" dobiva prikaz liste otvorenih naloga. Klikom na "Prihvati nalog" on prihvaća određeni nalog te, ovisno o tome je li nalog redovni ili izvanredni, biva preusmjeren na prozor predviđen taj nalog.
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Ako je nalog redovni, klikom na "Unos kilometraže" on unosi kilometražu vozila u trenutku servisa. Klikom na "Spremi" kilometraža se sprema te se serviser vraća na prikaz liste radnih naloga.
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			Ako je nalog izvanredni, klikom na "Unos rezervnih dijelova" serviser se preusmjerava na iskočni prozor gdje, dok ih ima, unosi rezervne dijelove. Nakon što je završio, vraća se na prikaz naloga. Odabirom "Unos usluga" on na isti način unosi usluge koje su obavljene u servisu, dok ih ima. Klikom na "Zatvori" serviser se vraća na prikaz liste otvorenih naloga.
 			
+			Ukoliko na svojoj početnoj stranici serviser odabere opciju "Odjava", on se odjavljuje iz svog korisničkog računa.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_serviser}
+				\caption{Dijagram stanja za servisera}
+				\label{fig:statediagram}
+			\end{figure}
 			
 			\eject 
 		
