@@ -19,6 +19,9 @@
         function addLabor(id) {
             $.post(window.location.pathname + "/addLabor", {laborId: id}, () => location.reload());
         }
+        function removeItem(id) {
+            $.post(window.location.pathname + "/removeItem", {itemId: id}, () => location.reload());
+        }
     </script>
 
     <div class="row">
@@ -46,10 +49,14 @@
             <tr>
                 <th>Naziv stavke</th>
                 <th>Cijena</th>
+                <th></th>
             </tr>
             <tr th:each="item : ${order.items}">
                 <td th:text="${item.name}">Zamjena ulja</td>
                 <td th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">100 kn</td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="removeItem(this.dataset.id);" th:attr="data-id=${item.itemId}">Ukloni</button>
+                </td>
             </tr>
             <tr th:remove="all">
                 <td>Zamjena ulja</td>

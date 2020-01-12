@@ -143,6 +143,12 @@ public class AutoServiceController {
         return ResponseEntity.ok("");
     }
 
+    @PostMapping("/autoservice/repairOrders/{id}/removeItem")
+    public ResponseEntity<?> removeItem(@PathVariable Long id, @RequestParam Long itemId) {
+
+        return ResponseEntity.ok("");
+    }
+
     @GetMapping("/autoservice/priceList")
     @Secured("ROLE_SERVICE_ADMIN")
     public String showPriceList(Model model) {
