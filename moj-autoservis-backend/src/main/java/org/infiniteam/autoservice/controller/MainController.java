@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.security.Principal;
@@ -108,5 +111,21 @@ public class MainController {
         newAutoService.addEmployee(owner);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/settings")
+    public String settings(Model model){
+        AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
+        model.addAttribute("user", appUser);
+        return "settings";
+    }
+
+    @PostMapping("/settings")
+    public String changeUserSettings(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email){
+        AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
+        appUser.setFirstName(firstName);
+        appUser.setLastName(lastName);
+        appUser.setEmail(email);
+        return "redirect:/settings";
     }
 }
