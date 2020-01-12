@@ -365,9 +365,20 @@
 		
 		\section{Dijagram aktivnosti}
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Dijagram aktivnosti na slici \ref{fig:actdiag} prikazuje dijagram aktivnosti za životni tijek jednog radnog naloga, od otvaranja koje vrši korisnik do zatvaranja.
 			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			Korisnik zatraži upravljanje nalozima web-aplikaciji, koja zatim šalje upit za dohvat podataka bazi podataka. Nakon što baza vrati podatke o automobilima i servisima, web-aplikacija prikazuje sučelje za otvaranje radnog naloga. Korisnik tada otvara novi radni nalog, a web-aplikacija šalje bazi podataka upit za dodavanjem podataka. Kada baza stvori novi radni nalog, web-aplikacija potvrđuje spremanje. 
+			
+			Nakon toga, serviser zatraži listu naloga te ju web-aplikacija dohvati iz baze. Serviser prihvaća radni nalog te ponovno preko web-aplikacije i baze ažurira status naloga. Nakon što web-aplikacija prikaže sučelje otvorenog naloga, serviser unosi kilometražu i napomene (od kojih može odustati), te odlučuje je li potreban izvanredni servis. Web-aplikacija šalje upit bazi koja ažurira podatke, nakon čega web-aplikacija prikazuje ažurirane podatke serviseru. 
+			
+			Naposljetku, serviser zatvara radni nalog, te web-aplikacija šalje upit za promjenom podataka bazi. Ona ažurira podatke, nakon čega web-aplikacija prikazuje potvrdu serviseru.
+			 
+			 \begin{figure}[H]
+			 	\centering
+			 	\includegraphics[width=1.0\linewidth]{dijagrami/activity-diagram-edited}
+			 	\caption{Dijagram aktivnosti}
+			 	\label{fig:actdiag}
+			 \end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
