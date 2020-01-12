@@ -21,7 +21,27 @@
             </div>
             <div class="modal-body">
                 <div th:fragment="content">
-                    Dynamic loading
+                    <h5>
+                        Vlasnik: [[${ro.vehicle.owner.fullName}]] <br />
+                        Model automobila: [[${ro.vehicle.vehicleModel}]] <br />
+                        Registracijske oznake: [[${ro.vehicle.licencePlate}]] <br />
+                    </h5>
+                    <p>
+                        Autoservis: [[${ro.autoService.shopName}]]
+                    <p>
+                    <p>
+                        <table width="100%">
+                            <tr>
+                                <th>Naziv stavke</th>
+                                <th>Cijena</th>
+                            </tr>
+                            <tr th:each="item : ${ro.items}">
+                                <td th:text="${item.name}">Zamjena ulja</td>
+                                <td th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">100 kn</td>
+                            </tr>
+                        </table>
+                    </p>
+                    <h4>Ukupna cijena naloga: [[${#numbers.formatDecimal(ro.price, 1, 'COMMA', 2, 'POINT')}]] kn</h4>
                 </div>
             </div>
             <div class="modal-footer">

@@ -22,17 +22,15 @@
             <div class="modal-body">
                 <div th:fragment="content">
                     <h5>
-                    Vlasnik: Pero Perić <br>
-                    Model automobila: model <br>
-                    Registracijske oznake: ZG 1234 AV <br></h5>
+                    Vlasnik: [[${ro.vehicle.owner.fullName}]] <br />
+                    Model automobila: [[${ro.vehicle.vehicleModel}]] <br />
+                    Registracijske oznake: [[${ro.vehicle.licencePlate}]] <br />
+                    </h5>
                     <p>
-                        Broj naloga: #123 <br>
-                        Autoservis: Najbolji autoservis <br>
-                        Serviser: Marin Marić <br>
-                    Kilometraža: 80 000 km <br>
-                    Status naloga: Otvoren <br>
+                        Autoservis: [[${ro.autoService.shopName}]] <br />
+                        Kilometraža: [[${#numbers.formatInteger(ro.price,1,'POINT')}]] km <br />
                     <p>
-                    <h4>Ukupna cijena naloga: 1000 kn</h4>
+                    <h4>Ukupna cijena naloga: [[${#numbers.formatDecimal(ro.price, 1, 'COMMA', 2, 'POINT')}]] kn</h4>
                 </div>
             </div>
             <div class="modal-footer">

@@ -66,25 +66,30 @@
     <form style="visibility: hidden" id="deleteForm" method="post" th:action="'/user/vehicles/' + ${vehicle.vehicleId} + '/delete'"></form>
 
     <table class="table">
-        <thead>
-        <td>Auto servis</td>
-        <td>Stanje</td>
-        <td>Tip servisa</td>
-        <td></td>
-        </thead>
-        <tbody>
+        <tr>
+            <th>Auto servis</th>
+            <th>Stanje</th>
+            <th>Tip servisa</th>
+            <th>Datum servisa</th>
+            <th></th>
+        </tr>
         <tr th:each="ro : ${repairOrders}" data-id="${ro.id}">
             <td th:text="${ro.autoService.shopName}"></td>
-            <td th:text="${ro.serviceJobStatus}"></td>
+            <td th:switch="${ro.serviceJobStatus.name()}">
+                <span th:case="ACCEPTANCE_WAITING">Na čekanju</span>
+                <span th:case="IN_PROGRESS">Popravak u tijeku</span>
+                <span th:case="FINISHED">Završen</span>
+                <span th:case="REJECTED">Odbijen</span>
+            </td>
             <td>
                 <span th:if="${ro instanceof T(org.infiniteam.autoservice.model.RegularRepairOrder)}" th:text="Redovni"></span>
                 <span th:if="${ro instanceof T(org.infiniteam.autoservice.model.RepairingRepairOrder)}" th:text="Izvanredni"></span>
             </td>
+            <td th:text="${#temporals.format(ro.finishTime,'dd.MM.yyyy')}"></td>
             <td>
-                <button type="button" class="btn btn-secondary" onclick="showModal(this.dataset.id);" th:attr="data-id=${ro.repairOrderId}">Detalji</button>
+                <button type="button" class="btn btn-secondary" th:disabled="${!(ro.serviceJobStatus.name() == 'FINISHED' || ro.serviceJobStatus.name() == 'IN_PROGRESS')}" onclick="showModal(this.dataset.id);" th:attr="data-id=${ro.repairOrderId}">Detalji</button>
             </td>
         </tr>
-        </tbody>
     </table>
 
     <div class="modal fade" id="roDetailsModal" tabindex="-1" role="dialog" aria-labelledby="roDetailsLabel" aria-hidden="true">

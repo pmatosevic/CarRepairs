@@ -74,6 +74,8 @@ public class VehicleOwnerController {
         RepairOrder ro = repairOrderRepository.findById(roId).get();
         checkVehicleRights(ro.getVehicle());
 
+        model.addAttribute("ro", ro);
+
         if (ro instanceof RegularRepairOrder) {
             return "user/regularRoModal :: content";
         } else if (ro instanceof RepairingRepairOrder) {

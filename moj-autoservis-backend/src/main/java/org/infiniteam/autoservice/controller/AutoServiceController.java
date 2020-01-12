@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.websocket.server.PathParam;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +91,7 @@ public class AutoServiceController {
         repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
         repairOrder.setKilometers(kilometers);
         repairOrder.setRepairRecommended(recommended);
+        repairOrder.setFinishTime(LocalDateTime.now());
         repairOrderRepository.flush();
 
         return "redirect:/autoservice/repairOrders/opened";
@@ -101,6 +103,7 @@ public class AutoServiceController {
         checkRepairOrderAccess(repairOrder);
 
         repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
+        repairOrder.setFinishTime(LocalDateTime.now());
         repairOrderRepository.flush();
 
         return "redirect:/autoservice/repairOrders/opened";
