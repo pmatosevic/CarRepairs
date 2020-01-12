@@ -34,4 +34,9 @@ public class RepairingRepairOrder extends RepairOrder {
         item.setRepairOrder(this);
         items.add(item);
     }
+
+    public void removeItem(RepairOrderItem item) {
+        items.remove(item);
+        item.setRepairOrder(null);
+    }
 }

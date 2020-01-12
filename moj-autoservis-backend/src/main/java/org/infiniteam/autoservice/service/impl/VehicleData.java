@@ -1,4 +1,4 @@
-package org.infiniteam.autoservice.service;
+package org.infiniteam.autoservice.service.impl;
 
 public class VehicleData {
 

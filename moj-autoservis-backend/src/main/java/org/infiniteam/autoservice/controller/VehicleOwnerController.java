@@ -2,14 +2,9 @@ package org.infiniteam.autoservice.controller;
 
 import org.infiniteam.autoservice.dto.OpenRepairOrderDto;
 import org.infiniteam.autoservice.model.*;
-import org.infiniteam.autoservice.repository.AutoServiceRepository;
-import org.infiniteam.autoservice.repository.RepairOrderRepository;
-import org.infiniteam.autoservice.repository.UserRepository;
-import org.infiniteam.autoservice.repository.VehicleRepository;
 import org.infiniteam.autoservice.security.CurrentUser;
-import org.infiniteam.autoservice.service.HuoService;
-import org.infiniteam.autoservice.service.HuoServiceException;
-import org.infiniteam.autoservice.service.VehicleData;
+import org.infiniteam.autoservice.service.*;
+import org.infiniteam.autoservice.service.impl.VehicleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,24 +19,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Controller
 @Secured("ROLE_USER")
 public class VehicleOwnerController {
 
     @Autowired
-    private UserRepository userRepository;
+    private VehicleService vehicleService;
 
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private RepairOrderService repairOrderService;
 
     @Autowired
-    private RepairOrderRepository repairOrderRepository;
-
-    @Autowired
-    private AutoServiceRepository autoServiceRepository;
+    private AutoServiceService autoServiceService;
 
     @Autowired
     private HuoService huoService;
@@ -50,20 +40,20 @@ public class VehicleOwnerController {
     @Transactional
     public String carOwnerHome(Model model) {
         VehicleOwner user = getCurrentUser();
-        model.addAttribute("vehicles", vehicleRepository.findAllByOwner(user));
+        model.addAttribute("vehicles", vehicleService.findAllByOwner(user));
         return "user/vehicleList";
     }
 
     @GetMapping("/user/vehicles/{id}")
     @Transactional
     public String carDetails(@PathVariable Long id, Model model) {
-        Vehicle vehicle = vehicleRepository.findById(id).get();
+        Vehicle vehicle = vehicleService.fetch(id);
         checkVehicleRights(vehicle);
 
         model.addAttribute("vehicle", vehicle);
         model.addAttribute("roDisabled", !roCanBeOpened(vehicle));
-        model.addAttribute("repairOrders", repairOrderRepository.findAllByVehicle(vehicle));
-        model.addAttribute("autoServices", autoServiceRepository.findAll());
+        model.addAttribute("repairOrders", repairOrderService.findAllByVehicle(vehicle));
+        model.addAttribute("autoServices", autoServiceService.findAll());
 
         return "user/vehicle";
     }
@@ -71,7 +61,7 @@ public class VehicleOwnerController {
     @GetMapping("/user/vehicles/{id}/ro/{roId}")
     @Transactional
     public String repairOrderDetails(@PathVariable Long id, @PathVariable Long roId, Model model) {
-        RepairOrder ro = repairOrderRepository.findById(roId).get();
+        RepairOrder ro = repairOrderService.fetch(roId);
         checkVehicleRights(ro.getVehicle());
 
         model.addAttribute("ro", ro);
@@ -89,7 +79,7 @@ public class VehicleOwnerController {
     @Transactional
     public ResponseEntity<?> addVehicle(@RequestBody String licencePlate) {
         VehicleOwner user = getCurrentUser();
-        if (vehicleRepository.existsByLicencePlateAndOwner(licencePlate, user)) {
+        if (vehicleService.existsByLicencePlateAndOwner(licencePlate, user)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vozilo već postoji!");
         }
 
@@ -102,15 +92,14 @@ public class VehicleOwnerController {
                     .body("Vozilo nije registrirano u bazi osiguranih vozila!");
         }
 
-        Vehicle vehicle = new Vehicle(vehicleData, user);
-        vehicleRepository.saveAndFlush(vehicle);
+        Vehicle vehicle = vehicleService.create(vehicleData, user);
         return ResponseEntity.status(HttpStatus.CREATED).body(vehicle.getVehicleId());
     }
 
     @PostMapping("/user/vehicles/{id}/delete")
     @Transactional
     public String deleteVehicle(@PathVariable Long id) {
-        Vehicle vehicle = vehicleRepository.findById(id).get();
+        Vehicle vehicle = vehicleService.fetch(id);
         checkVehicleRights(vehicle);
         if (roCanBeOpened(vehicle)) {
             vehicle.setOwner(null);
@@ -121,29 +110,21 @@ public class VehicleOwnerController {
     @PostMapping("/user/vehicles/{id}/ro")
     @Transactional
     public ResponseEntity<?> openRepairOrder(@PathVariable Long id, @RequestBody OpenRepairOrderDto openRepairOrderDto) {
-        Optional<Vehicle> vehicleOptional = vehicleRepository.findById(id);
-        Optional<AutoService> as = autoServiceRepository.findById(openRepairOrderDto.getAutoServiceId());
-        if (vehicleOptional.isEmpty() || as.isEmpty()) return ResponseEntity.badRequest().body("Bad request.");
+        Vehicle vehicle = vehicleService.fetch(id);
+        AutoService autoservice = autoServiceService.fetch(openRepairOrderDto.getAutoServiceId());
 
-        Vehicle vehicle = vehicleOptional.get();
         checkVehicleRights(vehicle);
         if (!roCanBeOpened(vehicle)) {
             return ResponseEntity.badRequest().body("Vozilo je već na servisu.");
         }
 
-        RepairOrder repairOrder = (openRepairOrderDto.getRepairOrderType() == RepairOrderType.REGULAR_REPAIR_ORDER) ?
-                new RegularRepairOrder() : new RepairingRepairOrder();
-        repairOrder.setAutoService(as.get());
-        repairOrder.setVehicle(vehicle);
-        repairOrder.setCreationTime(LocalDateTime.now());
-        repairOrderRepository.saveAndFlush(repairOrder);
-
+        repairOrderService.create(autoservice, vehicle, openRepairOrderDto.getRepairOrderType());
         return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
 
     private boolean roCanBeOpened(Vehicle vehicle) {
-        return !repairOrderRepository.existsByVehicleAndServiceJobStatus(vehicle, ServiceJobStatus.IN_PROGRESS)
-                && !repairOrderRepository.existsByVehicleAndServiceJobStatus(vehicle, ServiceJobStatus.ACCEPTANCE_WAITING);
+        return !repairOrderService.existsByVehicleAndServiceJobStatus(vehicle, ServiceJobStatus.IN_PROGRESS)
+                && !repairOrderService.existsByVehicleAndServiceJobStatus(vehicle, ServiceJobStatus.ACCEPTANCE_WAITING);
     }
 
     private void checkVehicleRights(Vehicle vehicle) {

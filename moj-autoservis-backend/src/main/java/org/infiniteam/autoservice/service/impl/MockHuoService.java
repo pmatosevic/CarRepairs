@@ -1,5 +1,7 @@
-package org.infiniteam.autoservice.service;
+package org.infiniteam.autoservice.service.impl;
 
+import org.infiniteam.autoservice.service.HuoService;
+import org.infiniteam.autoservice.service.HuoServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

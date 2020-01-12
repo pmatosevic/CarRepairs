@@ -1,6 +1,6 @@
 package org.infiniteam.autoservice.model;
 
-import org.infiniteam.autoservice.service.VehicleData;
+import org.infiniteam.autoservice.service.impl.VehicleData;
 
 import javax.persistence.*;
 
