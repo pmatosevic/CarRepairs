@@ -27,7 +27,7 @@ public class AdministratorController {
     @Secured("ROLE_ADMIN")
     @GetMapping("/admin")
     public String adminHome(Model model) {
-        return "admin/home";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/admin/users")

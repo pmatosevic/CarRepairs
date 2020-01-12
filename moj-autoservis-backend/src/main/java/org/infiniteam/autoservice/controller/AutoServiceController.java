@@ -249,11 +249,12 @@ public class AutoServiceController {
 
     @PostMapping("/autoservice/details")
     @Secured("ROLE_SERVICE_ADMIN")
-    public String changeServiceSettings(@RequestParam String shopName, @RequestParam String address){
+    public String changeServiceSettings(@RequestParam String shopName, @RequestParam String address, @RequestParam double regularPrice) {
         ServiceEmployee serviceEmployee  = (ServiceEmployee) ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
         AutoService autoService = serviceEmployee.getAutoService();
         autoService.setShopName(shopName);
         autoService.setAddress(address);
+        autoService.setRegularServicePrice(regularPrice);
         return "redirect:/autoservice/details";
     }
 

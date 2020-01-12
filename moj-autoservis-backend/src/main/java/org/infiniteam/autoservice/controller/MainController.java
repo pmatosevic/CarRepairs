@@ -117,7 +117,7 @@ public class MainController {
     public String settings(Model model){
         AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
         model.addAttribute("user", appUser);
-        return "settings";
+        return "changeSettings";
     }
 
     @PostMapping("/settings")
@@ -127,5 +127,10 @@ public class MainController {
         appUser.setLastName(lastName);
         appUser.setEmail(email);
         return "redirect:/settings";
+    }
+
+    @GetMapping("/changePassword")
+    public String changePassword(Model model) {
+        return "changePassword";
     }
 }

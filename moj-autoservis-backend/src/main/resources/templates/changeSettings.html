@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"xmlns:th="http://www.thymeleaf.org">
 <head th:replace="header :: common_header(~{::title},~{})">
-    <title>Postavke</title>
+    <title>Korisnički podaci</title>
 </head>
 <body>
 <div th:replace="~{header :: header}">Header</div>
 <main role="main" class="container">
     <form class="settings-form" id="settings" method="post">
-        <h1 class="h3 mb-3 font-weight-normal">Korisnički podaci</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Promjena korisničkih podataka</h1>
         <p id="error"></p>
         <div class="form-group row">
             <label for="firstName" class="col-sm-2 col-form-label">Ime:</label>
@@ -24,7 +24,7 @@
         <div class="form-group row">
             <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="email" id="email" th:value ="${user.email}">
+                <input required type="email" class="form-control" name="email" id="email" th:value ="${user.email}" />
             </div>
         </div>
         <button type="button" class="btn btn-primary" onclick="$('#settings').submit();">Spremi</button>
