@@ -1,5 +1,6 @@
 package org.infiniteam.autoservice.service.impl;
 
+import org.infiniteam.autoservice.controller.BadRequestException;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.repository.RepairOrderRepository;
 import org.infiniteam.autoservice.service.EntityNotFoundException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -87,6 +89,33 @@ public class RepairOrderServiceJpa implements RepairOrderService {
         Assert.isTrue(kilometers >= 0, "Kilometers must be non-negative.");
         ro.setKilometers(kilometers);
         ro.setRepairRecommended(repairRecommended);
+    }
+
+    @Override
+    @Transactional
+    public void removeItemFromOrder(RepairingRepairOrder ro, long itemId) {
+        RepairOrderItem item = null;
+        for (RepairOrderItem item1 : ro.getItems()) {
+            if (item1.getItemId().equals(itemId)) item = item1;
+        }
+        if (item == null) throw new EntityNotFoundException("Item not found.");
+        ro.removeItem(item);
+
+        repairOrderRepository.flush();
+    }
+
+    @Override
+    @Transactional
+    public void addItemToOrder(RepairingRepairOrder ro, Product product) {
+        Assert.hasText(product.getName(), "Name should not be empty.");
+        Assert.isTrue(product.getPrice() >= 0, "Price should be non negative.");
+
+        RepairOrderItem item = new RepairOrderItem();
+        item.setName(product.getName());
+        item.setPrice(product.getPrice());
+        ro.addItem(item);
+
+        repairOrderRepository.flush();
     }
 
 

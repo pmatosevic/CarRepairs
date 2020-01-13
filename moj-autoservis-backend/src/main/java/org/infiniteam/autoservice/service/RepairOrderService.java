@@ -29,4 +29,8 @@ public interface RepairOrderService {
 
     void updateRegularRepairOrder(RegularRepairOrder ro, int kilometers, boolean repairRecommended);
 
+    void addItemToOrder(RepairingRepairOrder ro, Product product);
+
+    void removeItemFromOrder(RepairingRepairOrder ro, long itemId);
+
 }

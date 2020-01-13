@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface AutoServiceService {
 
-    List<AutoService> findAll();
+    List<AutoService> findAllActive();
 
     AutoService fetch(long autoServiceId);
 

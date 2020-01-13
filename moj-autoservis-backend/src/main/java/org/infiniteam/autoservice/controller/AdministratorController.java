@@ -1,25 +1,17 @@
 package org.infiniteam.autoservice.controller;
 
-import org.infiniteam.autoservice.model.AppUser;
 import org.infiniteam.autoservice.model.AutoService;
-import org.infiniteam.autoservice.model.ServiceEmployee;
 import org.infiniteam.autoservice.model.VehicleOwner;
-import org.infiniteam.autoservice.repository.UserRepository;
-import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.service.AutoServiceService;
 import org.infiniteam.autoservice.service.VehicleOwnerService;
-import org.infiniteam.autoservice.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -54,7 +46,7 @@ public class AdministratorController {
 
     @GetMapping("/admin/autoservices")
     public String autoservicesList(Model model) {
-        List<AutoService> autoServices = autoServiceService.findAll();
+        List<AutoService> autoServices = autoServiceService.findAllActive();
         model.addAttribute("autoServices", autoServices);
         return "admin/autoServices";
     }

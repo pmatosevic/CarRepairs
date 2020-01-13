@@ -101,17 +101,13 @@ public class AutoServiceController {
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/addPart")
-    @Transactional
     public ResponseEntity<?> addVehiclePartToRepairOrder(@PathVariable Long id, @RequestParam Long partId) {
         RepairingRepairOrder repairOrder = repairOrderService.fetchRepairingRepairOrder(id);
         VehiclePart part = vehiclePartService.fetch(partId);
         checkRepairOrderAccess(repairOrder);
         checkAutoServiceAccess(part.getAutoService());
 
-        RepairOrderItem item = new RepairOrderItem();
-        item.setName(part.getPartName());
-        item.setPrice(part.getPrice());
-        repairOrder.addItem(item);
+        repairOrderService.addItemToOrder(repairOrder, part);
 
         return ResponseEntity.ok("");
     }
@@ -123,18 +119,19 @@ public class AutoServiceController {
         checkRepairOrderAccess(repairOrder);
         checkAutoServiceAccess(labor.getAutoService());
 
-        RepairOrderItem item = new RepairOrderItem();
-        item.setName(labor.getServiceName());
-        item.setPrice(labor.getPrice());
-        repairOrder.addItem(item);
+        repairOrderService.addItemToOrder(repairOrder, labor);
 
         return ResponseEntity.ok("");
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/removeItem")
-    public ResponseEntity<?> removeItem(@PathVariable Long id, @RequestParam Long itemId) {
-        //TODO: implement
-        return ResponseEntity.ok("");
+    @Transactional
+    public String removeItem(@PathVariable Long id, @RequestParam Long itemId) {
+        RepairingRepairOrder ro = repairOrderService.fetchRepairingRepairOrder(id);
+        checkRepairOrderAccess(ro);
+        repairOrderService.removeItemFromOrder(ro, itemId);
+
+        return "redirect:/autoservice/repairOrders/" + id;
     }
 
 

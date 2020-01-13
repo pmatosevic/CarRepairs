@@ -3,7 +3,7 @@ package org.infiniteam.autoservice.model;
 import javax.persistence.*;
 
 @Entity
-public class VehiclePart {
+public class VehiclePart implements Product {
 
     @Id @GeneratedValue
     private Long partId;
@@ -50,6 +50,11 @@ public class VehiclePart {
 
     public void setEstimatedDurationInKm(int estimatedDurationInKm) {
         this.estimatedDurationInKm = estimatedDurationInKm;
+    }
+
+    @Override
+    public String getName() {
+        return partName;
     }
 
     public double getPrice() {

@@ -53,7 +53,7 @@ public class VehicleOwnerController {
         model.addAttribute("vehicle", vehicle);
         model.addAttribute("roDisabled", !roCanBeOpened(vehicle));
         model.addAttribute("repairOrders", repairOrderService.findAllByVehicle(vehicle));
-        model.addAttribute("autoServices", autoServiceService.findAll());
+        model.addAttribute("autoServices", autoServiceService.findAllActive());
 
         return "user/vehicle";
     }

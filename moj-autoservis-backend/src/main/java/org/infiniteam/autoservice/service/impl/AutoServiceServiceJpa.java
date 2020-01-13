@@ -34,8 +34,8 @@ public class AutoServiceServiceJpa implements AutoServiceService {
 
 
     @Override
-    public List<AutoService> findAll() {
-        return autoServiceRepository.findAll();
+    public List<AutoService> findAllActive() {
+        return autoServiceRepository.findAllByActive(true);
     }
 
     @Override
