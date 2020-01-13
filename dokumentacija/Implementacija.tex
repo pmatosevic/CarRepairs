@@ -2,11 +2,19 @@
 		
 		
 		\section{Korištene tehnologije i alati}
+%		
+%			\textbf{\textit{dio 2. revizije}}
+%			
+%			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
+
 		
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
-			
+		Prilikom rada na projektu komunikacija je ostvarena putem aplikacije \textit{Slack}\footnote{https://slack.com/}, a za praćenje promjena na izvornom kodu aplikacije i dokumentacije je korišten alat \textit{Git}\footnote{https://git-scm.com/} s udaljenim repozitorijem na servisu \textit{GitLab}\footnote{https://gitlab.com/}. Za pisanje koda je korišteno razvojno okruženje \textit{IntelliJ IDEA}\footnote{text}. Dokumantacija pisana u \textit{LaTeX}-u korištenjem aplikacija \textit{TexStudio}\footnote{text}, a dijagrami su izrađeni alatom \textit{Astah UML}.
+		
+		Aplikacija, odnosno njezin \textit{backend} je napisan u programskom jeziku \textit{Java} korištenjem radnog okvira \textit{Spring}\footnote{text}. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac model-pogled-nadglednik, koristi princip inverzije ovisnosti koji će olakšati kasnije promjene te nudi gotovu implementaciju različitih protokola. Korištena je i biblioteka \textit{Thymeleaf}\footnote{text} koja olakšava generiranje \textit{HTML} koda koji se šalje kiljentovom pregledniku.
+		
+		Uz njega je korištena i biblioteka \textit{Spring JPA}\footnote{text} (koja uključuje \textit{ORM} biblioteku \textit{Hibernate}) koja automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje. U razvojnoj okolini se koristi \textit{H2}\footnote{text} baza podataka koja se čuva u memoriji za vrijeme pokretanja aplikacije te omogućava lako testiranje i dodavanje podataka. U produkcijskoj okolini je korištena \textit{PostgreSQL}\footnote{text} baza podataka, koja je besplatna i otvorenog koda te dobro podržana u \textit{Spring} okviru.
+		
+		\textit{Frontend} je ostvaren u \textit{HTML}-u, \textit{CSS}-u i \textit{JavaScript}-u. Korištena je biblioteka \textit{Bootstrap}\footnote{text} koja omogućuje lakšu i bržu izradu responzivnih stranica korištenjem gotovih komponenti. Biblioteka \textit{jQuery}\footnote{text} je korištena zbog nadogradnje osnovnih mogućnosti \textit{JavaScripta}.
 			
 			\eject 
 		
