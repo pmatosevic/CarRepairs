@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static org.infiniteam.autoservice.model.RepairOrderType.REGULAR_REPAIR_ORDER;
+
 @Service
 public class RepairOrderServiceJpa implements RepairOrderService {
 
@@ -46,12 +48,13 @@ public class RepairOrderServiceJpa implements RepairOrderService {
 
     @Override
     public RepairOrder create(AutoService autoService, Vehicle vehicle, RepairOrderType type) {
-        RepairOrder repairOrder = (type == RepairOrderType.REGULAR_REPAIR_ORDER) ?
+        RepairOrder repairOrder = (type == REGULAR_REPAIR_ORDER) ?
                 new RegularRepairOrder() : new RepairingRepairOrder();
 
         repairOrder.setAutoService(autoService);
         repairOrder.setVehicle(vehicle);
         repairOrder.setCreationTime(LocalDateTime.now());
+        repairOrder.setPrice(type == REGULAR_REPAIR_ORDER ? autoService.getRegularServicePrice() : 0.0);
 
         return repairOrderRepository.save(repairOrder);
     }
@@ -100,6 +103,7 @@ public class RepairOrderServiceJpa implements RepairOrderService {
         }
         if (item == null) throw new EntityNotFoundException("Item not found.");
         ro.removeItem(item);
+        ro.setPrice(ro.getPrice() - item.getPrice());
 
         repairOrderRepository.flush();
     }
@@ -114,6 +118,7 @@ public class RepairOrderServiceJpa implements RepairOrderService {
         item.setName(product.getName());
         item.setPrice(product.getPrice());
         ro.addItem(item);
+        ro.setPrice(ro.getPrice() + item.getPrice());
 
         repairOrderRepository.flush();
     }
