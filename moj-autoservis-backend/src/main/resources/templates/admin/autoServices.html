@@ -14,10 +14,10 @@
         })
     }
 
-    function deleteUser(id) {
+    function deleteService(id) {
         const url = urljoin(window.location.pathname, id, "/delete");
         $.post(url)
-            .done(data => bootbox.alert("Korisnik je izbrisan", () => location.reload()))
+            .done(data => bootbox.alert("Auto servis je izbrisan", () => location.reload()))
             .fail(xhr => bootbox.alert("Dogodila se pogreška: " + xhr.responseText));
     }
 </script>
@@ -26,23 +26,21 @@
 
 <main role="main" class="container">
 
-    <p><h3>Registrirani vlasnici automobila</h3></p>
+    <p><h3>Registrirani autoservisi</h3></p>
     <table class="table">
         <tr>
-            <th>Korisničko ime</th>
-            <th>Ime i prezime</th>
+            <th>Naziv</th>
+            <th>Adresa</th>
             <th>OIB</th>
-            <th>E-mail</th>
             <th>Akcija</th>
         </tr>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.username}">pperic</td>
-            <td th:text="${user.fullName}">Pero Perić</td>
-            <td th:text="${user.oib}">123456789</td>
-            <td th:text="${user.email}">pperic@example.com</td>
+        <tr th:each="autoService : ${autoServices}">
+            <td th:text="${autoService.shopName}">pperic</td>
+            <td th:text="${autoService.address}">Pero Perić</td>
+            <td th:text="${autoService.oib}">123456789</td>
             <td>
                 <!--<button type="button" class="btn btn-primary" onclick="showDetails(this.dataset.id);" th:attr="data-id=${part.partId}">Detalji</button>-->
-                <button type="button" class="btn btn-danger" onclick="deleteUser(this.dataset.id);" th:attr="data-id=${user.userId}">Izbriši račun</button>
+                <button type="button" class="btn btn-danger" onclick="deleteService(this.dataset.id);" th:attr="data-id=${autoService.autoServiceId}">Izbriši auto servis</button>
             </td>
         </tr>
     </table>
