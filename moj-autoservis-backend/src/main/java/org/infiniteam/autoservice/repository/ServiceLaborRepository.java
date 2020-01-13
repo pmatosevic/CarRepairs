@@ -10,4 +10,6 @@ public interface ServiceLaborRepository extends JpaRepository<ServiceLabor, Long
 
     List<ServiceLabor> findAllByAutoService(AutoService autoService);
 
+    void deleteAllByAutoService(AutoService autoService);
+
 }

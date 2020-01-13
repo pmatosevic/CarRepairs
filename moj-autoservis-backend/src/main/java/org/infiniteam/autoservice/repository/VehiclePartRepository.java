@@ -10,4 +10,6 @@ public interface VehiclePartRepository extends JpaRepository<VehiclePart, Long> 
 
     List<VehiclePart> findAllByAutoService(AutoService autoService);
 
+    void deleteAllByAutoService(AutoService autoService);
+
 }

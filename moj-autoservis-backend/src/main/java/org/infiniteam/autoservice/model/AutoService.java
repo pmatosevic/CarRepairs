@@ -16,7 +16,7 @@ public class AutoService {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column(unique = true)
     private String oib;
 
     private double regularServicePrice;
@@ -32,6 +32,9 @@ public class AutoService {
 
     @OneToMany(mappedBy = "autoService")
     private List<ServiceEmployee> employees = new ArrayList<>();
+
+    @Column
+    private boolean active = true;
 
     public Long getAutoServiceId() {
         return autoServiceId;
@@ -108,5 +111,13 @@ public class AutoService {
     public void addEmployee(ServiceEmployee employee) {
         employee.setAutoService(this);
         employees.add(employee);
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

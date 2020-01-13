@@ -7,6 +7,8 @@ import org.infiniteam.autoservice.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -121,7 +123,9 @@ public class MainController {
     }
 
     @PostMapping("/settings")
-    public String changeUserSettings(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email){
+    @PreAuthorize("isAuthenticated()")
+    public String changeUserSettings(@RequestParam String firstName, @RequestParam String lastName,
+                                     @RequestParam String email) {
         AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
         appUser.setFirstName(firstName);
         appUser.setLastName(lastName);
@@ -130,6 +134,7 @@ public class MainController {
     }
 
     @GetMapping("/changePassword")
+    @PreAuthorize("isAuthenticated()")
     public String changePassword(Model model) {
         return "changePassword";
     }

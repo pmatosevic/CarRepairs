@@ -17,5 +17,5 @@ public interface AutoServiceService {
 
     Optional<AutoService> findById(long autoServiceId);
 
-
+    void softDelete(AutoService autoService);
 }
