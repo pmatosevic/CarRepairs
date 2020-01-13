@@ -38,10 +38,20 @@
 		
 		
 		\section{Dijagram razmještaja}
-			
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+%			
+%			\textbf{\textit{dio 2. revizije}}
+%			
+%			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+	
+	
+		Cijeli sustav je organiziran na temelju klijent-poslužitelj arhitekture. Na dijagramu se nalazi klijent (klijentsko računalo) s web preglednikom koji putem \textit{HTTPS} protokola razmjenjuje podatke s web poslužiteljem na poslužiteljskom računalu. Na poslužiteljskom računalu se nalaze web poslužitelj u kojem je pokrenuta aplikacija koji \textit{ODBC} protokolom s poslužiteljem baze podataka dohvaća i mijenja podatke u bazi podataka aplikacije.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1\linewidth]{dijagrami/deployment_diagram}
+			\caption{Dijagram razmještaja}
+			\label{fig:deploymentdiagram}
+		\end{figure}
 			
 			\eject 
 		
