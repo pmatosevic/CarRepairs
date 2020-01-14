@@ -11,13 +11,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SeleniumTest {
 
     private static final String USER_USERNAME = "user1";
     private static final String USER_PASSWORD = "user1";
+    private static final String SERVICE_ADMIN_USERNAME = "boss";
+    private static final String SERVICE_ADMIN_PASSWORD = "boss";
     private static String BASE_URL = "http://localhost:8080/";
 
     @BeforeEach
@@ -52,6 +53,68 @@ public class SeleniumTest {
         WebDriver driver = newDriver();
         loginAs(driver, USER_USERNAME, USER_PASSWORD);
         assertFalse(driver.findElements(By.id("auth-dropdown")).isEmpty());
+        driver.close();
+    }
+
+
+    @Test
+    public void addingVehicleThatExistsInHuoWorks() {
+        WebDriver driver = newDriver();
+        loginAs(driver, USER_USERNAME, USER_PASSWORD);
+
+        // Delete other vehicles to start on a clean state
+        while (!driver.findElements(By.className("card-header")).isEmpty()) {
+            driver.findElement(By.partialLinkText("Detalji")).click();
+            driver.findElement(By.id("deleteVehicle")).click();
+        }
+
+        String vehiclePlate = "ZG1234AB";
+        driver.findElement(By.id("add-vehicle-btn")).click();
+        driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
+        driver.findElement(By.id("addVehicle")).click();
+
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("exampleModal"))));
+
+//        Other way:
+//        List<WebElement> elements = driver.findElements(By.className("card-header"));
+//        assertTrue(elements.stream().map(WebElement::getText).anyMatch(text -> text.equals(vehiclePlate)));
+
+        String result = driver.findElement(By.className("card-header")).getText();
+        assertEquals(vehiclePlate, result);
+
+        driver.quit();
+    }
+
+
+    @Test
+    public void addingVehicleThatDoesAlreadyExistsFails() {
+        WebDriver driver = newDriver();
+        loginAs(driver, USER_USERNAME, USER_PASSWORD);
+
+        // Delete other vehicles to start on a clean state
+        while (!driver.findElements(By.className("card-header")).isEmpty()) {
+            driver.findElement(By.partialLinkText("Detalji")).click();
+            driver.findElement(By.id("deleteVehicle")).click();
+        }
+
+        String vehiclePlate = "ZG1234AB";
+        driver.findElement(By.id("add-vehicle-btn")).click();
+        driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
+        driver.findElement(By.id("addVehicle")).click();
+
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("exampleModal"))));
+
+        driver.findElement(By.id("add-vehicle-btn")).click();
+        driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
+        driver.findElement(By.id("addVehicle")).click();
+
+        // Assert that error message is displayed
+        assertTrue(driver.findElement(By.id("exampleModal")).isDisplayed());
+        assertTrue(driver.findElement(By.className("alert")).isDisplayed());
+
+        driver.quit();
     }
 
 
