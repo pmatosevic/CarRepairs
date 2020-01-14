@@ -8,7 +8,6 @@ import org.infiniteam.autoservice.service.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -33,16 +32,18 @@ public class UserServiceJpa implements UserService {
     }
 
     @Override
+    @Transactional
     public void changePassword(AppUser user, String oldPassword, String newPassword) {
-        if (user.getPasswordHash().equals(passwordEncoder.encode(oldPassword))) {
-            throw new IllegalArgumentException("Current password is incorrect.");
+        if (!passwordEncoder.matches(oldPassword, user.getPasswordHash())) {
+            throw new IllegalArgumentException("Trenutna lozinka je netočna.");
         }
         Utility.checkPassword(newPassword);
         user.setPasswordHash(passwordEncoder.encode(newPassword));
-        userRepository.flush();
+        userRepository.saveAndFlush(user);
     }
 
     @Override
+    @Transactional
     public AppUser modify(AppUser appUser) {
         validate(appUser);
         userRepository.flush();

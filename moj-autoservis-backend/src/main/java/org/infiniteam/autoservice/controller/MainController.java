@@ -53,7 +53,10 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request, Model model) {
+    public String login(HttpServletRequest request, Model model, Principal principal) {
+        if (principal != null) {
+            return "redirect:/";
+        }
         return "home/login";
     }
 
@@ -92,7 +95,6 @@ public class MainController {
     }
 
     @PostMapping("/register/autoservice")
-    @Transactional
     public ResponseEntity<?> autoServiceRegistration(HttpServletRequest request, Model model) {
         if (autoServiceService.existsByOib(request.getParameter("oib"))) {
             return ResponseEntity.badRequest().body("Autoservis s tim OIB-om već postoji");
@@ -147,7 +149,7 @@ public class MainController {
         return "changePassword";
     }
 
-    @PostMapping
+    @PostMapping("/changePassword")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_SERVICE_EMPLOYEE', 'ROLE_ADMIN')")
     public ResponseEntity<?> changePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
         AppUser user = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
