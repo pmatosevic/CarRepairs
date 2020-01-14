@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="header :: common_header(~{::title},~{::link})">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Moj AutoServis</title>
@@ -20,18 +20,13 @@
     $(document).ready(function() {
         $(document).ready(function() {
             $('#openRo').click(function () {
-                $.ajax({
-                    method: "POST",
-                    url: window.location.pathname + "/ro",
-                    contentType: 'application/json',
-                    data: JSON.stringify({
+                $.post(urljoin(window.location.pathname, "/ro"),
+                    {
                         'autoServiceId': $("#autoServiceSelect option:selected").val(),
                         'repairOrderType': $('#typeSelect option:selected').val()
-                    }),
-                    success: data => {
-                        location.reload();
-                    },
-                });
+                    }
+                    ).done(() => location.reload())
+                    .fail((xhr) => bootbox.alert("Dogodila se pogreška"));
             })
         });
     });
@@ -39,13 +34,6 @@
     function showModal(id) {
         const url = window.location.pathname + "/ro/" + id;
         $("#dynamic-load").load(url);
-        // $.ajax({
-        //     method: "GET",
-        //     url: window.location.pathname + "/ro/" + id,
-        //     success: data => {
-        //
-        //     },
-        // });
         $('#roDetailsModal').modal('show');
     }
 </script>

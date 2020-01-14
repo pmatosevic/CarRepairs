@@ -1,6 +1,5 @@
 package org.infiniteam.autoservice.controller;
 
-import org.infiniteam.autoservice.dto.OpenRepairOrderDto;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.service.*;
@@ -13,10 +12,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
@@ -109,16 +105,17 @@ public class VehicleOwnerController {
 
     @PostMapping("/user/vehicles/{id}/ro")
     @Transactional
-    public ResponseEntity<?> openRepairOrder(@PathVariable Long id, @RequestBody OpenRepairOrderDto openRepairOrderDto) {
+    public ResponseEntity<?> openRepairOrder(@PathVariable Long id, @RequestParam long autoServiceId,
+                                             @RequestParam RepairOrderType repairOrderType) {
         Vehicle vehicle = vehicleService.fetch(id);
-        AutoService autoservice = autoServiceService.fetch(openRepairOrderDto.getAutoServiceId());
+        AutoService autoservice = autoServiceService.fetch(autoServiceId);
 
         checkVehicleRights(vehicle);
         if (!roCanBeOpened(vehicle)) {
             return ResponseEntity.badRequest().body("Vozilo je već na servisu.");
         }
 
-        repairOrderService.create(autoservice, vehicle, openRepairOrderDto.getRepairOrderType());
+        repairOrderService.create(autoservice, vehicle, repairOrderType);
         return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
 
