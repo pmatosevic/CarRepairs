@@ -39,11 +39,12 @@ public class SeleniumTest {
         element = driver.findElement(By.name("password"));
         element.sendKeys(password);
         driver.findElement(By.id("submit-btn")).click();
-        new WebDriverWait(driver, 1)
-                .until(ExpectedConditions.or(
-                        ExpectedConditions.presenceOfElementLocated(By.id("auth-dropdown")),
-                        ExpectedConditions.visibilityOf(driver.findElement(By.id("error")))
-                ));
+//        new WebDriverWait(driver, 1)
+//                .until(ExpectedConditions.or(
+//                        ExpectedConditions.presenceOfElementLocated(By.id("auth-dropdown"))
+//                        ExpectedConditions.visibilityOf(driver.findElement(By.id("error")))
+//                ));
+        driver.findElement(By.id("auth-dropdown"));         // shown only if the user is logged in
     }
 
     @Test
@@ -52,6 +53,8 @@ public class SeleniumTest {
         loginAs(driver, USER_USERNAME, USER_PASSWORD);
         assertFalse(driver.findElements(By.id("auth-dropdown")).isEmpty());
     }
+
+
 
 
 
