@@ -1,5 +1,6 @@
 package org.infiniteam.autoservice;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -73,6 +74,7 @@ public class SeleniumTest {
         driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
         driver.findElement(By.id("addVehicle")).click();
 
+        // Wait for modal to close
         new WebDriverWait(driver, 1)
                 .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("exampleModal"))));
 
@@ -103,6 +105,7 @@ public class SeleniumTest {
         driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
         driver.findElement(By.id("addVehicle")).click();
 
+        // Wait for modal to close
         new WebDriverWait(driver, 1)
                 .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("exampleModal"))));
 
