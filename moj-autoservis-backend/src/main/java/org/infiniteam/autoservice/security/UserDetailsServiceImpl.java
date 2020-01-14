@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Map<Class<? extends AppUser>, List<GrantedAuthority>> authorities = Map.of(
+    private static final Map<Class<? extends AppUser>, List<GrantedAuthority>> AUTHORITIES = Map.of(
             VehicleOwner.class, AuthorityUtils.createAuthorityList("ROLE_USER"),
             ServiceEmployee.class, AuthorityUtils.createAuthorityList("ROLE_SERVICE_EMPLOYEE"),
             Administrator.class, AuthorityUtils.createAuthorityList("ROLE_ADMIN")
@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private List<GrantedAuthority> userAuthorities(AppUser appUser) {
         List<GrantedAuthority> authList = new ArrayList<>();
-        authList.addAll(authorities.get(appUser.getClass()));
+        authList.addAll(AUTHORITIES.get(appUser.getClass()));
         if (appUser instanceof ServiceEmployee && ((ServiceEmployee) appUser).getEmployeeType() == ServiceEmployeeType.SERVICE_ADMINISTRATOR) {
             authList.addAll(AuthorityUtils.createAuthorityList("ROLE_SERVICE_ADMIN"));
         }

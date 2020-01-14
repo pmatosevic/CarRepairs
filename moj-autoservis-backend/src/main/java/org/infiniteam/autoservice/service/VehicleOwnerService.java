@@ -13,4 +13,5 @@ public interface VehicleOwnerService {
 
     void delete(VehicleOwner vehicleOwner);
 
+    VehicleOwner create(VehicleOwner vehicleOwner);
 }

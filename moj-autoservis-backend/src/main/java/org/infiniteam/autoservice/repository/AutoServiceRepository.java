@@ -14,4 +14,6 @@ public interface AutoServiceRepository extends JpaRepository<AutoService, Long> 
 
     Optional<AutoService> getByOib(String oib);
 
+    boolean existsByOib(String oib);
+
 }

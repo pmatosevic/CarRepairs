@@ -2,13 +2,11 @@ package org.infiniteam.autoservice.service.impl;
 
 import org.infiniteam.autoservice.model.AutoService;
 import org.infiniteam.autoservice.model.ServiceEmployee;
-import org.infiniteam.autoservice.repository.AutoServiceRepository;
-import org.infiniteam.autoservice.repository.ServiceEmployeeRepository;
-import org.infiniteam.autoservice.repository.ServiceLaborRepository;
-import org.infiniteam.autoservice.repository.VehiclePartRepository;
-import org.infiniteam.autoservice.service.AutoServiceService;
-import org.infiniteam.autoservice.service.EntityNotFoundException;
+import org.infiniteam.autoservice.model.ServiceEmployeeType;
+import org.infiniteam.autoservice.repository.*;
+import org.infiniteam.autoservice.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -30,6 +28,12 @@ public class AutoServiceServiceJpa implements AutoServiceService {
 
     @Autowired
     private ServiceLaborRepository serviceLaborRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
 
@@ -67,6 +71,29 @@ public class AutoServiceServiceJpa implements AutoServiceService {
         serviceLaborRepository.deleteAllByAutoService(autoService);
         autoService.setOib(null);
         autoService.setActive(false);
+    }
+
+    @Override
+    public boolean existsByOib(String oib) {
+        return autoServiceRepository.existsByOib(oib);
+    }
+
+    @Override
+    @Transactional
+    public void createServiceWithOwner(AutoService newAutoService, ServiceEmployee owner) {
+        Utility.checkOib(newAutoService.getOib());
+        Assert.hasText(newAutoService.getShopName(), "Shop name should not be blank.");
+        Assert.hasText(newAutoService.getAddress(), "Address should not be blank.");
+        newAutoService.setRegularServicePrice(0.0);
+
+        autoServiceRepository.saveAndFlush(newAutoService);
+
+        owner.setEmployeeType(ServiceEmployeeType.SERVICE_ADMINISTRATOR);
+        owner.setAutoService(newAutoService);
+        owner.setPasswordHash(passwordEncoder.encode(owner.getPasswordHash()));
+        userService.validate(owner);
+
+        serviceEmployeeRepository.saveAndFlush(owner);
     }
 
 

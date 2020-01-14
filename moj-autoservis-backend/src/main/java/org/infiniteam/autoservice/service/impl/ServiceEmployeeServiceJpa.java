@@ -30,9 +30,8 @@ public class ServiceEmployeeServiceJpa implements ServiceEmployeeService {
 
     @Override
     public ServiceEmployee add(ServiceEmployee employee) {
-        Utility.validateUser(employee, userRepository);
         Assert.notNull(employee.getAutoService(), "Employee has to have an autoservice.");
-        return serviceEmployeeRepository.save(employee);
+        return serviceEmployeeRepository.saveAndFlush(employee);
     }
 
     @Override
