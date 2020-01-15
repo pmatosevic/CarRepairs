@@ -1,7 +1,6 @@
-package org.infiniteam.autoservice.service.impl;
+package org.infiniteam.autoservice.service.huo;
 
-import org.infiniteam.autoservice.service.HuoService;
-import org.infiniteam.autoservice.service.HuoServiceException;
+import org.infiniteam.autoservice.service.impl.VehicleData;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Service
-public class MockHuoService implements HuoService {
+public class MockHuoConnector implements HuoConnector {
 
     private static List<String> MODELS = List.of(
         "Tesla Cybertruck"

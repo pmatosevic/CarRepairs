@@ -4,9 +4,9 @@ import org.infiniteam.autoservice.model.Vehicle;
 import org.infiniteam.autoservice.model.VehicleOwner;
 import org.infiniteam.autoservice.repository.VehicleRepository;
 import org.infiniteam.autoservice.service.*;
+import org.infiniteam.autoservice.service.huo.HuoConnector;
+import org.infiniteam.autoservice.service.huo.HuoServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class VehicleServiceJpa implements VehicleService {
     private VehicleRepository vehicleRepository;
 
     @Autowired
-    private HuoService huoService;
+    private HuoConnector huoConnector;
 
     @Override
     public Vehicle fetch(long vehicleId) {
@@ -49,7 +49,7 @@ public class VehicleServiceJpa implements VehicleService {
 
         VehicleData vehicleData;
         try {
-            vehicleData = huoService.fetchVehicleData(licencePlate);
+            vehicleData = huoConnector.fetchVehicleData(licencePlate);
         } catch (HuoServiceException e) {
             throw new IllegalArgumentException("Nije moguće dohvatiti vozilo iz HUO registra.");
         }

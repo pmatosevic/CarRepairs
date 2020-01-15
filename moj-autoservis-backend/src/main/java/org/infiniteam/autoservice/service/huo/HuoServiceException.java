@@ -1,4 +1,4 @@
-package org.infiniteam.autoservice.service;
+package org.infiniteam.autoservice.service.huo;
 
 public class HuoServiceException extends Exception {
 

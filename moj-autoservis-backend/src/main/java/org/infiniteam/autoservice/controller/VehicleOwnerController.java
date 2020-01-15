@@ -3,7 +3,7 @@ package org.infiniteam.autoservice.controller;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.service.*;
-import org.infiniteam.autoservice.service.impl.VehicleData;
+import org.infiniteam.autoservice.service.huo.HuoConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +28,6 @@ public class VehicleOwnerController {
 
     @Autowired
     private AutoServiceService autoServiceService;
-
-    @Autowired
-    private HuoService huoService;
 
     @GetMapping("/user")
     @Transactional

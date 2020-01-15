@@ -1,8 +1,8 @@
-package org.infiniteam.autoservice.service;
+package org.infiniteam.autoservice.service.huo;
 
 import org.infiniteam.autoservice.service.impl.VehicleData;
 
-public interface HuoService {
+public interface HuoConnector {
 
     VehicleData fetchVehicleData(String licencePlate) throws HuoServiceException;
 
