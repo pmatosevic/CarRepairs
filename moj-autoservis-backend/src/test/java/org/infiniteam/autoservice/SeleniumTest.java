@@ -119,6 +119,18 @@ public class SeleniumTest {
 
 
     @Test
+    public void addingNewService() {
+        loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_PASSWORD);
+
+        driver.findElement(By.id("price-nav")).click();
+        driver.findElement(By.id("add-service-btn")).click();
+        driver.findElement(By.id("partName")).sendKeys("guma");
+        driver.findElement(By.id("price")).sendKeys("60");
+        driver.findElement(By.id("save-part")).click();
+    }
+
+
+    @Test
     public void addingNewServiceWorker() {
         loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_USERNAME);
         driver.findElement(By.id("employees")).click();
