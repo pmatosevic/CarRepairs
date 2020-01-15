@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -80,12 +81,14 @@ public class SeleniumTest {
         new WebDriverWait(driver, 1)
                 .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("exampleModal"))));
 
-//        Other way:
-//        List<WebElement> elements = driver.findElements(By.className("card-header"));
-//        assertTrue(elements.stream().map(WebElement::getText).anyMatch(text -> text.equals(vehiclePlate)));
-
         String result = driver.findElement(By.className("card-header")).getText();
         assertEquals(vehiclePlate, result);
+
+//        Other way:
+//        List<WebElement> elements = driver.findElements(By.className("card-header"));
+//        assertTrue(elements.stream()
+//                      .map(WebElement::getText)
+//                      .anyMatch(text -> text.equals(vehiclePlate)));
     }
 
 
@@ -99,6 +102,7 @@ public class SeleniumTest {
             driver.findElement(By.id("deleteVehicle")).click();
         }
 
+        WebElement modal = driver.findElement(By.id("exampleModal"));
         String vehiclePlate = "ZG1234AB";
         driver.findElement(By.id("add-vehicle-btn")).click();
         driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
@@ -106,7 +110,7 @@ public class SeleniumTest {
 
         // Wait for modal to close
         new WebDriverWait(driver, 1)
-                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("exampleModal"))));
+                .until(ExpectedConditions.stalenessOf(modal));
 
         driver.findElement(By.id("add-vehicle-btn")).click();
         driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
@@ -119,19 +123,46 @@ public class SeleniumTest {
 
 
     @Test
-    public void addingNewService() {
+    public void addingNewAutoServicePartSuccessfullyAddsItToPriceList() {
         loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_PASSWORD);
+        driver.get(BASE_URL + "autoservice/priceList");
 
-        driver.findElement(By.id("price-nav")).click();
-        driver.findElement(By.id("add-service-btn")).click();
-        driver.findElement(By.id("partName")).sendKeys("guma");
-        driver.findElement(By.id("price")).sendKeys("60");
+        // Delete other parts to start from clean state
+        while (true) {
+            Optional<WebElement> element = driver.findElements(By.className("part-row"))
+                    .stream()
+                    .findFirst();
+            if (element.isEmpty()) break;
+            element.get().findElement(By.className("btn-danger")).click();
+            new WebDriverWait(driver, 1)
+                    .until(ExpectedConditions.stalenessOf(element.get()));
+        }
+
+        driver.findElement(By.id("add-part")).click();
+        driver.findElement(By.className("modal-content"));
+
+        driver.findElement(By.id("partName")).sendKeys("Guma");
+        driver.findElement(By.id("price")).clear();
+        driver.findElement(By.id("price")).sendKeys("200");
+        driver.findElement(By.id("estimatedDuration")).clear();
+        driver.findElement(By.id("estimatedDuration")).sendKeys("100");
         driver.findElement(By.id("save-part")).click();
+
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("modal"))));
+
+        List<WebElement> elems = driver.findElements(By.className("part-row")).stream()
+                .filter(e -> e.findElement(By.className("part-name-text")).getText().contains("Guma")
+                            && e.findElement(By.className("part-km-text")).getText().contains("100")
+                            && e.findElement(By.className("part-price-text")).getText().contains("200"))
+                .collect(Collectors.toList());
+
+        assertEquals(1, elems.size());
     }
 
 
     @Test
-    public void addingNewServiceWorker() {
+    public void addingNewServiceWorkerAddsNewEmployeeThatIsAbleToLogIn() {
         loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_USERNAME);
         driver.findElement(By.id("employees")).click();
 
@@ -159,7 +190,7 @@ public class SeleniumTest {
                 .until(ExpectedConditions.urlToBe(BASE_URL));
 
         loginAs(driver, "user2", "user2");
-        assertDoesNotThrow(() -> driver.findElement(By.id("auth-dropdown")));
+        assertFalse(driver.findElements(By.id("auth-dropdown")).isEmpty());     // Employee successfully logged in
     }
 
 

@@ -37,7 +37,7 @@
 <main role="main" class="container">
 
     <p><h5>Rezervni dijelovi</h5></p>
-    <p><button type="button" class="btn btn-secondary" onclick="editPart(0);">Dodaj rezervni dio</button></p>
+    <p><button type="button" id="add-part" class="btn btn-secondary" onclick="editPart(0);">Dodaj rezervni dio</button></p>
     <table class="table">
         <tr>
             <th>Naziv</th>
@@ -45,10 +45,10 @@
             <th>Cijena</th>
             <th>Akcija</th>
         </tr>
-        <tr th:each="part : ${parts}">
-            <td th:text="${part.partName}">Disk kočnice</td>
-            <td th:text="${part.estimatedDurationInKm} + ' km'">100 000 km</td>
-            <td th:text="${#numbers.formatDecimal(part.price, 0, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
+        <tr th:each="part : ${parts}" class="part-row">
+            <td th:text="${part.partName}" class="part-name-text">Disk kočnice</td>
+            <td th:text="${part.estimatedDurationInKm} + ' km'" class="part-km-text">100 000 km</td>
+            <td th:text="${#numbers.formatDecimal(part.price, 0, 'COMMA', 2, 'POINT')} + ' kn'" class="part-price-text">1000 kn</td>
             <td>
                 <button type="button" class="btn btn-primary" onclick="editPart(this.dataset.id);" th:attr="data-id=${part.partId}">Uredi</button>
                 <button type="button" class="btn btn-danger" onclick="deletePart(this.dataset.id);" th:attr="data-id=${part.partId}">Ukloni</button>
