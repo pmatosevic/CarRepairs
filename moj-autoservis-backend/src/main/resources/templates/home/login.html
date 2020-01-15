@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="header :: common_header(~{::title},~{::link})">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Prijava - Moj AutoServis</title>
@@ -8,77 +8,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#error').hide();
-
-            $('.form-login').submit(function (e) {
-                e.preventDefault();
-                $('#submit-btn').prop('disabled', true);
-
-                const form = $('.form-login');
-                const url = form.attr('action');
-                $.ajax({
-                    method: "POST",
-                    url: url,
-                    data: form.serialize(),
-                    success: data => {
-                        window.location.replace("/");
-                    },
-                    error: data => {
-                        $('#error').show();
-                        $('#submit-btn').prop('disabled', false);
-                    }
-                });
-            });
-
-        })
-    </script>
-
-    <style type="text/css">
-        body {
-            background-color: #f5f5f5;
-        }
-
-        .form-login {
-            width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-        }
-
-        .form-login .form-control {
-            position: relative;
-            box-sizing: border-box;
-            height: auto;
-            padding: 10px;
-            font-size: 16px;
-        }
-        .form-login .form-control:focus {
-            z-index: 2;
-        }
-        .form-login input[type="text"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        .form-login input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-
-        #error {
-            color: darkred;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 
 <body>
 <div th:replace="~{header :: header}">Header</div>
 <main role="main" class="container text-center">
-    <form class="form-login" method="post" action="/appLogin">
+    <form class="form-login-reg" method="post">
         <h1 class="h3 mb-3 font-weight-normal">Prijava</h1>
         <div class="alert alert-success" role="alert" th:if="${(param.registered != null)}">
             Uspješno ste registrirani!
@@ -86,12 +22,17 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <p id="error">Neispravno korisničko ime ili lozinka</p>
+        <div class="alert alert-danger" role="alert" th:if="${(param.error != null)}">
+            Neispravno korisničko ime ili lozinka!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <label for="username" class="sr-only">Korisničko ime</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Korisničko ime" required autofocus>
         <label for="password" class="sr-only">Lozinka</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Lozinka" required>
-        <button id="submit-btn" class="btn btn-lg btn-primary btn-block">Prijava</button>
+        <button type="submit" id="submit-btn" class="btn btn-lg btn-primary btn-block">Prijava</button>
     </form>
 </main>
 </body>

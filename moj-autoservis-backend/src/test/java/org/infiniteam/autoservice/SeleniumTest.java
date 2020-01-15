@@ -31,7 +31,7 @@ public class SeleniumTest {
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "C:\\Java\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }
 
     @AfterEach
