@@ -271,7 +271,7 @@ public class AutoServiceController {
 
         ServiceEmployee employee = new ServiceEmployee();
         employee.setUsername(username);
-        employee.setPasswordHash(passwordEncoder.encode(password));
+        employee.setPasswordHash(password);
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
         employee.setAutoService(getUserAutoService());

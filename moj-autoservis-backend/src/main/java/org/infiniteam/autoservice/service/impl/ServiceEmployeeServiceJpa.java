@@ -6,8 +6,10 @@ import org.infiniteam.autoservice.model.ServiceEmployeeType;
 import org.infiniteam.autoservice.repository.ServiceEmployeeRepository;
 import org.infiniteam.autoservice.repository.UserRepository;
 import org.infiniteam.autoservice.service.ServiceEmployeeService;
+import org.infiniteam.autoservice.service.UsernameExistsException;
 import org.infiniteam.autoservice.service.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -23,6 +25,9 @@ public class ServiceEmployeeServiceJpa implements ServiceEmployeeService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<ServiceEmployee> findAllByAutoService(AutoService autoService) {
         return serviceEmployeeRepository.findAllByAutoService(autoService);
@@ -30,6 +35,10 @@ public class ServiceEmployeeServiceJpa implements ServiceEmployeeService {
 
     @Override
     public ServiceEmployee add(ServiceEmployee employee) {
+        if (userRepository.existsByUsername(employee.getUsername())) {
+            throw new UsernameExistsException("Username already exists.");
+        }
+        employee.setPasswordHash(passwordEncoder.encode(employee.getPasswordHash()));
         Assert.notNull(employee.getAutoService(), "Employee has to have an autoservice.");
         return serviceEmployeeRepository.saveAndFlush(employee);
     }
