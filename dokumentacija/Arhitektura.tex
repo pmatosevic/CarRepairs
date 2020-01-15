@@ -371,44 +371,48 @@
 		
 		\section{Dijagram stanja}
 			
-			Slika \ref{fig:statediagram} prikazuje dijagram stanja koji opisuje kako se serviser služi aplikacijom. Nakon što mu se njegova prikaže početna stranica, on klikom na "Servisni nalozi" dobiva prikaz liste otvorenih naloga. Klikom na "Prihvati nalog" on prihvaća određeni nalog te, ovisno o tome je li nalog redovni ili izvanredni, biva preusmjeren na prozor predviđen taj nalog.
+%			Slika \ref{fig:statediagram} prikazuje dijagram stanja koji opisuje kako se serviser služi aplikacijom. Nakon što mu se njegova prikaže početna stranica, on klikom na "Servisni nalozi" dobiva prikaz liste otvorenih naloga. Klikom na "Prihvati nalog" on prihvaća određeni nalog te, ovisno o tome je li nalog redovni ili izvanredni, biva preusmjeren na prozor predviđen taj nalog.
+%			
+%			Ako je nalog redovni, klikom na "Unos kilometraže" on unosi kilometražu vozila u trenutku servisa. Klikom na "Spremi" kilometraža se sprema te se serviser vraća na prikaz liste radnih naloga.
+%			
+%			Ako je nalog izvanredni, klikom na "Unos rezervnih dijelova" serviser se preusmjerava na iskočni prozor gdje, dok ih ima, unosi rezervne dijelove. Nakon što je završio, vraća se na prikaz naloga. Odabirom "Unos usluga" on na isti način unosi usluge koje su obavljene u servisu, dok ih ima. Klikom na "Zatvori" serviser se vraća na prikaz liste otvorenih naloga.
+%			
+%			Ukoliko na svojoj početnoj stranici serviser odabere opciju "Odjava", on se odjavljuje iz svog korisničkog računa.
 			
-			Ako je nalog redovni, klikom na "Unos kilometraže" on unosi kilometražu vozila u trenutku servisa. Klikom na "Spremi" kilometraža se sprema te se serviser vraća na prikaz liste radnih naloga.
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_serviser}
+%				\caption{Dijagram stanja za servisera}
+%				\label{fig:statediagram}
+%			\end{figure}
+%			
+%			\eject 
 			
-			Ako je nalog izvanredni, klikom na "Unos rezervnih dijelova" serviser se preusmjerava na iskočni prozor gdje, dok ih ima, unosi rezervne dijelove. Nakon što je završio, vraća se na prikaz naloga. Odabirom "Unos usluga" on na isti način unosi usluge koje su obavljene u servisu, dok ih ima. Klikom na "Zatvori" serviser se vraća na prikaz liste otvorenih naloga.
+			Slika \ref{fig:statediagram} prikazuje dijagram stanja korisnika koji pristupa aplikaciji. On se na početnoj stranici može prijaviti kao serviser ili kao vlasnik automobila, ili može izaći iz preglednika. 
 			
-			Ukoliko na svojoj početnoj stranici serviser odabere opciju "Odjava", on se odjavljuje iz svog korisničkog računa.
+			Ukoliko se prijavi kao vlasnik automobila, prikazuje mu se popis automobila. Klikom na gumb "Detalji" prikazuju mu se radni nalozi za određeni automobil. Klikom na "Otvori nalog" on može otvoriti novi radni nalog, te ga nakon toga aplikacija vraća na popis radnih naloga za taj automobil. Također, vlasnik iz svih stanja može doći na prikaz dosadašnjih naloga, ili se odjaviti (tj. doći na početnu stranicu).
+			
+			Ako se korisnik prijavi kao serviser, prikazuje mu se lista pristiglih naloga koje on može prihvatiti klikom na gumb Prihvati (tada se nalog premješta u otvorene naloge) ili odbiti klikom na gumb Odbij (tada se nalog briše s liste). Klikom na "Otvoreni nalozi", servisera se preusmjerava na prikaz liste otvorenih naloga. Klikom na "Detalji" serviser može uređivati određeni nalog. Ukoliko je nalog za redovan servis, serviser klikom na "Završi" može završiti radni nalog, a klikom na "Povratak" vratiti se na listu. Ukoliko je nalog pak izvanredan, serviser može dodati novu uslugu klikom na "Dodaj uslugu" (tada mu se prikaže lista usluga) ili dodati novi rezervni dio klikom na "Dodaj rezervni dio" (tada mu se prikaže lista rezervnih dijelova). U oba slučaja, klik na "Dodaj" vraća servisera na stranicu tog naloga, te kao i kod redovitog radnog naloga, klikom na "Završi" može završiti radni nalog ili se vratiti na listu klikom na "Povratak". Također, serviser iz svih stanja može doći do prikaza liste pristiglih naloga, te se iz svih stanja može odjaviti.
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_serviser}
-				\caption{Dijagram stanja za servisera}
-				\label{fig:statediagram}
-			\end{figure}
-			
-			\eject 
-			
-			Slika 4.9 prikazuje dijagram stanja korisnika koji pristupa aplikaciji....
-			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_user}
+				\includegraphics[width=1.0\linewidth]{dijagrami/state-diagram-edited}
 				\caption{Dijagram stanja za korisnika}
 				\label{fig:statediagram}
 			\end{figure}
 		
 			\eject 
 			
-			Slika 4.10 prikazuje dijagram stanja vlasnika auta. Klikom na "Servisni nalozi" praikazuje se lista već postojećih naloga, nakon čega ima opciju otvoriti novi nalog.
-			
-			\begin{figure}[H]
-				\centering
-				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_carowner}
-				\caption{Dijagram stanja za vlasnika auta}
-				\label{fig:statediagram}
-			\end{figure}
-			
-			\eject
+%			Slika 4.10 prikazuje dijagram stanja vlasnika auta. Klikom na "Servisni nalozi" praikazuje se lista već postojećih naloga, nakon čega ima opciju otvoriti novi nalog.
+%			
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_carowner}
+%				\caption{Dijagram stanja za vlasnika auta}
+%				\label{fig:statediagram}
+%			\end{figure}
+%			
+%			\eject
 		
 		\section{Dijagram aktivnosti}
 			
