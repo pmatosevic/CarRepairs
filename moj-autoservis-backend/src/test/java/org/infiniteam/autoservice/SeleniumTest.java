@@ -22,15 +22,18 @@ public class SeleniumTest {
     private static final String SERVICE_ADMIN_PASSWORD = "boss";
     private static String BASE_URL = "http://localhost:8080/";
 
+    WebDriver driver;
+
     @BeforeEach
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "C:\\Java\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    private WebDriver newDriver() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        return driver;
+    @AfterEach
+    public void quit() {
+        driver.quit();
     }
 
 
@@ -51,16 +54,13 @@ public class SeleniumTest {
 
     @Test
     public void loginWithGoodCredentialsWorks() {
-        WebDriver driver = newDriver();
         loginAs(driver, USER_USERNAME, USER_PASSWORD);
         assertFalse(driver.findElements(By.id("auth-dropdown")).isEmpty());
-        driver.close();
     }
 
 
     @Test
     public void addingVehicleThatExistsInHuoWorks() {
-        WebDriver driver = newDriver();
         loginAs(driver, USER_USERNAME, USER_PASSWORD);
 
         // Delete other vehicles to start on a clean state
@@ -84,14 +84,11 @@ public class SeleniumTest {
 
         String result = driver.findElement(By.className("card-header")).getText();
         assertEquals(vehiclePlate, result);
-
-        driver.quit();
     }
 
 
     @Test
     public void addingVehicleThatDoesAlreadyExistsFails() {
-        WebDriver driver = newDriver();
         loginAs(driver, USER_USERNAME, USER_PASSWORD);
 
         // Delete other vehicles to start on a clean state
@@ -116,8 +113,6 @@ public class SeleniumTest {
         // Assert that error message is displayed
         assertTrue(driver.findElement(By.id("exampleModal")).isDisplayed());
         assertTrue(driver.findElement(By.className("alert")).isDisplayed());
-
-        driver.quit();
     }
 
 
