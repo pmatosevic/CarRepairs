@@ -21,9 +21,9 @@
 	
 		\section{Ispitivanje programskog rješenja}
 			
-			\textbf{\textit{dio 2. revizije}}\\
+%			\textbf{\textit{dio 2. revizije}}\\
 			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
+%			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
 	
 			
 			\subsection{Ispitivanje komponenti}
@@ -33,14 +33,186 @@
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
+%			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
 			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+%			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
+%			 \begin{itemize}
+%			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
+%			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
+%			 \end{itemize}
+%		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			
+			Svi testovi izvršeni su uz pomoć alata Selenium. Svrha ispitivanja je provjera osnovih funkcionalnosti sustava te pronalazak mogućih pogrešaka ili neočekivanih ponašanja u izvođenju koda.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 1: Korisnik dodaje automobil s ispravnom registarskom oznakom}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+			
+			\item Otvaranje početne web stranice u pregledniku
+			\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
+			\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
+			\item Klik na gumb 'Prijava'
+			\item Klik na gumb 'Novi automobil'
+			\item Unos registracijske tablice 'ZG1234AB' u polje unosa
+			\item Klik na gumb 'Dodaj'	
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime korisnika vlasnika vozila i lozinka
+				\item Prikazuje se početna web stranica ulogiranog korisnika
+				\item Pojavljuje se prozor za dodavanje vozila
+				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
+				\item Na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
+				
+			\end{packed_enum}
+		
+		
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 2: Korisnik dodaje automobil s registarskom oznakom koja već postoji}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
+				\item Klik na gumb 'Prijava'
+				\item Klik na gumb 'Novi automobil'
+				\item Unos registracijske tablice 'ZG1234AB' u polje unosa
+				\item Klik na gumb 'Dodaj'
+				\item Klik na gumb 'Novi automobil'
+				\item Unos registracijske tablice 'ZG1234AB' u polje unosa
+				\item Klik na gumb 'Dodaj'
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime korisnika vlasnika vozila i lozinka
+				\item Prikazuje se početna web stranica ulogiranog korisnika
+				\item Pojavljuje se prozor za dodavanje vozila
+				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
+				\item Na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
+				\item Pojavljuje se prozor za dodavanje vozila
+				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
+				\item Pojavljuje se poruka pogreške 'Vozilo već postoji!'
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 3: Administrator servisa dodaje novu uslugu}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
+				\item Klik na gumb 'Prijava'
+				\item ...
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime administratora i lozinka
+				\item Prikazuje se početna web stranica ulogiranog administratora
+				\item ...
+				(U tablici postoji novi redak s novom uslugom.)
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 4: Administrator servisa registrira novog servisera}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
+				\item Klik na gumb 'Prijava'
+				\item ...
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime administratora i lozinka
+				\item Prikazuje se početna web stranica ulogiranog administratora
+				\item ...
+				(Novoregistrirani serviser se može prijaviti.)
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 5: Administrator servisa registrira novog servisera s već postojećim korisničkim imenom}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
+				\item Klik na gumb 'Prijava'
+				\item ...
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime administratora i lozinka
+				\item Prikazuje se početna web stranica ulogiranog administratora
+				\item ...
+				(Sustav javlja pogrešku.)
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			
 			
 			\eject 
 		
