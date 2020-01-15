@@ -437,12 +437,21 @@
 %			\textbf{\textit{dio 2. revizije}}\\
 %		
 %			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
-
+		
+		Na slici \ref{fig:componentdiagram} su je na dijagramu komponenti prikazana interna struktura i odnosi glavnih komponenti aplikacije te njihova međuovisnost s okolinom.
+		
+		Preglednik putem \textit{HTTP} zahtjeva i odgovora komunicira s aplikacijom. Ti zahtjevi u aplikaciji pristižu u interni Springov \textit{DispatcherServlet} koji pomoću komponente \textit{UserDetailsService} saznaje trenutnog korisnika i njegove ovlasti te prosljeđuje obradu komponenti \textit{Controllers} koja obuhvaća sve komponente u kontrolerskom sloju aplikacije. Pomoću vraćenih podataka i komponente \textit{Thymeleaf} iz predložaka se stvara \textit{HTML} kod koji \textit{DispatcherServler} šalje natrag klijentu.
+		
+		Komponenta \textit{Controllers} sve operacije obavlja oslanjajući se na komponentu \textit{JpaServices} koja implementira tražene funkcionalnosti. Ta komponenta dohvat podataka vrši iz repozitorija čije implementacije stvara komponenta \textit{Spring JPA} koja sama piše i parsira \textit{SQL} upite i odgovore te se spaja na bazu podataka.
+		
+		Postoji i mogućnost dohvata podataka o vozilu iz vanjskog HUO servisa koju interno vrši \textit{HUOConnector}, a koriste je ostali servisi. Funkcionalnost spajanja na vanjski HUO servis trenutno nije implementirana, pa \textit{HUO Connector} samo glumi tu funkcionalnost.
+		
+		
 
 		\begin{figure}
 			\centering
 			\includegraphics[width=1.0\linewidth]{dijagrami/component_diagram}
-			\caption{}
+			\caption{Dijagram komponenti}
 			\label{fig:componentdiagram}
 		\end{figure}
 
