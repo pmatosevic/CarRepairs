@@ -36,7 +36,7 @@ public class ServiceEmployeeServiceJpa implements ServiceEmployeeService {
 
     @Override
     public Optional<ServiceEmployee> findByUsername(String username) {
-        return findByUsername(username);
+        return serviceEmployeeRepository.findByUsername(username);
     }
 
     @Override

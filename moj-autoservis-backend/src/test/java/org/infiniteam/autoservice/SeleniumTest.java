@@ -10,7 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -119,26 +121,72 @@ public class SeleniumTest {
     @Test
     public void addingNewServiceWorker() {
         loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_USERNAME);
-
         driver.findElement(By.id("employees")).click();
-        // Delete other vehicles to start on a clean state
-        //while (!driver.findElements(By.className("card-header")).isEmpty()) {
-            //driver.findElement(By.partialLinkText("Detalji")).click();
-            //driver.findElement(By.id("obrisi")).click();
 
-        driver.findElement(By.id("dodaj")).click();
-        driver.findElement(By.id("korisnickoime")).click();
-        driver.findElement(By.id("korisnickoime")).sendKeys("user2");
-        driver.findElement(By.id("pass")).click();
-        driver.findElement(By.id("pass")).sendKeys("user2");
-        driver.findElement(By.id("name")).click();
-        driver.findElement(By.id("name")).sendKeys("Darian");
-        driver.findElement(By.id("sur")).click();
-        driver.findElement(By.id("sur")).sendKeys("Horvat");
-        driver.findElement(By.id("spasi")).click();
-
-
+        //Delete other employees to start on a clean state
+        while (true) {
+            Optional<WebElement> element = driver.findElements(By.id("delete-employee"))
+                    .stream().filter(WebElement::isEnabled)
+                    .findFirst();
+            if (element.isEmpty()) break;
+            element.get().click();
+            new WebDriverWait(driver, 1)
+                    .until(ExpectedConditions.invisibilityOf(element.get()));
         }
+
+        driver.findElement(By.id("add-employee")).click();
+        driver.findElement(By.id("username")).sendKeys("user2");
+        driver.findElement(By.id("password")).sendKeys("user2");
+        driver.findElement(By.id("firstName")).sendKeys("Darian");
+        driver.findElement(By.id("lastName")).sendKeys("Horvat");
+        driver.findElement(By.id("save")).click();
+
+        driver.get(BASE_URL + "logout");
+
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.urlToBe(BASE_URL));
+
+        loginAs(driver, "user2", "user2");
+        assertDoesNotThrow(() -> driver.findElement(By.id("auth-dropdown")));
+    }
+
+
+    @Test
+    public void addingNewServiceWorkerWithUsernameThatExistsDisplaysError() {
+        loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_USERNAME);
+        driver.findElement(By.id("employees")).click();
+
+        //Delete other employees to start on a clean state
+        while (true) {
+            Optional<WebElement> element = driver.findElements(By.id("delete-employee"))
+                    .stream().filter(WebElement::isEnabled)
+                    .findFirst();
+            if (element.isEmpty()) break;
+            element.get().click();
+            new WebDriverWait(driver, 1)
+                    .until(ExpectedConditions.invisibilityOf(element.get()));
+        }
+
+        driver.findElement(By.id("add-employee")).click();
+        driver.findElement(By.id("username")).sendKeys("user2");
+        driver.findElement(By.id("password")).sendKeys("user2");
+        driver.findElement(By.id("firstName")).sendKeys("Darian");
+        driver.findElement(By.id("lastName")).sendKeys("Horvat");
+        driver.findElement(By.id("save")).click();
+
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.id("modal"))));
+
+        driver.findElement(By.id("add-employee")).click();
+        driver.findElement(By.id("username")).sendKeys("user2");
+        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.id("firstName")).sendKeys("Neki");
+        driver.findElement(By.id("lastName")).sendKeys("Novi");
+        driver.findElement(By.id("save")).click();
+
+        // Error message is displayed
+        assertTrue(driver.findElement(By.className("alert")).isDisplayed());
+    }
 
 
     // Iz primjera sa sata
