@@ -35,7 +35,7 @@
 <main role="main" class="container">
 
     <p><h5>Zaposlenici</h5></p>
-    <p><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal">Dodaj zaposlenika</button></p>
+    <p><button type="button" id="dodaj" class="btn btn-secondary" data-toggle="modal" data-target="#modal">Dodaj zaposlenika</button></p>
     <table class="table">
         <thead>
         <td>Ime i prezime</td>
@@ -47,7 +47,7 @@
             <td th:text="${employee.fullName}">Pero Perić</td>
             <td th:text="${employee.username}">pperic</td>
             <td>
-                <button type="button" class="btn btn-danger" th:disabled="${employee.employeeType.name() == 'SERVICE_ADMINISTRATOR'}" onclick="removeEmployee(this.dataset.id);" th:attr="data-id=${employee.username}">Ukloni</button>
+                <button type="button" id="obrisi" class="btn btn-danger" th:disabled="${employee.employeeType.name() == 'SERVICE_ADMINISTRATOR'}" onclick="removeEmployee(this.dataset.id);" th:attr="data-id=${employee.username}">Ukloni</button>
             </td>
         </tr>
         </tbody>
@@ -71,25 +71,25 @@
                     </div>
                     <form id="addForm">
                     <div class="form-group row">
-                        <label for="username" class="col-sm-5 col-form-label">Korisničko ime:</label>
+                        <label for="username" id="korisnickoime" class="col-sm-5 col-form-label">Korisničko ime:</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="username" id="username">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="password" class="col-sm-5 col-form-label">Lozinka:</label>
+                        <label for="password" id="pass" class="col-sm-5 col-form-label">Lozinka:</label>
                         <div class="col-sm-5">
                             <input type="password" class="form-control" name="password" id="password">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="firstName" class="col-sm-5 col-form-label">Ime:</label>
+                        <label for="firstName" id="name" class="col-sm-5 col-form-label">Ime:</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="firstName" id="firstName">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="lastName" class="col-sm-5 col-form-label">Prezime:</label>
+                        <label for="lastName" id="sur" class="col-sm-5 col-form-label">Prezime:</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="lastName" id="lastName">
                         </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-                    <button type="button" class="btn btn-primary" onclick="addEmployee();">Spremi</button>
+                    <button type="button" id="spasi" class="btn btn-primary" onclick="addEmployee();">Spremi</button>
                 </div>
             </div>
         </div>
