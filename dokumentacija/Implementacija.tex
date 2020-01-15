@@ -53,12 +53,13 @@
 			\begin{packed_enum}
 			
 			\item Otvaranje početne web stranice u pregledniku
-			\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
-			\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
-			\item Klik na gumb 'Prijava'
-			\item Klik na gumb 'Novi automobil'
+			\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+			\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+			\item Klik na gumb \textit{Prijava}
+			\item Klik na gumb \textit{Novi automobil}
 			\item Unos registracijske tablice 'ZG1234AB' u polje unosa
-			\item Klik na gumb 'Dodaj'	
+			\item Klik na gumb \textit{Dodaj}
+			\item Zatvaranje prozora preglednika
 				
 			\end{packed_enum}
 			
@@ -69,10 +70,11 @@
 				\item Prikazuje se početna web stranica
 				\item Prikazuje se stranica za prijavu
 				\item U polja za unos unešeni su korisničko ime korisnika vlasnika vozila i lozinka
-				\item Prikazuje se početna web stranica ulogiranog korisnika
+				\item Prikazuje se početna web stranica prijavljenog korisnika
 				\item Pojavljuje se prozor za dodavanje vozila
 				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
 				\item Na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
+				\item Prozor preglednika zatvoren
 				
 			\end{packed_enum}
 		
@@ -88,15 +90,16 @@
 			\begin{packed_enum}
 				
 				\item Otvaranje početne web stranice u pregledniku
-				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
-				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
-				\item Klik na gumb 'Prijava'
-				\item Klik na gumb 'Novi automobil'
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+				\item Klik na gumb  \textit{Prijava}
+				\item Klik na gumb \textit{Novi automobil}
 				\item Unos registracijske tablice 'ZG1234AB' u polje unosa
-				\item Klik na gumb 'Dodaj'
-				\item Klik na gumb 'Novi automobil'
+				\item Klik na gumb \textit{Dodaj}
+				\item Klik na gumb \textit{Novi automobil}
 				\item Unos registracijske tablice 'ZG1234AB' u polje unosa
-				\item Klik na gumb 'Dodaj'
+				\item Klik na gumb \textit{Dodaj}
+				\item Zatvaranje prozora preglednika
 				
 			\end{packed_enum}
 			
@@ -107,13 +110,14 @@
 				\item Prikazuje se početna web stranica
 				\item Prikazuje se stranica za prijavu
 				\item U polja za unos unešeni su korisničko ime korisnika vlasnika vozila i lozinka
-				\item Prikazuje se početna web stranica ulogiranog korisnika
+				\item Prikazuje se početna web stranica prijavljenog korisnika
 				\item Pojavljuje se prozor za dodavanje vozila
 				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
-				\item Na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
+				\item Zatvara se prozor za dodavanje vozija i na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
 				\item Pojavljuje se prozor za dodavanje vozila
 				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
-				\item Pojavljuje se poruka pogreške 'Vozilo već postoji!'
+				\item Pojavljuje se poruka pogreške: \textit{Vozilo već postoji!}
+				\item Prozor preglednika zatvoren
 				
 			\end{packed_enum}
 			
@@ -128,10 +132,14 @@
 			\begin{packed_enum}
 				
 				\item Otvaranje početne web stranice u pregledniku
-				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
-				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
-				\item Klik na gumb 'Prijava'
-				\item ...
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena administratora i lozinke u polja za unos
+				\item Klik na gumb \textit{Prijava}
+				\item Brisanje svih dijelova i usluga
+				\item Klik na gumb \textit{Dodaj} za novi rezervni dio
+				\item Unos 'Guma' u polje \textit{Naziv}, '200' u polje \textit{Cijena u kn} i '100' u polje \textit{Predviđeno trajanje u km}
+				\item Klik na gumb \textit{Spremi}
+				\item Zatvaranje prozora preglednika
 				
 			\end{packed_enum}
 			
@@ -142,16 +150,19 @@
 				\item Prikazuje se početna web stranica
 				\item Prikazuje se stranica za prijavu
 				\item U polja za unos unešeni su korisničko ime administratora i lozinka
-				\item Prikazuje se početna web stranica ulogiranog administratora
-				\item ...
-				(U tablici postoji novi redak s novom uslugom.)
+				\item Prikazuje se početna web stranica prijavljenog administratora
+				\item Nema ni jednog dijela ni usluge
+				\item Otvara se prozor za unos rezervnog dijela
+				\item U polje \textit{Naziv} unešen je naziv 'Guma', u polje \textit{Cijena u kn} unešena je cijena '200', a u polje \textit{Predviđeno trajanje u km} unešeno je '100'
+				\item Zatvara se prozor unosa novog rezervnog dijela te se rezervni dio i njegovi detalji pojavljuju na popisu rezervnih dijelova
+				\item Prozor preglednika zatvoren
 				
 			\end{packed_enum}
 			
 			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
 			
 			\hfill\break
-			\noindent\textbf{Ispitni slučaj 4: Administrator servisa registrira novog servisera}
+			\noindent\textbf{Ispitni slučaj 4: Administrator servisa registrira novog servisera i serviser se prijavljuje}
 			
 			\hfill\break
 			\noindent\textbf{Ulaz:}
@@ -159,10 +170,21 @@
 			\begin{packed_enum}
 				
 				\item Otvaranje početne web stranice u pregledniku
-				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
-				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
-				\item Klik na gumb 'Prijava'
-				\item ...
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+				\item Klik na gumb \textit{Prijava}
+				\item Klik na gumb \textit{Zaposlenici}
+				\item Brisanje svih ostalih zaposlenika
+				\item Klik na gumb \textit{Dodaj zaposlenika}
+				\item Unos 'user2' u polja \textit{Korisničko ime} i \textit{Lozinka}, 'Darian' u polje \textit{Ime} i 'Horvat' u polje \textit{Prezime}
+				\item Klik na gumb \textit{Spremi}
+				\item Klik na gumb za dropdown opcija
+				\item Klik na gumb \textit{Odjava}
+				\item Klik na gumb \textit{Prijava}
+				\item Unos 'user2' u polje \textit{Korisničko ime} i \textit{Lozinka}
+				\item Klik na gumb \textit{Prijava}
+				\item Zatvaranje prozora preglednika
+			
 				
 			\end{packed_enum}
 			
@@ -173,9 +195,18 @@
 				\item Prikazuje se početna web stranica
 				\item Prikazuje se stranica za prijavu
 				\item U polja za unos unešeni su korisničko ime administratora i lozinka
-				\item Prikazuje se početna web stranica ulogiranog administratora
-				\item ...
-				(Novoregistrirani serviser se može prijaviti.)
+				\item Prikazuje se početna web stranica prijavljenog administratora
+				\item Prikazuje se stranica sa popisom zaposlenika
+				\item Svi ostali zaposlenici izbrisani
+				\item Otvara se prozor za dodavanje novog zaposlenika
+				\item U polja \textit{Korisničko ime} i \textit{Lozinka} unešeno je 'user2', u polje \textit{Ime}'Darian' te u polje \textit{Prezime} 'Horvat'
+				\item Zatvara se prozor za dodavanje novog zaposlenika i novi se zaposlenik nalazi na popisu zaposlenika
+				\item Prikazuju se opcije u dropdownu
+				\item Korisnik je odjavljen i prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja \textit{Korisničko ime} i \textit{Lozinka} unešeno je 'user2'
+				\item Korisnik je uspješno prijavljen i prikazuje se početna stranica prijavljenog korisnika
+				\item Prozor preglednika zatvoren
 				
 			\end{packed_enum}
 			
@@ -190,10 +221,18 @@
 			\begin{packed_enum}
 				
 				\item Otvaranje početne web stranice u pregledniku
-				\item Klik na gumb za otvaranje stranice za prijavu 'Prijava'
-				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polje za unos
-				\item Klik na gumb 'Prijava'
-				\item ...
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+				\item Klik na gumb \textit{Prijava}
+				\item Klik na gumb \textit{Zaposlenici}
+				\item Brisanje svih ostalih zaposlenika
+				\item Klik na gumb \textit{Dodaj zaposlenika}
+				\item Unos 'user2' u polja \textit{Korisničko ime} i \textit{Lozinka}, 'Darian' u polje \textit{Ime} i 'Horvat' u polje \textit{Prezime}
+				\item Klik na gumb \textit{Spremi}
+				\item Klik na gumb \textit{Dodaj zaposlenika}
+				\item Unos 'user2' u polja \textit{Korisničko ime} i \textit{Lozinka}, 'Neki' u polje \textit{Ime} i 'Novi' u polje \textit{Prezime}
+				\item Klik na gumb \textit{Spremi}
+				\item Zatvaranje prozora preglednika
 				
 			\end{packed_enum}
 			
@@ -205,8 +244,15 @@
 				\item Prikazuje se stranica za prijavu
 				\item U polja za unos unešeni su korisničko ime administratora i lozinka
 				\item Prikazuje se početna web stranica ulogiranog administratora
-				\item ...
-				(Sustav javlja pogrešku.)
+				\item Prikazuje se stranica sa popisom zaposlenika
+				\item Svi ostali zaposlenici izbrisani
+				\item Otvara se prozor za dodavanje novog zaposlenika
+				\item U polja \textit{Korisničko ime'} i \textit{Lozinka} unešeno je 'user2', u polje \textit{Ime} 'Darian' te u polje \textit{Prezime} 'Horvat'
+				\item Zatvara se prozor za dodavanje novog zaposlenika i novi se zaposlenik nalazi na popisu zaposlenika
+				\item Otvara se prozor za dodavanje novog zaposlenika
+				\item U polja \textit{Korisničko ime} i \textit{Lozinka} unešeno je 'user2', u polje \textit{Ime} 'Neki' te u polje \textit{Prezime} 'Novi'
+				\item Poljavljuje se poruka pogreške: \textit{Korisničko ime je zauzeto}
+				\item Prozor preglednika zatvoren
 				
 			\end{packed_enum}
 			
