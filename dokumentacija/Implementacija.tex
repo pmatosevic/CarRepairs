@@ -1,6 +1,5 @@
 \chapter{Implementacija i korisničko sučelje}
 		
-		
 		\section{Korištene tehnologije i alati}
 %		
 %			\textbf{\textit{dio 2. revizije}}
@@ -27,9 +26,133 @@
 	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			%\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
 			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 1: Dodavanje stavke na račun}
 			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void addItemToOrderAddsItemAndUpdatesPrice() {
+				repairOrderService.addItemToOrder(repRo, product);
+			
+				assertEquals(100.00, (double) repRo.getPrice());
+				assertThat(repRo.getItems()).hasSize(1);
+				assertThat(repRo.getItems().get(0).getName()).isEqualTo("Item");
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 2: Dodavanje stavke na račun koji je zatvoren}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void addItemToOrderShouldThrowOnClosedRo() {
+				repRo.setServiceJobStatus(ServiceJobStatus.FINISHED);
+			
+				assertThrows(RuntimeException.class, () -> repairOrderService.addItemToOrder(repRo, product));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 3: Dodavanje besplatne stavke na račun}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void addItemToOrderShouldNotThrowOnFreeProduct() {
+				product = new Product() {
+					public String getName() {
+						return "Free";
+				} 
+				public double getPrice() {
+					return 0.0;
+				}
+			};
+				assertDoesNotThrow(() -> repairOrderService.addItemToOrder(repRo, product));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 4: Dodavanje automobila i dohvat podataka o njemu}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void createVehicleReturnsTheVehicleWithCorrectDataFromHuoServiceAndOwner() throws HuoServiceException {
+				when(huoService.fetchVehicleData(any())).thenReturn(
+					new VehicleData("ZG1234AA", "MOCK-VIN", "Audi A1")
+				);
+				when(vehicleRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+				VehicleOwner owner = new VehicleOwner();
+				
+				Vehicle vehicle = vehicleService.create("ZG1234AA", owner);
+				
+				assertEquals("ZG1234AA", vehicle.getLicencePlate());
+				assertEquals("MOCK-VIN", vehicle.getVinNumber());
+				assertEquals("Audi A1", vehicle.getVehicleModel());
+				assertEquals(owner, vehicle.getOwner());
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 5: Dodavanje automobila i dohvat podataka o njemu za automobil s neispravnim podatcima}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void createVehicleThrowsWhenHuoServiceThrows() throws HuoServiceException {
+				when(huoService.fetchVehicleData(any())).thenThrow(new HuoServiceException());
+				VehicleOwner owner = new VehicleOwner();
+				
+				Assertions.assertThrows(RuntimeException.class, () -> vehicleService.create("ZG1234AA", owner));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 6: Dodavanje automobila i dohvat podataka o njemu za automobil koji je već pridijeljen tom vlasniku}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void createVehicleFailsWhenOwnerHasThatVehicle() throws HuoServiceException {
+				VehicleData data = new VehicleData("ZG1234AA", "MOCK-VIN", "Audi A1");
+				//when(huoService.fetchVehicleData(any())).thenReturn(data);
+				VehicleOwner owner = new VehicleOwner();
+				Vehicle vehicle = new Vehicle(data, owner);
+				owner.setVehicles(List.of(vehicle));
+				when(vehicleRepository.existsByLicencePlateAndOwner(any(), any())).thenReturn(true);
+				//when(vehicleRepository.findAllByOwner(any())).thenReturn(List.of(vehicle));
+				
+				Assertions.assertThrows(AlreadyExistsException.class, () -> vehicleService.create("ZG1234AA", owner));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
 			
 			\subsection{Ispitivanje sustava}
 			
