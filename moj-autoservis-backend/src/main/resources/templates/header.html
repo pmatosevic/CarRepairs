@@ -46,7 +46,7 @@
                     <a class="nav-link" th:href="@{/autoservice/repairOrders/opened}">Otvoreni nalozi</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_SERVICE_ADMIN')">
-                    <a class="nav-link" th:href="@{/autoservice/priceList}">Cjenik</a>
+                    <a class="nav-link" id="price-nav" th:href="@{/autoservice/priceList}">Cjenik</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_SERVICE_ADMIN')">
                     <a class="nav-link" th:href="@{/autoservice/employees}">Zaposlenici</a>
