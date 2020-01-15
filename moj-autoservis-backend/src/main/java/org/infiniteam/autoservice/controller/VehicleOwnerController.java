@@ -75,21 +75,14 @@ public class VehicleOwnerController {
     @Transactional
     public ResponseEntity<?> addVehicle(@RequestBody String licencePlate) {
         VehicleOwner user = getCurrentUser();
-        if (vehicleService.existsByLicencePlateAndOwner(licencePlate, user)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vozilo već postoji!");
-        }
-
-        VehicleData vehicleData;
         try {
-            vehicleData = huoService.fetchVehicleData(licencePlate);
-        } catch (HuoServiceException e) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Vozilo nije registrirano u bazi osiguranih vozila!");
+            Vehicle vehicle = vehicleService.create(licencePlate, user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(vehicle.getVehicleId());
+        } catch (AlreadyExistsException e) {
+            return ResponseEntity.badRequest().body("Vozilo je već dodano.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Vozilo nije pronađeno u HUO registru.");
         }
-
-        Vehicle vehicle = vehicleService.create(vehicleData, user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(vehicle.getVehicleId());
     }
 
     @PostMapping("/user/vehicles/{id}/delete")

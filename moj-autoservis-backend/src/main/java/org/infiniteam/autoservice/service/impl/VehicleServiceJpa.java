@@ -3,9 +3,10 @@ package org.infiniteam.autoservice.service.impl;
 import org.infiniteam.autoservice.model.Vehicle;
 import org.infiniteam.autoservice.model.VehicleOwner;
 import org.infiniteam.autoservice.repository.VehicleRepository;
-import org.infiniteam.autoservice.service.EntityNotFoundException;
-import org.infiniteam.autoservice.service.VehicleService;
+import org.infiniteam.autoservice.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class VehicleServiceJpa implements VehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private HuoService huoService;
 
     @Override
     public Vehicle fetch(long vehicleId) {
@@ -38,9 +42,20 @@ public class VehicleServiceJpa implements VehicleService {
     }
 
     @Override
-    public Vehicle create(VehicleData vehicleData, VehicleOwner owner) {
-        Vehicle vehicle = new Vehicle(vehicleData, owner);
-        return vehicleRepository.save(vehicle);
+    public Vehicle create(String licencePlate, VehicleOwner owner) {
+        if (existsByLicencePlateAndOwner(licencePlate, owner)) {
+            throw new AlreadyExistsException("Vozilo već postoji!");
+        }
+
+        VehicleData vehicleData;
+        try {
+            vehicleData = huoService.fetchVehicleData(licencePlate);
+        } catch (HuoServiceException e) {
+            throw new IllegalArgumentException("Nije moguće dohvatiti vozilo iz HUO registra.");
+        }
+
+        return vehicleRepository.save(new Vehicle(vehicleData, owner));
     }
+
 
 }

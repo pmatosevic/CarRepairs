@@ -17,6 +17,6 @@ public interface VehicleService {
 
     boolean existsByLicencePlateAndOwner(String licencePlate, VehicleOwner owner);
 
-    Vehicle create(VehicleData vehicleData, VehicleOwner owner);
+    Vehicle create(String licencePlate, VehicleOwner owner);
 
 }

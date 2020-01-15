@@ -22,6 +22,9 @@ public class RepairOrderServiceJpa implements RepairOrderService {
     @Autowired
     private RepairOrderRepository repairOrderRepository;
 
+
+
+
     @Override
     public List<RepairOrder> findAll() {
         return repairOrderRepository.findAll();
@@ -97,6 +100,8 @@ public class RepairOrderServiceJpa implements RepairOrderService {
     @Override
     @Transactional
     public void removeItemFromOrder(RepairingRepairOrder ro, long itemId) {
+        Assert.isTrue(ro.getServiceJobStatus() == ServiceJobStatus.IN_PROGRESS, "RO should be in progress.");
+
         RepairOrderItem item = null;
         for (RepairOrderItem item1 : ro.getItems()) {
             if (item1.getItemId().equals(itemId)) item = item1;
@@ -113,6 +118,7 @@ public class RepairOrderServiceJpa implements RepairOrderService {
     public void addItemToOrder(RepairingRepairOrder ro, Product product) {
         Assert.hasText(product.getName(), "Name should not be empty.");
         Assert.isTrue(product.getPrice() >= 0, "Price should be non negative.");
+        Assert.isTrue(ro.getServiceJobStatus() == ServiceJobStatus.IN_PROGRESS, "RO should be in progress.");
 
         RepairOrderItem item = new RepairOrderItem();
         item.setName(product.getName());
