@@ -1,6 +1,5 @@
 package org.infiniteam.autoservice.controller;
 
-import org.infiniteam.autoservice.dto.OpenRepairOrderDto;
 import org.infiniteam.autoservice.model.*;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.service.*;
@@ -13,10 +12,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
@@ -79,21 +75,14 @@ public class VehicleOwnerController {
     @Transactional
     public ResponseEntity<?> addVehicle(@RequestBody String licencePlate) {
         VehicleOwner user = getCurrentUser();
-        if (vehicleService.existsByLicencePlateAndOwner(licencePlate, user)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vozilo već postoji!");
-        }
-
-        VehicleData vehicleData;
         try {
-            vehicleData = huoService.fetchVehicleData(licencePlate);
-        } catch (HuoServiceException e) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Vozilo nije registrirano u bazi osiguranih vozila!");
+            Vehicle vehicle = vehicleService.create(licencePlate, user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(vehicle.getVehicleId());
+        } catch (AlreadyExistsException e) {
+            return ResponseEntity.badRequest().body("Vozilo je već dodano.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Vozilo nije pronađeno u HUO registru.");
         }
-
-        Vehicle vehicle = vehicleService.create(vehicleData, user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(vehicle.getVehicleId());
     }
 
     @PostMapping("/user/vehicles/{id}/delete")
@@ -109,16 +98,17 @@ public class VehicleOwnerController {
 
     @PostMapping("/user/vehicles/{id}/ro")
     @Transactional
-    public ResponseEntity<?> openRepairOrder(@PathVariable Long id, @RequestBody OpenRepairOrderDto openRepairOrderDto) {
+    public ResponseEntity<?> openRepairOrder(@PathVariable Long id, @RequestParam long autoServiceId,
+                                             @RequestParam RepairOrderType repairOrderType) {
         Vehicle vehicle = vehicleService.fetch(id);
-        AutoService autoservice = autoServiceService.fetch(openRepairOrderDto.getAutoServiceId());
+        AutoService autoservice = autoServiceService.fetch(autoServiceId);
 
         checkVehicleRights(vehicle);
         if (!roCanBeOpened(vehicle)) {
             return ResponseEntity.badRequest().body("Vozilo je već na servisu.");
         }
 
-        repairOrderService.create(autoservice, vehicle, openRepairOrderDto.getRepairOrderType());
+        repairOrderService.create(autoservice, vehicle, repairOrderType);
         return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
 
