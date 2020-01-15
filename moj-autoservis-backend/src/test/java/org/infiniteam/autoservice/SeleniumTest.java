@@ -115,6 +115,7 @@ public class SeleniumTest {
         assertTrue(driver.findElement(By.className("alert")).isDisplayed());
     }
 
+
     @Test
     public void addingNewService() {
         loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_PASSWORD);
@@ -126,6 +127,28 @@ public class SeleniumTest {
         driver.findElement(By.id("save-part")).click();
     }
 
+
+    @Test
+    public void addingNewServiceWorker() {
+        loginAs(driver, SERVICE_ADMIN_USERNAME, SERVICE_ADMIN_USERNAME);
+
+        driver.findElement(By.id("employees")).click();
+        // Delete other vehicles to start on a clean state
+        //while (!driver.findElements(By.className("card-header")).isEmpty()) {
+            //driver.findElement(By.partialLinkText("Detalji")).click();
+            //driver.findElement(By.id("obrisi")).click();
+
+        driver.findElement(By.id("dodaj")).click();
+        driver.findElement(By.id("korisnickoime")).click();
+        driver.findElement(By.id("korisnickoime")).sendKeys("user2");
+        driver.findElement(By.id("pass")).click();
+        driver.findElement(By.id("pass")).sendKeys("user2");
+        driver.findElement(By.id("name")).click();
+        driver.findElement(By.id("name")).sendKeys("Darian");
+        driver.findElement(By.id("sur")).click();
+        driver.findElement(By.id("sur")).sendKeys("Horvat");
+        driver.findElement(By.id("spasi")).click();
+        }
 
 
     // Iz primjera sa sata
