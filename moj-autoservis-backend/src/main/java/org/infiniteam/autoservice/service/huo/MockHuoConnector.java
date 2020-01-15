@@ -11,20 +11,35 @@ import java.util.UUID;
 public class MockHuoConnector implements HuoConnector {
 
     private static List<String> MODELS = List.of(
-        "Tesla Cybertruck"
-    );
-
-    private static List<String> VINS = List.of(
-        "4T1BG28K81U790207"
+        "Audi A1",
+        "Ford Mustang",
+        "Subaru Impreza",
+        "BMW X3",
+        "Infiniti QX60",
+        "Mercedes CLS"
     );
 
     private Random rand = new Random();
 
     @Override
-    public VehicleData fetchVehicleData(String licencePlate) throws HuoServiceException {
+    public VehicleData fetchVehicleData(String licencePlate) throws HuoConnectorException {
         String model = MODELS.get(rand.nextInt(MODELS.size()));
-        String vin = UUID.randomUUID().toString().replace("-", "");
-        return new VehicleData(licencePlate, vin, model);
+        String vin = UUID.randomUUID().toString().replace("-", "").toUpperCase().substring(0, 18);
+        String decodedLicence = decodeLicence(licencePlate);
+
+        return new VehicleData(decodedLicence, vin, model);
+    }
+
+    private String decodeLicence(String licencePlate) throws HuoConnectorException {
+        licencePlate = licencePlate.replace(" ", "");
+        String city = licencePlate.substring(0, 2);
+        int pos = 2;
+        while (Character.isDigit(licencePlate.charAt(pos))) pos++;
+        String number = licencePlate.substring(2, pos);
+        String chars = licencePlate.substring(pos);
+
+        if (number.length() < 3 || number.length() > 4) throw new HuoConnectorException("Invalid licence plate.");
+        return city + " " + number + " " + chars;
     }
 
 }

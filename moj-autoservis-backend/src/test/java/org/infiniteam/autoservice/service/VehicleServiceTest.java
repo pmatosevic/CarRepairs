@@ -4,7 +4,7 @@ import org.infiniteam.autoservice.model.Vehicle;
 import org.infiniteam.autoservice.model.VehicleOwner;
 import org.infiniteam.autoservice.repository.VehicleRepository;
 import org.infiniteam.autoservice.service.huo.HuoConnector;
-import org.infiniteam.autoservice.service.huo.HuoServiceException;
+import org.infiniteam.autoservice.service.huo.HuoConnectorException;
 import org.infiniteam.autoservice.service.impl.VehicleData;
 import org.infiniteam.autoservice.service.impl.VehicleServiceJpa;
 import org.junit.Test;
@@ -35,14 +35,14 @@ public class VehicleServiceTest {
 
 
     @BeforeEach
-    public void setup() throws HuoServiceException {
+    public void setup() throws HuoConnectorException {
         when(huoConnector.fetchVehicleData(any())).then(invocation -> {
             return new VehicleData(invocation.getArgument(0), "MOCK-VIN", "Audi A1");
         });
     }
 
     @Test
-    public void createVehicleReturnsTheVehicleWithCorrectDataFromHuoServiceAndOwner() throws HuoServiceException {
+    public void createVehicleReturnsTheVehicleWithCorrectDataFromHuoServiceAndOwner() throws HuoConnectorException {
         when(huoConnector.fetchVehicleData(any())).thenReturn(
                 new VehicleData("ZG1234AA", "MOCK-VIN", "Audi A1")
         );
@@ -58,15 +58,15 @@ public class VehicleServiceTest {
     }
 
     @Test
-    public void createVehicleThrowsWhenHuoServiceThrows() throws HuoServiceException {
-        when(huoConnector.fetchVehicleData(any())).thenThrow(new HuoServiceException());
+    public void createVehicleThrowsWhenHuoServiceThrows() throws HuoConnectorException {
+        when(huoConnector.fetchVehicleData(any())).thenThrow(new HuoConnectorException());
         VehicleOwner owner = new VehicleOwner();
 
         Assertions.assertThrows(RuntimeException.class, () -> vehicleService.create("ZG1234AA", owner));
     }
 
     @Test
-    public void createVehicleFailsWhenOwnerHasThatVehicle() throws HuoServiceException {
+    public void createVehicleFailsWhenOwnerHasThatVehicle() throws HuoConnectorException {
         VehicleData data = new VehicleData("ZG1234AA", "MOCK-VIN", "Audi A1");
         //when(huoService.fetchVehicleData(any())).thenReturn(data);
         VehicleOwner owner = new VehicleOwner();

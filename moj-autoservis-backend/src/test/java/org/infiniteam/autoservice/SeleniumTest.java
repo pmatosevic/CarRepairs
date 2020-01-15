@@ -67,7 +67,7 @@ public class SeleniumTest {
             driver.findElement(By.id("deleteVehicle")).click();
         }
 
-        String vehiclePlate = "ZG1234AB";
+        String vehiclePlate = "ZG 1234 AB";
         driver.findElement(By.id("add-vehicle-btn")).click();
         driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
         driver.findElement(By.id("addVehicle")).click();
@@ -98,7 +98,7 @@ public class SeleniumTest {
         }
 
         WebElement modal = driver.findElement(By.id("exampleModal"));
-        String vehiclePlate = "ZG1234AB";
+        String vehiclePlate = "ZG 1234 AB";
         driver.findElement(By.id("add-vehicle-btn")).click();
         driver.findElement(By.id("vehiclePlate")).sendKeys(vehiclePlate);
         driver.findElement(By.id("addVehicle")).click();

@@ -5,7 +5,7 @@ import org.infiniteam.autoservice.model.VehicleOwner;
 import org.infiniteam.autoservice.repository.VehicleRepository;
 import org.infiniteam.autoservice.service.*;
 import org.infiniteam.autoservice.service.huo.HuoConnector;
-import org.infiniteam.autoservice.service.huo.HuoServiceException;
+import org.infiniteam.autoservice.service.huo.HuoConnectorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,7 @@ public class VehicleServiceJpa implements VehicleService {
         VehicleData vehicleData;
         try {
             vehicleData = huoConnector.fetchVehicleData(licencePlate);
-        } catch (HuoServiceException e) {
+        } catch (HuoConnectorException e) {
             throw new IllegalArgumentException("Nije moguće dohvatiti vozilo iz HUO registra.");
         }
 
