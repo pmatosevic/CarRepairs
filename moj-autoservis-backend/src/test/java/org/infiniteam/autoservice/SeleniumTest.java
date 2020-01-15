@@ -47,11 +47,6 @@ public class SeleniumTest {
         element = driver.findElement(By.name("password"));
         element.sendKeys(password);
         driver.findElement(By.id("submit-btn")).click();
-//        new WebDriverWait(driver, 1)
-//                .until(ExpectedConditions.or(
-//                        ExpectedConditions.presenceOfElementLocated(By.id("auth-dropdown"))
-//                        ExpectedConditions.visibilityOf(driver.findElement(By.id("error")))
-//                ));
         driver.findElement(By.id("auth-dropdown"));         // shown only if the user is logged in
     }
 
@@ -229,48 +224,6 @@ public class SeleniumTest {
 
         // Error message is displayed
         assertTrue(driver.findElement(By.className("alert")).isDisplayed());
-    }
-
-
-    // Iz primjera sa sata
-
-    public void testLoginVehicleOwner() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://localhost:8080/login");
-
-        WebElement element = driver.findElement(By.name("username"));
-        element.sendKeys("user1");
-        element = driver.findElement(By.name("password"));
-        element.sendKeys("user1");
-        driver.findElement(By.id("submit-btn")).click();
-
-        String title = driver.getTitle();
-        assertEquals(title, "Administracija");
-        driver.quit();
-    }
-
-    public void testLoginBadCreds() {
-        WebDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Chrome Driver\\chromedriver.exe");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://r2d2.zemris.fer.hr/OPPgrupe/");
-
-
-        WebElement element = driver.findElement(By.name("username"));
-        element.sendKeys("testadmin");
-
-        element = driver.findElement(By.name("pass"));
-        element.sendKeys("22345");
-
-        driver.findElement(By.cssSelector("input[type='submit']")).click();
-
-        String title = driver.getTitle();
-
-        assertEquals(title, "OPP - Prijava projektnih grupa");
-
-        driver.quit();
-
     }
 
 
