@@ -18,7 +18,7 @@
         <tbody>
             <tr th:each="ro : ${repairOrders}" th:attr="data-id=${ro.repairOrderId}">
                 <td th:text="${ro.vehicle.licencePlate}"></td>
-                <td th:text="${ro.vehicle.owner.firstName} + ' ' + ${ro.vehicle.owner.firstName}"></td>
+                <td th:text="${ro.vehicle.owner.firstName} + ' ' + ${ro.vehicle.owner.lastName}"></td>
                 <td>
                     <button type="button" class="btn btn-success" onclick="handleAccept(this.dataset.id)" th:attr="data-id=${ro.repairOrderId}">Prihvati</button>
                     <button type="button" class="btn btn-danger" onclick="handleReject(this.dataset.id)" th:attr="data-id=${ro.repairOrderId}">Odbij</button>
