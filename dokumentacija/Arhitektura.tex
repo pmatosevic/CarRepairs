@@ -328,42 +328,62 @@
 			\label{fig:classdiagrammodel}
 		\end{figure}
 	
-		Na slici \ref{fig:classdiagramcontrolservice} dijagramom su prikazani razredi \textit{controller} i \textit{service}.
+		Na slici \ref{fig:classdiagramcontrolservice} dijagramom su prikazani razredi koji pripadaju paketima \textit{controller} i \textit{service} odnosno kontrolerskom i servisnom sloju.
 		
-		Razred \textit{MainController} nudi operacije povezane s prikazom početne stranice te registraciju. Njegova sučelja su \textit{VehicleOwnerService}, \textit{AutoServiceService} i \textit{UserService}.
+		Razred \textit{MainController} nudi operacije povezane s prikazom početne stranice, registracijom, te općenitom promjenom korisničkih podataka i lozinke. Za te operacije ovisi o sučeljima \textit{VehicleOwnerService}, \textit{AutoServiceService} i \textit{UserService}.
 		
-		Razred \textit{AdministratorController} nudi operacije povezane s administratorom. Njegova sučelja su \textit{VehicleOwnerService} i \textit{AutoServiceService}. 
+		Razred \textit{AdministratorController} nudi izvođenje operacija koje koristi administrator. On ovisi o sučeljima \textit{VehicleOwnerService} i \textit{AutoServiceService}. 
 		
-		Razred \textit{VehicleOwnerController} nudi operacije povezane s vlasnikom vozila. Njegova sučelja su \textit{AutoServiceService}, \textit{VehicleService} i \textit{RepairOrderService}.
+		Razred \textit{VehicleOwnerController} nudi operacije povezane s vlasnikom vozila. On koristi operacije koje nude sučelja \textit{AutoServiceService}, \textit{VehicleService} i \textit{RepairOrderService}.
 		
-		Razred \textit{AutoServiceController} nudi operacije povezane sa serviserom. Njegova sučelja su \textit{RepairOrderService}, \textit{VehiclePartService}, \textit{ServiceLaborService} i \textit{ServiceEmployeeService}.
+		Razred \textit{AutoServiceController} nudi operacije povezane sa serviserom. On koristi sučelja \textit{RepairOrderService}, \textit{VehiclePartService}, \textit{ServiceLaborService} i \textit{ServiceEmployeeService}.
 		
-		Razred \textit{ApiController} je prazan.
+		Razred \textit{GeoDTO} služi za dinamički prijenos podataka o lokacijama servisa na \textit{frontend}.
 		
-		Razred \textit{GeoDTO} slući za postavljanje i dobavljanje lokacije te postavljanje i dobavljanje imena.
+		Razred \textit{Utility} nudi statičke metode za provjeru OIB-a, e-maila, korisničkog imena, lozinke te ostalih izmijenjivih podataka i za provjeru postojanja podataka.
 		
-		Razred \textit{Utility} služi za provjeru OIB-a, e-maila, korisničkog imena, lozinke te ostalih izmijenjivih podataka i za provjeru postojanja podataka.
+		Sučelje \textit{UserService} definira operacije za uređivanje računa svih korisnika. Sučelje \textit{VehicleOwnerService} definira operacije za uređivanje računa svih korisnika vlasnika vozila. Sučelje \textit{AutoServiceService} definira operacije povezane s autoservisima. Sučelje \textit{VehicleService} omogućava upravljanje vozilima. Sučelje \textit{RepairOrderService} omogućava upravljanje servisnim nalozima. Sučelje \textit{VehiclePartService} omogućava upravljanje zamjenskim komadima za vozila. Sučelje \textit{ServiceLaborService} omogućava upravljanje uslugama koje se nude. Sučelje \textit{ServiceEmployeeService} omogućava upravljanje radnicima (serviserima).
 		
-		Sučelje \textit{UserService} omogućava uređivanje računa svih korisnika. Sučelje \textit{VehicleOwnerService} omogućava uređivanje računa svih korisnika vlasnika vozila. Sučelje \textit{AutoServiceService} omogućava uređivanje svih autoservisa. Sučelje \textit{VehicleService} omogućava upravljanje vozilima. Sučelje \textit{RepairOrderService} omogućava upravljanje servisnim nalozima. Sučelje \textit{VehiclePartService} omogućava upravljanje zamjenskim komadima za vozila. Sučelje \textit{ServiceLaborService} omogućava upravljanje uslugama koje se nude. Sučelje \textit{ServiceEmployeeService} omogućava upravljanje radnicima (serviserima).
+		Sve ta sučelja imaju i konkretne implementacije koje za pristup podacima koriste \textit{JPA} repozitorije, a oni su smješteni u paket \textit{impl}.
 				
 		
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_controller_service.png}
-			\caption{Dijagram razreda controller i service}
+			\caption{Dijagram razreda kontrolerskog i sučelja servisnog sloja}
 			\label{fig:classdiagramcontrolservice}
 		\end{figure}
 	
-		Na slici \ref{fig:classdiagramimpl} prikazan je razred \textit{impl}.
+		Na slici \ref{fig:classdiagramimpl} prikazan je razred \textit{impl}. Razred \textit{AutoServiceServiceJpa} pruža uslugu vezanu za autoservis -- stvaranje, izmjenu, pronalazak, brisanje itd. Također pruža mogućnost stvaranja autoservisa s vlasnikom. Ovaj razred koristi sučelja \textit{UserService, ServiceEmployeeRepository, ServiceLaborRepository, VehiclePartRepository, AutoserviceRepository} i \textit{AutoServiceService}.
+		
+		Razred \textit{UserServiceJpa} pruža uslugu pronalaska, dohvata, ažuriranja podataka, promjenu lozinke korisnika itd. Ovaj razred koristi sučelja \textit{UserRepository} i \textit{UserService}.
+		
+		Razred \textit{PasswordEncoder} je prazan, te ga nasljeđuju \textit{VehicleOwnerServiceJpa, UserServiceJpa} i \textit{AutoServiceServiceJpa}.
+		
+		Razred \textit{VehicleOwnerServiceJpa} pruža uslugu vezanu za vlasnike automobila: dohvat, pronalazak, brisanje i stvaranje. Ovaj razred koristi sučelja \textit{VehicleOwnerRepository, UserRepository, VehicleOwnerService} i \textit{VehicleRepository}.
+		
+		Rezred \textit{VehicleServiceJpa} pruža uslugu dohvata, pronalaska, stvaranja i provjere postojanja automobila. Koristi sučelja \textit{HuoConnector, VehicleRepository} i \textit{VehicleService}.
+		
+		Razred \textit{ServiceLaborServiceJpa} pruža uslugu za dohvat, pronalazak, dodavanje, mijenjanje i brisanje usluge autoservisa. Koristi sučelja \textit{ServiceLaborService} i \textit{ServiceLaborRepository}.
+		
+		Razred \textit{VehiclePartServiceJpa} pruža uslugu pronalaska, dohvata, dodavanja, mijenjanja i brisanja rezervog dijela auta. Koristi sučelja \textit{VehiclePartService} i \textit{VehiclePartRepository}.
+		
+		Razred \textit{ServiceEmployeeServiceJpa} pruža uslugu pronalaska, dodavanja i brisanja zaposlenika određenog autoservisa. Koristi sučelje \textit{ServiceEmployeeService, ServiceEmployeeRepository} i \textit{UserRepository}, a nasljeđuje \textit{PasswordEncoder}.
+		
+		Razred \textit{VehicleServiceJpa} pruža uslugu dohvata, pronalaska, provjere postojanja i stvaranje automobila koristeći sučelja \textit{HuoConnector, Vehicle Repository} i \textit{VehicleService}.
+		
+		Razred \textit{RepairOrderServiceJpa} pruža uslugu dohvata, pronalaska, stvaranja i ažuriranja radnog naloga, kao i dodavanje i micanje stavki. Koristi sučelja \textit{RepairOrderRepository} i \textit{RepairOrderService}.
+		
+		Razred VehicleData predstavlja podatke o automobilu: registracijske oznake, broj šasije i model. 
 	
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_impl.png}
-			\caption{Dijagram razreda impl}
+			\caption{Dijagram razreda servisnog sloja}
 			\label{fig:classdiagramimpl}
 		\end{figure}
 	
-		Na slici \ref{fig:classdiagramhuorepositorysecurity} dijagramom su prikazani svi preostali razredi, preciznije razredi \textit{huo}, \textit{repository}, i \textit{security}. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije. Razred \textit{Initialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} (čije je sučelje \textit{UserDetailsService}) i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{CurrentUser}.
+		Na slici \ref{fig:classdiagramhuorepositorysecurity} dijagramom su prikazani svi preostali razredi, preciznije paketi \textit{huo}, \textit{repository}, i \textit{security}. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije. Razred \textit{Initialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} (čije je sučelje \textit{UserDetailsService}) i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{CurrentUser}.
 	
 		\begin{figure}[H]
 			\centering
