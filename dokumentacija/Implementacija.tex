@@ -455,9 +455,53 @@
 			$ GRANT ALL PRIVILEGES ON DATABASE naziv_baze_podataka TO korisnik;
 		\end{lstlisting}
 		
-		\subsection{Konfiguracija i pokretanje }
+		\subsection{Konfiguracija i pokretanje poslužitelja}
+		Za pokretanje konfiguriranje, prevođenje i pokretanje web aplikacije potrebno je putem \textit{apt} sustava instalirati pakete:
+		\begin{lstlisting}
+			$ sudo apt update
+			$ sudo apt install openjdk-11-jdk-headless maven screen
+		\end{lstlisting}
+		Nakon preuzimanja izvornog koda na poslužitelj (npr. putem \textit{Git}-a ili preko sustava za automatizirani razmještaj) potrebno je otići u direktorij izvornog koda te nakon otvaranja konfiguracijske datoteke naredbom:
+		\begin{lstlisting}
+			$ nano src/main/resources/application.properties
+		\end{lstlisting}
+		postaviti parametre pristupa prema bazi podataka (novostvorenoj u prethodnom koraku ili nekoj već kreiranoj):
+		\begin{lstlisting}
+			spring.datasource.url=jdbc:postgresql://localhost:5432/naziv_baze_podataka
+			spring.datasource.username=korisnik
+			spring.datasource.password=lozinka
+			spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+		\end{lstlisting}
+		U slučaju korištenja neke druge baze podataka potrebno je na promijeniti \textit{spring.datasource.url} ovisno o uputama te baze podataka. Nakon toga je potrebno stvoriti izvršni kod izvršavanjem naredbe:
+		\begin{lstlisting}
+			$ mvn compile
+			$ mvn build
+			$ mvn package
+		\end{lstlisting}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1.0\linewidth]{slike/deployment1}
+			\caption{Prikaz nakon uspješnog stvaranja izvršnog koda}
+			\label{fig:deployment1}
+		\end{figure}
 		
-
-			
+		
+		Preporuča se naredbom 
+		\begin{lstlisting}
+			$ screen
+		\end{lstlisting}
+		stvoriti virtualni terminal te u njemu pokrenuti aplikaciju izvođenjem naredbe:
+		\begin{lstlisting}
+			$ ./run.sh
+		\end{lstlisting}
+		Ta će skripta pokrenuti Springov ugrađeni \textit{Tomcat} poslužitelj na portu standardnom portu 80.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1.0\linewidth]{slike/deployment2}
+			\caption{Prikaz nakon pokretanja poslužitelja}
+			\label{fig:deployment2}
+		\end{figure}
+		
 			
 			\eject 
