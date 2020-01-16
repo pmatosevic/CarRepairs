@@ -19,7 +19,7 @@ public class AutoService {
     @Column(unique = true)
     private String oib;
 
-    private double regularServicePrice;
+    private double regularServicePrice = 1000.00;
 
     @OneToMany(mappedBy = "autoService")
     private List<ServiceLabor> serviceLabors;

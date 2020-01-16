@@ -54,7 +54,7 @@ public class AutoServiceServiceJpa implements AutoServiceService {
 
     @Override
     public AutoService update(AutoService autoService) {
-        return autoServiceRepository.save(autoService);
+        return autoServiceRepository.saveAndFlush(autoService);
     }
 
     @Override

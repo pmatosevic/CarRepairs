@@ -36,7 +36,8 @@ public class AutoServiceController {
     private ServiceEmployeeService serviceEmployeeService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private AutoServiceService autoServiceService;
+
 
     @GetMapping("/autoservice")
     public String autoserviceHome(Model model) {
@@ -262,6 +263,7 @@ public class AutoServiceController {
         autoService.setRegularServicePrice(regularPrice);
         autoService.setLatitude(latitude);
         autoService.setLongitude(longitude);
+        autoServiceService.update(autoService);
         return "redirect:/autoservice/details";
     }
 
