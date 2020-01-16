@@ -6,6 +6,8 @@ import org.infiniteam.autoservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,22 @@ public class MockDataInitialization {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private Environment environment;
+
     @EventListener
     public void appReady(ApplicationReadyEvent e) {
+        if (environment.acceptsProfiles(Profiles.of("production"))) {
+            if (userRepository.existsByUsername("admin")) return;
+            Administrator admin = new Administrator();
+            admin.setUsername("admin");
+            admin.setFirstName("Admin");
+            admin.setLastName("Admin");
+            admin.setPasswordHash(passwordEncoder.encode("Admin456"));
+            userRepository.saveAndFlush(admin);
+            return;
+        }
+
         VehicleOwner user = new VehicleOwner();
         user.setUsername("user1");
         user.setFirstName("Pero");
