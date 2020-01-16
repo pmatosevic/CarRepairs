@@ -63,7 +63,7 @@ public class SeleniumTest {
 
         // Delete other vehicles to start on a clean state
         while (!driver.findElements(By.className("card-header")).isEmpty()) {
-            driver.findElement(By.partialLinkText("Detalji")).click();
+            driver.findElement(By.partialLinkText("Nalozi")).click();
             driver.findElement(By.id("deleteForm")).submit();
         }
 
@@ -93,7 +93,7 @@ public class SeleniumTest {
 
         // Delete other vehicles to start on a clean state
         while (!driver.findElements(By.className("card-header")).isEmpty()) {
-            driver.findElement(By.partialLinkText("Detalji")).click();
+            driver.findElement(By.partialLinkText("Nalozi")).click();
             driver.findElement(By.id("deleteForm")).submit();
         }
 
