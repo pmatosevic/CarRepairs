@@ -36,6 +36,16 @@
         $("#dynamic-load").load(url);
         $('#roDetailsModal').modal('show');
     }
+
+    function deleteVehicle() {
+        bootbox.confirm({
+            message: "Jeste li sigurni da želite izbrisati vozilo?",
+            locale: 'hr',
+            callback: function (result) {
+                if (result) $('#deleteForm').submit();
+            }
+        });
+    }
 </script>
 
 <div th:replace="~{header :: header}">Header</div>
@@ -46,7 +56,7 @@
 
     <p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openRoModal" th:disabled="${roDisabled}">Otvori nalog</button>
-        <button type="button" class="btn btn-danger" id="deleteVehicle" th:disabled="${roDisabled}" onclick="$('#deleteForm').submit();">
+        <button type="button" class="btn btn-danger" id="deleteVehicle" th:disabled="${roDisabled}" onclick="deleteVehicle()">
             <i class="fa fa-trash"></i>
             Izbriši vozilo</button>
     </p>

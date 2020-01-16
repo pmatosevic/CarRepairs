@@ -11,6 +11,12 @@
 
 <main role="main" class="container">
 
+    <script type="text/javascript">
+        function closeSubmit() {
+            bootbox.alert("Radni nalog je uspješno zatvoren.", () => $("#form").submit());
+        }
+    </script>
+
     <form id="form" method="post" th:action="@{/autoservice/repairOrders/{id}/saveAndClose(id=${order.repairOrderId})}">
 
     <div class="row">
@@ -45,7 +51,7 @@
             </div>
 
             <div>
-                <button type="submit" class="btn btn-success" role="button">Završi nalog</button>
+                <button type="button" class="btn btn-success" onclick="closeSubmit()">Završi nalog</button>
                 <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
             </div>
         </div>
