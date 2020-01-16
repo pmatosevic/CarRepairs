@@ -10,7 +10,7 @@
     function changeData(e) {
         e.preventDefault();
         $.post(window.location.pathname, $('#settings').serialize())
-            .done(data => {bootbox.alert("Podaci su promijenjeni.", () => window.location.href = "/");})
+            .done(data => {bootbox.alert("Podaci su uspješno promijenjeni!", () => window.location.href = "/");})
             .fail((xhr, status, error) => bootbox.alert("Greška: " + xhr.responseText));
         return false;
     }
@@ -20,6 +20,7 @@
 <div th:replace="~{header :: header}">Header</div>
 <main role="main" class="container">
     <form class="settings-form" id="settings" method="post" onsubmit="return changeData(event)">
+        <br>
         <h1 class="h3 mb-3 font-weight-normal">Promjena korisničkih podataka</h1>
         <p id="error"></p>
         <div class="form-group row">
