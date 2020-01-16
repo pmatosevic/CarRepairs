@@ -53,7 +53,7 @@ public class MainController {
     public List<GeoDTO> fetchAutoServiceLocations() {
         List<AutoService> autoServices = autoServiceService.findAllActive();
         return autoServices.stream()
-                .map(as -> new GeoDTO(as.getShopName(), as.getLatitude(), as.getLongitude()))
+                .map(as -> new GeoDTO(as.getShopName() + " (Redovni servis: " + as.getRegularServicePrice() + " kn)", as.getLatitude(), as.getLongitude()))
                 .collect(Collectors.toList());
     }
 
