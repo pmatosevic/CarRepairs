@@ -13,6 +13,11 @@
 <main role="main" class="container">
 
     <script type="text/javascript">
+
+        function closeSubmit() {
+            bootbox.alert("Radni nalog je uspješno zatvoren.", () => $("#closeForm").submit());
+        }
+
         function addPart(id) {
             $.post(window.location.pathname + "/addPart", {partId: id}, () => location.reload());
         }
@@ -82,7 +87,7 @@
 
     <div>
         <form id="closeForm" th:action="@{/autoservice/repairOrders/{id}/close(id=${order.repairOrderId})}" method="post"></form>
-        <button type="button" class="btn btn-success" onclick="$('#closeForm').submit()">Završi nalog</button>
+        <button type="button" class="btn btn-success" onclick="closeSubmit()">Završi nalog</button>
         <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
     </div>
 
