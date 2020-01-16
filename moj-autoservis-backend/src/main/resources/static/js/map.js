@@ -12,4 +12,6 @@ function showMap(url) {
         }
     });
 
+    return map;
+
 }
