@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main role="main" class="container">
+</main>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="roDetailsModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div th:fragment="content">
+                    <h5>
+                    Vlasnik: [[${ro.vehicle.owner.fullName}]] <br />
+                    Model automobila: [[${ro.vehicle.vehicleModel}]] <br />
+                    Registracijske oznake: [[${ro.vehicle.licencePlate}]] <br />
+                    </h5>
+                    <p>
+                        Autoservis: [[${ro.autoService.shopName}]] <br />
+                        Kilometraža: [[${#numbers.formatInteger(ro.kilometers,1,'POINT')}]] km <br />
+                    <p>
+                    <h4>Ukupna cijena naloga: [[${#numbers.formatDecimal(ro.price, 1, 'COMMA', 2, 'POINT')}]] kn</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+

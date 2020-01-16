@@ -3,7 +3,7 @@ package org.infiniteam.autoservice.model;
 import javax.persistence.*;
 
 @Entity
-public class ServiceLabor {
+public class ServiceLabor implements Product {
 
     @Id @GeneratedValue
     private Long serviceLaborId;
@@ -12,7 +12,7 @@ public class ServiceLabor {
     private AutoService autoService;
 
     @Column(nullable = false)
-    private String serviceName;
+    private String serviceName = "";
 
     @Column(nullable = false)
     private double price;
@@ -39,6 +39,11 @@ public class ServiceLabor {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    @Override
+    public String getName() {
+        return serviceName;
     }
 
     public double getPrice() {

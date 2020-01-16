@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Pregled redovnog radnog naloga</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <script type="text/javascript">
+        function closeSubmit() {
+            bootbox.alert("Radni nalog je uspješno zatvoren.", () => $("#form").submit());
+        }
+    </script>
+
+    <form id="form" method="post" th:action="@{/autoservice/repairOrders/{id}/saveAndClose(id=${order.repairOrderId})}">
+
+    <div class="row">
+        <div class="col">
+            <h3>Radni nalog redovnog servisa</h3>
+            <div class="row">
+                <div class="col-md-3">Vlasnik:</div>
+                <div class="col-md-4" th:text="${order.vehicle.owner.fullName}">Pero Perić</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Automobil:</div>
+                <div class="col-md-4" th:text="${order.vehicle.vehicleModel}">Audi A1</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Datum dolaska na servis:</div>
+                <div class="col-md-4" th:text="${#temporals.format(order.creationTime,'dd.MM.yyyy')}">7.1.2020.</div>
+            </div>
+            <label class="form-group row">
+                <label for="kilometers" class="col-md-3 col-form-label">Kilometraža u kilometrima:</label>
+                <input name="kilometers" id="kilometers" type="number" min="1" max="1000000" step="1" class="form-control col-md-4" required th:value="${order.kilometers}"/>
+            </label>
+            <label class="form-group row">
+                <label for="recommended" class="col-md-3 col-form-label">Preporuka za izvanredan servis:</label>
+                <select class="form-control col-md-4" id="recommended" name="recommended">
+                    <option value="false" th:attrappend="selected=${!order.repairRecommended} ? 'selected'">Ne</option>
+                    <option value="true" th:attrappend="selected=${order.repairRecommended} ? 'selected'">Da</option>
+                </select>
+            </label>
+
+            <div>
+                <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 0, 'COMMA', 2, 'POINT')}]] kn</h3>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-success" onclick="closeSubmit()">Završi nalog</button>
+                <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
+            </div>
+        </div>
+    </div>
+
+    </form>
+
+
+</main>
+
+</body>
+</html>

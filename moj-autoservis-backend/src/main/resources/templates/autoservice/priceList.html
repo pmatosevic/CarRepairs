@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Cjenik auto servisa</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+    function editPart(id) {
+        const url = window.location.pathname + "/parts/" + id;
+        $("#modal").load(url, "", () => {
+            $('#modal').modal('show');
+        })
+    }
+
+    function deletePart(id) {
+        const url = window.location.pathname + "/parts/" + id + "/delete";
+        $.post(url, data => location.reload());
+    }
+
+    function editLabor(id) {
+        const url = window.location.pathname + "/labors/" + id;
+        $("#modal").load(url, "", () => {
+            $('#modal').modal('show');
+        })
+    }
+
+    function deleteLabor(id) {
+        const url = window.location.pathname + "/labors/" + id + "/delete";
+        $.post(url, data => location.reload());
+    }
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <p><h5>Rezervni dijelovi</h5></p>
+    <p><button type="button" id="add-part" class="btn btn-secondary" onclick="editPart(0);">Dodaj rezervni dio</button></p>
+    <table class="table">
+        <tr>
+            <th>Naziv</th>
+            <th>Predviđena kilometraža</th>
+            <th>Cijena</th>
+            <th>Akcija</th>
+        </tr>
+        <tr th:each="part : ${parts}" class="part-row">
+            <td th:text="${part.partName}" class="part-name-text">Disk kočnice</td>
+            <td th:text="${part.estimatedDurationInKm} + ' km'" class="part-km-text">100 000 km</td>
+            <td th:text="${#numbers.formatDecimal(part.price, 0, 'COMMA', 2, 'POINT')} + ' kn'" class="part-price-text">1000 kn</td>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="editPart(this.dataset.id);" th:attr="data-id=${part.partId}">Uredi</button>
+                <button type="button" class="btn btn-danger" onclick="deletePart(this.dataset.id);" th:attr="data-id=${part.partId}">Ukloni</button>
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <p><h5>Usluge</h5></p>
+    <p><button type="button" id="add-service-btn" class="btn btn-secondary" onclick="editLabor(0);">Dodaj uslugu</button></p>
+    <table class="table">
+        <tr>
+            <th>Opis</th>
+            <th>Cijena</th>
+            <th>Akcija</th>
+        </tr>
+        <tr th:each="labor : ${labors}">
+            <td th:text="${labor.serviceName}">Zamjena ulja</td>
+            <td th:text="${#numbers.formatDecimal(labor.price, 0, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="editLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Uredi</button>
+                <button type="button" class="btn btn-danger" onclick="deleteLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Ukloni</button>
+            </td>
+        </tr>
+    </table>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+    </div>
+</main>
+<!-- /.container -->
+</body>
+</html>

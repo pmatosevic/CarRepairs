@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Radni nalozi u tijeku</title>
+</head>
+
+<body>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<div class="container">
+
+    <p></p>
+
+    <div class="row" justify-content-center>
+
+        <!-- <div class="col-2"> <! navigation>
+            <div class="row">
+
+                <div class="col"> <! page navigation >
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Početna</a>
+                        <a class="nav-link" id="v-pills-open-tab" data-toggle="pill" href="" role="tab" aria-controls="v-pills-profile" aria-selected="false">Otvoreni nalozi</a>
+                        <a class="nav-link" id="v-pills-progress-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Prihvaćeni nalozi</a>
+
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-open" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-progress" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+
+
+        <div class="col-10">  <! list of service orders>
+
+            <div class="row"> <! one service order>
+                <div class="col-5" th:each="ro : ${repairOrders}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${ro.vehicle.vehicleModel}">Radni nalog 1</h5>
+                            <p class="card-text">Stigao na servis: [[${#temporals.format(ro.creationTime,'dd.MM.yyyy')}]]</p>
+                            <a href="#" class="btn btn-primary" th:href="@{/autoservice/repairOrders/{roId}(roId=${ro.repairOrderId})}">Detalji</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-5" th:remove="all">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Radni nalog 1</h5>
+                            <p class="card-text">Osnovni podatci o radnom nalogu.</p>
+                            <a href="#" class="btn btn-primary">Detalji</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5" th:remove="all">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Radni nalog 2</h5>
+                            <p class="card-text">Osnovni podatci o radnom nalogu.</p>
+                            <a href="#" class="btn btn-primary">Detalji</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5" th:remove="all">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Radni nalog 2</h5>
+                            <p class="card-text">Osnovni podatci o radnom nalogu.</p>
+                            <a href="#" class="btn btn-primary">Detalji</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

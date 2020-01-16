@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Pristigli nalozi - Moj AutoServis</title>
+</head>
+
+<body>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+    <table class="table">
+        <thead>
+            <td>Vozilo</td>
+            <td>Korisnik</td>
+            <td>Akcija</td>
+        </thead>
+        <tbody>
+            <tr th:each="ro : ${repairOrders}" th:attr="data-id=${ro.repairOrderId}">
+                <td th:text="${ro.vehicle.licencePlate}"></td>
+                <td th:text="${ro.vehicle.owner.firstName} + ' ' + ${ro.vehicle.owner.lastName}"></td>
+                <td>
+                    <button type="button" class="btn btn-success" onclick="handleAccept(this.dataset.id)" th:attr="data-id=${ro.repairOrderId}">Prihvati</button>
+                    <button type="button" class="btn btn-danger" onclick="handleReject(this.dataset.id)" th:attr="data-id=${ro.repairOrderId}">Odbij</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+<!-- /.container -->
+
+<script type="application/javascript">
+    function handleAccept(id) {
+        updateOrder(id, "ACCEPT");
+    }
+
+    function handleReject(id) {
+        updateOrder(id, "REJECT");
+    }
+
+    function updateOrder(id, status) {
+        $.ajax({
+            method: "POST",
+            url: "/autoservice/repairOrders/" + id + "/status",
+            data: {'status': status},
+            success: data => {
+                $('tr[data-id="' + id + '"').hide();
+            },
+            error: data => {
+                console.log(data);
+            }
+        });
+    }
+</script>
+</body>
+</html>

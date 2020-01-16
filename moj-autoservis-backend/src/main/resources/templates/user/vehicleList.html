@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Moji automobili</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#addVehicle').click(function () {
+            const regPlate = $('#vehiclePlate').val();
+            $.ajax({
+                method: "POST",
+                url: "/user/vehicles",
+                contentType: 'text/plain',
+                data: regPlate,
+                success: data => {
+                    location.reload();
+                },
+                error: response => {
+                    $('#alert-msg').text(response.responseText);
+                    $('.alert').show();
+                }
+            });
+        })
+    });
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <p></p> <! ruzno ali radi>
+
+    <p>
+    <button type="button" id="add-vehicle-btn" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Novi automobil &nbsp<i class="fa fa-car"></i></button>
+    </p>
+
+    <div class="row">
+        <div class="col-4" th:each="vehicle : ${vehicles}">
+            <div class="card">
+                <div class="card">
+                    <div class="card-header" th:text="${vehicle.licencePlate}">HV 1234 AB</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${vehicle.vehicleModel}">Audi A1</h5>
+                    <p class="card-text">Broj šasije: [[${vehicle.vinNumber}]]</p>
+                    <a href="#" class="btn btn-secondary" th:href="'/user/vehicles/' + ${vehicle.vehicleId}">Nalozi</a>
+                    <button type="button" id="statistics-btn" class="btn btn-secondary" data-toggle="modal" data-target="#stat-model">Statistika</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dodaj vozilo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <span id="alert-msg"></span>
+                        <button type="button" class="close" onclick="$('.alert').hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="form-group row">
+                        <label for="vehiclePlate" class="col-sm-5 col-form-label">Registracijske tablice:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="vehiclePlate">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                    <button type="button" class="btn btn-primary" id="addVehicle">Dodaj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="stat-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Statistika</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <span id="alert-mess"></span>
+                        <button type="button" class="close" onclick="$('.alert').hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="form-group row">
+                        <label for="vehiclePlate" class="col-sm-5 col-form-label">Prosječna kilometraža:</label>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<!-- /.container -->
+</body>
+</html>

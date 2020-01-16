@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Pregled redovnog radnog naloga</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <script type="text/javascript">
+
+        function closeSubmit() {
+            bootbox.alert("Radni nalog je uspješno zatvoren.", () => $("#closeForm").submit());
+        }
+
+        function addPart(id) {
+            $.post(window.location.pathname + "/addPart", {partId: id}, () => location.reload());
+        }
+        function addLabor(id) {
+            $.post(window.location.pathname + "/addLabor", {laborId: id}, () => location.reload());
+        }
+        function removeItem(id) {
+            $.post(window.location.pathname + "/removeItem", {itemId: id}, () => location.reload());
+        }
+    </script>
+
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h3>Radni nalog izvanrednog servisa</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Vlasnik:</div>
+                <div class="col-md-4" th:text="${order.vehicle.owner.fullName}">Pero Perić</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Automobil:</div>
+                <div class="col-md-4" th:text="${order.vehicle.vehicleModel}">Audi A1</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Datum dolaska na servis:</div>
+                <div class="col-md-4" th:text="${#temporals.format(order.creationTime,'dd.MM.yyyy')}">7.1.2020.</div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <table style="width:100%">
+            <tr>
+                <th>Naziv stavke</th>
+                <th>Cijena</th>
+                <th></th>
+            </tr>
+            <tr th:each="item : ${order.items}">
+                <td th:text="${item.name}">Zamjena ulja</td>
+                <td th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">100 kn</td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="removeItem(this.dataset.id);" th:attr="data-id=${item.itemId}">Ukloni</button>
+                </td>
+            </tr>
+            <tr th:remove="all">
+                <td>Zamjena ulja</td>
+                <td>100 kn</td>
+            </tr>
+            <tr th:remove="all">
+                <td>Popravak laka</td>
+                <td>1000 kn</td>
+            </tr>
+        </table>
+    </p>
+
+    <p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPartModal">Dodaj rezervni dio</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addServiceModal">Dodaj uslugu</button>
+    </p>
+
+    <div>
+        <p>
+            <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}]] kn</h3>
+        </p>
+    </div>
+
+    <div>
+        <form id="closeForm" th:action="@{/autoservice/repairOrders/{id}/close(id=${order.repairOrderId})}" method="post"></form>
+        <button type="button" class="btn btn-success" onclick="closeSubmit()">Završi nalog</button>
+        <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
+    </div>
+
+
+    <div class="modal" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="serviceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addServiceModalTitle">Dodavanje usluge</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>Opis</th>
+                            <th>Cijena</th>
+                            <th>Akcija</th>
+                        </tr>
+                        <tr th:each="labor : ${labors}">
+                            <td th:text="${labor.serviceName}">Zamjena ulja</td>
+                            <td th:text="${#numbers.formatDecimal(labor.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
+                            <td>
+                                <button type="button" class="btn btn-success" onclick="addLabor(this.dataset.id);" th:attr="data-id=${labor.serviceLaborId}">Dodaj</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addPartModal" tabindex="-1" role="dialog" aria-labelledby="partModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPartModalTitle">Dodavanje rezervnog dijela</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Predviđena kilometraža</th>
+                            <th>Cijena</th>
+                            <th>Akcija</th>
+                        </tr>
+                        <tr th:each="part : ${parts}">
+                            <td th:text="${part.partName}">Disk kočnice</td>
+                            <td th:text="${part.estimatedDurationInKm} + ' km'">100 000 km</td>
+                            <td th:text="${#numbers.formatDecimal(part.price, 1, 'COMMA', 2, 'POINT')} + ' kn'">1000 kn</td>
+                            <td>
+                                <button type="button" class="btn btn-success" onclick="addPart(this.dataset.id);" th:attr="data-id=${part.partId}">Dodaj</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+</body>
+</html>

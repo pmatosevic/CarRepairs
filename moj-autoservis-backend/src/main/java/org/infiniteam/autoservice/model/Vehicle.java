@@ -1,5 +1,7 @@
 package org.infiniteam.autoservice.model;
 
+import org.infiniteam.autoservice.service.impl.VehicleData;
+
 import javax.persistence.*;
 
 @Entity
@@ -57,5 +59,15 @@ public class Vehicle {
 
     public void setVehicleModel(String vehicleModel) {
         this.vehicleModel = vehicleModel;
+    }
+
+    public Vehicle() {
+    }
+
+    public Vehicle(VehicleData vehicleData, VehicleOwner owner) {
+        this.licencePlate = vehicleData.getLicencePlate();
+        this.vinNumber = vehicleData.getVinNumber();
+        this.vehicleModel = vehicleData.getModel();
+        this.owner = owner;
     }
 }

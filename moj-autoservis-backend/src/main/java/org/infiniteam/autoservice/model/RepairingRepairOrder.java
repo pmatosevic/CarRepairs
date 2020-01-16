@@ -1,6 +1,7 @@
 package org.infiniteam.autoservice.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,8 +11,8 @@ public class RepairingRepairOrder extends RepairOrder {
     @Column
     private String malfunctions;
 
-    @OneToMany(mappedBy = "repairOrder", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RepairOrderItem> items;
+    @OneToMany(mappedBy = "repairOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RepairOrderItem> items = new ArrayList<>();
 
     public String getMalfunctions() {
         return malfunctions;
@@ -27,5 +28,15 @@ public class RepairingRepairOrder extends RepairOrder {
 
     public void setItems(List<RepairOrderItem> items) {
         this.items = items;
+    }
+
+    public void addItem(RepairOrderItem item) {
+        item.setRepairOrder(this);
+        items.add(item);
+    }
+
+    public void removeItem(RepairOrderItem item) {
+        items.remove(item);
+        item.setRepairOrder(null);
     }
 }

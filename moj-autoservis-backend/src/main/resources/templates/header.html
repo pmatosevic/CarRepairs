@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="common_header(title,links)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:replace="${title}">Title</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/url-join.js}"></script>
+
+    <!-- Sweetalert -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.js"></script>
+
+    <!-- Common styles and scripts -->
+<!--    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/test.css}">-->
+<!--    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">-->
+<!--    <script type="text/javascript" th:src="@{/js/script.js}"></script>-->
+
+    <!--/* Per-page placeholder for additional links */-->
+    <th:block th:replace="${links}" />
+
+    </head>
+<body>
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-md" th:fragment="header">
+    <div class="container">
+        <a class="navbar-brand" href="#" th:href="@{/}">Moj AutoServis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLeft" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarLeft">
+            <ul class="navbar-nav">
+<!--                <li class="nav-item" th:classappend="${module == 'home' ? 'active' : ''}" th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--                    <a class="nav-link" href="#" th:href="@{/}">Home</a>-->
+<!--                </li>-->
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user}">Moja vozila</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/mapView}">Karta servisa</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ROLE_SERVICE_EMPLOYEE')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/autoservice/repairOrders/waiting}">Pristigli nalozi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/autoservice/repairOrders/opened}">Otvoreni nalozi</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_SERVICE_ADMIN')">
+                    <a class="nav-link" id="price-nav" th:href="@{/autoservice/priceList}">Cjenik</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_SERVICE_ADMIN')">
+                    <a class="nav-link" id="employees" th:href="@{/autoservice/employees}">Zaposlenici</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_SERVICE_ADMIN')">
+                    <a class="nav-link" th:href="@{/autoservice/details}">Autoservis</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/users}">Korisnici</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/autoservices}">Autoservisi</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a class="nav-link" href="/login" th:href="@{/login}">Prijava</a>
+                </li>
+                <!--<li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="/logout" th:href="@{#}" onclick="$('#form').submit();">Odjava</a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>-->
+                <li class="nav-item dropdown" id="auth-dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link dropdown-toggle" href="#" th:href="@{#}" th:text="${#authorization.authentication.principal.appUser.getFullName()}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ime Prezime</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#" th:href="@{/settings}">
+                            <i class="fa fa-cog fa-spin"></i>
+                            Postavke
+                        </a>
+                        <a class="dropdown-item" href="#" th:href="@{/changePassword}">
+                            <i class="fa fa-lock"></i>
+                            Promjena lozinke
+                        </a>
+                        <a class="dropdown-item" href="#" th:href="@{#}" onclick="$('#logoutForm').submit();">
+                            <i class="fa fa-sign-out"></i>
+                            Odjava
+                        </a>
+                    </div>
+                    <form style="visibility: hidden" id="logoutForm" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+</body>
+</html>

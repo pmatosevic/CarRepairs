@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Zaposlenici auto servisa</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+    function removeEmployee(username) {
+        const url = urljoin(window.location.pathname, "/delete");
+        $.post(url, {'username': username}, data => location.reload());
+    }
+
+    function addEmployee() {
+        $.ajax({
+            method: "POST",
+            url: window.location,
+            data: $('#addForm').serialize(),
+            success: data => {
+                location.reload();
+            },
+            error: response => {
+                $('#alert-msg').text(response.responseText);
+                $('.alert').show();
+            }
+        });
+    }
+
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <p><h5>Zaposlenici</h5></p>
+    <p><button type="button" id="add-employee" class="btn btn-secondary" data-toggle="modal" data-target="#modal">Dodaj zaposlenika</button></p>
+    <table class="table">
+        <thead>
+        <td>Ime i prezime</td>
+        <td>Korisničko ime</td>
+        <td>Akcija</td>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}" class="employee-row">
+            <td th:text="${employee.fullName}">Pero Perić</td>
+            <td th:text="${employee.username}">pperic</td>
+            <td>
+                <button type="button" id="delete-employee" class="btn btn-danger" th:disabled="${employee.employeeType.name() == 'SERVICE_ADMINISTRATOR'}" onclick="removeEmployee(this.dataset.id);" th:attr="data-id=${employee.username}">Ukloni</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dodaj zaposlenika</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <span id="alert-msg"></span>
+                        <button type="button" class="close" onclick="$('.alert').hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="addForm">
+                    <div class="form-group row">
+                        <label for="username" class="col-sm-5 col-form-label">Korisničko ime:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="username" id="username">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-5 col-form-label">Lozinka:</label>
+                        <div class="col-sm-5">
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstName" class="col-sm-5 col-form-label">Ime:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="firstName" id="firstName">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lastName" class="col-sm-5 col-form-label">Prezime:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="lastName" id="lastName">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                    <button type="button" id="save" class="btn btn-primary" onclick="addEmployee();">Spremi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- /.container -->
+</body>
+</html>

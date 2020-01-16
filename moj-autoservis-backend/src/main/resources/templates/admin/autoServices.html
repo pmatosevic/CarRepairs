@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Administracija - Vlasnici automobila</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+    function showDetails(id) {
+        const url = urljoin(window.location.pathname, id);
+        $("#modal").load(url, "", () => {
+            $('#modal').modal('show');
+        })
+    }
+
+    function deleteService(id) {
+        const url = urljoin(window.location.pathname, id, "/delete");
+        $.post(url)
+            .done(data => bootbox.alert("Auto servis je izbrisan", () => location.reload()))
+            .fail(xhr => bootbox.alert("Dogodila se pogreška: " + xhr.responseText));
+    }
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+
+<main role="main" class="container">
+
+    <p><h3>Registrirani autoservisi</h3></p>
+    <table class="table">
+        <tr>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>OIB</th>
+            <th>Akcija</th>
+        </tr>
+        <tr th:each="autoService : ${autoServices}">
+            <td th:text="${autoService.shopName}">pperic</td>
+            <td th:text="${autoService.address}">Pero Perić</td>
+            <td th:text="${autoService.oib}">123456789</td>
+            <td>
+                <!--<button type="button" class="btn btn-primary" onclick="showDetails(this.dataset.id);" th:attr="data-id=${part.partId}">Detalji</button>-->
+                <button type="button" class="btn btn-danger" onclick="deleteService(this.dataset.id);" th:attr="data-id=${autoService.autoServiceId}">Izbriši auto servis</button>
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+    </div>
+</main>
+<!-- /.container -->
+</body>
+</html>

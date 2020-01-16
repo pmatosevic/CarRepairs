@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: common_header(~{::title},~{})">
+    <title>Korisnički podaci</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    function changeData(e) {
+        e.preventDefault();
+        $.post(window.location.pathname, $('#settings').serialize())
+            .done(data => {bootbox.alert("Podaci su promijenjeni.", () => window.location.href = "/");})
+            .fail((xhr, status, error) => bootbox.alert("Greška: " + xhr.responseText));
+        return false;
+    }
+
+</script>
+
+<div th:replace="~{header :: header}">Header</div>
+<main role="main" class="container">
+    <form class="settings-form" id="settings" method="post" onsubmit="return changeData(event)">
+        <h1 class="h3 mb-3 font-weight-normal">Promjena korisničkih podataka</h1>
+        <p id="error"></p>
+        <div class="form-group row">
+            <label for="firstName" class="col-sm-2 col-form-label">Ime:</label>
+            <div class="col-sm-5">
+                <input required type="text" class="form-control" name="firstName" id="firstName" th:value ="${user.firstName}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lastName" class="col-sm-2 col-form-label">Prezime:</label>
+            <div class="col-sm-5">
+                <input required type="text" class="form-control" name="lastName" id="lastName" th:value ="${user.lastName}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
+            <div class="col-sm-5">
+                <input required type="email" class="form-control" name="email" id="email" th:value ="${user.email}" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Spremi</button>
+    </form>
+</main>
+</body>
+</html>

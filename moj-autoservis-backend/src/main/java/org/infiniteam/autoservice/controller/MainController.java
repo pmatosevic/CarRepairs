@@ -1,68 +1,81 @@
 package org.infiniteam.autoservice.controller;
 
 import org.infiniteam.autoservice.model.*;
-import org.infiniteam.autoservice.repository.AutoServiceRepository;
-import org.infiniteam.autoservice.repository.UserRepository;
-import org.infiniteam.autoservice.security.SpringCurrentUser;
+import org.infiniteam.autoservice.security.CurrentUser;
+import org.infiniteam.autoservice.service.AutoServiceService;
+import org.infiniteam.autoservice.service.UserService;
+import org.infiniteam.autoservice.service.VehicleOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
 
-    private static final Map<Class<?>, String> redirects = Map.of(
+    private static final Map<Class<?>, String> REDIRECTS = Map.of(
             VehicleOwner.class, "/user",
             ServiceEmployee.class, "/autoservice",
             Administrator.class, "/admin"
     );
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    private AutoServiceRepository autoServiceRepository;
+    private AutoServiceService autoServiceService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private VehicleOwnerService vehicleOwnerService;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
         if (principal != null) {
             UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
-            SpringCurrentUser user = (SpringCurrentUser) token.getPrincipal();
-            return "redirect:" + redirects.get(user.getAppUser().getClass());
+            CurrentUser user = (CurrentUser) token.getPrincipal();
+            return "redirect:" + REDIRECTS.get(user.getAppUser().getClass());
         }
-        return "home";
+        return "home/home";
+    }
+
+    @GetMapping("/rest/autoServiceLocations")
+    @ResponseBody
+    public List<GeoDTO> fetchAutoServiceLocations() {
+        List<AutoService> autoServices = autoServiceService.findAllActive();
+        return autoServices.stream()
+                .map(as -> new GeoDTO(as.getShopName(), as.getLatitude(), as.getLongitude()))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request, Model model) {
-        return "login";
+    public String login(HttpServletRequest request, Model model, Principal principal) {
+        if (principal != null) {
+            return "redirect:/";
+        }
+        return "home/login";
     }
 
     @GetMapping("/register/user")
     public String registrationFormUser(Model model){
-        return "user/registration";
+        return "home/userRegistration";
     }
 
     @PostMapping("/register/user")
-    @Transactional
-    public ResponseEntity<String> userRegistration(HttpServletRequest request) {
+    public ResponseEntity<?> userRegistration(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (userRepository.getByUsername(username).isPresent()) {
-            return new ResponseEntity<>("Korisničko ime već postoji.", HttpStatus.BAD_REQUEST);
+        if (userService.existsByUsername(username)) {
+            return ResponseEntity.badRequest().body("Korisničko ime već postoji.");
         }
 
         VehicleOwner newUser = new VehicleOwner();
@@ -71,42 +84,87 @@ public class MainController {
         newUser.setOib(request.getParameter("oib"));
         newUser.setFirstName(request.getParameter("name"));
         newUser.setLastName(request.getParameter("surname"));
-        newUser.setPasswordHash(passwordEncoder.encode(password));
-        userRepository.saveAndFlush(newUser);
-        return new ResponseEntity<>(HttpStatus.OK);
+        newUser.setPasswordHash(password);
+
+        try {
+            vehicleOwnerService.create(newUser);
+            return ResponseEntity.ok("");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping("/register/autoservice")
     public String registrationFormAutoService(Model model){
-        return "autoservice/registration";
+        return "home/autoserviceRegistration";
     }
 
     @PostMapping("/register/autoservice")
-    @Transactional
-    public ResponseEntity<String> autoServiceRegistration(HttpServletRequest request, Model model) {
-        if (autoServiceRepository.getByOib(request.getParameter("oib")).isPresent()) {
-            return new ResponseEntity<>("Autoservis s tim OIB-om već postoji", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> autoServiceRegistration(HttpServletRequest request, Model model) {
+        if (autoServiceService.existsByOib(request.getParameter("oib"))) {
+            return ResponseEntity.badRequest().body("Autoservis s tim OIB-om već postoji");
         }
-        if (userRepository.getByUsername(request.getParameter("username")).isPresent()) {
-            return new ResponseEntity<>("Korisničko ime već postoji.", HttpStatus.BAD_REQUEST);
+        if (userService.existsByUsername(request.getParameter("username"))) {
+            return ResponseEntity.badRequest().body("Korisničko ime već postoji.");
         }
 
         AutoService newAutoService = new AutoService();
         newAutoService.setShopName(request.getParameter("shopname"));
         newAutoService.setAddress(request.getParameter("address"));
         newAutoService.setOib(request.getParameter("oib"));
-        autoServiceRepository.save(newAutoService);
 
         ServiceEmployee owner = new ServiceEmployee();
-        owner.setEmployeeType(ServiceEmployeeType.SERVICE_ADMINISTRATOR);
         owner.setEmail(request.getParameter("email"));
         owner.setUsername(request.getParameter("username"));
         owner.setFirstName(request.getParameter("name"));
         owner.setLastName(request.getParameter("surname"));
-        owner.setPasswordHash(passwordEncoder.encode(request.getParameter("password")));
-        userRepository.save(owner);
-        newAutoService.addEmployee(owner);
+        owner.setPasswordHash(request.getParameter("password"));
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            autoServiceService.createServiceWithOwner(newAutoService, owner);
+            return ResponseEntity.ok("");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("");
+        }
     }
+
+    @GetMapping("/settings")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_SERVICE_EMPLOYEE', 'ROLE_ADMIN')")
+    public String settings(Model model){
+        AppUser appUser = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
+        model.addAttribute("user", appUser);
+        return "changeSettings";
+    }
+
+    @PostMapping("/settings")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_SERVICE_EMPLOYEE', 'ROLE_ADMIN')")
+    public ResponseEntity<?> changeUserSettings(@RequestParam String firstName, @RequestParam String lastName,
+                                     @RequestParam String email) {
+        AppUser user = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        userService.modify(user);
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/changePassword")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_SERVICE_EMPLOYEE', 'ROLE_ADMIN')")
+    public String changePasswordPage(Model model) {
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_SERVICE_EMPLOYEE', 'ROLE_ADMIN')")
+    public ResponseEntity<?> changePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
+        AppUser user = ((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getAppUser();
+        try {
+            userService.changePassword(user, oldPassword, newPassword);
+            return ResponseEntity.ok("");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+
 }
