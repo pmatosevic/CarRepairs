@@ -46,7 +46,7 @@ public class UserServiceJpa implements UserService {
     @Transactional
     public AppUser modify(AppUser appUser) {
         validate(appUser);
-        userRepository.flush();
+        userRepository.saveAndFlush(appUser);
         return appUser;
     }
 
