@@ -30,6 +30,13 @@
 <body>
 <div th:replace="~{header :: header}">Header</div>
 <main role="main" class="container">
+
+    <script type="text/javascript">
+        function closeSubmit() {
+            bootbox.alert("Podatci su uspješno promijenjeni.", () => $("#settings-form").submit());
+        }
+    </script>
+
     <form class="settings-form" id="details" method="post">
         <input type="hidden" name="latitude" id="latitude" th:value="${service.latitude}" />
         <input type="hidden" name="longitude" id="longitude" th:value="${service.longitude}" />
@@ -54,26 +61,29 @@
                 <input type="number" min="0.00" max="1000000.00" step="0.01" class="form-control" name="regularPrice" id="regularPrice" th:value="${service.regularServicePrice}">
             </div>
         </div>
-        <div class="row col-6 offset-1" id="mapid" style="height: 300px"></div>
-        <button type="button" class="btn btn-primary" onclick="$('#details').submit();">Spremi</button>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var map = showMap();
-                L.marker([$("#latitude").val(), $("#longitude").val()]).addTo(map)
-                    .bindPopup($("#shopName").val());
+        <button type="button" class="btn btn-primary" onclick="closeSubmit();">Spremi</button>
+        <div class="row justify-content-center">
+            <div class="row" id="mapid" style="height: 400px; width: 800px;"></div>
+            <br>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var map = showMap();
+                    L.marker([$("#latitude").val(), $("#longitude").val()]).addTo(map)
+                        .bindPopup($("#shopName").val());
 
-                var popup = L.popup();
-                function onMapClick(e) {
-                    $("#latitude").val(e.latlng.lat);
-                    $("#longitude").val(e.latlng.lng);
-                    popup
-                        .setLatLng(e.latlng)
-                        .setContent("Nova lokacija")
-                        .openOn(map);
-                }
-                map.on('click', onMapClick);
-            });
-        </script>
+                    var popup = L.popup();
+                    function onMapClick(e) {
+                        $("#latitude").val(e.latlng.lat);
+                        $("#longitude").val(e.latlng.lng);
+                        popup
+                            .setLatLng(e.latlng)
+                            .setContent("Nova lokacija")
+                            .openOn(map);
+                    }
+                    map.on('click', onMapClick);
+                });
+            </script>
+        </div>
     </form>
 </main>
 </body>

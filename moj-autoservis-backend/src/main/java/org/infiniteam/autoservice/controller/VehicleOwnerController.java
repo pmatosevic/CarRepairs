@@ -15,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @Secured("ROLE_USER")
@@ -47,11 +50,29 @@ public class VehicleOwnerController {
         Vehicle vehicle = vehicleService.fetch(id);
         checkVehicleRights(vehicle);
 
+        List<RepairOrder> orders = repairOrderService.findAllByVehicle(vehicle);
+        Collections.reverse(orders);
         model.addAttribute("vehicle", vehicle);
         model.addAttribute("roDisabled", !roCanBeOpened(vehicle));
-        model.addAttribute("repairOrders", repairOrderService.findAllByVehicle(vehicle));
+        model.addAttribute("repairOrders", orders);
         model.addAttribute("autoServices", autoServiceService.findAllActive());
-
+        double averagePrice = repairOrderService.findAllByVehicle(vehicle)
+                .stream()
+                .mapToDouble(RepairOrder::getPrice)
+                .average()
+                .orElse(0);
+        model.addAttribute( "averagePrice", averagePrice);
+        double averageKM = repairOrderService.findAllByVehicle(vehicle)
+                .stream()
+                .filter(repairOrder -> repairOrder instanceof RegularRepairOrder)
+                .mapToDouble(repairOrder -> ((RegularRepairOrder) repairOrder).getKilometers())
+                .average().orElse(0);
+        model.addAttribute("averageKM", averageKM);
+        int repairingRepairOrder = (int)repairOrderService.findAllByVehicle(vehicle)
+                .stream()
+                .filter(repairOrder -> repairOrder instanceof RepairingRepairOrder)
+                .count();
+        model.addAttribute("repairingRepairOrder", repairingRepairOrder);
         return "user/vehicle";
     }
 

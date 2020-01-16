@@ -36,10 +36,11 @@
 <div th:replace="~{header :: header}">Header</div>
 <main role="main" class="container">
 
-    <h1>Autoservisi</h1>
+    <br>
+    <h1>Autoservisi <i class="fa fa-map-signs"></i></h1>
     <p></p>
 
-    <div class="row col-8 offset-2" id="mapid"></div>
+    <div class="row justify-content-center" id="mapid"></div>
     <script type="text/javascript">
         $(document).ready(function() {
             showMap("/rest/autoServiceLocations");

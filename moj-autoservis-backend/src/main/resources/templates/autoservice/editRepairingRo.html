@@ -31,9 +31,11 @@
 
     <div class="row">
         <div class="col">
+            <br>
             <div class="row">
-                <h3>Radni nalog izvanrednog servisa</h3>
+                <h3>&nbsp Radni nalog izvanrednog servisa</h3>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-3">Vlasnik:</div>
                 <div class="col-md-4" th:text="${order.vehicle.owner.fullName}">Pero Perić</div>
@@ -75,20 +77,23 @@
     </p>
 
     <p>
+        <br>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPartModal">Dodaj rezervni dio</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addServiceModal">Dodaj uslugu</button>
     </p>
 
     <div>
         <p>
+            <br>
             <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 1, 'COMMA', 2, 'POINT')}]] kn</h3>
         </p>
     </div>
 
     <div>
         <form id="closeForm" th:action="@{/autoservice/repairOrders/{id}/close(id=${order.repairOrderId})}" method="post"></form>
+        <br>
         <button type="button" class="btn btn-success" onclick="closeSubmit()">Završi nalog</button>
-        <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
+        <button type="button" class="btn btn-secondary" onclick="window.history.go(-1); return false;">Povratak</button>
     </div>
 
 
