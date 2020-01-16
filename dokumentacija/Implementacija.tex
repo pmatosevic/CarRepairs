@@ -437,11 +437,25 @@
 %			
 %			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
 
-		U ovom polgavlju će biti opisana instalacija potrebnih softverskih paketa, stvaranje izvršnog koda, konfiguracija i pokretanje web aplikacije na \textit{Debian} baziranom \textit{Linux} poslužitelju. Da bi se aplikacija mogla pokrenuti potrebno je potrebno je konfigurirati parametre spajanja na već kreiranu bazu podataka.
+		U ovom polgavlju će biti opisana instalacija potrebnih softverskih paketa, stvaranje izvršnog koda, konfiguracija i pokretanje web aplikacije na \textit{Debian} baziranom \textit{Linux} poslužitelju. Ova web aplikacije je prilagođena i testirana za rad s \textit{PostgreSQL} bazom podataka u produkcijskom okruženju te se zbog toga preporuča njezina uporaba iako je aplikaciju moguće konfigurirati i za korištenje ostalih baza podataka. Moguće je koristiti već unaprijed stvorenu bazu podataka, a u nastavku su dane upute za instalaciju \textit{PostgreSQL} baze u slučaju da se ručno želi postaviti baza.
 		
 		\subsection{Instalacija i konfiguracija baze podataka}
+		\textit{PostgreSQL} baza može se instalirati koristeći \textit{apt} sustava izvođenjem sljedećih naredbi:
+		\begin{lstlisting}
+			$ sudo apt update
+			$ sudo apt install postgresql postgresql-contrib
+		\end{lstlisting}
+		Time je instalirana baza podataka te je potrebno stvoriti novog korisnika i njemu pripadajuću bazu podataka koju će aplikacija koristiti:
+		\begin{lstlisting}
+			$ su - postgres 
+			$ createuser korisnik
+			$ createdb naziv_baze_podataka
+			$ psql
+			$ ALTER USER korisnik WITH ENCRYPTED PASSWORD 'lozinka';
+			$ GRANT ALL PRIVILEGES ON DATABASE naziv_baze_podataka TO korisnik;
+		\end{lstlisting}
 		
-		
+		\subsection{Konfiguracija i pokretanje }
 		
 
 			
