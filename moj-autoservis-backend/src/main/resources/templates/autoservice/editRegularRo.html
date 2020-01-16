@@ -21,7 +21,9 @@
 
     <div class="row">
         <div class="col">
+            <br>
             <h3>Radni nalog redovnog servisa</h3>
+            <br>
             <div class="row">
                 <div class="col-md-3">Vlasnik:</div>
                 <div class="col-md-4" th:text="${order.vehicle.owner.fullName}">Pero Perić</div>
@@ -47,12 +49,15 @@
             </label>
 
             <div>
+                <br>
                 <h3>Ukupna cijena: [[${#numbers.formatDecimal(order.price, 0, 'COMMA', 2, 'POINT')}]] kn</h3>
             </div>
 
             <div>
+                <br>
+                <br>
                 <button type="button" class="btn btn-success" onclick="closeSubmit()">Završi nalog</button>
-                <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Povratak</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.go(-1); return false;">Povratak</button>
             </div>
         </div>
     </div>
