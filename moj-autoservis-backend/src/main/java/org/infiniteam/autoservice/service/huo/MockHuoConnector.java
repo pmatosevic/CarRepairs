@@ -31,13 +31,17 @@ public class MockHuoConnector implements HuoConnector {
     }
 
     private String decodeLicence(String licencePlate) throws HuoConnectorException {
-        licencePlate = licencePlate.replace(" ", "");
-        String city = licencePlate.substring(0, 2);
-        int pos = 2;
-        while (Character.isDigit(licencePlate.charAt(pos))) pos++;
-        String number = licencePlate.substring(2, pos);
-        String chars = licencePlate.substring(pos);
-
+        String city, number, chars;
+        try {
+            licencePlate = licencePlate.replace(" ", "");
+            city = licencePlate.substring(0, 2);
+            int pos = 2;
+            while (Character.isDigit(licencePlate.charAt(pos))) pos++;
+            number = licencePlate.substring(2, pos);
+            chars = licencePlate.substring(pos);
+        } catch (RuntimeException e) {
+            throw new HuoConnectorException("Invalid licence plate.");
+        }
         if (number.length() < 3 || number.length() > 4) throw new HuoConnectorException("Invalid licence plate.");
         return city + " " + number + " " + chars;
     }
