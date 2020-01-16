@@ -37,10 +37,10 @@ public class AutoService {
     private boolean active = true;
 
     @Column
-    private double latitude;
+    private double latitude = 45;
 
     @Column
-    private double longitude;
+    private double longitude = 16;
 
     public Long getAutoServiceId() {
         return autoServiceId;
