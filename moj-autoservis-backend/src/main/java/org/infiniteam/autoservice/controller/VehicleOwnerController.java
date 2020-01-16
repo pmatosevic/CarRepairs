@@ -51,7 +51,7 @@ public class VehicleOwnerController {
         model.addAttribute("roDisabled", !roCanBeOpened(vehicle));
         model.addAttribute("repairOrders", repairOrderService.findAllByVehicle(vehicle));
         model.addAttribute("autoServices", autoServiceService.findAllActive());
-
+        model.addAttribute( "averagePrice", repairOrderService.findAllByVehicle(vehicle).stream().mapToDouble(repairOrder -> repairOrder.getPrice()).average());
         return "user/vehicle";
     }
 
