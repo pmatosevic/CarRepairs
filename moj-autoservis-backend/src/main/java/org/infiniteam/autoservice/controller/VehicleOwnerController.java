@@ -51,7 +51,19 @@ public class VehicleOwnerController {
         model.addAttribute("roDisabled", !roCanBeOpened(vehicle));
         model.addAttribute("repairOrders", repairOrderService.findAllByVehicle(vehicle));
         model.addAttribute("autoServices", autoServiceService.findAllActive());
-        model.addAttribute( "averagePrice", repairOrderService.findAllByVehicle(vehicle).stream().mapToDouble(repairOrder -> repairOrder.getPrice()).average());
+        double averagePrice = repairOrderService.findAllByVehicle(vehicle)
+                .stream()
+                .mapToDouble(RepairOrder::getPrice)
+                .average()
+                .orElse(0);
+        model.addAttribute( "averagePrice", averagePrice);
+        double averageKM = repairOrderService.findAllByVehicle(vehicle)
+                .stream()
+                .filter(repairOrder -> repairOrder instanceof RegularRepairOrder)
+                .mapToDouble(repairOrder -> ((RegularRepairOrder) repairOrder).getKilometers())
+                .average().orElse(0);
+        model.addAttribute("averageKM", averageKM);
+
         return "user/vehicle";
     }
 
