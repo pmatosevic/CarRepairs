@@ -64,7 +64,7 @@ public class SeleniumTest {
         // Delete other vehicles to start on a clean state
         while (!driver.findElements(By.className("card-header")).isEmpty()) {
             driver.findElement(By.partialLinkText("Detalji")).click();
-            driver.findElement(By.id("deleteVehicle")).click();
+            driver.findElement(By.id("deleteForm")).submit();
         }
 
         String vehiclePlate = "ZG 1234 AB";
@@ -94,7 +94,7 @@ public class SeleniumTest {
         // Delete other vehicles to start on a clean state
         while (!driver.findElements(By.className("card-header")).isEmpty()) {
             driver.findElement(By.partialLinkText("Detalji")).click();
-            driver.findElement(By.id("deleteVehicle")).click();
+            driver.findElement(By.id("deleteForm")).submit();
         }
 
         WebElement modal = driver.findElement(By.id("exampleModal"));
