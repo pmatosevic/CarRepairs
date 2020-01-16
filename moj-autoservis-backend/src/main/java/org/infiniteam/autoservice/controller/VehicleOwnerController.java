@@ -63,7 +63,11 @@ public class VehicleOwnerController {
                 .mapToDouble(repairOrder -> ((RegularRepairOrder) repairOrder).getKilometers())
                 .average().orElse(0);
         model.addAttribute("averageKM", averageKM);
-
+        int repairingRepairOrder = (int)repairOrderService.findAllByVehicle(vehicle)
+                .stream()
+                .filter(repairOrder -> repairOrder instanceof RepairingRepairOrder)
+                .count();
+        model.addAttribute("repairingRepairOrder", repairingRepairOrder);
         return "user/vehicle";
     }
 
