@@ -81,6 +81,7 @@ public class AutoServiceController {
     }
 
     @PostMapping("/autoservice/repairOrders/{id}/saveAndClose")
+    @Transactional
     public String saveAndCloseRegularRo(@PathVariable Long id,
                                         @RequestParam int kilometers, @RequestParam boolean recommended) {
         RegularRepairOrder repairOrder = repairOrderService.fetchRegularRepairOrder(id);
