@@ -87,7 +87,7 @@ public class RepairOrderServiceJpa implements RepairOrderService {
         Assert.isTrue(repairOrder.getServiceJobStatus() == ServiceJobStatus.IN_PROGRESS, "RO has to be in progress.");
         repairOrder.setServiceJobStatus(ServiceJobStatus.FINISHED);
         repairOrder.setFinishTime(LocalDateTime.now());
-        repairOrderRepository.flush();
+        repairOrderRepository.saveAndFlush(repairOrder);
     }
 
     @Override
@@ -95,6 +95,7 @@ public class RepairOrderServiceJpa implements RepairOrderService {
         Assert.isTrue(kilometers >= 0, "Kilometers must be non-negative.");
         ro.setKilometers(kilometers);
         ro.setRepairRecommended(repairRecommended);
+        repairOrderRepository.saveAndFlush(ro);
     }
 
     @Override
