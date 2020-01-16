@@ -160,7 +160,7 @@ public class AutoServiceController {
     public String vehiclePartModal(@PathVariable Long id, Model model) {
         VehiclePart part = id == 0 ? new VehiclePart() : vehiclePartService.fetch(id);
         model.addAttribute("part", part);
-        return "/autoservice/vehiclePartModal :: content";
+        return "autoservice/vehiclePartModal :: content";
     }
 
     @PostMapping("/autoservice/priceList/parts/{id}/delete")
@@ -198,7 +198,7 @@ public class AutoServiceController {
     public String serviceLaborModal(@PathVariable Long id, Model model) {
         ServiceLabor labor = id == 0 ? new ServiceLabor() : serviceLaborService.fetch(id);
         model.addAttribute("labor", labor);
-        return "/autoservice/serviceLaborModal :: content";
+        return "autoservice/serviceLaborModal :: content";
     }
 
     @PostMapping("/autoservice/priceList/labors")
