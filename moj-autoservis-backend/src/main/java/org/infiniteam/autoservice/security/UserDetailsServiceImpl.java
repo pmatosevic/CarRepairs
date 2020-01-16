@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 () -> new UsernameNotFoundException("Username is not found in the DB.")
         );
 
-        return new SpringCurrentUser(
+        return new CurrentUser(
                 username, appUser.getPasswordHash(), userAuthorities(appUser), appUser
         );
     }

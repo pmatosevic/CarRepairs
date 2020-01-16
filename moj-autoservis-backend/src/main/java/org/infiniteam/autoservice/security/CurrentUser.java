@@ -5,11 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class SpringCurrentUser extends org.springframework.security.core.userdetails.User {
+public class CurrentUser extends org.springframework.security.core.userdetails.User {
 
     private AppUser appUser;
 
-    public SpringCurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities, AppUser appUser) {
+    public CurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities, AppUser appUser) {
         super(username, password, authorities);
         this.appUser = appUser;
     }
