@@ -317,52 +317,59 @@
 %			
 %			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
 
-		Na slici \ref{fig:classdiagram} je prikazan dijagram razreda koji pripadaju sloju modela. Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Njega nasljeđuje razred \textit{Administrator} koji predstavlja administratora koji ima najveće ovlasti, razred \textit{VehicleOwner} koji predstavlja registriranog vlasnika automobila, razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser ovisno ovisno o tipu (enumeracija \textit{ServiceEmployeeType}) te razred \textit{CurrentUser} u koji se pohranjuju podatci o trenutnom korisniku. 
+		Na slici \ref{fig:classdiagrammodel} je prikazan dijagram razreda koji pripadaju sloju modela. Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Njega nasljeđuje razred \textit{Administrator} koji predstavlja administratora koji ima najveće ovlasti, razred \textit{VehicleOwner} koji predstavlja registriranog vlasnika automobila, razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser ovisno ovisno o tipu (enumeracija \textit{ServiceEmployeeType}) te razred \textit{CurrentUser} u koji se pohranjuju podatci o trenutnom korisniku. 
 		
 		Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{RepairOrder} predstavlja radni nalog za servis, ima trenutni status koji prikazuje je li nalog u čekanju, odbijen, prihvaćen ili gotov (enumeracija \textit{ServiceJobStatus}), te ima dva podrazreda, razred \textit{RegularRepairOrder} koji predstavlja radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji predstavlja radni nalog za izvanredni servis. Razred \textit{RepairOrderItem} predstavlja konkretnu stavku (ugrađeni rezervni dio ili obavljenu uslugu) s cijenom na izvanrednom servisu. Razredi \textit{VehiclePart} i \textit{ServiceLabor} implementiraju sučelje \textit{Product} koji predstavlja proizvod ili uslugu. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil, a razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu te oni pripadaju određenom autoservisu te predstavljaju stavke koje se mogu dodati na radne naloge izvanrednog servisa.
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram}
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_model.png}
 			\caption{Dijagram razreda modela}
-			\label{fig:classdiagram}
+			\label{fig:classdiagrammodel}
 		\end{figure}
 	
-		Na slici \ref{fig:classdiagramctrl} dijagramom su prikazani razredi \textit{controller} i \textit{service}.
+		Na slici \ref{fig:classdiagramcontrolservice} dijagramom su prikazani razredi \textit{controller} i \textit{service}.
 		
 		Razred \textit{MainController} nudi operacije povezane s prikazom početne stranice te registraciju. Njegova sučelja su \textit{VehicleOwnerService}, \textit{AutoServiceService} i \textit{UserService}.
 		
 		Razred \textit{AdministratorController} nudi operacije povezane s administratorom. Njegova sučelja su \textit{VehicleOwnerService} i \textit{AutoServiceService}. 
 		
-		Razred \textit{VehicleOwnerController} nudi operacije povezane s vlasnikom vozila. Njegova sučelja su \textit{AutoServiceService}, \textit{HuoService}, \textit{VehicleService} i \textit{RepairOrderService}.
+		Razred \textit{VehicleOwnerController} nudi operacije povezane s vlasnikom vozila. Njegova sučelja su \textit{AutoServiceService}, \textit{VehicleService} i \textit{RepairOrderService}.
 		
 		Razred \textit{AutoServiceController} nudi operacije povezane sa serviserom. Njegova sučelja su \textit{RepairOrderService}, \textit{VehiclePartService}, \textit{ServiceLaborService} i \textit{ServiceEmployeeService}.
 		
-		Sučelje \textit{UserService} omogućava uređivanje računa svih korisnika. Sučelje \textit{VehicleOwnerService} omogućava uređivanje računa svih korisnika vlasnika vozila. Sučelje \textit{AutoServiceService} omogućava uređivanje svih autoservisa. Sučelje \textit{HuoService} dobavlja podatke o automobilima prema njihovim registarskim oznakama. Sučelje \textit{VehicleService} omogućava upravljanje vozilima. Sučelje \textit{RepairOrderService} omogućava upravljanje servisnim nalozima. Sučelje \textit{VehiclePartService} omogućava upravljanje zamjenskim komadima za vozila. Sučelje \textit{ServiceLaborService} omogućava upravljanje uslugama koje se nude. Sučelje \textit{ServiceEmployeeService} omogućava upravljanje radnicima (serviserima).
+		Razred \textit{ApiController} je prazan.
+		
+		Razred \textit{GeoDTO} slući za postavljanje i dobavljanje lokacije te postavljanje i dobavljanje imena.
+		
+		Razred \textit{Utility} služi za provjeru OIB-a, e-maila, korisničkog imena, lozinke te ostalih izmijenjivih podataka i za provjeru postojanja podataka.
+		
+		Sučelje \textit{UserService} omogućava uređivanje računa svih korisnika. Sučelje \textit{VehicleOwnerService} omogućava uređivanje računa svih korisnika vlasnika vozila. Sučelje \textit{AutoServiceService} omogućava uređivanje svih autoservisa. Sučelje \textit{VehicleService} omogućava upravljanje vozilima. Sučelje \textit{RepairOrderService} omogućava upravljanje servisnim nalozima. Sučelje \textit{VehiclePartService} omogućava upravljanje zamjenskim komadima za vozila. Sučelje \textit{ServiceLaborService} omogućava upravljanje uslugama koje se nude. Sučelje \textit{ServiceEmployeeService} omogućava upravljanje radnicima (serviserima).
+				
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_ctrl}
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_controller_service.png}
 			\caption{Dijagram razreda controller i service}
-			\label{fig:classdiagramctrl}
+			\label{fig:classdiagramcontrolservice}
 		\end{figure}
 	
 		Na slici \ref{fig:classdiagramimpl} prikazan je razred \textit{impl}.
 	
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_impl}
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_impl.png}
 			\caption{Dijagram razreda impl}
 			\label{fig:classdiagramimpl}
 		\end{figure}
 	
-		Na slici \ref{fig:classdiagramother} dijagramom su prikazani svi preostali razredi, preciznije razredi \textit{repository}, \textit{dto} i \textit{security}. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije. Razred \textit{Initialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} (čije je sučelje \textit{UserDetailsService}) i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{CurrentUser}. Klasa \textit{OpenRepairOrderDto} služi za dobavljanje podataka o trenutnom servisnom nalogu, preciznije, za dobavljanje ID-a i tipa naloga (enumeracija \textit{RepairOrderType}).
+		Na slici \ref{fig:classdiagramhuorepositorysecurity} dijagramom su prikazani svi preostali razredi, preciznije razredi \textit{huo}, \textit{repository}, i \textit{security}. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije. Razred \textit{Initialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} (čije je sučelje \textit{UserDetailsService}) i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{CurrentUser}.
 	
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_other}
-			\caption{Dijagram razreda repository, dto i security}
-			\label{fig:classdiagramother}
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_huo_repository_security.png}
+			\caption{Dijagram razreda huo, repository i security}
+			\label{fig:classdiagramhuorepositorysecurity}
 		\end{figure}
 		
 			
