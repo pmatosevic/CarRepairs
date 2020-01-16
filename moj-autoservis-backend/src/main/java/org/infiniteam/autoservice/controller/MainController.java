@@ -1,28 +1,24 @@
 package org.infiniteam.autoservice.controller;
 
-import org.apache.coyote.Response;
 import org.infiniteam.autoservice.model.*;
-import org.infiniteam.autoservice.repository.AutoServiceRepository;
 import org.infiniteam.autoservice.security.CurrentUser;
 import org.infiniteam.autoservice.service.AutoServiceService;
 import org.infiniteam.autoservice.service.UserService;
 import org.infiniteam.autoservice.service.VehicleOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -50,6 +46,15 @@ public class MainController {
             return "redirect:" + REDIRECTS.get(user.getAppUser().getClass());
         }
         return "home/home";
+    }
+
+    @GetMapping("/rest/autoServiceLocations")
+    @ResponseBody
+    public List<GeoDTO> fetchAutoServiceLocations() {
+        List<AutoService> autoServices = autoServiceService.findAllActive();
+        return autoServices.stream()
+                .map(as -> new GeoDTO(as.getShopName(), as.getLatitude(), as.getLongitude()))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/login")

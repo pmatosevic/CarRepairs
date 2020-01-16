@@ -30,11 +30,15 @@ public class VehicleOwnerController {
     private AutoServiceService autoServiceService;
 
     @GetMapping("/user")
-    @Transactional
     public String carOwnerHome(Model model) {
         VehicleOwner user = getCurrentUser();
         model.addAttribute("vehicles", vehicleService.findAllByOwner(user));
         return "user/vehicleList";
+    }
+
+    @GetMapping("/user/mapView")
+    public String viewAutoServiceLocations(Model model) {
+        return "user/mapView";
     }
 
     @GetMapping("/user/vehicles/{id}")

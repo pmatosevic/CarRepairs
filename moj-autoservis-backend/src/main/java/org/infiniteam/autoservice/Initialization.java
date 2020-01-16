@@ -33,6 +33,8 @@ public class Initialization {
         autoService.setShopName("Najbolji auto servis");
         autoService.setAddress("Adresa");
         autoService.setOib("123456789");
+        autoService.setLatitude(45.81);
+        autoService.setLongitude(15.98);
 
         ServiceEmployee employee = new ServiceEmployee();
         employee.setUsername("employee");

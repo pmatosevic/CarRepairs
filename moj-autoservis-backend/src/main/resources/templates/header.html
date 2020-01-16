@@ -38,6 +38,14 @@
 <!--                    <a class="nav-link" href="#" th:href="@{/}">Home</a>-->
 <!--                </li>-->
             </ul>
+            <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ROLE_USER')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user}">Moja vozila</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/mapView}">Karta servisa</a>
+                </li>
+            </ul>
             <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ROLE_SERVICE_EMPLOYEE')">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/autoservice/repairOrders/waiting}">Pristigli nalozi</a>
