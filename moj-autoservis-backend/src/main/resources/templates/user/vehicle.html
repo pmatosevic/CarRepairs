@@ -56,10 +56,10 @@
 
     <p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#openRoModal" th:disabled="${roDisabled}">Otvori nalog</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#stat-model" th:disabled="${roDisabled}">Statistika</button>
         <button type="button" class="btn btn-danger" id="deleteVehicle" th:disabled="${roDisabled}" onclick="deleteVehicle()">
             <i class="fa fa-trash"></i>
             Izbriši vozilo</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stat-model" th:disabled="${roDisabled}">Statistika</button>
     </p>
 
     <form style="visibility: hidden" id="deleteForm" method="post" th:action="'/user/vehicles/' + ${vehicle.vehicleId} + '/delete'"></form>
@@ -163,17 +163,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="form-group row">
-                        <label for="stat-model" class="col-sm-5 col-form-label">Prosječna cijena:</label>
-                        <div class="col-sm-3">
-                            <label for="stat-model" class="col-sm-6 col-form-label">
-                                [[${#numbers.formatDecimal(averagePrice, 1, 'COMMA', 2, 'POINT')}]] kn
+                    <div class="col">
+                        <div class="row">
+                            <label for="stat-model" class="col">
+                                Prosječna cijena: [[${#numbers.formatDecimal(averagePrice, 1, 'COMMA', 2, 'POINT')}]] kn
                             </label>
                         </div>
-                        <label for="stat-model" class="col-sm-5 col-form-label">Prosječna kilometraža:</label>
-                        <div class="col-sm-3">
-                            <label for="stat-model" class="col-sm-6 col-form-label">
-                                [[${#numbers.formatDecimal(averageKM, 1, 'COMMA', 2, 'POINT')}]] km
+                        <div class="row">
+                            <label for="stat-model" class="col">
+                                Prosječna kilometraža: [[${#numbers.formatDecimal(averageKM, 1, 'COMMA', 2, 'POINT')}]] km
                             </label>
                         </div>
                     </div>

@@ -13534,3 +13534,231 @@ org.springframework.expression.spel.SpelEvaluationException: EL1004E: Method cal
 2020-01-16 20:11:20.544 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
 2020-01-16 20:11:20.545  INFO 12908 --- [http-nio-8080-exec-2] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
 2020-01-16 20:11:20.551 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:00.251  INFO 12908 --- [Thread-5] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-16 20:17:00.254  INFO 12908 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-16 20:17:00.262  INFO 12908 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-01-16 20:17:00.551  INFO 12908 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-01-16 20:17:01.771  INFO 12908 --- [restartedMain] o.i.a.MyAutoServiceApplication           : Starting MyAutoServiceApplication on Toshiba with PID 12908 (C:\OPP\infiniteam\moj-autoservis-backend\target\classes started by Katarina in C:\OPP\infiniteam)
+2020-01-16 20:17:01.772  INFO 12908 --- [restartedMain] o.i.a.MyAutoServiceApplication           : No active profile set, falling back to default profiles: default
+2020-01-16 20:17:02.869  INFO 12908 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-01-16 20:17:02.943  INFO 12908 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74ms. Found 8 repository interfaces.
+2020-01-16 20:17:03.041  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$cab69a8e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.045  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$636462c8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.046  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.047  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@32924ae9' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.048  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$8839057a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.050  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.Jsr250MetadataSourceConfiguration' of type [org.springframework.security.config.annotation.method.configuration.Jsr250MetadataSourceConfiguration$$EnhancerBySpringCGLIB$$ad8e1d90] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.050  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'jsr250MethodSecurityMetadataSource' of type [org.springframework.security.access.annotation.Jsr250MethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.050  INFO 12908 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-16 20:17:03.161  INFO 12908 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-01-16 20:17:03.162  INFO 12908 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-01-16 20:17:03.162  INFO 12908 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2020-01-16 20:17:03.209  INFO 12908 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-01-16 20:17:03.209 DEBUG 12908 --- [restartedMain] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2020-01-16 20:17:03.209  INFO 12908 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1433 ms
+2020-01-16 20:17:03.281  WARN 12908 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [A2260115BECE03499089049C2E86BC96]
+2020-01-16 20:17:03.401  INFO 12908 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2020-01-16 20:17:03.424  INFO 12908 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2020-01-16 20:17:04.049  INFO 12908 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-16 20:17:04.097  INFO 12908 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-01-16 20:17:04.681  INFO 12908 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5e6995a6, org.springframework.security.web.context.SecurityContextPersistenceFilter@721e43f7, org.springframework.security.web.header.HeaderWriterFilter@76512b75, org.springframework.security.web.authentication.logout.LogoutFilter@22757063, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@22f48e21, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6bd9f0e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@14ac646e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70c6c92e, org.springframework.security.web.session.SessionManagementFilter@3160e1f1, org.springframework.security.web.access.ExceptionTranslationFilter@34343b4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@44ad2bb1]
+2020-01-16 20:17:04.727 DEBUG 12908 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/**/favicon.ico] in 'faviconHandlerMapping'
+2020-01-16 20:17:04.828  INFO 12908 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-16 20:17:04.838 DEBUG 12908 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2020-01-16 20:17:04.846  WARN 12908 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-16 20:17:04.869 DEBUG 12908 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 48 mappings in 'requestMappingHandlerMapping'
+2020-01-16 20:17:04.931 DEBUG 12908 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2020-01-16 20:17:04.943 DEBUG 12908 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2020-01-16 20:17:05.170  INFO 12908 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-01-16 20:17:05.171  INFO 12908 --- [restartedMain] o.i.a.MyAutoServiceApplication           : Started MyAutoServiceApplication in 3.503 seconds (JVM running for 1105.795)
+2020-01-16 20:17:05.797 ERROR 12908 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : Unique index or primary key violation: "PUBLIC.UK_642CJAE9H9GTU6ONHQ5IDLXII_INDEX_7 ON PUBLIC.AUTO_SERVICE(OIB) VALUES 1"; SQL statement:
+insert into auto_service (active, address, latitude, longitude, oib, regular_service_price, shop_name, auto_service_id) values (?, ?, ?, ?, ?, ?, ?, ?) [23505-199]
+2020-01-16 20:17:05.807 ERROR 12908 --- [restartedMain] o.h.i.ExceptionMapperStandardImpl        : HHH000346: Error during managed flush [org.hibernate.exception.ConstraintViolationException: could not execute statement]
+2020-01-16 20:17:05.817  INFO 12908 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-01-16 20:17:12.507  INFO 12908 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-01-16 20:17:12.515  INFO 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-01-16 20:17:12.516 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2020-01-16 20:17:12.525 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2020-01-16 20:17:12.526  INFO 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-01-16 20:17:12.526 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:17:12.528 DEBUG 12908 --- [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:17:12.529  INFO 12908 --- [http-nio-8080-exec-1] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:17:12.547 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Failed to complete request: org.springframework.security.access.AccessDeniedException: Access is denied
+2020-01-16 20:17:12.568 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/login", parameters={}
+2020-01-16 20:17:12.569 DEBUG 12908 --- [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.MainController.login(javax.servlet.http.HttpServletRequest,org.springframework.ui.Model,java.security.Principal)
+2020-01-16 20:17:12.569  INFO 12908 --- [http-nio-8080-exec-2] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/login IP:127.0.0.1
+2020-01-16 20:17:12.582 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:17:12.612 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:12.699 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:17:12.702 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/css/login.css", parameters={}
+2020-01-16 20:17:12.702 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:17:12.702  INFO 12908 --- [http-nio-8080-exec-3] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:17:12.708 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:17:12.708  INFO 12908 --- [http-nio-8080-exec-4] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/css/login.css IP:127.0.0.1
+2020-01-16 20:17:12.712 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:12.715 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:16.274 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:17:16.276 DEBUG 12908 --- [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:17:16.276  INFO 12908 --- [http-nio-8080-exec-6] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:17:16.310 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:17:16.346 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:16.408 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:17:16.410 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:17:16.410  INFO 12908 --- [http-nio-8080-exec-7] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:17:16.416 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:40.155 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/login", parameters={}
+2020-01-16 20:17:40.157 DEBUG 12908 --- [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.MainController.login(javax.servlet.http.HttpServletRequest,org.springframework.ui.Model,java.security.Principal)
+2020-01-16 20:17:40.157  INFO 12908 --- [http-nio-8080-exec-8] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/login IP:127.0.0.1
+2020-01-16 20:17:40.165 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.view.RedirectView        : View name 'redirect:/', model {}
+2020-01-16 20:17:40.166 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2020-01-16 20:17:40.174 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/", parameters={}
+2020-01-16 20:17:40.174 DEBUG 12908 --- [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.MainController.index(org.springframework.ui.Model,java.security.Principal)
+2020-01-16 20:17:40.175  INFO 12908 --- [http-nio-8080-exec-9] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/ IP:127.0.0.1
+2020-01-16 20:17:40.176 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.view.RedirectView        : View name 'redirect:/user', model {}
+2020-01-16 20:17:40.177 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 302 FOUND
+2020-01-16 20:17:40.186 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/user", parameters={}
+2020-01-16 20:17:40.187 DEBUG 12908 --- [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carOwnerHome(org.springframework.ui.Model)
+2020-01-16 20:17:40.187  INFO 12908 --- [http-nio-8080-exec-10] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user IP:127.0.0.1
+2020-01-16 20:17:40.194 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:17:40.206 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:40.290 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:17:40.291 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:17:40.292  INFO 12908 --- [http-nio-8080-exec-1] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:17:40.301 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:41.232 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:17:41.234 DEBUG 12908 --- [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:17:41.234  INFO 12908 --- [http-nio-8080-exec-2] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:17:41.249 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:17:41.263 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:17:41.337 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:17:41.340 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:17:41.340  INFO 12908 --- [http-nio-8080-exec-3] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:17:41.346 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:18:47.354 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:18:47.355 DEBUG 12908 --- [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:18:47.355  INFO 12908 --- [http-nio-8080-exec-6] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:18:47.364 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:18:47.393 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:18:47.438 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:18:47.439 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:18:47.439  INFO 12908 --- [http-nio-8080-exec-7] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:18:47.444 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:19:33.477 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:19:33.478 DEBUG 12908 --- [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:19:33.479  INFO 12908 --- [http-nio-8080-exec-8] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:19:33.496 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:19:33.653 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:19:33.654 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:19:33.654  INFO 12908 --- [http-nio-8080-exec-9] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:19:33.661 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:19:33.662 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:20:29.048 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:20:29.049 DEBUG 12908 --- [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:20:29.050  INFO 12908 --- [http-nio-8080-exec-10] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:20:29.124 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:20:29.165 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:20:29.220 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:20:29.221 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:20:29.250  INFO 12908 --- [http-nio-8080-exec-1] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:20:29.256 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:20:51.547 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:20:51.548 DEBUG 12908 --- [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:20:51.549  INFO 12908 --- [http-nio-8080-exec-2] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:20:51.566 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:20:51.631 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:20:51.665 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:20:51.666 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:20:51.666  INFO 12908 --- [http-nio-8080-exec-3] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:20:51.669 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:21:48.184 DEBUG 12908 --- [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:21:48.185 DEBUG 12908 --- [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:21:48.185  INFO 12908 --- [http-nio-8080-exec-5] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:21:48.196 DEBUG 12908 --- [http-nio-8080-exec-5] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:21:48.232 DEBUG 12908 --- [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:21:48.308 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:21:48.309 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:21:48.310  INFO 12908 --- [http-nio-8080-exec-4] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:21:48.314 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:22:24.026 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:22:24.027 DEBUG 12908 --- [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:22:24.028  INFO 12908 --- [http-nio-8080-exec-6] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:22:24.044 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:22:24.081 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:22:24.124 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:22:24.126 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:22:24.127  INFO 12908 --- [http-nio-8080-exec-7] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:22:24.131 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:22:55.648 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:22:55.649 DEBUG 12908 --- [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:22:55.649  INFO 12908 --- [http-nio-8080-exec-8] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:22:55.664 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:22:55.719 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:22:55.763 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:22:55.764 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:22:55.765  INFO 12908 --- [http-nio-8080-exec-9] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:22:55.770 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:23:51.311 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:23:51.313 DEBUG 12908 --- [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:23:51.313  INFO 12908 --- [http-nio-8080-exec-10] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:23:51.324 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:23:51.356 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:23:51.392 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:23:51.394 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:23:51.394  INFO 12908 --- [http-nio-8080-exec-1] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:23:51.399 DEBUG 12908 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:24:19.913 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:24:19.914 DEBUG 12908 --- [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:24:19.914  INFO 12908 --- [http-nio-8080-exec-2] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:24:19.924 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:24:19.949 DEBUG 12908 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:24:19.995 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:24:19.997 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:24:19.997  INFO 12908 --- [http-nio-8080-exec-3] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:24:20.005 DEBUG 12908 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:24:48.308 DEBUG 12908 --- [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:24:48.310 DEBUG 12908 --- [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:24:48.310  INFO 12908 --- [http-nio-8080-exec-5] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:24:48.319 DEBUG 12908 --- [http-nio-8080-exec-5] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:24:48.350 DEBUG 12908 --- [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:24:48.389 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:24:48.390 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:24:48.391  INFO 12908 --- [http-nio-8080-exec-4] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:24:48.400 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:25:09.682 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:25:09.683 DEBUG 12908 --- [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:25:09.683  INFO 12908 --- [http-nio-8080-exec-6] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:25:09.684 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Failed to complete request: org.springframework.security.access.AccessDeniedException: Access is denied
+2020-01-16 20:25:09.741 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/login", parameters={}
+2020-01-16 20:25:09.742 DEBUG 12908 --- [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.MainController.login(javax.servlet.http.HttpServletRequest,org.springframework.ui.Model,java.security.Principal)
+2020-01-16 20:25:09.742  INFO 12908 --- [http-nio-8080-exec-7] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/login IP:127.0.0.1
+2020-01-16 20:25:09.743 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:25:09.753 DEBUG 12908 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:25:09.791 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:25:09.791 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/css/login.css", parameters={}
+2020-01-16 20:25:09.792 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:25:09.792  INFO 12908 --- [http-nio-8080-exec-8] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:25:09.792 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:25:09.793  INFO 12908 --- [http-nio-8080-exec-9] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/css/login.css IP:127.0.0.1
+2020-01-16 20:25:09.796 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:25:09.798 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:25:10.157 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/favicon.ico", parameters={}
+2020-01-16 20:25:10.157 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [class path resource [META-INF/resources/], class path resource [resources/], class path resource [static/], class path resource [public/], ServletContext resource [/], class path resource []]
+2020-01-16 20:25:10.174 DEBUG 12908 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:27:08.355 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:27:08.356 DEBUG 12908 --- [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:27:08.357  INFO 12908 --- [http-nio-8080-exec-4] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:27:08.368 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:27:08.400 DEBUG 12908 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:27:08.452 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:27:08.453 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:27:08.453  INFO 12908 --- [http-nio-8080-exec-6] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:27:08.461 DEBUG 12908 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:29:28.612 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/user/vehicles/6", parameters={}
+2020-01-16 20:29:28.613 DEBUG 12908 --- [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to public java.lang.String org.infiniteam.autoservice.controller.VehicleOwnerController.carDetails(java.lang.Long,org.springframework.ui.Model)
+2020-01-16 20:29:28.614  INFO 12908 --- [http-nio-8080-exec-8] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/user/vehicles/6 IP:127.0.0.1
+2020-01-16 20:29:28.627 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, application/xhtml+xml, image/webp, application/xml;q=0.9, */*;q=0.8]
+2020-01-16 20:29:28.664 DEBUG 12908 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2020-01-16 20:29:28.700 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/js/url-join.js", parameters={}
+2020-01-16 20:29:28.702 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]
+2020-01-16 20:29:28.702  INFO 12908 --- [http-nio-8080-exec-9] o.i.a.security.CustomRequestInterceptor  : Request URL:http://localhost:8080/js/url-join.js IP:127.0.0.1
+2020-01-16 20:29:28.709 DEBUG 12908 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
