@@ -437,13 +437,71 @@
 %			
 %			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
 
-		U ovom polgavlju će biti opisana instalacija potrebnih softverskih paketa, stvaranje izvršnog koda, konfiguracija i pokretanje web aplikacije na \textit{Debian} baziranom \textit{Linux} poslužitelju. Da bi se aplikacija mogla pokrenuti potrebno je potrebno je konfigurirati parametre spajanja na već kreiranu bazu podataka.
+		U ovom polgavlju će biti opisana instalacija potrebnih softverskih paketa, stvaranje izvršnog koda, konfiguracija i pokretanje web aplikacije na \textit{Debian} baziranom \textit{Linux} poslužitelju. Ova web aplikacije je prilagođena i testirana za rad s \textit{PostgreSQL} bazom podataka u produkcijskom okruženju te se zbog toga preporuča njezina uporaba iako je aplikaciju moguće konfigurirati i za korištenje ostalih baza podataka. Moguće je koristiti već unaprijed stvorenu bazu podataka, a u nastavku su dane upute za instalaciju \textit{PostgreSQL} baze u slučaju da se ručno želi postaviti baza.
 		
 		\subsection{Instalacija i konfiguracija baze podataka}
+		\textit{PostgreSQL} baza može se instalirati koristeći \textit{apt} sustava izvođenjem sljedećih naredbi:
+		\begin{lstlisting}
+			$ sudo apt update
+			$ sudo apt install postgresql postgresql-contrib
+		\end{lstlisting}
+		Time je instalirana baza podataka te je potrebno stvoriti novog korisnika i njemu pripadajuću bazu podataka koju će aplikacija koristiti:
+		\begin{lstlisting}
+			$ su - postgres 
+			$ createuser korisnik
+			$ createdb naziv_baze_podataka
+			$ psql
+			$ ALTER USER korisnik WITH ENCRYPTED PASSWORD 'lozinka';
+			$ GRANT ALL PRIVILEGES ON DATABASE naziv_baze_podataka TO korisnik;
+		\end{lstlisting}
+		
+		\subsection{Konfiguracija i pokretanje poslužitelja}
+		Za pokretanje konfiguriranje, prevođenje i pokretanje web aplikacije potrebno je putem \textit{apt} sustava instalirati pakete:
+		\begin{lstlisting}
+			$ sudo apt update
+			$ sudo apt install openjdk-11-jdk-headless maven screen
+		\end{lstlisting}
+		Nakon preuzimanja izvornog koda na poslužitelj (npr. putem \textit{Git}-a ili preko sustava za automatizirani razmještaj) potrebno je otići u direktorij izvornog koda te nakon otvaranja konfiguracijske datoteke naredbom:
+		\begin{lstlisting}
+			$ nano src/main/resources/application.properties
+		\end{lstlisting}
+		postaviti parametre pristupa prema bazi podataka (novostvorenoj u prethodnom koraku ili nekoj već kreiranoj):
+		\begin{lstlisting}
+			spring.datasource.url=jdbc:postgresql://localhost:5432/naziv_baze_podataka
+			spring.datasource.username=korisnik
+			spring.datasource.password=lozinka
+			spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+		\end{lstlisting}
+		U slučaju korištenja neke druge baze podataka potrebno je na promijeniti \textit{spring.datasource.url} ovisno o uputama te baze podataka. Nakon toga je potrebno stvoriti izvršni kod izvršavanjem naredbe:
+		\begin{lstlisting}
+			$ mvn compile
+			$ mvn build
+			$ mvn package
+		\end{lstlisting}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1.0\linewidth]{slike/deployment1}
+			\caption{Prikaz nakon uspješnog stvaranja izvršnog koda}
+			\label{fig:deployment1}
+		\end{figure}
 		
 		
+		Preporuča se naredbom 
+		\begin{lstlisting}
+			$ screen
+		\end{lstlisting}
+		stvoriti virtualni terminal te u njemu pokrenuti aplikaciju izvođenjem naredbe:
+		\begin{lstlisting}
+			$ ./run.sh
+		\end{lstlisting}
+		Ta će skripta pokrenuti Springov ugrađeni \textit{Tomcat} poslužitelj na portu standardnom portu 80.
 		
-
-			
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1.0\linewidth]{slike/deployment2}
+			\caption{Prikaz nakon pokretanja poslužitelja}
+			\label{fig:deployment2}
+		\end{figure}
+		
 			
 			\eject 
