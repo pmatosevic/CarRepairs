@@ -9,6 +9,9 @@
         <module name="my-auto-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="my-auto-service-selenium-test" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

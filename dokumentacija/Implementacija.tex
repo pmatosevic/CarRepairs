@@ -1,58 +1,507 @@
 \chapter{Implementacija i korisničko sučelje}
 		
-		
 		\section{Korištene tehnologije i alati}
+%		
+%			\textbf{\textit{dio 2. revizije}}
+%			
+%			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
+
 		
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
-			
+		Prilikom rada na projektu komunikacija je ostvarena putem aplikacije \textit{Slack}\footnote{https://slack.com/}, a za praćenje promjena na izvornom kodu aplikacije i dokumentacije je korišten alat \textit{Git}\footnote{https://git-scm.com/} s udaljenim repozitorijem na servisu \textit{GitLab}\footnote{https://gitlab.com/}. Za pisanje koda je korišteno razvojno okruženje \textit{IntelliJ IDEA}\footnote{https://www.jetbrains.com/idea/}. Dokumantacija pisana u \textit{LaTeX}\footnote{https://www.latex-project.org/}-u korištenjem aplikacija \textit{TexStudio}\footnote{https://www.texstudio.org/}, a dijagrami su izrađeni alatom \textit{Astah UML}\footnote{http://astah.net/}.
+		
+		Aplikacija, odnosno njezin \textit{backend} je napisan u programskom jeziku \textit{Java} korištenjem radnog okvira \textit{Spring}\footnote{https://spring.io/}. To je okvir koji nudi dio poslužiteljske implementacije web aplikacije slijedeći obrazac model-pogled-nadglednik, koristi princip inverzije ovisnosti koji će olakšati kasnije promjene te nudi gotovu implementaciju različitih protokola. Korištena je i biblioteka \textit{Thymeleaf}\footnote{https://www.thymeleaf.org/} koja olakšava generiranje \textit{HTML} koda koji se šalje kiljentovom pregledniku.
+		
+		Uz njega je korištena i biblioteka \textit{Spring JPA}\footnote{https://spring.io/projects/spring-data-jpa} (koja uključuje \textit{ORM} biblioteku \textit{Hibernate}) koja automatski preslikava razrede i njihove veze u relacijski model te generira i provodi SQL upite koje sam obrađuje. U razvojnoj okolini se koristi \textit{H2}\footnote{https://www.h2database.com} baza podataka koja se čuva u memoriji za vrijeme pokretanja aplikacije te omogućava lako testiranje i dodavanje podataka. U produkcijskoj okolini je korištena \textit{PostgreSQL}\footnote{https://www.postgresql.org/} baza podataka, koja je besplatna i otvorenog koda te dobro podržana u \textit{Spring} okviru.
+		
+		\textit{Frontend} je ostvaren u \textit{HTML}-u, \textit{CSS}-u i \textit{JavaScript}\footnote{https://www.javascript.com/}-u. Korištena je biblioteka \textit{Bootstrap}\footnote{https://getbootstrap.com/} koja omogućuje lakšu i bržu izradu responzivnih stranica korištenjem gotovih komponenti. Biblioteka \textit{jQuery}\footnote{https://jquery.com/} je korištena zbog nadogradnje osnovnih mogućnosti \textit{JavaScripta}.
 			
 			\eject 
 		
 	
 		\section{Ispitivanje programskog rješenja}
 			
-			\textbf{\textit{dio 2. revizije}}\\
+%			\textbf{\textit{dio 2. revizije}}\\
 			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
+%			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
 	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+			%\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
 			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 1: Dodavanje stavke na račun}
 			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void addItemToOrderAddsItemAndUpdatesPrice() {
+				repairOrderService.addItemToOrder(repRo, product);
+			
+				assertEquals(100.00, (double) repRo.getPrice());
+				assertThat(repRo.getItems()).hasSize(1);
+				assertThat(repRo.getItems().get(0).getName()).isEqualTo("Item");
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 2: Dodavanje stavke na račun koji je zatvoren}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void addItemToOrderShouldThrowOnClosedRo() {
+				repRo.setServiceJobStatus(ServiceJobStatus.FINISHED);
+			
+				assertThrows(RuntimeException.class, () -> repairOrderService.addItemToOrder(repRo, product));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 3: Dodavanje besplatne stavke na račun}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void addItemToOrderShouldNotThrowOnFreeProduct() {
+				product = new Product() {
+					public String getName() {
+						return "Free";
+				} 
+				public double getPrice() {
+					return 0.0;
+				}
+			};
+				assertDoesNotThrow(() -> repairOrderService.addItemToOrder(repRo, product));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill
+			\begin{figure}[H]
+				\includegraphics[scale=0.7]{slike/test/repair.JPG}
+				\centering
+				\caption{Rezultat ispitnih slučajeva 1, 2 i 3}
+				\label{fig:testrepair}
+			\end{figure}
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 4: Dodavanje automobila i dohvat podataka o njemu}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void createVehicleReturnsTheVehicleWithCorrectDataFromHuoServiceAndOwner() throws HuoServiceException {
+				when(huoService.fetchVehicleData(any())).thenReturn(
+					new VehicleData("ZG1234AA", "MOCK-VIN", "Audi A1")
+				);
+				when(vehicleRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+				VehicleOwner owner = new VehicleOwner();
+				
+				Vehicle vehicle = vehicleService.create("ZG1234AA", owner);
+				
+				assertEquals("ZG1234AA", vehicle.getLicencePlate());
+				assertEquals("MOCK-VIN", vehicle.getVinNumber());
+				assertEquals("Audi A1", vehicle.getVehicleModel());
+				assertEquals(owner, vehicle.getOwner());
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 5: Dodavanje automobila i dohvat podataka o njemu za automobil s neispravnim podatcima}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void createVehicleThrowsWhenHuoServiceThrows() throws HuoServiceException {
+				when(huoService.fetchVehicleData(any())).thenThrow(new HuoServiceException());
+				VehicleOwner owner = new VehicleOwner();
+				
+				Assertions.assertThrows(RuntimeException.class, () -> vehicleService.create("ZG1234AA", owner));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 6: Dodavanje automobila i dohvat podataka o njemu za automobil koji je već pridijeljen tom vlasniku}
+			
+			%\hfill\break
+			\noindent Izvorni kod:
+			
+			\begin{lstlisting}[language=Java]
+			@Test
+			public void createVehicleFailsWhenOwnerHasThatVehicle() throws HuoServiceException {
+				VehicleData data = new VehicleData("ZG1234AA", "MOCK-VIN", "Audi A1");
+				//when(huoService.fetchVehicleData(any())).thenReturn(data);
+				VehicleOwner owner = new VehicleOwner();
+				Vehicle vehicle = new Vehicle(data, owner);
+				owner.setVehicles(List.of(vehicle));
+				when(vehicleRepository.existsByLicencePlateAndOwner(any(), any())).thenReturn(true);
+				//when(vehicleRepository.findAllByOwner(any())).thenReturn(List.of(vehicle));
+				
+				Assertions.assertThrows(AlreadyExistsException.class, () -> vehicleService.create("ZG1234AA", owner));
+			}
+			\end{lstlisting}
+			
+			\noindent Izvođenje ispita: Ispit je prošao.
+			
+			\hfill
+			\begin{figure}[H]
+				\includegraphics[scale=0.7]{slike/test/vehicle.JPG}
+				\centering
+				\caption{Rezultat ispitnih slučajeva 4, 5 i 6}
+				\label{fig:testvehicle}
+			\end{figure}
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
+%			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
 			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+%			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
+%			 \begin{itemize}
+%			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
+%			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
+%			 \end{itemize}
+%		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			
+			Svi testovi izvršeni su uz pomoć alata Selenium. Svrha ispitivanja je provjera osnovih funkcionalnosti sustava te pronalazak mogućih pogrešaka ili neočekivanih ponašanja u izvođenju koda.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 1: Korisnik dodaje automobil s ispravnom registarskom oznakom}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+			
+			\item Otvaranje početne web stranice u pregledniku
+			\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+			\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+			\item Klik na gumb \textit{Prijava}
+			\item Klik na gumb \textit{Novi automobil}
+			\item Unos registracijske tablice 'ZG1234AB' u polje unosa
+			\item Klik na gumb \textit{Dodaj}
+			\item Zatvaranje prozora preglednika
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime korisnika vlasnika vozila i lozinka
+				\item Prikazuje se početna web stranica prijavljenog korisnika
+				\item Pojavljuje se prozor za dodavanje vozila
+				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
+				\item Na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
+				\item Prozor preglednika zatvoren
+				
+			\end{packed_enum}
+		
+		
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 2: Korisnik dodaje automobil s registarskom oznakom koja već postoji}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+				\item Klik na gumb  \textit{Prijava}
+				\item Klik na gumb \textit{Novi automobil}
+				\item Unos registracijske tablice 'ZG1234AB' u polje unosa
+				\item Klik na gumb \textit{Dodaj}
+				\item Klik na gumb \textit{Novi automobil}
+				\item Unos registracijske tablice 'ZG1234AB' u polje unosa
+				\item Klik na gumb \textit{Dodaj}
+				\item Zatvaranje prozora preglednika
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime korisnika vlasnika vozila i lozinka
+				\item Prikazuje se početna web stranica prijavljenog korisnika
+				\item Pojavljuje se prozor za dodavanje vozila
+				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
+				\item Zatvara se prozor za dodavanje vozija i na stranici postoji kartica ili neki tekst s navedenom registarskom oznakom
+				\item Pojavljuje se prozor za dodavanje vozila
+				\item U polje za unos unešena je registracijska tablica 'ZG1234AB'
+				\item Pojavljuje se poruka pogreške: \textit{Vozilo već postoji!}
+				\item Prozor preglednika zatvoren
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 3: Administrator servisa dodaje novu uslugu}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena administratora i lozinke u polja za unos
+				\item Klik na gumb \textit{Prijava}
+				\item Brisanje svih dijelova i usluga
+				\item Klik na gumb \textit{Dodaj} za novi rezervni dio
+				\item Unos 'Guma' u polje \textit{Naziv}, '200' u polje \textit{Cijena u kn} i '100' u polje \textit{Predviđeno trajanje u km}
+				\item Klik na gumb \textit{Spremi}
+				\item Zatvaranje prozora preglednika
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime administratora i lozinka
+				\item Prikazuje se početna web stranica prijavljenog administratora
+				\item Nema ni jednog dijela ni usluge
+				\item Otvara se prozor za unos rezervnog dijela
+				\item U polje \textit{Naziv} unešen je naziv 'Guma', u polje \textit{Cijena u kn} unešena je cijena '200', a u polje \textit{Predviđeno trajanje u km} unešeno je '100'
+				\item Zatvara se prozor unosa novog rezervnog dijela te se rezervni dio i njegovi detalji pojavljuju na popisu rezervnih dijelova
+				\item Prozor preglednika zatvoren
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 4: Administrator servisa registrira novog servisera i serviser se prijavljuje}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+				\item Klik na gumb \textit{Prijava}
+				\item Klik na gumb \textit{Zaposlenici}
+				\item Brisanje svih ostalih zaposlenika
+				\item Klik na gumb \textit{Dodaj zaposlenika}
+				\item Unos 'user2' u polja \textit{Korisničko ime} i \textit{Lozinka}, 'Darian' u polje \textit{Ime} i 'Horvat' u polje \textit{Prezime}
+				\item Klik na gumb \textit{Spremi}
+				\item Klik na gumb za dropdown opcija
+				\item Klik na gumb \textit{Odjava}
+				\item Klik na gumb \textit{Prijava}
+				\item Unos 'user2' u polje \textit{Korisničko ime} i \textit{Lozinka}
+				\item Klik na gumb \textit{Prijava}
+				\item Zatvaranje prozora preglednika
+			
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime administratora i lozinka
+				\item Prikazuje se početna web stranica prijavljenog administratora
+				\item Prikazuje se stranica sa popisom zaposlenika
+				\item Svi ostali zaposlenici izbrisani
+				\item Otvara se prozor za dodavanje novog zaposlenika
+				\item U polja \textit{Korisničko ime} i \textit{Lozinka} unešeno je 'user2', u polje \textit{Ime}'Darian' te u polje \textit{Prezime} 'Horvat'
+				\item Zatvara se prozor za dodavanje novog zaposlenika i novi se zaposlenik nalazi na popisu zaposlenika
+				\item Prikazuju se opcije u dropdownu
+				\item Korisnik je odjavljen i prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja \textit{Korisničko ime} i \textit{Lozinka} unešeno je 'user2'
+				\item Korisnik je uspješno prijavljen i prikazuje se početna stranica prijavljenog korisnika
+				\item Prozor preglednika zatvoren
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			\noindent\textbf{Ispitni slučaj 5: Administrator servisa registrira novog servisera s već postojećim korisničkim imenom}
+			
+			\hfill\break
+			\noindent\textbf{Ulaz:}
+			
+			\begin{packed_enum}
+				
+				\item Otvaranje početne web stranice u pregledniku
+				\item Klik na gumb za otvaranje stranice za prijavu \textit{Prijava}
+				\item Unos korisničkog imena korisnika vlasnika vozila i lozinke u polja za unos
+				\item Klik na gumb \textit{Prijava}
+				\item Klik na gumb \textit{Zaposlenici}
+				\item Brisanje svih ostalih zaposlenika
+				\item Klik na gumb \textit{Dodaj zaposlenika}
+				\item Unos 'user2' u polja \textit{Korisničko ime} i \textit{Lozinka}, 'Darian' u polje \textit{Ime} i 'Horvat' u polje \textit{Prezime}
+				\item Klik na gumb \textit{Spremi}
+				\item Klik na gumb \textit{Dodaj zaposlenika}
+				\item Unos 'user2' u polja \textit{Korisničko ime} i \textit{Lozinka}, 'Neki' u polje \textit{Ime} i 'Novi' u polje \textit{Prezime}
+				\item Klik na gumb \textit{Spremi}
+				\item Zatvaranje prozora preglednika
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Očekivani rezultat:}
+			
+			\begin{packed_enum}
+				
+				\item Prikazuje se početna web stranica
+				\item Prikazuje se stranica za prijavu
+				\item U polja za unos unešeni su korisničko ime administratora i lozinka
+				\item Prikazuje se početna web stranica ulogiranog administratora
+				\item Prikazuje se stranica sa popisom zaposlenika
+				\item Svi ostali zaposlenici izbrisani
+				\item Otvara se prozor za dodavanje novog zaposlenika
+				\item U polja \textit{Korisničko ime'} i \textit{Lozinka} unešeno je 'user2', u polje \textit{Ime} 'Darian' te u polje \textit{Prezime} 'Horvat'
+				\item Zatvara se prozor za dodavanje novog zaposlenika i novi se zaposlenik nalazi na popisu zaposlenika
+				\item Otvara se prozor za dodavanje novog zaposlenika
+				\item U polja \textit{Korisničko ime} i \textit{Lozinka} unešeno je 'user2', u polje \textit{Ime} 'Neki' te u polje \textit{Prezime} 'Novi'
+				\item Poljavljuje se poruka pogreške: \textit{Korisničko ime je zauzeto}
+				\item Prozor preglednika zatvoren
+				
+			\end{packed_enum}
+			
+			\noindent\textbf{Rezultat:} Sva očekivanja su zadovoljena. Selenium test je prošao.
+			
+			\hfill\break
+			
+			\begin{figure}[H]
+				\includegraphics[scale=0.9]{slike/Selenium_test_results.png}
+				\centering
+				\caption{Rezultat svih Selenium ispitnih slučajeva}
+				\label{fig:seleniumtestresults}
+			\end{figure}
+			
 			
 			\eject 
 		
 		
 		\section{Dijagram razmještaja}
-			
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+%			
+%			\textbf{\textit{dio 2. revizije}}
+%			
+%			 \textit{Potrebno je umetnuti \textbf{specifikacijski} dijagram razmještaja i opisati ga. Moguće je umjesto specifikacijskog dijagrama razmještaja umetnuti dijagram razmještaja instanci, pod uvjetom da taj dijagram bolje opisuje neki važniji dio sustava.}
+	
+	
+		Cijeli sustav je organiziran na temelju klijent-poslužitelj arhitekture. Na dijagramu se nalazi klijent (klijentsko računalo) s web preglednikom koji putem \textit{HTTPS} protokola razmjenjuje podatke s web poslužiteljem na poslužiteljskom računalu. Na poslužiteljskom računalu se nalaze web poslužitelj u kojem je pokrenuta aplikacija koji \textit{ODBC} protokolom s poslužiteljem baze podataka dohvaća i mijenja podatke u bazi podataka aplikacije.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1\linewidth]{dijagrami/deployment_diagram}
+			\caption{Dijagram razmještaja}
+			\label{fig:deploymentdiagram}
+		\end{figure}
 			
 			\eject 
 		
 		\section{Upute za puštanje u pogon}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+%			\textbf{\textit{dio 2. revizije}}\\
+%		
+%			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
+%			
+%			
+%			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
+
+		U ovom polgavlju će biti opisana instalacija potrebnih softverskih paketa, stvaranje izvršnog koda, konfiguracija i pokretanje web aplikacije na \textit{Debian} baziranom \textit{Linux} poslužitelju. Ova web aplikacije je prilagođena i testirana za rad s \textit{PostgreSQL} bazom podataka u produkcijskom okruženju te se zbog toga preporuča njezina uporaba iako je aplikaciju moguće konfigurirati i za korištenje ostalih baza podataka. Moguće je koristiti već unaprijed stvorenu bazu podataka, a u nastavku su dane upute za instalaciju \textit{PostgreSQL} baze u slučaju da se ručno želi postaviti baza.
 		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-			
-			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
+		\subsection{Instalacija i konfiguracija baze podataka}
+		\textit{PostgreSQL} baza može se instalirati koristeći \textit{apt} sustava izvođenjem sljedećih naredbi:
+		\begin{lstlisting}
+			$ sudo apt update
+			$ sudo apt install postgresql postgresql-contrib
+		\end{lstlisting}
+		Time je instalirana baza podataka te je potrebno stvoriti novog korisnika i njemu pripadajuću bazu podataka koju će aplikacija koristiti:
+		\begin{lstlisting}
+			$ su - postgres 
+			$ createuser korisnik
+			$ createdb naziv_baze_podataka
+			$ psql
+			$ ALTER USER korisnik WITH ENCRYPTED PASSWORD 'lozinka';
+			$ GRANT ALL PRIVILEGES ON DATABASE naziv_baze_podataka TO korisnik;
+		\end{lstlisting}
+		
+		\subsection{Konfiguracija i pokretanje poslužitelja}
+		Za pokretanje konfiguriranje, prevođenje i pokretanje web aplikacije potrebno je putem \textit{apt} sustava instalirati pakete:
+		\begin{lstlisting}
+			$ sudo apt update
+			$ sudo apt install openjdk-11-jdk-headless maven screen
+		\end{lstlisting}
+		Nakon preuzimanja izvornog koda na poslužitelj (npr. putem \textit{Git}-a ili preko sustava za automatizirani razmještaj) potrebno je otići u direktorij izvornog koda te nakon otvaranja konfiguracijske datoteke naredbom:
+		\begin{lstlisting}
+			$ nano src/main/resources/application.properties
+		\end{lstlisting}
+		postaviti parametre pristupa prema bazi podataka (novostvorenoj u prethodnom koraku ili nekoj već kreiranoj):
+		\begin{lstlisting}
+			spring.datasource.url=jdbc:postgresql://localhost:5432/naziv_baze_podataka
+			spring.datasource.username=korisnik
+			spring.datasource.password=lozinka
+			spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+		\end{lstlisting}
+		U slučaju korištenja neke druge baze podataka potrebno je na promijeniti \textit{spring.datasource.url} ovisno o uputama te baze podataka. Nakon toga je potrebno stvoriti izvršni kod izvršavanjem naredbe:
+		\begin{lstlisting}
+			$ mvn compile
+			$ mvn build
+			$ mvn package
+		\end{lstlisting}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1.0\linewidth]{slike/deployment1}
+			\caption{Prikaz nakon uspješnog stvaranja izvršnog koda}
+			\label{fig:deployment1}
+		\end{figure}
+		
+		
+		Preporuča se naredbom 
+		\begin{lstlisting}
+			$ screen
+		\end{lstlisting}
+		stvoriti virtualni terminal te u njemu pokrenuti aplikaciju izvođenjem naredbe:
+		\begin{lstlisting}
+			$ ./run.sh
+		\end{lstlisting}
+		Ta će skripta pokrenuti Springov ugrađeni \textit{Tomcat} poslužitelj na portu standardnom portu 80.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=1.0\linewidth]{slike/deployment2}
+			\caption{Prikaz nakon pokretanja poslužitelja}
+			\label{fig:deployment2}
+		\end{figure}
+		
 			
 			\eject 

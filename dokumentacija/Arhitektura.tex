@@ -317,28 +317,80 @@
 %			
 %			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
 
-		Na slici \ref{fig:classdiagram} je prikazan dijagram razreda koji pripadaju sloju modela. Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Njega nasljeđuje razred \textit{Administrator} koji predstavlja administratora koji ima najveće ovlasti, razred \textit{VehicleOwner} koji predstavlja registriranog vlasnika automobila te razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser ovisno ovisno o tipu (enumeracija \textit{ServiceEmployeeType}).
+		Na slici \ref{fig:classdiagrammodel} je prikazan dijagram razreda koji pripadaju sloju modela. Razred \textit{AppUser} predstavlja registriranog korisnika koji nakon unosa svojih podataka može koristiti osnovne funkcionalnosti aplikacije. Njega nasljeđuje razred \textit{Administrator} koji predstavlja administratora koji ima najveće ovlasti, razred \textit{VehicleOwner} koji predstavlja registriranog vlasnika automobila, razred \textit{ServiceEmployee} predstavlja osobu zaposlenu u auto servisu, koja može biti vlasnik tog auto servisa ili serviser ovisno ovisno o tipu (enumeracija \textit{ServiceEmployeeType}) te razred \textit{CurrentUser} u koji se pohranjuju podatci o trenutnom korisniku. 
 		
-		Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{RepairOrder} predstavlja radni nalog za servis, te ima dva podrazreda, razred \textit{RegularRepairOrder} koji predstavlja radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji predstavlja radni nalog za izvanredni servis. Razred \textit{RepairOrderItem} predstavlja konkretnu stavku (ugrađeni rezervni dio ili obavljenu uslugu) s cijenom na izvanrednom servisu. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil, a razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu te oni pripadaju određenom autoservisu te predstavljaju stavke koje se mogu dodati na radne naloge izvanrednog servisa.
+		Razred \textit{Vehicle} predstavlja vozilo koje pripada nekom korisniku. Razred \textit{AutoService} označava jedan auto servis. Razred \textit{RepairOrder} predstavlja radni nalog za servis, ima trenutni status koji prikazuje je li nalog u čekanju, odbijen, prihvaćen ili gotov (enumeracija \textit{ServiceJobStatus}), te ima dva podrazreda, razred \textit{RegularRepairOrder} koji predstavlja radni nalog za redovni servis, te razred \textit{RepairingRepairOrder} koji predstavlja radni nalog za izvanredni servis. Razred \textit{RepairOrderItem} predstavlja konkretnu stavku (ugrađeni rezervni dio ili obavljenu uslugu) s cijenom na izvanrednom servisu. Razredi \textit{VehiclePart} i \textit{ServiceLabor} implementiraju sučelje \textit{Product} koji predstavlja proizvod ili uslugu. Razred \textit{VehiclePart} predstavlja rezervni dio za automobil, a razred \textit{ServiceLabor} predstavlja uslugu koju serviser može obaviti na automobilu te oni pripadaju određenom autoservisu te predstavljaju stavke koje se mogu dodati na radne naloge izvanrednog servisa.
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram}
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_model.png}
 			\caption{Dijagram razreda modela}
-			\label{fig:classdiagram}
+			\label{fig:classdiagrammodel}
 		\end{figure}
 	
-		Na slici \ref{fig:classdiagramctrl} dijagramom su prikazani ostali razredi. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije, dok razred \textit{MockDataInitialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{SpringCurrentUser}.
+		Na slici \ref{fig:classdiagramcontrolservice} dijagramom su prikazani razredi koji pripadaju paketima \textit{controller} i \textit{service} odnosno kontrolerskom i servisnom sloju.
 		
-		Razred \textit{MainController} pripada sloju nadglednika te nudi operacije povezane s prikaznom početne stranice te registraciju. Razredi \textit{AdministratorController}, \textit{VehicleOwnerController} te \textit{AutoServiceController} nude operacije povezane s tipom korisnika koji će koristiti aplikaciju i sve metode u njima su prikazane samo idejno, i jedine nisu implementirane.
+		Razred \textit{MainController} nudi operacije povezane s prikazom početne stranice, registracijom, te općenitom promjenom korisničkih podataka i lozinke. Za te operacije ovisi o sučeljima \textit{VehicleOwnerService}, \textit{AutoServiceService} i \textit{UserService}.
+		
+		Razred \textit{AdministratorController} nudi izvođenje operacija koje koristi administrator. On ovisi o sučeljima \textit{VehicleOwnerService} i \textit{AutoServiceService}. 
+		
+		Razred \textit{VehicleOwnerController} nudi operacije povezane s vlasnikom vozila. On koristi operacije koje nude sučelja \textit{AutoServiceService}, \textit{VehicleService} i \textit{RepairOrderService}.
+		
+		Razred \textit{AutoServiceController} nudi operacije povezane sa serviserom. On koristi sučelja \textit{RepairOrderService}, \textit{VehiclePartService}, \textit{ServiceLaborService} i \textit{ServiceEmployeeService}.
+		
+		Razred \textit{GeoDTO} služi za dinamički prijenos podataka o lokacijama servisa na \textit{frontend}.
+		
+		Razred \textit{Utility} nudi statičke metode za provjeru OIB-a, e-maila, korisničkog imena, lozinke te ostalih izmijenjivih podataka i za provjeru postojanja podataka.
+		
+		Sučelje \textit{UserService} definira operacije za uređivanje računa svih korisnika. Sučelje \textit{VehicleOwnerService} definira operacije za uređivanje računa svih korisnika vlasnika vozila. Sučelje \textit{AutoServiceService} definira operacije povezane s autoservisima. Sučelje \textit{VehicleService} omogućava upravljanje vozilima. Sučelje \textit{RepairOrderService} omogućava upravljanje servisnim nalozima. Sučelje \textit{VehiclePartService} omogućava upravljanje zamjenskim komadima za vozila. Sučelje \textit{ServiceLaborService} omogućava upravljanje uslugama koje se nude. Sučelje \textit{ServiceEmployeeService} omogućava upravljanje radnicima (serviserima).
+		
+		Sve ta sučelja imaju i konkretne implementacije koje za pristup podacima koriste \textit{JPA} repozitorije, a oni su smješteni u paket \textit{impl}.
+				
 		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.9\linewidth]{dijagrami/class_diagram_ctrl}
-			\caption{Dijagram razreda u sloju nadglednika te sloja pristupa podacima}
-			\label{fig:classdiagramctrl}
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_controller_service.png}
+			\caption{Dijagram razreda kontrolerskog i sučelja servisnog sloja}
+			\label{fig:classdiagramcontrolservice}
 		\end{figure}
 	
+		Na slici \ref{fig:classdiagramimpl} prikazan je razred \textit{impl}. Razred \textit{AutoServiceServiceJpa} pruža uslugu vezanu za autoservis -- stvaranje, izmjenu, pronalazak, brisanje itd. Također pruža mogućnost stvaranja autoservisa s vlasnikom. Ovaj razred koristi sučelja \textit{UserService, ServiceEmployeeRepository, ServiceLaborRepository, VehiclePartRepository, AutoserviceRepository} i \textit{AutoServiceService}.
+		
+		Razred \textit{UserServiceJpa} pruža uslugu pronalaska, dohvata, ažuriranja podataka, promjenu lozinke korisnika itd. Ovaj razred koristi sučelja \textit{UserRepository} i \textit{UserService}.
+		
+		Razred \textit{PasswordEncoder} je prazan, te ga nasljeđuju \textit{VehicleOwnerServiceJpa, UserServiceJpa} i \textit{AutoServiceServiceJpa}.
+		
+		Razred \textit{VehicleOwnerServiceJpa} pruža uslugu vezanu za vlasnike automobila: dohvat, pronalazak, brisanje i stvaranje. Ovaj razred koristi sučelja \textit{VehicleOwnerRepository, UserRepository, VehicleOwnerService} i \textit{VehicleRepository}.
+		
+		Rezred \textit{VehicleServiceJpa} pruža uslugu dohvata, pronalaska, stvaranja i provjere postojanja automobila. Koristi sučelja \textit{HuoConnector, VehicleRepository} i \textit{VehicleService}.
+		
+		Razred \textit{ServiceLaborServiceJpa} pruža uslugu za dohvat, pronalazak, dodavanje, mijenjanje i brisanje usluge autoservisa. Koristi sučelja \textit{ServiceLaborService} i \textit{ServiceLaborRepository}.
+		
+		Razred \textit{VehiclePartServiceJpa} pruža uslugu pronalaska, dohvata, dodavanja, mijenjanja i brisanja rezervog dijela auta. Koristi sučelja \textit{VehiclePartService} i \textit{VehiclePartRepository}.
+		
+		Razred \textit{ServiceEmployeeServiceJpa} pruža uslugu pronalaska, dodavanja i brisanja zaposlenika određenog autoservisa. Koristi sučelje \textit{ServiceEmployeeService, ServiceEmployeeRepository} i \textit{UserRepository}, a nasljeđuje \textit{PasswordEncoder}.
+		
+		Razred \textit{VehicleServiceJpa} pruža uslugu dohvata, pronalaska, provjere postojanja i stvaranje automobila koristeći sučelja \textit{HuoConnector, Vehicle Repository} i \textit{VehicleService}.
+		
+		Razred \textit{RepairOrderServiceJpa} pruža uslugu dohvata, pronalaska, stvaranja i ažuriranja radnog naloga, kao i dodavanje i micanje stavki. Koristi sučelja \textit{RepairOrderRepository} i \textit{RepairOrderService}.
+		
+		Razred VehicleData predstavlja podatke o automobilu: registracijske oznake, broj šasije i model. 
+	
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_impl.png}
+			\caption{Dijagram razreda servisnog sloja}
+			\label{fig:classdiagramimpl}
+		\end{figure}
+	
+		Na slici \ref{fig:classdiagramhuorepositorysecurity} dijagramom su prikazani svi preostali razredi, preciznije paketi \textit{huo}, \textit{repository}, i \textit{security}. Razred \textit{MyAutoServiceApplication} predstavlja glavni razred od kojeg počinje izvršavanje poslužiteljske aplikacije. Razred \textit{Initialization} izvršava upis testnih podataka u bazu prilikom pokretanja aplikacije u razvojnom okruženju. Sučelja \textit{UserRepository} i \textit{AutoServiceRepository} pripadaju sloju pristupa podacima. Razredi \textit{UserDetailsServiceImpl} (čije je sučelje \textit{UserDetailsService}) i \textit{WebSecurity} služe za dohvaćanje podataka o korisniku prilikom autentikacije odnosno za konfiguraciju autentikacije i autorizacije, i podatke o trenutnom korisniku pohranjuju kao razred \textit{CurrentUser}.
+	
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1.0\linewidth]{dijagrami/class_diagram_huo_repository_security.png}
+			\caption{Dijagram razreda huo, repository i security}
+			\label{fig:classdiagramhuorepositorysecurity}
+		\end{figure}
 		
 			
 			
@@ -346,43 +398,87 @@
 		
 		\section{Dijagram stanja}
 			
-			Slika \ref{fig:statediagram} prikazuje dijagram stanja koji opisuje kako se serviser služi aplikacijom. Nakon što mu se njegova prikaže početna stranica, on klikom na "Servisni nalozi" dobiva prikaz liste otvorenih naloga. Klikom na "Prihvati nalog" on prihvaća određeni nalog te, ovisno o tome je li nalog redovni ili izvanredni, biva preusmjeren na prozor predviđen taj nalog.
+%			Slika \ref{fig:statediagram} prikazuje dijagram stanja koji opisuje kako se serviser služi aplikacijom. Nakon što mu se njegova prikaže početna stranica, on klikom na "Servisni nalozi" dobiva prikaz liste otvorenih naloga. Klikom na "Prihvati nalog" on prihvaća određeni nalog te, ovisno o tome je li nalog redovni ili izvanredni, biva preusmjeren na prozor predviđen taj nalog.
+%			
+%			Ako je nalog redovni, klikom na "Unos kilometraže" on unosi kilometražu vozila u trenutku servisa. Klikom na "Spremi" kilometraža se sprema te se serviser vraća na prikaz liste radnih naloga.
+%			
+%			Ako je nalog izvanredni, klikom na "Unos rezervnih dijelova" serviser se preusmjerava na iskočni prozor gdje, dok ih ima, unosi rezervne dijelove. Nakon što je završio, vraća se na prikaz naloga. Odabirom "Unos usluga" on na isti način unosi usluge koje su obavljene u servisu, dok ih ima. Klikom na "Zatvori" serviser se vraća na prikaz liste otvorenih naloga.
+%			
+%			Ukoliko na svojoj početnoj stranici serviser odabere opciju "Odjava", on se odjavljuje iz svog korisničkog računa.
 			
-			Ako je nalog redovni, klikom na "Unos kilometraže" on unosi kilometražu vozila u trenutku servisa. Klikom na "Spremi" kilometraža se sprema te se serviser vraća na prikaz liste radnih naloga.
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_serviser}
+%				\caption{Dijagram stanja za servisera}
+%				\label{fig:statediagram}
+%			\end{figure}
+%			
+%			\eject 
 			
-			Ako je nalog izvanredni, klikom na "Unos rezervnih dijelova" serviser se preusmjerava na iskočni prozor gdje, dok ih ima, unosi rezervne dijelove. Nakon što je završio, vraća se na prikaz naloga. Odabirom "Unos usluga" on na isti način unosi usluge koje su obavljene u servisu, dok ih ima. Klikom na "Zatvori" serviser se vraća na prikaz liste otvorenih naloga.
+			Slika \ref{fig:statediagram} prikazuje dijagram stanja korisnika koji pristupa aplikaciji. On se na početnoj stranici može prijaviti kao serviser ili kao vlasnik automobila, ili može izaći iz preglednika. 
 			
-			Ukoliko na svojoj početnoj stranici serviser odabere opciju "Odjava", on se odjavljuje iz svog korisničkog računa.
+			Ukoliko se prijavi kao vlasnik automobila, prikazuje mu se popis automobila. Klikom na gumb "Detalji" prikazuju mu se radni nalozi za određeni automobil. Klikom na "Otvori nalog" on može otvoriti novi radni nalog, te ga nakon toga aplikacija vraća na popis radnih naloga za taj automobil. Također, vlasnik iz svih stanja može doći na prikaz dosadašnjih naloga, ili se odjaviti (tj. doći na početnu stranicu).
+			
+			Ako se korisnik prijavi kao serviser, prikazuje mu se lista pristiglih naloga koje on može prihvatiti klikom na gumb Prihvati (tada se nalog premješta u otvorene naloge) ili odbiti klikom na gumb Odbij (tada se nalog briše s liste). Klikom na "Otvoreni nalozi", servisera se preusmjerava na prikaz liste otvorenih naloga. Klikom na "Detalji" serviser može uređivati određeni nalog. Ukoliko je nalog za redovan servis, serviser klikom na "Završi" može završiti radni nalog, a klikom na "Povratak" vratiti se na listu. Ukoliko je nalog pak izvanredan, serviser može dodati novu uslugu klikom na "Dodaj uslugu" (tada mu se prikaže lista usluga) ili dodati novi rezervni dio klikom na "Dodaj rezervni dio" (tada mu se prikaže lista rezervnih dijelova). U oba slučaja, klik na "Dodaj" vraća servisera na stranicu tog naloga, te kao i kod redovitog radnog naloga, klikom na "Završi" može završiti radni nalog ili se vratiti na listu klikom na "Povratak". Također, serviser iz svih stanja može doći do prikaza liste pristiglih naloga, te se iz svih stanja može odjaviti.
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_serviser}
-				\caption{Dijagram stanja za servisera}
+				\includegraphics[width=1.0\linewidth]{dijagrami/state-diagram-edited}
+				\caption{Dijagram stanja za korisnika}
 				\label{fig:statediagram}
 			\end{figure}
-			
+		
 			\eject 
+			
+%			Slika 4.10 prikazuje dijagram stanja vlasnika auta. Klikom na "Servisni nalozi" praikazuje se lista već postojećih naloga, nakon čega ima opciju otvoriti novi nalog.
+%			
+%			\begin{figure}[H]
+%				\centering
+%				\includegraphics[width=1.0\linewidth]{dijagrami/state_diag_carowner}
+%				\caption{Dijagram stanja za vlasnika auta}
+%				\label{fig:statediagram}
+%			\end{figure}
+%			
+%			\eject
 		
 		\section{Dijagram aktivnosti}
 			
-			Dijagram aktivnosti na slici \ref{fig:actdiag} prikazuje dijagram aktivnosti za životni tijek jednog radnog naloga, od otvaranja koje vrši korisnik do zatvaranja.
+			Slika \ref{fig:actdiag} prikazuje dijagram aktivnosti za životni tijek jednog radnog naloga, od otvaranja koje vrši korisnik do zatvaranja.
 			
 			Korisnik zatraži upravljanje nalozima web-aplikaciji, koja zatim šalje upit za dohvat podataka bazi podataka. Nakon što baza vrati podatke o automobilima i servisima, web-aplikacija prikazuje sučelje za otvaranje radnog naloga. Korisnik tada otvara novi radni nalog, a web-aplikacija šalje bazi podataka upit za dodavanjem podataka. Kada baza stvori novi radni nalog, web-aplikacija potvrđuje spremanje. 
 			
-			Nakon toga, serviser zatraži listu naloga te ju web-aplikacija dohvati iz baze. Serviser prihvaća radni nalog te ponovno preko web-aplikacije i baze ažurira status naloga. Nakon što web-aplikacija prikaže sučelje otvorenog naloga, serviser unosi kilometražu i napomene (od kojih može odustati), te odlučuje je li potreban izvanredni servis. Web-aplikacija šalje upit bazi koja ažurira podatke, nakon čega web-aplikacija prikazuje ažurirane podatke serviseru. 
+			Nakon toga, serviser zatraži listu naloga te ju web-aplikacija dohvati iz baze. Serviser prihvaća radni nalog te ponovno preko web-aplikacije i baze ažurira status naloga. Nakon što web-aplikacija prikaže sučelje otvorenog naloga, serviser unosi kilometražu (postupak se ponavlja dok serviser ne unese ispravan format kilometraže, odnosno nenegativan broj), te odlučuje je li potreban izvanredni servis. Web-aplikacija šalje upit bazi koja ažurira podatke, nakon čega web-aplikacija prikazuje ažurirane podatke serviseru. 
 			
 			Naposljetku, serviser zatvara radni nalog, te web-aplikacija šalje upit za promjenom podataka bazi. Ona ažurira podatke, nakon čega web-aplikacija prikazuje potvrdu serviseru.
 			 
 			 \begin{figure}[H]
 			 	\centering
-			 	\includegraphics[width=1.0\linewidth]{dijagrami/activity-diagram-edited}
+			 	\includegraphics[width=1.0\linewidth]{dijagrami/activity-diagram-v2}
 			 	\caption{Dijagram aktivnosti}
 			 	\label{fig:actdiag}
 			 \end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
+%		
+%			\textbf{\textit{dio 2. revizije}}\\
+%		
+%			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+		Na slici \ref{fig:componentdiagram} su je na dijagramu komponenti prikazana interna struktura i odnosi glavnih komponenti aplikacije te njihova međuovisnost s okolinom.
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+		Preglednik putem \textit{HTTP} zahtjeva i odgovora komunicira s aplikacijom. Ti zahtjevi u aplikaciji pristižu u interni Springov \textit{DispatcherServlet} koji pomoću komponente \textit{UserDetailsService} saznaje trenutnog korisnika i njegove ovlasti te prosljeđuje obradu komponenti \textit{Controllers} koja obuhvaća sve komponente u kontrolerskom sloju aplikacije. Pomoću vraćenih podataka i komponente \textit{Thymeleaf} iz predložaka se stvara \textit{HTML} kod koji \textit{DispatcherServler} šalje natrag klijentu.
+		
+		Komponenta \textit{Controllers} sve operacije obavlja oslanjajući se na komponentu \textit{JpaServices} koja implementira tražene funkcionalnosti. Ta komponenta dohvat podataka vrši iz repozitorija čije implementacije stvara komponenta \textit{Spring JPA} koja sama piše i parsira \textit{SQL} upite i odgovore te se spaja na bazu podataka.
+		
+		Postoji i mogućnost dohvata podataka o vozilu iz vanjskog HUO servisa koju interno vrši \textit{HUOConnector}, a koriste je ostali servisi. Funkcionalnost spajanja na vanjski HUO servis trenutno nije implementirana, pa \textit{HUO Connector} samo glumi tu funkcionalnost.
+		
+		
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=1.0\linewidth]{dijagrami/component_diagram}
+			\caption{Dijagram komponenti}
+			\label{fig:componentdiagram}
+		\end{figure}
+
